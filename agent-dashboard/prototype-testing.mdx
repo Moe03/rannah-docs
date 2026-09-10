@@ -1,0 +1,630 @@
+---
+title: "Prototype Testing"
+description: "Test and preview your agent in a safe, controlled environment before deploying to production with advanced debugging and testing tools"
+icon: "flask"
+---
+
+{/* <img
+  className="block dark:hidden"
+  src="/images/prototype-testing-light.png"
+  alt="Prototype Testing Environment"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/prototype-testing-dark.png"
+  alt="Prototype Testing Environment"
+/> */}
+
+Validate your agent's performance, behavior, and user experience in a comprehensive testing environment before going live. The Prototype Testing feature provides real-time preview capabilities with advanced debugging tools and performance monitoring.
+
+## Why Use Prototype Testing?
+
+<CardGroup cols={2}>
+  <Card title="Risk-Free Testing" icon="shield">
+    Test new configurations, prompts, and features without affecting your live widget or real users
+  </Card>
+  <Card title="Real-Time Preview" icon="eye">
+    See exactly how your agent will behave with live data and current configurations
+  </Card>
+  <Card title="Debug Mode" icon="bug">
+    Access detailed logging, conversation flow tracking, and performance metrics
+  </Card>
+  <Card title="Iterative Development" icon="rotate-right">
+    Rapidly test changes and improvements in a controlled environment
+  </Card>
+</CardGroup>
+
+## Testing Environments
+
+<Tabs>
+  <Tab title="Standard Prototype">
+    <div className="space-y-4">
+      <p>The standard prototype environment provides a full-featured preview of your agent with development tools and debugging capabilities.</p>
+      
+      <AccordionGroup>
+        <Accordion title="Features & Capabilities" icon="rocket-launch">
+          <CardGroup cols={2}>
+            <Card title="Full Widget Preview" icon="computer">
+              - Complete agent functionality
+              - Real-time configuration updates
+              - Live theme and styling
+              - Interactive conversation testing
+            </Card>
+            <Card title="Development Tools" icon="screwdriver-wrench">
+              - Console logging and debugging
+              - Performance monitoring
+              - Error tracking and reporting
+              - Configuration validation
+            </Card>
+          </CardGroup>
+        </Accordion>
+        
+        <Accordion title="Testing Scenarios" icon="list-check">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Conversation Testing</h4>
+              <ul className="space-y-1 text-sm">
+                <li>• Test various user intents</li>
+                <li>• Validate response accuracy</li>
+                <li>• Check conversation flow</li>
+                <li>• Verify knowledge base integration</li>
+              </ul>
+            </div>
+            <div className="bg-green-50 dark:bg-green-900 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">UI/UX Validation</h4>
+              <ul className="space-y-1 text-sm">
+                <li>• Visual design verification</li>
+                <li>• Theme and branding check</li>
+                <li>• Responsive behavior testing</li>
+                <li>• Accessibility compliance</li>
+              </ul>
+            </div>
+          </div>
+        </Accordion>
+        
+        <Accordion title="Configuration Options" icon="gear">
+          ```javascript
+          // Prototype environment configuration
+          window.VG_CONFIG = {
+            ID: 'your-agent-id',
+            render: 'full-width',
+            region: 'na', // or 'eu'
+            
+            // Development-specific settings
+            stylesheets: [
+              'https://cdn.example.com/vg_dev_build/styles.css'
+            ],
+            
+            // Custom variables for testing
+            vf_variables: {
+              test_mode: true,
+              debug_level: 'verbose',
+              environment: 'prototype'
+            }
+          }
+          ```
+        </Accordion>
+      </AccordionGroup>
+    </div>
+  </Tab>
+  
+  <Tab title="Voice Prototype">
+    <div className="space-y-4">
+      <p>The voice prototype environment specifically focuses on testing voice interactions, speech recognition, and audio features.</p>
+      
+      <AccordionGroup>
+        <Accordion title="Voice-Specific Testing" icon="microphone">
+          <CardGroup cols={2}>
+            <Card title="Speech Recognition" icon="ear">
+              - Microphone input testing
+              - Audio quality verification
+              - Speech-to-text accuracy
+              - Background noise handling
+              - Multiple accent support
+            </Card>
+            <Card title="Voice Generation" icon="volume">
+              - Text-to-speech output
+              - Voice personality testing
+              - Audio clarity and quality
+              - Response timing validation
+              - Multiple language support
+            </Card>
+          </CardGroup>
+        </Accordion>
+        
+        <Accordion title="Audio Environment Testing" icon="headphones">
+          <div className="space-y-4">
+            <Frame>
+              <div className="bg-purple-50 dark:bg-purple-900 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">🎧 Audio Testing Checklist</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                  <div>
+                    <strong>Input Testing:</strong>
+                    <ul className="mt-1 space-y-1">
+                      <li>• Clear speech recognition</li>
+                      <li>• Background noise filtering</li>
+                      <li>• Multiple microphone types</li>
+                      <li>• Various audio qualities</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <strong>Output Testing:</strong>
+                    <ul className="mt-1 space-y-1">
+                      <li>• Voice clarity and tone</li>
+                      <li>• Speaking pace and rhythm</li>
+                      <li>• Pronunciation accuracy</li>
+                      <li>• Emotional expression</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </Frame>
+            
+            <Warning>
+            **Browser Compatibility**: Voice features require modern browsers with WebRTC support. Test across different browsers and devices for compatibility.
+            </Warning>
+          </div>
+        </Accordion>
+        
+        <Accordion title="Voice Configuration Testing" icon="sliders">
+          <Tabs>
+            <Tab title="Speech Settings">
+              <div className="space-y-3">
+                              ```json
+              {
+                "voice": {
+                  "provider": "elevenlabs",
+                  "voice_id": "your-voice-id",
+                  "speed": 1.0,
+                  "stability": 0.75,
+                  "clarity": 0.75
+                }
+              }
+              ```
+                
+                <Info>
+                Test different voice providers and settings to find the perfect match for your brand personality and use case.
+                </Info>
+              </div>
+            </Tab>
+            
+            <Tab title="Recognition Settings">
+              <div className="space-y-3">
+                              ```json
+              {
+                "transcription": {
+                  "provider": "deepgram",
+                  "model": "nova-2",
+                  "language": "en-US",
+                  "smart_format": true,
+                  "punctuate": true
+                }
+              }
+              ```
+                
+                <Tip>
+                Use different transcription models to test accuracy with your specific use case and target audience.
+                </Tip>
+              </div>
+            </Tab>
+          </Tabs>
+        </Accordion>
+      </AccordionGroup>
+    </div>
+  </Tab>
+</Tabs>
+
+## Testing Workflow & Best Practices
+
+<Steps>
+  <Step title="Pre-Testing Setup">
+    **Configure Your Testing Environment**
+    - Ensure all agent configurations are saved
+    - Set up test scenarios and conversation flows
+    - Prepare sample user data and edge cases
+    - Document expected behaviors and outcomes
+  </Step>
+  
+  <Step title="Systematic Testing">
+    **Follow a Structured Testing Approach**
+    - Test basic functionality first
+    - Progress to complex conversation flows
+    - Validate edge cases and error handling
+    - Check performance under different conditions
+  </Step>
+  
+  <Step title="Documentation & Iteration">
+    **Record Results and Iterate**
+    - Document issues and unexpected behaviors
+    - Note performance metrics and response times
+    - Plan fixes and improvements
+    - Re-test after making changes
+  </Step>
+  
+  <Step title="Production Readiness">
+    **Validate for Deployment**
+    - Confirm all tests pass consistently
+    - Verify performance meets requirements
+    - Ensure accessibility and compatibility
+    - Get stakeholder approval for go-live
+  </Step>
+</Steps>
+
+## Advanced Testing Features
+
+<AccordionGroup>
+  <Accordion title="Debug Mode & Logging" icon="magnifying-glass">
+    <div className="space-y-4">
+        ```javascript
+        // Enable debug mode for detailed logging
+        window.VG_CONFIG = {
+          debug: true,
+          logLevel: 'verbose', // 'error', 'warn', 'info', 'debug', 'verbose'
+          
+          // Custom debug settings
+          debugSettings: {
+            showConversationFlow: true,
+            logApiCalls: true,
+            trackPerformance: true,
+            highlightElements: true
+          }
+        }
+        ```
+      
+      <CardGroup cols={2}>
+        <Card title="Console Logging" icon="terminal">
+          - Conversation flow tracking
+          - API request/response logs
+          - Performance timing data
+          - Error stack traces
+          - Configuration validation
+        </Card>
+        <Card title="Visual Debugging" icon="eye">
+          - Element highlighting
+          - State visualization
+          - Flow diagram overlay
+          - Performance heat maps
+          - Interaction tracking
+        </Card>
+      </CardGroup>
+      
+      <Info>
+      **Debug Console**: Open your browser's developer tools to access comprehensive logging and debugging information during prototype testing.
+      </Info>
+    </div>
+  </Accordion>
+  
+  <Accordion title="Performance Monitoring" icon="chart-line">
+    <Tabs>
+      <Tab title="Response Metrics">
+        <div className="space-y-4">
+          <Frame>
+            <div className="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900 dark:to-green-900 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Key Performance Indicators</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <strong>Response Times:</strong>
+                  <ul className="mt-1 space-y-1">
+                    <li>• First response: &lt;2 seconds</li>
+                    <li>• Subsequent responses: &lt;1 second</li>
+                    <li>• Voice processing: &lt;3 seconds</li>
+                    <li>• Knowledge base queries: &lt;1.5 seconds</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>Quality Metrics:</strong>
+                  <ul className="mt-1 space-y-1">
+                    <li>• Response accuracy: &gt;95%</li>
+                    <li>• Intent recognition: &gt;90%</li>
+                    <li>• Voice clarity: High quality</li>
+                    <li>• Error rate: &lt;1%</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </Frame>
+        </div>
+      </Tab>
+      
+      <Tab title="Load Testing">
+        <CardGroup cols={2}>
+          <Card title="Stress Testing" icon="weight-hanging">
+            - Rapid conversation sequences
+            - Multiple simultaneous requests
+            - Large knowledge base queries
+            - Extended conversation sessions
+          </Card>
+          <Card title="Resource Monitoring" icon="gauge">
+            - Memory usage tracking
+            - CPU performance impact
+            - Network bandwidth usage
+            - Battery consumption (mobile)
+          </Card>
+        </CardGroup>
+      </Tab>
+    </Tabs>
+  </Accordion>
+  
+  <Accordion title="A/B Testing Framework" icon="flask">
+    <div className="space-y-4">
+        ```javascript
+        // A/B testing configuration
+        window.VG_CONFIG = {
+          experiment: {
+            name: 'greeting_test_v1',
+            variant: 'B', // 'A' or 'B'
+            
+            variants: {
+              A: {
+                greeting: "Hello! How can I help you today?",
+                style: "formal"
+              },
+              B: {
+                greeting: "Hey there! What can I do for you? 😊",
+                style: "casual"
+              }
+            }
+          }
+        }
+        ```
+      
+      <CardGroup cols={2}>
+        <Card title="Test Variables" icon="flask-vial">
+          - Greeting messages and tone
+          - Response personalities
+          - Visual themes and layouts
+          - Conversation flow patterns
+          - Feature availability
+        </Card>
+        <Card title="Success Metrics" icon="bullseye-arrow">
+          - User engagement rates
+          - Conversation completion
+          - User satisfaction scores
+          - Task completion success
+          - Response relevance ratings
+        </Card>
+      </CardGroup>
+      
+      <Tip>
+      Run A/B tests in the prototype environment to validate changes before implementing them in production.
+      </Tip>
+    </div>
+  </Accordion>
+</AccordionGroup>
+
+## Testing Scenarios & Checklists
+
+<Tabs>
+  <Tab title="Conversation Testing">
+    <AccordionGroup>
+      <Accordion title="Basic Functionality Tests">
+        <div className="space-y-3">
+          <Frame>
+            <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Essential Test Cases</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                <div>
+                  <strong>Basic Interactions:</strong>
+                  <ul className="mt-1 space-y-1">
+                    <li>□ Initial greeting and welcome</li>
+                    <li>□ Simple question answering</li>
+                    <li>□ Knowledge base queries</li>
+                    <li>□ Fallback responses</li>
+                    <li>□ Conversation ending</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>Advanced Features:</strong>
+                  <ul className="mt-1 space-y-1">
+                    <li>□ Multi-turn conversations</li>
+                    <li>□ Context maintenance</li>
+                    <li>□ Tool/function calling</li>
+                    <li>□ Human handoff triggers</li>
+                    <li>□ Voice interaction (if enabled)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </Frame>
+        </div>
+      </Accordion>
+      
+      <Accordion title="Edge Case Testing">
+        <CardGroup cols={2}>
+          <Card title="Input Variations" icon="keyboard">
+            - Very long messages
+            - Special characters and emojis
+            - Multiple languages
+            - Nonsensical input
+            - Empty/whitespace messages
+          </Card>
+          <Card title="Error Scenarios" icon="triangle-exclamation">
+            - Network connectivity issues
+            - API timeout situations
+            - Invalid user data
+            - System overload conditions
+            - Security restriction triggers
+          </Card>
+        </CardGroup>
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  
+  <Tab title="UI/UX Testing">
+    <div className="space-y-4">
+      <Frame>
+        <div className="bg-green-50 dark:bg-green-900 p-4 rounded-lg">
+          <h4 className="font-semibold mb-2">User Experience Checklist</h4>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div>
+              <strong>Visual Design:</strong>
+              <ul className="mt-1 space-y-1">
+                <li>□ Brand consistency</li>
+                <li>□ Color contrast (WCAG)</li>
+                <li>□ Font readability</li>
+                <li>□ Image quality</li>
+                <li>□ Animation smoothness</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Responsiveness:</strong>
+              <ul className="mt-1 space-y-1">
+                <li>□ Mobile layout</li>
+                <li>□ Tablet adaptation</li>
+                <li>□ Desktop optimization</li>
+                <li>□ Touch interactions</li>
+                <li>□ Keyboard navigation</li>
+              </ul>
+            </div>
+            <div>
+              <strong>Accessibility:</strong>
+              <ul className="mt-1 space-y-1">
+                <li>□ Screen reader support</li>
+                <li>□ Keyboard navigation</li>
+                <li>□ Focus indicators</li>
+                <li>□ Alt text for images</li>
+                <li>□ High contrast mode</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </Frame>
+    </div>
+  </Tab>
+  
+  <Tab title="Performance Testing">
+    <AccordionGroup>
+      <Accordion title="Load Time Testing">
+        <CardGroup cols={2}>
+          <Card title="Initial Load" icon="clock">
+            - Widget initialization time
+            - First contentful paint
+            - Time to interactive
+            - Resource loading efficiency
+          </Card>
+          <Card title="Runtime Performance" icon="gear">
+            - Message response times
+            - Memory usage patterns
+            - CPU utilization
+            - Network request efficiency
+          </Card>
+        </CardGroup>
+      </Accordion>
+      
+      <Accordion title="Browser Compatibility">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-blue-50 dark:bg-blue-900 p-3 rounded-lg">
+            <strong>Desktop Browsers:</strong>
+            <ul className="mt-2 space-y-1 text-sm">
+              <li>□ Chrome (latest 2 versions)</li>
+              <li>□ Firefox (latest 2 versions)</li>
+              <li>□ Safari (latest 2 versions)</li>
+              <li>□ Edge (latest 2 versions)</li>
+            </ul>
+          </div>
+          <div className="bg-green-50 dark:bg-green-900 p-3 rounded-lg">
+            <strong>Mobile Browsers:</strong>
+            <ul className="mt-2 space-y-1 text-sm">
+              <li>□ Mobile Chrome</li>
+              <li>□ Mobile Safari</li>
+              <li>□ Samsung Internet</li>
+              <li>□ Mobile Firefox</li>
+            </ul>
+          </div>
+        </div>
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+</Tabs>
+
+## Troubleshooting Testing Issues
+
+<AccordionGroup>
+  <Accordion title="Common Testing Problems" icon="bug">
+    <Tabs>
+      <Tab title="Configuration Issues">
+        <div className="space-y-3">
+            **Prototype Not Loading:**
+            ```javascript
+            // Check configuration
+            console.log('VG_CONFIG:', window.VG_CONFIG);
+            
+            // Verify required fields
+            if (!window.VG_CONFIG?.ID) {
+              console.error('Missing agent ID');
+            }
+            ```
+          
+          <Warning>
+          **Common Fix**: Ensure your agent ID is correct and your account has access to the testing environment.
+          </Warning>
+        </div>
+      </Tab>
+      
+      <Tab title="Performance Issues">
+        <CardGroup cols={2}>
+          <Card title="Slow Response Times" icon="clock">
+            - Check network connectivity
+            - Verify server region settings
+            - Monitor API response times
+            - Review knowledge base size
+          </Card>
+          <Card title="Memory Leaks" icon="memory">
+            - Test extended sessions
+            - Monitor resource usage
+            - Check for event listeners
+            - Validate cleanup processes
+          </Card>
+        </CardGroup>
+      </Tab>
+    </Tabs>
+  </Accordion>
+
+  <Accordion title="Debug Tools & Techniques" icon="wrench">
+    <div className="space-y-4">
+        ```javascript
+        // Advanced debugging setup
+        window.VG_DEBUG = {
+          enabled: true,
+          
+          // Log all events
+          logEvents: true,
+          
+          // Track conversation state
+          trackState: true,
+          
+          // Monitor performance
+          performanceMonitoring: true,
+          
+          // Visual debugging
+          highlightElements: true
+        };
+        ``` 
+      
+      <Info>
+      **Browser DevTools**: Use the Network tab to monitor API calls, Console for logging, and Performance tab for runtime analysis.
+      </Info>
+    </div>
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+**Testing Best Practice**: Always test in incognito/private browsing mode to avoid cached data affecting your test results.
+</Note>
+
+## What's Next?
+
+<CardGroup cols={2}>
+  <Card title="Deploy to Production" icon="sliders" href="/agent-dashboard/widget-configuration">
+    Once testing is complete, deploy your agent using the widget configuration tools
+  </Card>
+  <Card title="Monitor Performance" icon="chart-line" href="/features/analytics">
+    Set up analytics and monitoring to track your agent's real-world performance
+  </Card>
+  <Card title="Voice Configuration" icon="microphone" href="/voice/introduction">
+    Configure advanced voice features based on your prototype testing results
+  </Card>
+  <Card title="Canvas Debugging" icon="chart-gantt" href="/canvas/features/testing-flows">
+    Use canvas testing tools for complex conversation flow validation
+  </Card>
+</CardGroup>

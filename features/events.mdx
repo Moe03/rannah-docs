@@ -1,0 +1,483 @@
+---
+title: Events Webhook
+icon: webhook
+
+---
+
+# Webhook Documentation
+
+Events are sent as HTTP POST requests to your configured endpoint with a structured JSON payload. Each event contains comprehensive information about the action that occurred in your workspace.
+
+---
+
+## Platform Compatibility
+
+<Warning>
+**Important:** Not all events are available for all agent platforms. VoiceFlow (VF) agents support a subset of events compared to Rannah رنّة agents.
+</Warning>
+
+| Platform | Description |
+|----------|-------------|
+| **Rannah رنّة** | Rannah رنّة agents (built with the Rannah رنّة node-based builder) |
+| **VF** | VoiceFlow agents (imported from VoiceFlow or using VoiceFlow runtime) |
+
+---
+
+## Event Types & Categories
+
+Below are all possible event types you can subscribe to:
+
+| Event Type              | Category           | Rannah رنّة Support | VF Support | Description                             |
+|------------------------|--------------------|-----------:|:----------:|-------------------------------------------------|
+| `message_received`     | Message Events     | ✅         | ✅         | Message received on any channel                  |
+| `conversation_updated` | Chat Events        | ✅         | ✅         | Full convo snapshot after persist (light + turns)|
+| `chat_delegated`       | Chat Events        | ✅         | ✅         | Chat was delegated to a team member              |
+| `bug_reported`         | Bug Events         | ✅         | ✅         | Bug or issue was reported                        |
+| `agent_deleted`        | Agent Events       | ✅         | ✅         | Agent was deleted                                |
+| `webhook_test`         | Test Event         | ✅         | ✅         | Used for testing your webhook endpoint           |
+| `lead_captured`        | Lead Events        | ✅         | ❌         | Lead was captured by an agent (Rannah رنّة only)   |
+| `form_submitted`       | Form Events        | ✅         | ❌         | Form was submitted (Rannah رنّة only)              |
+| `organisation_created` | Organisation Events| ✅         | ✅         | Organisation was created                         |
+| `organisation_updated` | Organisation Events| ✅         | ✅         | Organisation was updated                         |
+| `organisation_deleted` | Organisation Events| ✅         | ✅         | Organisation was deleted                         |
+| `client_created`       | Client Events      | ✅         | ✅         | Client was created                               |
+| `client_updated`       | Client Events      | ✅         | ✅         | Client was updated                               |
+| `client_deleted`       | Client Events      | ✅         | ✅         | Client was deleted                               |
+
+<Info>
+**Why are some events Rannah رنّة-only?**
+
+Rannah رنّة agents use WebSocket-based interactions that support advanced features like:
+- Automatic lead collection based on conversation analysis
+- UI Engine forms with dynamic form submissions
+- Real-time streaming responses
+
+VF agents use REST API-based interactions and rely on VoiceFlow's native capabilities, which don't include these features.
+</Info>
+
+---
+
+## Request Format
+
+| Property        | Value              |
+|-----------------|--------------------|
+| **HTTP Method** | `POST`             |
+| **Content Type**| `application/json` |
+
+---
+
+## Event Categories & Payloads
+
+### Agent Events
+**Types:** `agent_created`, `agent_updated`, `agent_deleted`
+
+**Payload fields:**
+- `agentId` (string): The ID of the agent
+- `agentName` (string, optional): The name of the agent
+- `agentPlatform` ("vg" | "vf", optional): The platform of the agent
+- `operation` ("created" | "updated" | "deleted"): The operation performed
+- `createdAt` (number): Timestamp (ms)
+- `workspaceSecret` (string): Workspace secret for verification
+
+**Sample:**
+```json title="Agent Created Event"
+{
+  "type": "agent_created",
+  "payload": {
+    "agentId": "agent_123456",
+    "agentName": "Customer Support Bot",
+    "agentPlatform": "vf",
+    "operation": "created",
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+### Message Events
+**Types:** `message_received`
+
+**Payload fields:**
+- `agentId` (string): The ID of the agent
+- `agentName` (string, optional): The name of the agent
+- `convoId` (string): The ID of the conversation
+- `messageContent` (string): The content of the message
+- `channel` ("whatsapp" | "instagram" | "facebook" | "telegram" | "webchat"): The channel
+- `messageType` (string, optional): The type of the message
+- `from` (string, optional): The sender
+- `createdAt` (number): Timestamp (ms)
+- `workspaceSecret` (string): Workspace secret for verification
+
+**Sample:**
+```json title="Message Received Event"
+{
+  "type": "message_received",
+  "payload": {
+    "agentId": "agent_123456",
+    "agentName": "Customer Support Bot",
+    "convoId": "convo_789012",
+    "messageContent": "Hello, I need help with my order",
+    "channel": "whatsapp",
+    "messageType": "text",
+    "from": "+1234567890",
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+### Conversation Updated Events
+**Types:** `conversation_updated`
+
+Fired after a conversation is persisted. Also POSTed to the agent's `advanced.serverUrl` when configured (agent-level webhook).
+
+**Payload fields:**
+- `agentId` (string): The ID of the agent
+- `agentName` (string, optional): The name of the agent
+- `convoId` (string): The ID of the conversation
+- `sessionId` (string, optional): The session ID
+- `channel` (string, optional): Conversation channel
+- `region` (string, optional): `eu` or `na`
+- `lightConvoData` (object): Light conversation metadata document
+- `turns` (array): Full chat history turns
+- `messagesHistory` (array, optional): LLM message history when available
+- `operation` (`"updated"`): Operation performed
+- `createdAt` (number): Timestamp (ms)
+- `workspaceSecret` (string): Workspace secret for verification
+
+**Sample:**
+```json title="Conversation Updated Event"
+{
+  "type": "conversation_updated",
+  "payload": {
+    "agentId": "agent_123456",
+    "agentName": "Customer Support Bot",
+    "convoId": "convo_789012",
+    "sessionId": "session_456",
+    "channel": "web-chat",
+    "region": "eu",
+    "operation": "updated",
+    "lightConvoData": {
+      "ID": "convo_789012",
+      "userName": "Jane Doe",
+      "origin": "web-chat",
+      "state": "ai-chatting",
+      "messagesNum": 2
+    },
+    "turns": [
+      {
+        "from": "human",
+        "messages": [
+          {
+            "from": "human",
+            "type": "text",
+            "item": { "payload": { "message": "Hello" } }
+          }
+        ]
+      }
+    ],
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+### Organisation Events
+**Types:** `organisation_created`, `organisation_updated`, `organisation_deleted`
+
+**Payload fields:**
+- `organisationId` (string): The ID of the organisation
+- `organisationName` (string, optional): The name of the organisation
+- `operation` ("created" | "updated" | "deleted"): The operation performed
+- `createdAt` (number): Timestamp (ms)
+- `workspaceSecret` (string): Workspace secret for verification
+
+**Sample:**
+```json title="Organisation Created Event"
+{
+  "type": "organisation_created",
+  "payload": {
+    "organisationId": "org_345678",
+    "organisationName": "Acme Corporation",
+    "operation": "created",
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+### Client Events
+**Types:** `client_created`, `client_updated`, `client_deleted`
+
+**Payload fields:**
+- `organisationId` (string): The ID of the organisation
+- `organisationName` (string, optional): The name of the organisation
+- `clientId` (string): The ID of the client
+- `clientName` (string, optional): The name of the client
+- `clientEmail` (string, optional): The email of the client
+- `operation` ("created" | "updated" | "deleted"): The operation performed
+- `createdAt` (number): Timestamp (ms)
+- `workspaceSecret` (string): Workspace secret for verification
+
+**Sample:**
+```json title="Client Created Event"
+{
+  "type": "client_created",
+  "payload": {
+    "organisationId": "org_345678",
+    "organisationName": "Acme Corporation",
+    "clientId": "client_901234",
+    "clientName": "John Doe",
+    "clientEmail": "john.doe@example.com",
+    "operation": "created",
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+### Lead Events
+**Types:** `lead_captured`
+
+<Warning>
+**Platform Support:** This event is only available for **Rannah رنّة agents**. VoiceFlow (VF) agents do not support automatic lead capture.
+</Warning>
+
+**Payload fields:**
+- `agentId` (string): The ID of the agent
+- `agentName` (string, optional): The name of the agent
+- `leadName` (string, optional): The name of the lead
+- `leadEmail` (string, optional): The email of the lead
+- `leadPhone` (string, optional): The phone of the lead
+- `channel` (see below): The channel where the lead was captured
+- `operation` ("captured"): The operation performed
+- `createdAt` (number): Timestamp (ms)
+- `workspaceSecret` (string): Workspace secret for verification
+
+**Possible channel values:**
+- `voice`, `vapi`, `web-chat`, `whatsapp`, `instagram`, `telegram`, `discord`, `gb-chat`, `messenger`, `telephony`, `webchat`
+
+**Sample:**
+```json title="Lead Captured Event"
+{
+  "type": "lead_captured",
+  "payload": {
+    "agentId": "agent_123456",
+    "agentName": "Sales Bot",
+    "leadName": "Jane Smith",
+    "leadEmail": "jane.smith@example.com",
+    "leadPhone": "+9876543210",
+    "channel": "web-chat",
+    "operation": "captured",
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+### Form Events
+**Types:** `form_submitted`
+
+<Warning>
+**Platform Support:** This event is only available for **Rannah رنّة agents**. VoiceFlow (VF) agents do not support UI Engine forms.
+</Warning>
+
+**Payload fields:**
+- `agentId` (string): The ID of the agent
+- `agentName` (string, optional): The name of the agent
+- `convoId` (string): The ID of the conversation
+- `formType` ("ui_engine_form" | "ui_engine_input"): The type of form submitted
+- `formData` (object): The submitted form data as key-value pairs
+- `channel` (see below): The channel where the form was submitted
+- `createdAt` (number): Timestamp (ms)
+- `workspaceSecret` (string): Workspace secret for verification
+
+**Possible channel values:**
+- `voice`, `vapi`, `web-chat`, `whatsapp`, `instagram`, `telegram`, `discord`, `gb-chat`, `messenger`, `telephony`, `webchat`
+
+**Sample:**
+```json title="Form Submitted Event"
+{
+  "type": "form_submitted",
+  "payload": {
+    "agentId": "agent_123456",
+    "agentName": "Support Bot",
+    "convoId": "convo_789012",
+    "formType": "ui_engine_form",
+    "formData": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "message": "I need help with my order"
+    },
+    "channel": "webchat",
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+### Chat Delegation Events
+**Types:** `chat_delegated`
+
+**Payload fields:**
+- `agentId` (string): The ID of the agent
+- `agentName` (string, optional): The name of the agent
+- `convoId` (string): The ID of the conversation
+- `assignedToUserId` (string): The ID of the user the chat was assigned to
+- `assignedToUserName` (string, optional): The name of the assigned user
+- `assignedToUserEmail` (string, optional): The email of the assigned user
+- `delegatedByUserId` (string, optional): The ID of the user who delegated
+- `delegatedByUserName` (string, optional): The name of the user who delegated
+- `customerName` (string, optional): The name of the customer
+- `customerEmail` (string, optional): The email of the customer
+- `customerPhone` (string, optional): The phone of the customer
+- `channel` (see below): The channel where the delegation occurred
+- `operation` ("delegated"): The operation performed
+- `createdAt` (number): Timestamp (ms)
+- `workspaceSecret` (string): Workspace secret for verification
+
+**Possible channel values:**
+- `voice`, `vapi`, `web-chat`, `whatsapp`, `instagram`, `telegram`, `discord`, `gb-chat`, `messenger`, `telephony`, `webchat`
+
+**Sample:**
+```json title="Chat Delegated Event"
+{
+  "type": "chat_delegated",
+  "payload": {
+    "agentId": "agent_123456",
+    "agentName": "Support Bot",
+    "convoId": "convo_789012",
+    "assignedToUserId": "user_456789",
+    "assignedToUserName": "Support Agent",
+    "assignedToUserEmail": "support@example.com",
+    "delegatedByUserId": "user_111222",
+    "delegatedByUserName": "Manager",
+    "customerName": "Jane Doe",
+    "customerEmail": "jane@example.com",
+    "customerPhone": "+1234567890",
+    "channel": "webchat",
+    "operation": "delegated",
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+### Bug Events
+**Type:** `bug_reported`
+
+**Payload fields:**
+- `agentId` (string): The ID of the agent
+- `agentName` (string, optional): The name of the agent
+- `convoId` (string): The ID of the conversation
+- `bugDescription` (string): The description of the bug or issue
+- `imageUrl` (string, optional): The CDN URL of the screenshot (automatically uploaded if provided)
+- `reportedByUserId` (string, optional): The ID of the user who reported the bug
+- `reportedByUserName` (string, optional): The name of the user who reported the bug
+- `reportedByUserEmail` (string, optional): The email of the user who reported the bug
+- `channel` (see below): The channel where the bug occurred
+- `operation` ("reported"): The operation performed
+- `createdAt` (number): Timestamp (ms)
+- `workspaceSecret` (string): Workspace secret for verification
+
+**Possible channel values:**
+- `voice`, `vapi`, `web-chat`, `whatsapp`, `instagram`, `telegram`, `discord`, `gb-chat`, `messenger`, `telephony`, `webchat`
+
+**Note:** When a screenshot is uploaded, it is automatically uploaded to the CDN and only the URL is sent in the webhook payload to keep the payload size minimal.
+
+**Sample:**
+```json title="Bug Reported Event"
+{
+  "type": "bug_reported",
+  "payload": {
+    "agentId": "agent_123456",
+    "agentName": "Support Bot",
+    "convoId": "convo_789012",
+    "bugDescription": "The bot is not responding to user inputs correctly",
+    "imageUrl": "https://cdn.voiceglow.org/bug-reports/user_123/1234567890.png",
+    "reportedByUserId": "user_345678",
+    "reportedByUserName": "John Doe",
+    "reportedByUserEmail": "john.doe@example.com",
+    "channel": "webchat",
+    "operation": "reported",
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+### Webhook Test Event
+**Type:** `webhook_test`
+
+**Payload fields:**
+- `message` (string): Test message
+- `createdAt` (number): Timestamp (ms)
+- `workspaceSecret` (string): Workspace secret for verification
+
+**Sample:**
+```json title="Webhook Test Event"
+{
+  "type": "webhook_test",
+  "payload": {
+    "message": "This is a test event",
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+---
+
+## Implementation Guidelines
+
+- **Response Requirements:**
+  - Return HTTP 200 status for successful receipt
+  - Response within 60 seconds timeout
+  - Empty response body is acceptable
+- **Delivery Behavior:**
+  - Events delivered in real-time
+  - No automatic retry mechanism
+  - Order of delivery not guaranteed
+- **Data Format:**
+  - Timestamps in milliseconds (Unix epoch)
+  - UTF-8 encoded JSON payload
+  - All fields are consistent across events
+- **Security & Performance:**
+  - Use workspace secret for verification
+  - Ensure endpoint can handle event volume
+  - Implement proper error handling
+
+---
+
+## Best Practices
+
+- Validate the workspace secret on every incoming webhook to ensure authenticity
+- Implement idempotency handling using the event timestamp and payload data
+- Use asynchronous processing for webhook handling to avoid timeout issues
+- Log all incoming webhooks for debugging and monitoring purposes
+
+---
+
+## Testing Your Webhook
+
+You can test your webhook endpoint using the `webhook_test` event. This event is sent with a simple payload and can be used to verify your endpoint is reachable and correctly configured.
+
+**Sample:**
+```json title="Webhook Test Event"
+{
+  "type": "webhook_test",
+  "payload": {
+    "message": "This is a test event",
+    "createdAt": 1718035200000,
+    "workspaceSecret": "your_workspace_secret"
+  }
+}
+```
+
+---
+
+## Subscribing to Events
+
+You can subscribe to one or more event types. Only events you are subscribed to will be sent to your endpoint. The workspace secret is included in every payload for verification and security.
+
+To update your subscriptions, use the dashboard or API as appropriate. 

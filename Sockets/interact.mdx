@@ -1,0 +1,127 @@
+---
+title: "Interact WebSocket"
+description: "The `Interact` WebSocket function enables real-time interaction with the Rannah رنّة. This allows users to send messages and receive streaming responses dynamically. This document provides a comprehensive guide on how to connect, send messages, and handle responses."
+icon: plug
+---
+
+## Example Workflow
+1. Open a WebSocket connection.
+2. Send a structured `interactObject` payload.
+3. Listen for responses and process different event types.
+4. Close the WebSocket when done.
+
+By following this guide, users can seamlessly integrate the `continueInteract` WebSocket into their applications for real-time communication.
+
+## WebSocket Endpoint
+
+The WebSocket connection URL is generated based on the region:
+
+```
+wss://<server-region>-gcp-api.vg-stuff.com/interact
+```
+
+Where `<server-region>` is either:
+
+- `eu` for the European Union
+- `na` for the North America
+
+## Connecting to the WebSocket
+Upon opening the connection, send a JSON payload to start interacting with the AI agent:
+```typescript
+const ws = new WebSocket(websocketUrl);
+
+ws.onopen = () => {
+    const interactObject = {
+        agentId: "your-agent-id",
+        convoId: "your-convo-id",
+        bucket: "voiceglow-eu" | "(default)", // For eu region or na region
+        prompt: "Hello, how can you help me?",
+        agentData: {
+            ownerID: "user-id", // your own UID
+            userID: "user-id", // your own UID
+        },
+        // Optional
+        lightConvoData: {
+            userName: "John Doe",
+            userEmail: "john@example.com",
+            userPhone: "+1234567890",
+            origin: "web-chat"      // Web chat interface
+                  | "discord"       // Discord integration
+                  | "messenger"     // Facebook Messenger
+                  | "instagram"     // Instagram integration
+                  | "gb-chat"       // GB chat
+        },
+    };
+    ws.send(JSON.stringify(interactObject));
+};
+```
+
+## Sending Data
+To send a message, structure the request as follows:
+```typescript
+const interactObject = {
+    agentId: "your-agent-id",
+    convoId: "your-convo-id",
+    bucket: "voiceglow-eu",
+    prompt: "What is the weather like today?",
+    agentData: {
+        ownerID: "user-id", // your own UID
+        userID: "user-id", // your own UID
+    },
+    lightConvoData: {
+        userName: "John Doe",
+        userEmail: "john@example.com",
+        userPhone: "+1234567890",
+        origin: "web-chat",
+    },
+};
+ws.send(JSON.stringify(interactObject));
+```
+
+## Receiving Messages
+Responses from the WebSocket arrive as message stream. To listen for incoming messages from the WebSocket:
+```javascript
+ws.onmessage = (event) => {
+  const eventData = JSON.parse(event.data);
+  console.log("Received:", eventData);
+};
+```
+
+## Closing the Connection
+To handle WebSocket closure:
+```typescript
+ws.onclose = () => {
+    console.log("WebSocket connection closed");
+};
+```
+
+## Handling Errors
+To manage errors gracefully:
+```typescript
+ws.onerror = (error) => {
+    console.error("WebSocket error:", error);
+};
+```
+
+## Response Structure
+Messages received from the WebSocket follow this structure:
+```typescript
+interface {
+    type: "sync_chat_history" | "metadata" | "debug" | "action" | "chunk";
+    turns?: TurnProps[];
+    metadata?: {
+        sources?: string[];
+    };
+    chunk?: string;
+    chunkIndex?: number;
+    ui_engine?: boolean;
+    action?: {
+        type: "request_handoff";
+    };
+}
+```
+
+
+## Conclusion
+
+This document outlines the setup, usage, and integration of the `Interact` WebSocket. Developers can follow these instructions to integrate real-time AI interactions into their applications using WebSockets.

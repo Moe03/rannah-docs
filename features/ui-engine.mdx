@@ -1,0 +1,361 @@
+---
+title: "UI Engine"
+description: "Create dynamic, interactive elements in your AI agent responses"
+icon: code
+---
+
+## Introduction
+
+The UI Engine is a powerful feature in Rannah رنّة that enables your AI agents to create rich, interactive elements in their responses. This enhances user engagement by going beyond simple text exchanges.
+
+<Warning>
+  This is an **experimental** feature and may not always work as expected. Use
+  with caution and thoroughly test your implementation.
+</Warning>
+
+## Enabling the UI Engine
+
+Enabling the UI engine appends further instructions to your system prompt, allowing your AI agent to output JSON data that renders UI elements like buttons, cards, carousels, forms and inputs. While not directly a UI element, your agent can also show images and render iframes out of the box.To enable it, do the following:
+
+<Steps>
+  <Step title="Navigate to Prompt Tab">
+    Open your agent's dashboard and go to the `Prompts` tab.
+  </Step>
+  <Step title="Locate UI Engine Checkbox">
+    Find the UI Engine **checkbox** in the settings.
+  </Step>
+  <Step title="Enable the Feature">Check the box and `save`.</Step>
+</Steps>
+
+## Instructing Your Agent
+
+With the UI Engine enabled, you have several options for guiding your agent's use of UI components:
+
+<AccordionGroup>
+  <Accordion title="Structured Instructions">
+    Provide specific instructions in your initial or system prompt. For example:
+
+    ```markdown
+    Generate two buttons saying "Start Tutorial" and "Skip Introduction".
+    Then, create a card with the title "Welcome", a brief description of our service, and an "Learn More" button.
+    ```
+
+  </Accordion>
+  <Accordion title="Guided Interaction">
+    Set up a structured interaction flow in your system prompt:
+
+    ```markdown
+    Follow these steps in the conversation:
+    1. Ask about the user's preference and generate three buttons: "Product Info", "Pricing", "Support".
+    2. Based on their choice, display a relevant card with:
+       - Title: [Chosen topic]
+       - Brief description
+       - "Get Details" button
+    3. After showing the card, ask if they want to explore another topic or end the conversation.
+    ```
+
+  </Accordion>
+  <Accordion title="Full Creative Freedom">
+    Give your agent the freedom to generate UI components as it sees fit:
+
+    ```markdown
+    You have access to the UI Engine for creating interactive elements like buttons, cards, carousels, forms and inputs, and images. Use these components when you believe they will enhance the user experience or make information presentation more effective. Be creative in your approach.
+    ```
+
+  </Accordion>
+</AccordionGroup>
+<Note>
+For information on integrating the UI Engine with your knowledge base, see our [KB and UI Engine](/agent-creation/knowledgebase/kb-and-ui-engine) page.
+</Note>
+<Tip>
+Models like `Claude 3.5 Sonnet` are particularly adept at generating appropriate UI elements code and using these components **effectively**. When giving your agent creative freedom, consider using such advanced models for optimal results.
+</Tip>
+
+## UI Components
+
+The UI Engine offers a variety of versatile interactive elements to enhance your AI agent's responses. They can be customized and combined to create engaging user interfaces.
+
+<Tabs>
+  <Tab title="Buttons">
+    **Buttons provide clear calls-to-action or navigation options.**
+
+    <Frame>
+      <video src="/images/ui-buttons-video.mp4" alt="Example of UI Engine buttons"
+      autoPlay loop></video>
+    </Frame>
+
+    <AccordionGroup>
+      <Accordion title="Variations">
+        **• Single button
+        • Multiple buttons in a row**
+      </Accordion>
+      <Accordion title="Usage Examples">
+        ```markdown
+        Generate two buttons:
+        1. "Learn More"
+        2. "Contact Us"
+        ```
+        ```markdown
+        Write this with markdown formatting:
+
+#### 👋 Welcome to Rannah رنّة AI! 🎨✨
+
+I'm Gia, your friendly AI assistant. I'm here to help you navigate our AI agent studio and unleash your creativity!
+
+How can I assist you today?
+
+Then, below it:
+
+generate three relevant buttons.
+
+        ```
+
+
+      </Accordion>
+    </AccordionGroup>
+
+  </Tab>
+
+  <Tab title="Cards">
+    **Cards highlight key information or products with high customizability.**
+
+    <Frame>
+      <video src="/images/ui-cards-video.mp4" alt="Example of UI Engine cards"
+      autoPlay loop></video>
+    </Frame>
+
+    <AccordionGroup>
+      <Accordion title="Variations">
+        **• Basic card with text only
+        • Card with image
+        • Card with button(s)
+        • Card with image and button(s)
+        • Card with title, description, image, and multiple buttons**
+      </Accordion>
+      <Accordion title="Usage Example">
+        ```markdown
+        Create a card with:
+        - Title: "Premium Plan"
+        - Description: "Get access to all features"
+        - Image: [URL of premium plan icon]
+        - Button: "Subscribe Now"
+        ```
+
+        ```markdown
+        Write a **short** welcome message.
+
+Then, Generate two cards below each other:
+
+One with just information.
+
+and one with image (/logo/rannah-wordmark.png) and cta button.
+
+        ```
+      </Accordion>
+    </AccordionGroup>
+
+  </Tab>
+
+  <Tab title="Carousels">
+    **Carousels display multiple items in a scrollable format.**
+
+    <Frame>
+      <video src="/images/ui-carousel-video.mp4" alt="Example of UI Engine carousel"
+      autoPlay loop></video>
+    </Frame>
+
+    <AccordionGroup>
+      <Accordion title="Variations">
+        **• Image carousel
+        • Card carousel
+        • Card with buttons and text carousel
+        • Mixed content carousel (images, cards, text, button(s))**
+      </Accordion>
+      <Accordion title="Usage Example">
+        ```markdown
+        Generate a carousel of 3 product cards. Each card should have:
+        - Product image [URL]
+        - Product name
+        - Price
+        - "Add to Cart" button
+        ```
+
+        ```
+
+Write a **short** welcome message.
+
+Then, create a carousel with three unique cards using ui elements:
+
+{/* TODO: Check if this is still relevant */}
+
+1. One carousel with text and this image /logo/rannah-wordmark.png
+
+2. One with information and button.
+
+3. One with just information.
+
+IMPORTANT: the first card in the carousel **have** to have an image!
+
+````
+      </Accordion>
+    </AccordionGroup>
+
+  </Tab>
+
+  <Tab title="Forms and Inputs">
+    **Forms and inputs allow users to provide structured data and interact with your agent through various input types.**
+
+    <Frame>
+      <img src="/images/ui_forms.png" alt="Example of UI Engine forms and inputs" />
+    </Frame>
+
+    <AccordionGroup>
+      <Accordion title="Variations">
+        **• Text input fields
+        • Email input fields
+        • Number input fields
+        • Dropdown/select menus
+        • Checkboxes and radio buttons
+        • Text areas for longer input
+        • Date/time pickers
+        • File upload inputs**
+      </Accordion>
+      <Accordion title="Usage Examples">
+        ```markdown
+        Create a contact form with:
+        - Name (text input)
+        - Email (email input)
+        - Message (text area)
+        - Submit button
+        ```
+
+        ```markdown
+        Generate a feedback form with:
+        - Rating (dropdown: 1-5 stars)
+        - Comments (text area)
+        - Would you recommend us? (radio buttons: Yes/No)
+        - Submit feedback button
+        ```
+
+        ```markdown
+        Create a survey form asking about user preferences:
+        - Favorite color (dropdown)
+        - Age range (radio buttons)
+        - Interests (checkboxes for multiple selection)
+        - Additional comments (text area)
+        ```
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+
+  <Tab title="Images">
+    **Images provide visual content for a more engaging chat, all you need is a valid image URL.**
+
+    <Warning>
+    Remember to provide the agent with working image URLs. Example: `https://www.hdwallpapers.in/download/lake_with_reflection_of_mountain_and_clouds_4k_hd_nature-3840x2160.jpg`
+        </Warning>
+
+    <Frame>
+      <video src="/images/ui-images-video.mp4" alt="Example of UI Engine image display"
+      autoPlay loop></video>
+    </Frame>
+
+    <AccordionGroup>
+      <Accordion title="Variations">
+       **• Single image display
+        • Display in carousel or cards**
+
+
+      </Accordion>
+      <Accordion title="Usage Example">
+        ```markdown
+        Display an image:
+        - URL: [product image URL]
+        ```
+        ```markdown
+        Write a **short** nature inspired welcome message with emojis.
+
+Show this image in 200px width x 100px height: https://i.pinimg.com/originals/eb/49/e5/eb49e5a5ab67740df2b5bed8ddb153de.jpg
+
+Then. show this image in 200px width x 100px height: https://wallpapers.com/images/featured/4k-ultra-hd-landscape-yva5dmhhj6fii9af.jpg
+        ```
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  <Tab title="Everything at once">
+    Put this in your agent's [initial prompt](/agent-creation/initial-prompt) and see every UI element in action.
+
+
+    ```markdown Everything at once
+### Say hi and welcome. You MUST generate all these ui elements, fill them with random interesting information:
+Card with information
+Card with two buttons and information
+Card with image and information:https://wallpapers.com/images/hd/4k-nature-moraine-lake-r66plwqa8m3z5reg.jpg
+Carousel with images and buttons https://wallpapers.com/images/hd/4k-nature-moraine-lake-r66plwqa8m3z5reg.jpg
+Form with name (text input), email (email input), and message (text area) fields with submit button
+small iframe with youtube video: <iframe width="400" height="200" src="https://www.youtube.com/embed/NNS5Piu-EII" title="Amazing Colors of Nature in 4K HDR 60fps - Tropical Animals and Relaxing Music" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+image, use this with 200 height and 400 width: https://wallpapers.com/images/hd/4k-nature-moraine-lake-r66plwqa8m3z5reg.jpg
+small frame with calendly: <iframe width="200" height="400" src="https://calendly.com/admin-magicmark/15min?primary_color=ff00d9&month=2024-08"></iframe>
+three buttons at the bottom'
+````
+
+  </Tab>
+</Tabs>
+
+<Note>
+  The versatility of the UI components allows for numerous combinations and
+  configurations. You can instruct your agent to create **complex elements**
+  like a carousel of cards, each with its own image, description, and buttons.
+</Note>
+
+<Tip>
+  Experiment with different component combinations to find the most effective
+  way to present information and engage users in **your** specific use case.
+</Tip>
+
+## Best Practices
+
+To make the most of the UI Engine:
+
+<CardGroup cols={2}>
+  <Card title="Balance Text and UI" icon="scale-balanced">
+    Mix textual responses with UI components for a rich, varied interaction.
+  </Card>
+  <Card title="Context-Aware Components" icon="sitemap">
+    Use UI elements that are relevant to the current conversation context.
+  </Card>
+  <Card title="Progressive Enhancement" icon="layer-group">
+    Start with essential information in text, then enhance with UI components.
+  </Card>
+  <Card title="Test Different Approaches" icon="vial-circle-check">
+    Experiment with structured instructions vs. creative freedom to find what
+    works best for your use case.
+  </Card>
+</CardGroup>
+
+## Credit Usage Considerations
+
+<Warning>
+  Enabling the UI Engine **increases** credit consumption per response due to
+  the additional instructions appended to each interaction.
+</Warning>
+
+To manage credit usage effectively:
+
+<Steps>
+  <Step title="Monitor Usage">
+    Regularly check your credit usage in the [Usage tab](/features/usage-tab).
+  </Step>
+  <Step title="Optimize Interactions">
+    Use UI components together with text responses to optimize usage.
+  </Step>
+  <Step title="Inform Clients">
+    If you're an agency, ensure your clients are aware of the potential increase
+    in credit usage when the UI Engine is enabled.
+  </Step>
+  <Step title="Compare and Adjust">
+    Run comparisons of credit usage with and without the UI Engine to understand
+    its impact on your specific use case.
+  </Step>
+</Steps>
+

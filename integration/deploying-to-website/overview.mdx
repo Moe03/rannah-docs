@@ -1,0 +1,173 @@
+---
+title: "Overview"
+description: ""
+icon: tree
+---
+
+Rannah رنّة can be deployed almost anywhere, from the most popular website builders to SaaS platforms. By utilizing code snippets for integration, the widget can be seamlessly embedded into your digital environment of choice.
+
+## Integration Methods
+
+There are four main methods of integrating your AI agent:
+
+<CardGroup cols={2}>
+  <Card title="Popup Widget" icon="message-bot">
+    A chat widget that appears in the corner of your website, allowing for easy
+    access without interfering with the main content.
+  </Card>
+  <Card title="Embedded Chat" icon="browser">
+    A full-width chat interface embedded directly into your page, offering a
+    more immersive experience.
+  </Card>
+  <Card title="iframe" icon="brackets-square">
+    An iframe that can be placed anywhere on your site, providing maximum
+    flexibility in terms of placement and sizing.
+  </Card>
+  <Card title="Full html" icon="html5">
+    An iframe that can be placed anywhere on your site, providing maximum
+    flexibility in terms of placement and sizing.
+  </Card>
+</CardGroup>
+
+## Universal Code Snippets
+
+Regardless of the platform you're using, these code snippets form the basis of your Rannah رنّة integration:
+
+<Tabs>
+  <Tab title="Popup Widget">
+    ```html
+    <div id="VG_OVERLAY_CONTAINER"></div>
+    <script defer>
+        (function() {
+            window.VG_CONFIG = {
+                ID: "YOUR_AGENT_ID",
+                region: 'eu', // or 'na' for North America
+                render: 'bottom-right', // or 'bottom-left'
+                // modalMode: true, // Set this to 'true' to open the widget in modal mode
+                stylesheets: [
+                    "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+                ],
+            }
+            var VG_SCRIPT = document.createElement("script");
+            VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+            VG_SCRIPT.defer = true;
+            document.body.appendChild(VG_SCRIPT);
+        })()
+    </script>
+    ```
+  </Tab>
+
+  <Tab title="Embedded Chat">
+    ```html
+    <div style="width: 500px; height: 500px;" id="VG_OVERLAY_CONTAINER"></div>
+    <script defer>
+        (function() {
+            window.VG_CONFIG = {
+                ID: "YOUR_AGENT_ID",
+                region: 'eu', // or 'na' for North America
+                render: 'full-width',
+                // modalMode: true, // Set this to 'true' to open the widget in modal mode
+                stylesheets: [
+                    "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+                ],
+            }
+            var VG_SCRIPT = document.createElement("script");
+            VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+            VG_SCRIPT.defer = true;
+            document.body.appendChild(VG_SCRIPT);
+        })()
+    </script>
+    ```
+  </Tab>
+  
+  <Tab title="Iframe">
+
+    Iframes introduce a whole new range of usecases with the huge variety of applications Rannah رنّة brings to the table.
+
+    Integrating as a more integral part of websites, platforms or internal helper agents, iframes are a good way to point to your agent without the need to render the script directly on the site, where it might conflict with other scripts. The same with CSS as it might (in some cases - very rare) affect a sites stylesheet. Some popular use-cases are:
+
+
+    - **Integrate on platform:** Make the agent available to use in your own platform, whether it be PowerBI, Slack, Teams or Monday.com it can easily be put in wherever you want.
+    - **Use the agent as its own addon on your SaaS platform:** This is a popular way to launch AI quickly inside an existing product.
+    - **Use as a part of website layout:** Put the iframe directly on the page instead of using a traditional chatbot bubble. This works well for landing pages, support hubs, and AI-powered FAQ experiences.
+    - **Send it as a URL:** You can also share the iframe route directly as a standalone experience in email, chat, onboarding flows, or internal tools.
+
+    - *If you build something cool with Rannah رنّة, contact the team at [support@rannah.io](mailto:support@rannah.io).*
+
+          *Regards, the Rannah رنّة AI team*
+
+
+
+    ```html
+    <iframe
+        src="https://rannah.io/app/eu/render/YOUR_AGENT_ID/iframe"
+        style="width: 100%; height: 100vh;"
+        frameborder="0">
+    </iframe>
+    ```
+
+  </Tab>
+</Tabs>
+
+<Note>
+  Always replace `YOUR_AGENT_ID` with your actual Rannah رنّة Agent ID in all code
+  snippets.
+</Note>
+
+## Key Configuration Options
+
+The `VG_CONFIG` object in the script allows for customization of your agent's behavior and appearance:
+
+<AccordionGroup>
+  <Accordion title="ID">Your unique Rannah رنّة Agent identifier.</Accordion>
+  <Accordion title="region">
+    Set to 'eu' for Europe or 'na' for North America, based on your account
+    region.
+  </Accordion>
+  <Accordion title="render">
+    Controls the chatbot's position: 'bottom-right', 'bottom-left', or
+    'full-width'.
+  </Accordion>
+  <Accordion title="stylesheets">
+    Array of CSS stylesheets to customize the chatbot's appearance.
+  </Accordion>
+</AccordionGroup>
+
+## Additional Configuration Options
+
+You can further customize your chatbot by adding these optional parameters to the `VG_CONFIG` object:
+
+```javascript
+window.VG_CONFIG = {
+  // ... other config options ...
+  user: {
+    name: "John Doe",
+    email: "johndoe@example.com",
+    phone: "+1234567890",
+  },
+  userID: "CUSTOM_USER_ID",
+  autostart: true,
+};
+```
+
+<Tip>
+  Providing user data can enhance the personalization of your agents
+  interactions. The `autostart` option, when set to `true`, will open the widget
+  automatically when a user visits your site.
+</Tip>
+
+## Platform-Specific Integration Guides
+
+While the core integration code remains consistent, the method of adding this code to your site varies by platform. Click on each platform for detailed integration instructions:
+
+- [**Shopify**](/integration/deploying-to-website/shopify): Add the code to your theme.liquid file just before the closing `</body>` tag.
+- [**WordPress**](/integration/deploying-to-website/wordpress): Use a plugin like "Insert Headers and Footers" or edit your theme's footer.php file.
+- [**Wix**](/integration/deploying-to-website/wix): Use the Custom Code feature in the Wix Editor.
+- [**Webflow**](/integration/deploying-to-website/webflow): Add the code in the "Custom Code" section of your page settings.
+- [**Squarespace**](/integration/deploying-to-website/squarespace): Use the Code Injection feature to add the integration code.
+- [**Iframe / Full Page HTML**](/integration/deploying-to-website/iframe): Learn how to effectively use iframes for various use cases.
+
+<Check>
+  For detailed, platform-specific integration guides, please refer to the
+  individual documentation pages for each platform.
+</Check>

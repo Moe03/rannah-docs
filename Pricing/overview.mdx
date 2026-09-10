@@ -1,0 +1,225 @@
+---
+title: "Pricing Overview"
+description: "Complete guide to Rannah رنّة pricing — v2-2026 plans, credits, add-ons, and voice."
+icon: "dollar-sign"
+---
+
+# Pricing Overview
+
+Transparent, capability-based pricing. The **v2-2026** plan ladder (and its feature gates) applies to **new users only**.
+
+<Note>
+  **Existing customers (any plan before August 2026):** if you were already on an older plan — classic Pay as you go, legacy, managed, or any pre–August 2026 catalog — you keep **all features unlocked**. Nothing is taken away; you are not migrated onto the new ladder. The tier limits below apply only to new / never-paid workspaces on `v2-2026`.
+</Note>
+
+<Note>
+  **Credits are simple:** **1 USD = 1,000 credits**.
+
+  Plan prices below are in USD. Annual billing is ~33% off (**4 months free** — pay for 8 months, get 12).
+</Note>
+
+<Tip>
+  Compare plans on the [public pricing page](/Pricing/overview) or open **Billing** in the dashboard (bottom left) to upgrade, add add-ons, or buy credits.
+</Tip>
+
+---
+
+## Who sees which catalog?
+
+| Cohort | Plans / access | Notes |
+|--------|----------------|--------|
+| **New users (Aug 2026+)** | Free → Starter → Pro → Business → White Label → White Label Elite | Catalog id `v2-2026` — feature gates by tier |
+| **Any older plan (pre–Aug 2026)** | Your existing plan stays | **All features remain unlocked** — PAYG, legacy, managed, and other pre-v2 catalogs are fully grandfathered |
+
+Public REST API access on v2: **Business+** (read), **White Label+** (write). See [API Authentication](/Support/contact). Grandfathered pre–August 2026 paid workspaces keep their existing API access.
+
+---
+
+## Plan ladder (v2-2026)
+
+| Plan | Monthly | Annual (effective / billed) | Monthly credits | Agents | KB docs (workspace) |
+|------|---------|-----------------------------|-----------------|--------|---------------------|
+| **Free** | $0 | — | 500 (one-time trial) | 2 | 1,000 |
+| **Starter** | $29 | $19 / $228 | 5,000 | 3 | 1,000 |
+| **Pro** | $59 | $39 / $468 | 15,000 | 10 | 25,000 |
+| **Business** | $99 | $66 / $792 | 25,000 | 20 | 100,000 |
+| **White Label** | $199 | $133 / $1,596 | 60,000 | Unlimited | 500,000 |
+| **White Label Elite** | $349 | $233 / $2,796 | 120,000 | Unlimited | Unlimited |
+
+Unused monthly credits **roll over** — each cycle adds your plan quota on top of remaining balance, including purchased top-ups. Free’s 500 credits are a one-time trial allotment, not refreshed monthly.
+
+**[Full plan details & billing management →](./billing)**
+
+---
+
+## What’s included by tier
+
+### Free — $0
+Sandbox to learn the product.
+- Web widget, tools/nodes builder, basic analytics
+- 2 agent slots, 1 workspace seat, 2 trial client seats
+- Tier 4 AI models (fast / value)
+- One-time 500-credit trial
+
+### Starter — $29/mo
+Early production on web + Telegram.
+- Everything in Free (with monthly credits)
+- Telegram channel
+- Calendar & email integrations
+- Tier 3+ models
+- Community / email support
+
+### Pro — $59/mo (most popular)
+Full inbound omnichannel chat.
+- Everything in Starter
+- All chat channels (WhatsApp, Instagram, Messenger, Discord, Email)
+- Live handoff + ticketing, lead funnel, CRM integrations
+- Widget tabs, standard analytics
+- Overage credits (buy more when you need them)
+- Tier 2+ models
+- Monthly crawler refresh
+
+### Business — $99/mo
+Proactive growth — voice, campaigns, unbranded widget.
+- Everything in Pro
+- Voice / phone (SIP + Twilio), realtime call listening
+- Remove ConvoCore widget branding
+- Campaigns + AI follow-ups, AI summarization
+- BYOK + premium (Tier 1) models
+- MCP + webhooks, agent simulator
+- KB crawler access + auto-update
+- Public API **read** access
+- 2 Twilio numbers + 3 concurrent call lines included
+- Weekly crawler refresh · Priority email support
+
+### White Label — $199/mo
+Agency platform.
+- Everything in Business (API upgrades to **full** write)
+- Per-client analytics, crawler proxy + auto-scrape
+- Unlimited agents, 10 workspace seats, 20 client seats
+- 3 Twilio numbers + 10 concurrent lines
+- Daily crawler refresh · Priority + onboarding support
+
+### White Label Elite — $349/mo
+SaaS mode for agencies.
+- Everything in White Label
+- SaaS mode, client self-signup, client-facing analytics
+- Unlimited workspace & client seats, unlimited KB docs
+- Rebrandable API
+- Agency auto-billing (Stripe Connect for clients)
+- 5 Twilio numbers + 25 concurrent lines · Dedicated support
+
+Need a custom enterprise deal (on-prem, dedicated build, custom SLAs)? Contact sales from the [pricing page](/Pricing/overview).
+
+---
+
+## AI model tiers
+
+Higher plans include all lower tiers. Prices on the public page are **USD per 1M tokens** (platform rate) with credits underneath. **1 credit = $0.001**.
+
+| Tier | Plans | Examples |
+|------|-------|----------|
+| **4** | Free+ | Qwen 3.5 (default), Nemotron Nano, Llama 3.3 70B, GPT-4o Mini, Gemini 2.5 Flash-Lite, GPT 5 Nano |
+| **3** | Starter+ | Kimi K2.6, DeepSeek V4 Pro, Gemini 2.5 Flash, GPT-5 Mini, Claude Haiku 4.5 |
+| **2** | Pro+ | GPT-5 / 5.2 / 5.6 Luna, Gemini 3.x, Claude Sonnet 4.5, GPT-4o |
+| **1** | Business+ | Flagship (Opus 4.x, Kimi-K3, Grok 4.5, GPT-5.6 Sol/Terra, o3-mini, …) |
+
+Plus **1 interaction credit ($0.001)** per reply on top of token cost. Full live tables: [Pricing → Model access](/Pricing/overview).
+
+---
+
+## Add-ons
+
+You can unlock features below your plan (or add capacity) without jumping tiers. Annual add-ons = monthly × 8 (~33% off).
+
+### Capacity (all cohorts)
+| Add-on | Price | Notes |
+|--------|-------|--------|
+| Workspace seat | $10/mo | Extra dashboard seat |
+| Client seat | $15/mo | Extra agency client org |
+| Agent seat | $5/mo | Extra AI agent slot |
+| Concurrent call line | $5/mo | Extra simultaneous voice call |
+| Twilio phone number | $3/mo | Extra number slot |
+| White Label (legacy key) | $200/mo | Agency dashboard / clients / domains |
+
+### Feature add-ons (v2 catalog)
+| Add-on | Price | Unlocks |
+|--------|-------|---------|
+| Telegram | $5/mo | Telegram channel |
+| WhatsApp | $15/mo | WhatsApp |
+| Instagram / Messenger | $10/mo each | Social channels |
+| Discord / Email | $5/mo each | Chat channels |
+| Omnichannel chat pack | $29/mo | WA + IG + Messenger + Discord + Email |
+| Live handoff + ticketing | $15/mo | Human inbox |
+| Lead funnel | $15/mo | Lead capture + auto funnel |
+| CRM integrations | $10/mo | CRM connectors |
+| Remove widget branding | $19/mo | Widget-only (not agency WL) |
+| Widget tabs | $9/mo | Multi-tab widget UX |
+| Voice / phone | $29/mo | Voice agents + listening |
+| SIP trunk | $15/mo | BYO SIP |
+| Campaigns + follow-ups | $29/mo | Outbound + WA templates |
+| BYOK + premium models | $20/mo | Own keys + Tier 1 |
+| MCP + webhooks | $15/mo | Tools / outbound webhooks |
+| API read-only | $15/mo | REST read |
+| API full | $39/mo | REST write |
+| Agent simulator | $19/mo | Auto tester |
+| Crawler access | $10/mo | KB site ingest |
+| Crawler proxy / auto-update / auto-scrape | $15 / $12 / $15 | Advanced crawl |
+| SaaS mode | $99/mo | Client self-signup |
+
+**[Manage plans & add-ons in Billing →](./billing)**
+
+---
+
+## Credits & usage
+
+| Feature | Cost |
+|---------|------|
+| Base interaction (any channel) | ~$0.0010 (1 credit) + model token cost |
+| Custom channel fee | ~$0.0010 |
+| Crawler (per page) | ~$0.0010 |
+
+**[Full credits guide →](./credits)**
+
+---
+
+## Voice call pricing
+
+Total ≈ **platform fee + STT + TTS (or realtime STS) + LLM + telephony (optional)**.
+
+| Component | Typical range |
+|-----------|----------------|
+| Platform fee | **$0.020/min** (20 credits) |
+| Speech-to-Text | $0.004 – $0.013/min |
+| Text-to-Speech | $0.010 – $0.070/min |
+| Realtime STS | $0.010 – $0.070/min (Gemini Live / Ultravox / Grok Live) |
+| LLM | Varies by model (BYOK on Business+) |
+| Twilio | ~$0.015/min (est.) |
+
+Voice / phone access starts on **Business** (or the Voice add-on).
+
+**[Voice pricing details →](../voice/pricing)** · **[Provider cost estimates →](./provider-cost-estimates)** · **[Live pricing →](/Pricing/overview)**
+
+---
+
+## Cost optimization tips
+
+1. Start on the right tier — don’t buy Business if Pro channels are enough; use add-ons for one missing feature.
+2. Prefer Tier 4 / Tier 3 models for high-volume FAQ traffic.
+3. Enable **BYOK** on Business+ to cut LLM credit burn.
+4. Disable widget autostart / initial prompt if you don’t need proactive chat.
+5. Use Speechmatics / Google STT + Google TTS, or Gemini Live, for budget voice stacks.
+
+**[More optimization tips →](./credits#saving-credits--optimizing-usage)**
+
+---
+
+## Quick links
+
+- **[Billing & plans](./billing)** — Subscribe, change plan, invoices
+- **[Credits](./credits)** — How credits are consumed
+- **[Voice pricing](../voice/pricing)** — Call stack costs
+- **[Provider costs](./provider-cost-estimates)** — STT / TTS tables
+- **[Live pricing page](/Pricing/overview)** — Interactive comparison
+
+Questions? Join [Discord](https://discord.com/invite/5zvdYwhZa7) or contact sales for Elite / custom deals.

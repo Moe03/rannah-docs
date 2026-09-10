@@ -1,0 +1,36 @@
+---
+title: 'Embeddable Script'
+description: 'Deploy with the script'
+icon: 'book'
+---
+
+# Script
+You can deploy Rannah رنّة with a script.
+
+## Overview
+
+This guide shows how to deploy the voice orb as an embeddable script on your website. Using the script version, you can integrate the voice orb without a full React setup. Simply include the script on your page and initialize the orb with your configuration.
+
+
+## Installation
+
+Include the following script tag in your HTML file, ideally just before the closing `</body>` tag:
+
+```bash
+<script src="https://unpkg.com/@tixae-labs/react-voice-orb@latest/dist/voice-orb.min.js"></script>
+```
+After loading the script, initialize the Voice Orb by calling its global initializer. Add the following snippet to your page:
+
+```bash
+<script>
+  // Initialize the Voice Orb widget
+  window.VoiceOrb.init({
+    agentId: "YOUR_AGENT_ID",   // Replace with your agentId from Rannah رنّة.
+    region: "YOUR_REGION",      // Replace with your agent's region (e.g., "eu" or "na").
+    targetElementId: "voice-orb-container", // The ID of the element where the orb should render
+    
+    // Additional configuration options can be added here
+  });
+</script>
+```
+

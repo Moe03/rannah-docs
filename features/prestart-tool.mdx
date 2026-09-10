@@ -1,0 +1,184 @@
+---
+title: 'Prestart Tool'
+description: 'Dynamically enhance your AI agent prompts with external instructions before node execution'
+icon: play-pause
+---
+
+# What is the Prestart Tool?
+
+The Prestart Tool is a powerful feature that allows you to dynamically enhance your AI agent's prompt with additional instructions from an external source before the node begins execution. This tool makes a GET request to a specified URL and incorporates the response into the agent's prompt, enabling real-time customization and context-aware interactions.
+
+<Note>
+The Prestart Tool executes **before** the node starts, ensuring that any additional instructions are available to the AI agent from the very beginning of the conversation or task.
+</Note>
+
+## How It Works
+
+<Steps>
+  <Step title="URL Configuration">
+    Configure a URL endpoint that your server will monitor for GET requests from the Prestart Tool.
+  </Step>
+  <Step title="GET Request Execution">
+    Before the node starts, the Prestart Tool automatically sends a GET request to your specified URL.
+  </Step>
+  <Step title="Response Processing">
+    Your server responds with additional instructions or context that should be added to the AI agent's prompt.
+  </Step>
+  <Step title="Prompt Enhancement">
+    The response is seamlessly integrated into the agent's prompt, enriching its context and capabilities for the upcoming interaction.
+  </Step>
+</Steps>
+
+## Use Cases
+
+The Prestart Tool is particularly useful for:
+
+<CardGroup cols={2}>
+  <Card title="Dynamic Context Loading" icon="database">
+    Load user-specific information, preferences, or context from your database before the conversation begins.
+  </Card>
+  <Card title="Real-time Configuration" icon="gear">
+    Adjust agent behavior based on current system status, feature flags, or operational parameters.
+  </Card>
+  <Card title="Personalization" icon="user">
+    Customize the agent's tone, knowledge base, or available actions based on user profiles or session data.
+  </Card>
+  <Card title="Conditional Instructions" icon="code-branch">
+    Provide different instruction sets based on time of day, user location, or business logic.
+  </Card>
+</CardGroup>
+
+## Setup Guide
+
+### 1. Prepare Your Endpoint
+
+Create an endpoint on your server that responds to GET requests with the additional prompt instructions:
+
+```python
+# Example Flask endpoint
+@app.route('/prestart-instructions', methods=['GET'])
+def get_prestart_instructions():
+    # Your logic to determine additional instructions
+    additional_instructions = {
+        "instructions": "Today is a holiday, so provide extra friendly greetings and mention our special holiday offers.",
+        "context": "Current promotion: 20% off all services",
+        "tone": "festive and welcoming"
+    }
+    return jsonify(additional_instructions)
+```
+
+### 2. Configure the Prestart Tool
+
+<Steps>
+  <Step title="Access Tool Configuration">
+    Navigate to your agent's tool configuration section in the dashboard.
+  </Step>
+  <Step title="Add Prestart Tool">
+    Select "Prestart Tool" from the available tool options.
+  </Step>
+  <Step title="Enter URL">
+    Provide the complete URL to your endpoint that will return the additional instructions.
+  </Step>
+  <Step title="Test Configuration">
+    Use the test feature to verify that your endpoint is responding correctly.
+  </Step>
+</Steps>
+
+### 3. Response Format
+
+Your endpoint should return a JSON response with the additional prompt instructions. The tool supports various formats:
+
+```json
+{
+  "instructions": "Additional instructions for the AI agent",
+  "context": "Relevant context information",
+  "rules": ["Rule 1", "Rule 2", "Rule 3"],
+  "personality": "Adjust agent personality if needed"
+}
+```
+
+<Tip>
+Keep your response concise and focused. The Prestart Tool is designed for prompt enhancement, not large data transfers.
+</Tip>
+
+## Best Practices
+
+<Warning>
+Ensure your endpoint has proper error handling and returns a valid response within a reasonable timeframe to avoid delays in agent initialization.
+</Warning>
+
+### Response Time Optimization
+- Keep your endpoint response time under 2 seconds
+- Implement caching for frequently requested data
+- Use efficient database queries and API calls
+
+### Security Considerations
+- Implement proper authentication if sensitive data is involved
+- Use HTTPS for secure communication
+- Validate and sanitize any dynamic content before including it in prompts
+
+### Content Guidelines
+- Keep additional instructions relevant and specific
+- Avoid overwhelming the agent with too much additional context
+- Structure your response in a clear, actionable format
+
+## Error Handling
+
+The Prestart Tool includes built-in error handling:
+
+- **Network Errors**: If the URL is unreachable, the tool will skip the enhancement and proceed with the default prompt
+- **Timeout**: Requests that take longer than the configured timeout will be cancelled
+- **Invalid Response**: Non-JSON or malformed responses will be ignored with appropriate logging
+
+## Examples
+
+### E-commerce Agent Enhancement
+```json
+{
+  "instructions": "Current inventory shows low stock on popular items. Suggest alternatives when items are unavailable.",
+  "promotion": "Flash sale: 30% off electronics until midnight",
+  "shipping": "Free shipping available for orders over $50"
+}
+```
+
+### Support Agent Context Loading
+```json
+{
+  "context": "Customer has premium subscription, last contact was about billing issue (resolved)",
+  "priority": "high-value customer",
+  "available_actions": ["refund", "credit", "escalate", "technical_support"]
+}
+```
+
+### Time-sensitive Instructions
+```json
+{
+  "instructions": "After hours: Inform customers that live support resumes at 9 AM EST",
+  "emergency_contact": "For urgent issues, direct to emergency hotline: 1-800-URGENT",
+  "automated_actions": ["schedule_callback", "create_ticket"]
+}
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Tool not executing">
+    - Verify the URL is accessible and returns a valid response
+    - Check that the endpoint accepts GET requests
+    - Ensure there are no network restrictions blocking the request
+  </Accordion>
+  
+  <Accordion title="Instructions not appearing in prompt">
+    - Confirm your endpoint returns valid JSON
+    - Check the response structure matches expected format
+    - Review the tool configuration in your agent settings
+  </Accordion>
+  
+  <Accordion title="Slow agent initialization">
+    - Optimize your endpoint response time
+    - Consider implementing caching mechanisms
+    - Review timeout settings in the tool configuration
+  </Accordion>
+</AccordionGroup>
+
+The Prestart Tool empowers you to create more dynamic, context-aware AI agents that can adapt their behavior based on real-time information from your systems, providing a more personalized and effective user experience. 

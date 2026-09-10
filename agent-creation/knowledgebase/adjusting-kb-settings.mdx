@@ -1,0 +1,134 @@
+---
+title: 'Adjusting KB settings'
+description: 'Description of your new file.'
+icon: wrench
+---
+
+
+  # 
+
+<img class="rounded-md" src="https://i.imgur.com/johowZa.png" width="400"></img> 
+
+ 
+ 
+ 
+ 
+
+### **Adjusting chunks retrieved:** 
+
+ 
+ 
+
+The `Max Chunks Retrievable` slider controls how many pieces of information (<Tooltip tip="Segments of text or data that the model processes in one interaction. Each chunk can consist of several sentences or paragraphs, depending on the size of the data being processed. The model retrieves and processes these chunks sequentially to generate comprehensive and accurate responses.">Chunks</Tooltip>) the LLM can retrieve in one interaction. You can adjust it anywhere between 1 and 10. **We recommend** keeping it at around 3-4 depending on <Tooltip tip="It's recommended to increase the chunk limit as your knowledge base grows, especially when the document count exceeds 10, setting it to 6 chunks. More chunks allow the model to process more information at once, potentially improving the relevance and quality of its responses. This adjustment enables the AI to analyze a broader context, leading to more accurate and insightful answers.">amount of documents</Tooltip> in the knowledgebase. 
+
+ 
+ 
+ 
+ 
+
+When you adjust the slider, you change the maximum number of the model will retrieve. If you set it to a higher number, the model can pull more information at once, which might be useful for complex queries. However, be mindful that some models have a lower <Tooltip tip="The input limit is the maximum amount of data or text the AI can process in a single interaction. This limit is determined by the model's context window, which is the span of text the model can consider at once. Exceeding this limit can result in truncated or incomplete responses.">Input limit</Tooltip>, which means they can't process as much information at once and may require you to set a lower value on the slider. 
+
+# 
+
+<Warning> 
+
+Setting a higher chunk limit will consume more [credits](credits), as more <Tooltip tip="Tokens are units of text the AI processes. They can be as short as one character or as long as one word.">Tokens</Tooltip> are being processed. Each chunk corresponds to a set of tokens, and increasing the number of chunks means more tokens are retrieved, leading to higher credit usage. 
+
+</Warning> 
+
+ 
+ 
+ 
+
+# 
+
+### **Search similarity prompt:** 
+
+ 
+ 
+
+    To further enhance your agent's ability to retrieve the most relevant information from the knowledge base, use a prompt for the <Tooltip tip="A technique that generates search keywords based on the conversation context">Search Similarity Step</Tooltip>: 
+
+ <Steps>
+  <Step title="Navigate to Knowledge Section" icon="map-location-dot">
+    Go to your agent's `Knowledge` section in the dashboard.
+  </Step>
+  <Step title="Access Settings" icon="gear">
+    Look for and click on the `gear` icon located in the upper right corner of the page.
+  </Step>
+  <Step title="Write Your Prompt" icon="pencil">
+    In the input field that appears, write your custom prompt. If you're unsure, you can use the provided example as a starting point.
+  </Step>
+  <Step title="Include Chat History Variable" icon="code">
+    Ensure you include the `{chat_history}` variable in your prompt. This is crucial for the proper functioning of your knowledge base.
+<Warning>
+  The knowledge base won't work correctly without the `{chat_history}` variable.
+</Warning>
+  </Step>
+  <Step title="Save Changes" icon="floppy-disk">
+    After writing your prompt, click the `Done` button to save your changes.
+  </Step>
+  <Step title="Test the Knowledge Base" icon="vial-circle-check">
+    To verify that your knowledge base is working as expected, use the `Preview KB` feature located in the upper right corner of the page.
+<Tip>
+  Testing your knowledge base helps ensure that it responds accurately to queries before going live.
+</Tip>
+  </Step>
+</Steps>
+ 
+
+     
+<Card>
+    <img class="rounded-md" src="https://i.imgur.com/OUls8x7.png" width="700"></img> 
+</Card>
+# 
+
+    #### Example prompt
+    Try pasting this search similarity prompt in the input field and see the results: 
+
+<Card icon="code">
+    ```markdown 
+
+    # You are an advanced AI tasked with generating relevant search keywords. Use the chat history to create accurate and relevant keywords for searching our knowledge base. 
+
+
+    ## This is the chat history: {chat_history} 
+
+    # Steps: 
+
+    1. Analyze the chat history and context 
+
+    2. Identify main themes, topics, and keywords 
+
+    3. Generate a list of specific, relevant keywords for the search 
+
+ 
+    Output your list of keywords, separated by commas. 
+
+    ```
+
+
+
+</Card>
+
+### Related docs:
+
+<CardGroup cols={2}>
+  <Card title="Adding data" icon="file-circle-plus" href="/agent-creation/knowledgebase/adding-data/direct-text-entry">
+    
+  </Card>
+
+  <Card title="Prevewing the KB" icon="eye" href="/agent-creation/knowledgebase/adjusting-kb-settings">
+    
+  </Card>
+  
+  <Card title="Structuring KB documents" icon="file" href="/agent-creation/knowledgebase/structuring-kb-documents">
+    
+  </Card>
+
+  <Card title="KB and UI-engine" icon="window" href="/agent-creation/knowledgebase/kb-and-ui-engine">
+    
+  </Card>
+</CardGroup>
+ 
+ 

@@ -1,0 +1,127 @@
+---
+title: Creating and Managing Nodes
+description: Learn how to manage nodes in the Canvas feature by creating, moving, and connecting them with edges.
+icon: sitemap
+---
+
+Managing nodes in the **Canvas** feature involves organizing and linking nodes to build seamless AI agent flows. This guide explains how to create, move, connect, and configure nodes effectively.
+
+---
+
+## Creating Nodes
+
+Nodes form the building blocks of your flow. Follow these steps to add nodes to your workspace:
+
+1. **Default Node**:
+
+   - Drag and drop the **Default Node** from the side panel into the Canvas.
+   - These nodes represent operations or decision points.
+
+2. **Global Node**:
+
+   - Create a **Default Node** and enable the **Global Node** toggle in the node’s settings menu.
+   - Global nodes are reusable across the flow and can be accessed anywhere.
+
+3. **End Node**:
+   - Drag and drop the **End Node** to mark the endpoint of your conversation or process.
+
+---
+
+## Moving Nodes
+
+Reorganize your nodes by dragging them across the Canvas:
+
+- Click and hold the node you want to move.
+- Drag it to the desired location.
+- Release to position it on the grid.
+
+_Tip_: Keep your workspace organized by aligning nodes logically based on the flow direction (left-to-right or top-to-bottom).
+
+---
+
+## Connecting Nodes with Edges
+
+Edges define the flow of data and logic between nodes. To connect nodes:
+
+1. Hover over a node to display the connection points.
+2. Drag from a connection point to another node.
+3. Release to create an edge between the nodes.
+
+**Types of Connections**:
+
+- **Start to Default Nodes**: Define the starting point of your flow.
+- **Default to Global Nodes**: Reuse shared functionality like help prompts.
+- **Default to End Nodes**: Mark the logical endpoint of the conversation.
+
+---
+
+## Editing Edges and Conditions
+
+Edges can be customized to include conditions for dynamic routing:
+
+1. Click on an edge to open its settings.
+2. Add conditional logic based on user input or other variables.
+3. Save the configuration to ensure proper branching.
+
+**Example**:
+
+- Route users who say "Cancel" to a Global Node for handling cancellations.
+- Direct users asking about "Pricing" to a Default Node that integrates pricing tools.
+
+---
+
+## Customizing Node Behavior
+
+Click on a node to open its customization menu, which includes:
+
+- **Overview**: Set the node's name, description, and instructions.
+- **LLM Configuration**: Adjust AI response settings like temperature and token limits.
+- **Tools**: Integrate external APIs or tools for specific actions.
+- **Knowledge Base**: Enable AI to retrieve relevant knowledge from a database.
+- **Router Configuration**: Define conditions for branching flows.
+
+## Testing and Optimizing the Flow
+
+After managing nodes and edges, test your flow to ensure it works as intended:
+
+1. Use the **Test Tool** to simulate user inputs and outputs.
+2. Adjust node positions and edge configurations to fix any errors.
+3. Preview the flow to visualize how users navigate through the system.
+
+---
+
+## Best Practices for Managing Nodes
+
+- **Keep it tidy**: Organize nodes logically to maintain clarity, especially for complex flows.
+- **Label everything**: Assign descriptive names to nodes and edges for easier debugging.
+- **Use Global Nodes**: Reduce redundancy by centralizing reusable logic.
+- **Test regularly**: Simulate scenarios to identify and fix issues early.
+
+---
+
+### Example: Complete Flow Management
+
+**Scenario**: A customer service chatbot that:
+
+1. Greets the user with a **Start Node**.
+2. Processes user queries with **Default Nodes**.
+3. Offers a reusable “Cancel” command through a **Global Node**.
+4. Ends the conversation with an **End Node**.
+
+**Visual Representation**:
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/F8LED9jwmsE?si=q6HbOmiHLb5QjAZy"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+_Diagram showing the full flow with nodes, edges, and conditions._
+
+---
+
+Ready to refine your flows further? Dive into [Using Conditions in Flows](nodes/conditions) to explore dynamic routing.

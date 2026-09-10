@@ -1,0 +1,342 @@
+---
+title: "Airtable Integration"
+description: "Connect your Airtable bases to enable AI agents to create, read, and update records."
+icon: "table"
+---
+
+## Introduction
+
+Connect your Airtable bases to Rannah رنّة so your customers can create, read, and update records through your AI agent.
+
+## Overview
+
+The Airtable integration allows your customers to:
+
+- **View records** from your Airtable bases
+- **Create new records** with customer information
+- **Update existing records** based on specific criteria
+- **Search and filter** records using various conditions
+- **Manage data** across multiple Airtable bases
+
+<Note>
+  Your agent can perform full CRUD operations (Create, Read, Update, Delete) on
+  your Airtable data, making it perfect for CRM, lead management, and data
+  collection workflows.
+</Note>
+
+## 1. Connecting Your Airtable Account
+
+### Step 1: Connect to Rannah رنّة
+
+1. **Go to Integrations** in your Rannah رنّة workspace
+2. **Find the Airtable card** and click **"Connect"**
+3. **Click "Authorize"** - you'll be redirected to Airtable
+4. **Sign in to Airtable** and authorize the application
+5. **Select your bases** you want to make available
+6. **Complete the connection** - you'll be redirected back to Rannah رنّة
+
+<Info>
+  You can connect multiple Airtable accounts if needed. Each connection is
+  managed separately and can have different bases enabled.
+</Info>
+
+### Step 2: Select Bases
+
+After connecting, you'll be prompted to select which Airtable bases your agent can access:
+
+- **CRM Base** - Customer relationship management
+- **Lead Tracking** - Sales pipeline management
+- **Support Tickets** - Customer support workflows
+- **Custom Bases** - Any specialized databases you've created
+
+<Note>
+  You can modify your base selection at any time by managing your connection in
+  the Integrations page.
+</Note>
+
+## 2. Agent Configuration
+
+To enable Airtable functionality in your agent:
+
+### Step 1: Add Airtable Tool
+
+1. **Go to your agent configuration**
+2. **Edit a node** (e.g., Start Node)
+3. **In the Tools section**, add the **"airtable"** tool
+4. **Save the node configuration**
+
+### Step 2: Agent Instructions
+
+Add instructions like this to your agent node:
+
+```markdown
+You can help customers manage their data in Airtable:
+
+- Create new records with customer information
+- Look up existing records by email, name, or other fields
+- Update record information when customers provide changes
+- Search through records to find specific information
+
+When customers provide information or ask about their data, use the Airtable tool to store or retrieve information from the connected bases.
+```
+
+## 3. What Your Customers Can Do
+
+Once connected, your customers can interact with your agent to:
+
+### Data Management
+
+- **"Add my information to your database"**
+- **"Update my contact details"**
+- **"Look up my previous orders"**
+- **"Create a new support ticket"**
+
+### Information Retrieval
+
+- **"Do you have my email on file?"**
+- **"What's my current status?"**
+- **"Show me my order history"**
+- **"Find records for John Smith"**
+
+## 4. Usage Examples
+
+### Customer Adding Information
+
+<CodeGroup>
+```text Customer
+I'd like to sign up for your newsletter. My name is Sarah Johnson and my email is sarah@example.com.
+```
+
+```text Agent Response
+Perfect! I'd be happy to add you to our newsletter list. Let me save your information.
+
+✅ **Successfully Added:**
+- **Name**: Sarah Johnson
+- **Email**: sarah@example.com
+- **Status**: Newsletter Subscriber
+- **Date Added**: January 29, 2024
+
+You're all set! You'll start receiving our newsletter with the latest updates and insights. Is there anything else I can help you with today?
+```
+
+</CodeGroup>
+
+### Customer Looking Up Information
+
+<CodeGroup>
+```text Customer
+Can you check if you have my information on file? My email is john.doe@company.com
+```
+
+```text Agent Response
+Let me look that up for you right away.
+
+📋 **Found Your Record:**
+- **Name**: John Doe
+- **Email**: john.doe@company.com
+- **Company**: ABC Company
+- **Status**: Active Customer
+- **Last Updated**: January 15, 2024
+- **Phone**: (555) 123-4567
+
+Your information is up to date in our system. Would you like to update any of these details or is there something specific you need help with?
+```
+
+</CodeGroup>
+
+### Customer Updating Information
+
+<CodeGroup>
+```text Customer
+I need to update my phone number. It should be (555) 987-6543 instead.
+```
+
+```text Agent Response
+I'll update your phone number right away.
+
+✅ **Successfully Updated:**
+- **Previous Phone**: (555) 123-4567
+- **New Phone**: (555) 987-6543
+- **Updated**: January 29, 2024
+
+Your contact information has been updated in our system. Is there anything else you'd like to change or update?
+```
+
+</CodeGroup>
+
+## 5. System Prompt Examples
+
+### CRM Assistant
+
+```markdown
+You are a helpful CRM assistant. You can help customers:
+
+1. Add their contact information to our database
+2. Update their existing records
+3. Look up their information and status
+4. Create support tickets or requests
+
+When customers provide information:
+
+- Always confirm what you're saving before creating records
+- Use the customer's email as the primary identifier
+- Keep records organized and up-to-date
+- Provide confirmation of all changes made
+
+Use the Airtable tool to manage customer data efficiently.
+```
+
+### Lead Management Assistant
+
+```markdown
+You are a lead management assistant. You help with:
+
+- Capturing new lead information from website visitors
+- Updating lead status and contact details
+- Tracking customer interactions and preferences
+- Managing follow-up tasks and notes
+
+When handling leads:
+
+1. Collect essential information (name, email, company, interest)
+2. Categorize leads appropriately (hot, warm, cold)
+3. Add relevant notes about their needs
+4. Set appropriate follow-up reminders
+
+Use the Airtable tool to maintain accurate lead records.
+```
+
+### Support Ticket System
+
+```markdown
+You are a customer support assistant. You can:
+
+- Create new support tickets for customer issues
+- Look up existing tickets by email or ticket number
+- Update ticket status and add resolution notes
+- Track customer support history
+
+For support requests:
+
+1. Gather issue details (problem description, urgency, contact info)
+2. Create a properly categorized support ticket
+3. Provide ticket number for customer reference
+4. Set appropriate priority and status
+
+Use the Airtable tool to manage support workflows efficiently.
+```
+
+## 6. Available Airtable Methods
+
+Your agent has access to these Airtable functions:
+
+### `read`
+
+- **Purpose**: Retrieves records from your Airtable base
+- **Use**: "Look up customer information" or "Find records"
+
+### `create`
+
+- **Purpose**: Creates new records in your Airtable base
+- **Use**: "Add new customer" or "Create support ticket"
+
+### `update`
+
+- **Purpose**: Updates existing records with new information
+- **Use**: "Update contact details" or "Change status"
+
+### `upsert`
+
+- **Purpose**: Creates new record or updates existing one if found
+- **Use**: "Save customer info" (creates if new, updates if exists)
+
+## 7. Tips for Better Customer Experience
+
+### Data Collection Best Practices
+
+```text System Prompt Addition
+When collecting customer information:
+- Always ask for permission before saving personal data
+- Confirm the information before creating records
+- Use email addresses as primary identifiers when possible
+- Provide clear confirmation of what was saved
+
+When updating records:
+- Confirm the changes before applying them
+- Show what was changed (old vs new values)
+- Verify the customer's identity before making changes
+```
+
+### Common Use Cases
+
+Your agent will be able to handle scenarios like:
+
+- **Lead Capture**: "I'm interested in your services, here's my info..."
+- **Contact Updates**: "My phone number has changed to..."
+- **Support Requests**: "I'm having an issue with..."
+- **Information Lookup**: "Do you have my information on file?"
+- **Status Checks**: "What's the status of my request?"
+
+## 8. Troubleshooting
+
+### Connection Issues
+
+**Problem**: "No bases found"
+**Solution**:
+
+- Make sure you have bases in your Airtable account
+- Check that bases are shared with the connected account
+- Verify you selected bases during the connection process
+
+### Agent Can't Find Records
+
+**Problem**: Agent says "record not found" when it should exist
+**Solutions**:
+
+- Check that you're searching in the correct base and table
+- Verify the field names match exactly (case-sensitive)
+- Ensure the record hasn't been deleted or moved
+- Try searching with different criteria (email vs name)
+
+### Agent Can't Create Records
+
+**Problem**: "Failed to create record" errors
+**Solutions**:
+
+- Verify all required fields are provided
+- Check that field names match your Airtable base exactly
+- Ensure you have write permissions to the base
+- Confirm the base and table are still accessible
+
+### Agent Not Using Airtable
+
+**Problem**: Agent doesn't use Airtable when customers provide information
+**Solutions**:
+
+- Make sure Airtable tool is enabled in your agent's Canvas → Tools
+- Check that your Airtable connection is active in Integrations
+- Verify your agent has instructions about data management
+- Try reconnecting your account if issues persist
+
+## 9. Security & Privacy
+
+- ✅ **Secure access** - Uses OAuth for safe authentication
+- ✅ **Permission control** - Only access selected bases
+- ✅ **Encrypted storage** - API credentials are securely stored
+- ✅ **Audit trail** - All changes are logged in Airtable
+- ✅ **Disconnect anytime** - Remove access from Integrations page
+
+## Support
+
+Need help? Here's what to check:
+
+1. **Connection Status** - Make sure your Airtable account shows as "Connected" in Integrations
+2. **Tool Enabled** - Verify Airtable tool is enabled in your agent's Canvas → Tools
+3. **Bases Selected** - Ensure you've selected the right bases during connection setup
+4. **Field Names** - Check that your agent instructions match your Airtable field names
+
+For additional support, contact our team through the dashboard.
+
+---
+
+Your Airtable integration is now ready! Your customers can interact with your data through natural conversation, and your agent will handle all the database operations seamlessly.

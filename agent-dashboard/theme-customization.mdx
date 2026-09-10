@@ -1,0 +1,576 @@
+---
+title: "Theme Customization"
+description: "Design a stunning, brand-consistent widget interface with advanced theme customization tools and visual styling options"
+icon: "palette"
+---
+
+<img
+  className="block dark:hidden"
+  src="/images/theme-customization-light.png"
+  alt="Theme Customization Interface"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/theme-customization-dark.png"
+  alt="Theme Customization Interface"
+/>
+
+Create a visually stunning widget that perfectly matches your brand identity. The Theme Customization feature provides powerful tools to control every aspect of your widget's appearance, from colors and fonts to layouts and images.
+
+## Why Customize Your Theme?
+
+<CardGroup cols={2}>
+  <Card title="Brand Consistency" icon="building">
+    Ensure your widget seamlessly integrates with your website's design language and brand guidelines
+  </Card>
+  <Card title="Professional Appeal" icon="star">
+    Stand out with a polished, custom-designed interface that builds trust and credibility
+  </Card>
+  <Card title="User Experience" icon="heart">
+    Create an intuitive, visually pleasing experience that encourages user engagement
+  </Card>
+  <Card title="Competitive Edge" icon="trophy">
+    Differentiate your business with a unique, memorable widget design
+  </Card>
+</CardGroup>
+
+## Quick Start Guide
+
+<Steps>
+  <Step title="Access Theme Settings">
+    Navigate to your agent dashboard and click **Theme** in the left sidebar
+  </Step>
+  <Step title="Choose Your Approach">
+    Select between **Preset Themes** for quick setup or **Custom Theme** for full control
+  </Step>
+  <Step title="Configure Visual Elements">
+    Set up fonts, colors, images, and layout preferences
+  </Step>
+  <Step title="Preview & Fine-tune">
+    Use the live preview to test your design across different scenarios
+  </Step>
+</Steps>
+
+<Tip>
+Start with a preset theme close to your brand colors, then customize specific elements for the perfect match!
+</Tip>
+
+## Theme Configuration Options
+
+<Tabs>
+  <Tab title="Visual Styling">
+    <AccordionGroup>
+      <Accordion title="Font Family Configuration" icon="font">
+        <div className="space-y-4">
+            ```text
+            Font Options:
+            - Any Google Font name (e.g., "Roboto", "Open Sans", "Google Sans Flex")
+            - "inherit" - Use your website's existing font
+            - Custom web fonts (via CSS import)
+            ```
+          
+          <Info>
+          **Popular Professional Fonts:**
+          - **Google Sans Flex** - Modern, clean (default)
+          - **Inter** - Highly readable, tech-focused
+          - **Poppins** - Friendly, approachable
+          - **Roboto** - Google's flagship, versatile
+          </Info>
+          
+          <Warning>
+          Avoid "inherit" unless you're certain your website font loads properly in the widget context
+          </Warning>
+        </div>
+      </Accordion>
+      
+      <Accordion title="Language & Localization" icon="globe">
+        <CardGroup cols={2}>
+          <Card title="Automatic Translation" icon="language">
+            - 50+ supported languages
+            - Auto-translates labels and placeholders
+            - Maintains context and meaning
+            - Right-to-left (RTL) support
+          </Card>
+          <Card title="Custom Translations" icon="pencil">
+            - Override auto-translations
+            - Brand-specific terminology
+            - Cultural adaptations
+            - Regional dialects
+          </Card>
+        </CardGroup>
+      </Accordion>
+      
+      <Accordion title="Button Layout Options" icon="table-layout">
+        <Tabs>
+          <Tab title="Vertical Layout">
+            <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Best For:</h4>
+              <ul className="space-y-1 text-sm">
+                <li>✅ Mobile-first designs</li>
+                <li>✅ Limited horizontal space</li>
+                <li>✅ Clean, stacked appearance</li>
+                <li>✅ Easy thumb navigation</li>
+              </ul>
+            </div>
+          </Tab>
+          <Tab title="Horizontal Layout">
+            <div className="bg-green-50 dark:bg-green-900 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Best For:</h4>
+              <ul className="space-y-1 text-sm">
+                <li>✅ Desktop-focused interfaces</li>
+                <li>✅ Quick action accessibility</li>
+                <li>✅ Compact widget designs</li>
+                <li>✅ Traditional web layouts</li>
+              </ul>
+            </div>
+          </Tab>
+          <Tab title="Footer Layout">
+            <div className="bg-purple-50 dark:bg-purple-900 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Best For:</h4>
+              <ul className="space-y-1 text-sm">
+                <li>✅ Persistent action buttons</li>
+                <li>✅ Chat-focused interfaces</li>
+                <li>✅ Minimal visual interference</li>
+                <li>✅ Always-visible controls</li>
+              </ul>
+            </div>
+          </Tab>
+        </Tabs>
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  
+  <Tab title="Image Assets">
+    <div className="space-y-6">
+      <CardGroup cols={2}>
+        <Card title="Launch Avatar" icon="circle-user">
+          **Purpose**: The main icon users see before opening your widget
+          
+          **Specifications**:
+          - Size: 64x64px minimum
+          - Format: PNG, JPG, WebP
+          - Max size: 0.5MB
+          
+          **Best Practices**:
+          - Use your logo or brand icon
+          - Ensure good visibility at small sizes
+          - Consider contrast with your website background
+        </Card>
+        
+        <Card title="Header Image" icon="image">
+          **Purpose**: Top banner in your widget header
+          
+          **Specifications**:
+          - Aspect ratio: 16:9 or 3:1
+          - Format: PNG, JPG, WebP
+          - Max size: 0.5MB
+          
+          **Best Practices**:
+          - Brand logos or hero graphics
+          - Keep text minimal (may not be readable)
+          - Optimize for both light and dark themes
+        </Card>
+        
+        <Card title="Banner Image" icon="panorama">
+          **Purpose**: Full-width promotional or branding image
+          
+          **Specifications**:
+          - Width: 600px minimum
+          - Format: PNG, JPG, WebP
+          - Max size: 0.5MB
+          
+          **Use Cases**:
+          - Product showcases
+          - Promotional banners
+          - Brand storytelling
+        </Card>
+        
+        <Card title="Chat Avatar" icon="message">
+          **Purpose**: Icon representing your AI agent in conversations
+          
+          **Specifications**:
+          - Size: 40x40px minimum
+          - Format: PNG, JPG, WebP
+          - Max size: 0.5MB
+          
+          **Design Tips**:
+          - Professional headshot or mascot
+          - Friendly, approachable appearance
+          - Consistent with brand personality
+        </Card>
+      </CardGroup>
+      
+      <Accordion title="Background Chat Image Configuration">
+        <div className="space-y-4">
+          <Frame>
+            <div className="bg-gradient-to-r from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-900 p-4 rounded-lg">
+              <h4 className="font-semibold mb-2">Background Image Options</h4>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <strong>Subtle Patterns:</strong>
+                  <ul className="mt-1 space-y-1">
+                    <li>• Light textures</li>
+                    <li>• Geometric patterns</li>
+                    <li>• Brand watermarks</li>
+                  </ul>
+                </div>
+                <div>
+                  <strong>Avoid:</strong>
+                  <ul className="mt-1 space-y-1">
+                    <li>• Busy, distracting images</li>
+                    <li>• High contrast backgrounds</li>
+                    <li>• Text-heavy graphics</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </Frame>
+          
+          <CardGroup cols={2}>
+            <Card title="Visibility Controls" icon="eye">
+              - **Completely Visible**: Background shows fully
+              - **Subtle Overlay**: Semi-transparent for readability
+              - **Hidden**: No background image
+            </Card>
+            <Card title="Image Management" icon="gear">
+              - **Reset to Default**: Use platform default
+              - **Custom Upload**: Your own image
+              - **Remove**: Clean, minimal background
+            </Card>
+          </CardGroup>
+        </div>
+      </Accordion>
+    </div>
+  </Tab>
+  
+  <Tab title="Color Themes">
+    <div className="space-y-6">
+      <Tabs>
+        <Tab title="Preset Themes">
+          <div className="space-y-4">
+            <CardGroup cols={3}>
+              <Card title="Blue" icon="droplet" color="#0070f3">
+                Professional, trustworthy, corporate
+              </Card>
+              <Card title="Purple" icon="droplet" color="#8b5cf6">
+                Creative, innovative, tech-forward
+              </Card>
+              <Card title="Cyan" icon="droplet" color="#06b6d4">
+                Fresh, modern, healthcare/wellness
+              </Card>
+              <Card title="Pink" icon="droplet" color="#ec4899">
+                Friendly, approachable, lifestyle
+              </Card>
+              <Card title="Yellow" icon="droplet" color="#f59e0b">
+                Energetic, optimistic, food/travel
+              </Card>
+              <Card title="Red" icon="droplet" color="#ef4444">
+                Bold, urgent, e-commerce/sales
+              </Card>
+            </CardGroup>
+            
+            <AccordionGroup>
+              <Accordion title="Dark Mode Configuration">
+                <Info>
+                **Dark Mode Benefits:**
+                - Reduced eye strain in low-light environments
+                - Modern, sophisticated appearance
+                - Better battery life on OLED devices
+                - Popular with tech-savvy users
+                </Info>
+                
+                <Warning>
+                Test your images and text contrast carefully in dark mode to ensure readability
+                </Warning>
+              </Accordion>
+            </AccordionGroup>
+          </div>
+        </Tab>
+        
+        <Tab title="Custom Color Palette">
+          <div className="space-y-4">
+            <AccordionGroup>
+              <Accordion title="Primary Color Selection" icon="palette">
+                <div className="space-y-3">
+                    ```json
+                    {
+                      "primary": "#your-brand-color",
+                      "auto_generate": true,
+                      "theme_type": "light" // or "dark"
+                    }
+                    ```
+                  
+                  <CardGroup cols={2}>
+                    <Card title="Auto-Generation" icon="wand-magic-sparkles">
+                      - Choose your primary brand color
+                      - System generates 9 complementary shades
+                      - Ensures proper contrast ratios
+                      - Maintains accessibility standards
+                    </Card>
+                    <Card title="Manual Control" icon="sliders">
+                      - Customize each color shade individually
+                      - Fine-tune for specific brand guidelines
+                      - Advanced color theory application
+                      - Perfect brand color matching
+                    </Card>
+                  </CardGroup>
+                </div>
+              </Accordion>
+              
+              <Accordion title="Color Psychology & Brand Alignment" icon="brain">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div className="bg-blue-50 dark:bg-blue-900 p-3 rounded-lg">
+                    <strong>Cool Colors (Blue, Green, Purple):</strong>
+                    <ul className="mt-2 space-y-1">
+                      <li>• Trust and reliability</li>
+                      <li>• Professional services</li>
+                      <li>• Technology and innovation</li>
+                      <li>• Healthcare and wellness</li>
+                    </ul>
+                  </div>
+                  <div className="bg-orange-50 dark:bg-orange-900 p-3 rounded-lg">
+                    <strong>Warm Colors (Red, Orange, Yellow):</strong>
+                    <ul className="mt-2 space-y-1">
+                      <li>• Energy and excitement</li>
+                      <li>• Food and hospitality</li>
+                      <li>• Retail and e-commerce</li>
+                      <li>• Creative industries</li>
+                    </ul>
+                  </div>
+                </div>
+              </Accordion>
+            </AccordionGroup>
+          </div>
+        </Tab>
+      </Tabs>
+    </div>
+  </Tab>
+</Tabs>
+
+## Advanced Customization Features
+
+<AccordionGroup>
+  <Accordion title="Custom CSS Styling" icon="code">
+    <div className="space-y-4">
+        ```css
+        /* Example custom CSS overrides */
+        .widget-container {
+          border-radius: 20px;
+          box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .chat-message {
+          font-weight: 500;
+          line-height: 1.6;
+        }
+        
+        .primary-button {
+          background: linear-gradient(45deg, #your-color1, #your-color2);
+        }
+        ```
+      
+      <Info>
+      **CSS Customization Capabilities:**
+      - Override default styling
+      - Add custom animations
+      - Implement brand-specific effects
+      - Fine-tune spacing and typography
+      </Info>
+      
+      <Warning>
+      Advanced CSS should be tested thoroughly across different browsers and devices
+      </Warning>
+    </div>
+  </Accordion>
+  
+  <Accordion title="Dynamic Theme Switching" icon="toggle-on">
+    <CardGroup cols={2}>
+      <Card title="Time-based Themes" icon="clock">
+        - Automatic light/dark switching
+        - Business hours adaptations
+        - Seasonal theme changes
+        - Event-based styling
+      </Card>
+      <Card title="User Preferences" icon="user-gear">
+        - Remember user's theme choice
+        - Respect system preferences
+        - Accessibility accommodations
+        - Custom user overrides
+      </Card>
+    </CardGroup>
+  </Accordion>
+  
+  <Accordion title="Responsive Design Optimization" icon="mobile">
+    <Tabs>
+      <Tab title="Mobile Considerations">
+        <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900 dark:to-purple-900 p-4 rounded-lg">
+          <h4 className="font-semibold mb-2">Mobile-First Design Principles</h4>
+          <ul className="space-y-2 text-sm">
+            <li>🔄 **Vertical layouts** work better on mobile screens</li>
+            <li>👆 **Touch-friendly buttons** with adequate spacing</li>
+            <li>📱 **Readable fonts** at minimum 14px size</li>
+            <li>🎯 **High contrast** for outdoor visibility</li>
+            <li>⚡ **Fast loading** optimized images</li>
+          </ul>
+        </div>
+      </Tab>
+      <Tab title="Desktop Optimization">
+        <div className="bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900 dark:to-blue-900 p-4 rounded-lg">
+          <h4 className="font-semibold mb-2">Desktop Enhancement Features</h4>
+          <ul className="space-y-2 text-sm">
+            <li>🖱️ **Hover effects** for interactive elements</li>
+            <li>⌨️ **Keyboard navigation** support</li>
+            <li>📏 **Larger layouts** utilizing screen space</li>
+            <li>🎨 **Rich graphics** and detailed images</li>
+            <li>⚡ **Advanced animations** and transitions</li>
+          </ul>
+        </div>
+      </Tab>
+    </Tabs>
+  </Accordion>
+</AccordionGroup>
+
+## Theme Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Visual Hierarchy" icon="layer-group">
+    **Color Usage:**
+    - Primary: 60% (backgrounds, main areas)
+    - Secondary: 30% (buttons, highlights)
+    - Accent: 10% (calls-to-action, emphasis)
+    
+    **Typography Scale:**
+    - Headers: 18-24px
+    - Body text: 14-16px
+    - Small text: 12-14px
+  </Card>
+  
+  <Card title="Accessibility Standards" icon="universal-access">
+    **WCAG Compliance:**
+    - Color contrast ratio ≥ 4.5:1
+    - Focus indicators for navigation
+    - Alternative text for images
+    - Keyboard accessibility
+    
+    **Testing Tools:**
+    - Color contrast analyzers
+    - Screen reader compatibility
+    - Voice navigation support
+  </Card>
+  
+  <Card title="Performance Optimization" icon="gauge-high">
+    **Image Optimization:**
+    - WebP format when possible
+    - Compress without quality loss
+    - Responsive image sizing
+    - Lazy loading implementation
+    
+    **CSS Efficiency:**
+    - Minimize custom CSS
+    - Use system fonts when appropriate
+    - Optimize animation performance
+  </Card>
+  
+  <Card title="Maintenance Strategy" icon="screwdriver-wrench">
+    **Regular Updates:**
+    - Seasonal theme refreshes
+    - Brand guideline alignment
+    - User feedback incorporation
+    - A/B testing insights
+    
+    **Documentation:**
+    - Brand color specifications
+    - Asset version control
+    - Style guide maintenance
+  </Card>
+</CardGroup>
+
+## Troubleshooting & Common Issues
+
+<AccordionGroup>
+  <Accordion title="Color & Display Issues" icon="triangle-exclamation">
+    <Tabs>
+      <Tab title="Colors Not Appearing">
+        <Steps>
+          <Step title="Verify Color Format">
+            Ensure colors are in valid HEX format (#RRGGBB)
+          </Step>
+          <Step title="Check Theme Application">
+            Confirm custom theme is selected and saved
+          </Step>
+          <Step title="Clear Browser Cache">
+            Force refresh to see latest changes
+          </Step>
+          <Step title="Test Across Browsers">
+            Verify appearance in different browsers
+          </Step>
+        </Steps>
+      </Tab>
+      
+      <Tab title="Contrast Issues">
+        <Frame>
+          **Quick Contrast Check:**
+          - Light text on dark: ratio ≥ 4.5:1
+          - Dark text on light: ratio ≥ 4.5:1
+          - Interactive elements: ratio ≥ 3:1
+          
+          **Tools**: WebAIM Contrast Checker, Colour Contrast Analyser
+        </Frame>
+      </Tab>
+    </Tabs>
+  </Accordion>
+
+  <Accordion title="Image Problems" icon="image-slash">
+    <div className="space-y-3">
+      <Frame>
+        **Common Image Issues & Solutions:**
+        - **Not loading**: Check file size (≤0.5MB) and format (PNG/JPG/WebP)
+        - **Poor quality**: Use high-resolution source images
+        - **Slow loading**: Compress images using tools like TinyPNG
+        - **Wrong dimensions**: Resize to recommended specifications
+      </Frame>
+      
+      <Warning>
+      Images hosted on external servers may have CORS restrictions. Use the built-in upload feature for reliable delivery.
+      </Warning>
+    </div>
+  </Accordion>
+
+  <Accordion title="Custom CSS Issues" icon="code">
+    <CardGroup cols={2}>
+      <Card title="CSS Not Applied" icon="circle-x">
+        - Check CSS syntax validity
+        - Ensure proper selector specificity
+        - Verify no conflicting styles
+        - Test with minimal CSS first
+      </Card>
+      <Card title="Performance Impact" icon="gauge-high">
+        - Minimize complex animations
+        - Use efficient selectors
+        - Avoid excessive DOM manipulation
+        - Test on slower devices
+      </Card>
+    </CardGroup>
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+**Pro Tip**: Always test your theme changes in incognito/private browsing mode to see the true user experience without cached styles.
+</Note>
+
+## What's Next?
+
+<CardGroup cols={2}>
+  <Card title="Tabs Configuration" icon="grip-vertical" href="/agent-dashboard/tabs-configuration">
+    Create interactive multi-tab experiences that complement your custom theme
+  </Card>
+  <Card title="Widget Configuration" icon="sliders" href="/agent-dashboard/widget-configuration">
+    Configure advanced widget behaviors and interactive features
+  </Card>
+  <Card title="Analytics & Testing" icon="chart-line" href="/features/analytics">
+    Monitor user engagement and A/B test different theme variations
+  </Card>
+  <Card title="Voice Integration" icon="microphone" href="/voice/introduction">
+    Add voice capabilities that match your theme's professional appearance
+  </Card>
+</CardGroup>

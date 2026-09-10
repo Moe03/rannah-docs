@@ -1,0 +1,95 @@
+---
+title: Rewind Nodes
+description: Learn how to use the Rewind Nodes feature in the Canvas to navigate back through nodes during conversations.
+icon: Link
+---
+
+The **Rewind Nodes** feature in the Canvas allows your chatbot to navigate back to previous nodes during a conversation. This is useful for error handling, retries, or clarifications. The level of rewind determines how far back the chatbot can go in the flow.
+
+---
+
+## What is Rewind?
+
+Rewind functionality lets the chatbot "rewind" to revisit previous nodes. This is controlled via the **Router Configuration** tab in the node settings, where you can define how many levels back the chatbot can go.
+
+- **Level 0**: No rewind (default behavior).
+- **Level 1**: Go back one node.
+- **Level 2**: Go back two nodes.
+- **Level 3**: Go back up to three nodes.
+
+---
+
+## Configuring Rewind Nodes
+
+### Steps to Enable Rewind
+
+1. Open the **Router Configuration** tab for the desired node.
+2. Locate the **Rewind Level** slider.
+3. Adjust the level (0–3) based on how far back you want the chatbot to rewind.
+4. Save the configuration.
+
+**Example**: Set **Rewind Level 2** to allow the chatbot to go back two nodes when needed.
+
+**Visual Placeholder**:  
+![Rewind Configuration Example](/assets/rewind_nodes.png)
+_Image showing the Rewind Level slider in the Router Configuration tab._
+
+---
+
+## How Rewind Works in Conversations
+
+When rewind is enabled:
+
+1. The chatbot can automatically or conditionally return to previous nodes based on user input or flow logic.
+2. The conversation context is maintained up to the selected rewind level.
+
+---
+
+## Use Cases for Rewind
+
+1. **Error Handling**:
+
+   - If a tool integration fails, the chatbot can rewind to the previous node to retry or handle the error differently.
+
+2. **Clarifications**:
+
+   - If the user provides unclear input, the chatbot can return to the question node to ask for clarification.
+
+3. **Flow Redirection**:
+   - When a user changes their mind, the chatbot can rewind to a decision-making node to reprocess their request.
+
+**Example Use Case**:
+
+- **Scenario**: A scheduling chatbot asks for a time, but the user enters invalid input.
+  - The chatbot rewinds to the previous node to ask the user to re-enter the time.
+
+---
+
+## Testing Rewind Functionality
+
+1. Set up a node with a **Rewind Level** in the Router Configuration.
+2. Use the **Test Tool** to simulate user inputs and verify the rewind behavior.
+3. Observe how the flow returns to previous nodes and ensure the context is preserved.
+
+---
+
+## Best Practices for Rewind Nodes
+
+- **Limit Levels**: Use rewind levels conservatively to avoid creating overly complex flows.
+- **Context Management**: Ensure previous node contexts are preserved for a seamless user experience.
+- **Test Thoroughly**: Simulate various scenarios to ensure the rewind functionality works as intended.
+
+---
+
+### Example Flow with Rewind
+
+**Scenario**: A customer support chatbot:
+
+1. **Start Node** greets the user.
+2. User enters an unclear request.
+   - Chatbot rewinds to the previous **Default Node** to clarify.
+3. If the user corrects their input, the chatbot resumes the flow.
+
+---
+
+Ready to explore more advanced features? Move to [Testing Flows](testing-flows) for insights into flow validation!

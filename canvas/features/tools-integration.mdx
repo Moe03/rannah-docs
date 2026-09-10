@@ -1,0 +1,57 @@
+---
+title: Tools Integration
+description: Learn how to integrate and manage tools in the Canvas feature of Rannah رنّة.
+icon: Wrench
+---
+
+The **Tools Integration** feature allows you to connect external APIs or webhooks directly to nodes as custom tools. This enables your AI agents to execute tasks, fetch data, or interact with third-party services.
+
+---
+
+## Adding Tools
+
+1. Open the **Tools** tab in the node settings.
+2. Click **Add Tool** to configure a new tool.
+3. Enter the following:
+   - **Tool Name**: A unique name for the tool.
+   - **Server URL**: The endpoint of the API/webhook.
+   - **Request Method**: Choose from `GET`, `POST`, etc.
+   - **Variables**: Define input variables or use existing ones.
+
+### Adding Tools via Text Editor
+
+Tools can also be selected directly in the **Text Editor** using the `{` shortcut:
+
+1. Open the **Text Editor** in the node's settings.
+2. Type `{` to access a dropdown of available tools.
+3. Select the tool you wish to use, and it will be added to the editor.
+
+---
+
+## Testing Tools
+
+- Use the built-in **Test Tool** feature to verify the integration works as expected.
+- Generate the tool's schema using the AI assistant for faster setup.
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/ceTFZZtKcWk?si=pYy00FAGaDeJHKof"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+  allowfullscreen
+></iframe>
+
+---
+
+## Best Practices
+
+- Use descriptive names for tools to simplify debugging.
+- Test each tool thoroughly before deploying the flow.
+- Leverage AI schema generation to speed up configuration.
+
+---
+
+## Tool response
+We highly recommend giving the AI a detailed human readable JSON response for the tool result, not providing that will make the AI struggle to understand what is going on, thus will hallucinate more.

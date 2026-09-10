@@ -1,0 +1,233 @@
+---
+title: "Calendly Integration"
+description: "Connect Calendly with your own OAuth app so AI agents can check availability and share booking links — including on whitelabel domains."
+icon: "calendar-check"
+---
+
+## Introduction
+
+Connect Calendly to Rannah رنّة so your customers can check availability and book meetings through your AI agent.
+
+Calendly uses **bring-your-own (BYO) OAuth** (same idea as Shopify): you create an app in the [Calendly Developer Portal](https://developer.calendly.com), register **your dashboard’s** redirect URI, then paste Client ID + Client Secret into Integrations → Calendly.
+
+<Tip>
+  On a **whitelabel / custom domain**, the redirect URI must use **that domain**
+  (e.g. `https://app.youragency.com/api/calendly/callback`) — never the platform
+  host. The Integrations UI shows and copies the correct URI for the host you are on.
+</Tip>
+
+## What the agent can do
+
+Once connected, customers can:
+
+- **View your meeting types** and durations
+- **Check availability** for dates/times
+- **Book meetings directly** via Calendly’s Scheduling API (`POST /invitees`)
+- **See upcoming events** and **cancel** bookings (if configured)
+
+<Note>
+  Direct API booking requires a **paid Calendly plan** and the
+  `scheduled_events:write` OAuth scope. If booking fails (e.g. free plan), the
+  agent falls back to sharing a Calendly booking link.
+</Note>
+
+## Prerequisites
+
+- A Calendly account with at least one published event type
+- Access to [developer.calendly.com](https://developer.calendly.com) (Calendly OAuth app)
+- Dashboard access to **Integrations → Calendly** (agency workspace or whitelabel client dashboard)
+
+## 1. Create a Calendly OAuth app (required)
+
+### Step 1 — Open the Developer Portal and create the app
+
+1. Go to [https://developer.calendly.com](https://developer.calendly.com)
+2. Sign in
+3. Create a new OAuth application (or open an existing one)
+4. During creation:
+   - **App type:** leave **Web** selected (the default — do **not** change it)
+   - **Environment:** set the app to **Production** (not sandbox / development-only). Live dashboard OAuth needs a production app.
+
+<Tip>
+  Keep **Web** as the app type. Only set the environment to **Production** so
+  Connect works with real Calendly accounts in your Rannah رنّة / whitelabel
+  dashboard.
+</Tip>
+
+### Step 2 — Register the Redirect URI
+
+In the Calendly app settings, set **Redirect URI** to **exactly** what your dashboard shows under Calendly → Connect modal.
+
+| Where you open Integrations | Redirect URI to register |
+| --- | --- |
+| Platform host (e.g. `rannah.io`) | `https://rannah.io/api/calendly/callback` |
+| Whitelabel / custom domain | `https://{your-custom-domain}/api/calendly/callback` |
+| Local / `*.localhost` | `http://{host}:3000/api/calendly/callback` |
+
+<Warning>
+  The Redirect URI is host-specific. If you connect from `app.agency.com`, that
+  exact origin must be allowlisted in Calendly. A mismatch causes Calendly’s
+  “redirect uri is malformed or doesn't match” error.
+</Warning>
+
+### Step 3 — Choose scopes (required)
+
+In the Calendly app **Scopes** screen, enable **only** these:
+
+| Scope | Why |
+| --- | --- |
+| `users:read` | Identify the connected Calendly user |
+| `event_types:read` | List meeting types the agent can offer |
+| `availability:read` | Check open time slots |
+| `scheduled_events:read` | List upcoming bookings |
+| `scheduled_events:write` | Book meetings (`POST /invitees`) and cancel bookings |
+
+Leave everything else **off** (including `availability:write`, `event_types:write`, locations, routing forms, shares / scheduling links, User management, Contacts, Notetaker, Security & Compliance, and Webhooks). They are not used by the integration.
+
+<Warning>
+  If a required scope is missing, connect may succeed but availability checks,
+  event-type listing, or cancel will fail at runtime.
+</Warning>
+
+### Step 4 — Copy Client ID & Client Secret
+
+From the Calendly Developer Portal app settings, copy:
+
+- **Client ID**
+- **Client Secret**
+
+Confirm the app is **Production** and type is still **Web** before pasting credentials into Rannah رنّة.
+
+## 2. Connect from the dashboard (modal flow)
+
+Setup and docs live in a **Connect modal**, not on the main Integrations card.
+
+1. Open **Integrations** → **Calendly**
+2. Click **Connect** (or **Manage → Add Account**)
+3. In the modal:
+   - Confirm your Calendly app is **Web** (default) and **Production**
+   - Copy the shown **Redirect URI** into your Calendly app
+   - Confirm the five scopes above are enabled
+   - Paste **Client ID** and **Client Secret**
+   - Click **Save & Connect to Calendly**
+4. Authorize in Calendly
+5. You return to the **same** Integrations page (platform or whitelabel)
+6. Select which **event types** the agent may use
+
+You can connect multiple Calendly accounts; each is managed separately.
+
+<Info>
+  **Whitelabel clients:** credentials are stored on the agency workspace and
+  scoped to the client org. Agency-level apps and client-level apps do not
+  overwrite each other.
+</Info>
+
+## 3. Whitelabel setup (agencies)
+
+Use this when clients use your custom domain (not the platform host).
+
+### Agency checklist
+
+1. Point the client dashboard to your custom domain (agency whitelabel DNS / domain settings)
+2. On **that domain**, open Integrations → Calendly → **Connect**
+3. In the modal, copy the Redirect URI (`https://your-domain/api/calendly/callback`)
+4. Create a Calendly OAuth app: type **Web** (leave default), environment **Production**, with **that** Redirect URI and the five scopes above
+5. Paste Client ID / Secret → **Save & Connect to Calendly**
+6. Finish event-type selection
+
+### Why BYO is required on whitelabel
+
+Calendly validates `redirect_uri` against the app you created. A platform-only
+callback (`https://rannah.io/api/calendly/callback`) cannot complete OAuth
+started on `https://app.youragency.com`. Each brand/domain needs its URI
+registered (or one Calendly app with every domain’s callback listed, if Calendly
+allows multiple redirect URIs on your plan).
+
+### After connect
+
+- Users land back on `{customDomain}/app/{region}/agents/{agentId}/integrations` (or your integrations path)
+- Event types load via the API (`calendly.listEventTypes`) using the org-scoped connection
+
+## 5. Agent configuration
+
+### Enable the Calendly tool
+
+1. Open your agent
+2. Edit a node (e.g. Start)
+3. In **Tools**, enable **calendly**
+4. Save
+
+### Prompt example
+
+```markdown
+You can help customers schedule meetings and check availability:
+
+- Show available meeting types and their durations
+- Check availability for specific dates and times
+- Provide booking links for customers to schedule appointments
+- View upcoming scheduled meetings (if requested)
+
+When customers ask about scheduling or availability, use the Calendly tool to get real-time information and booking options.
+```
+
+## 6. Customer examples
+
+### Availability
+
+- “What meeting types are available?”
+- “When are you available this week?”
+- “Can I schedule a 30-minute call for tomorrow?”
+
+### Booking
+
+The agent returns a Calendly booking URL for the chosen slot; the customer completes booking on Calendly.
+
+## 7. Available Calendly methods
+
+| Method | Purpose | Example ask |
+| --- | --- | --- |
+| `list_event_types` | Meeting types | “What meeting types are available?” |
+| `check_availability` | Open slots | “When are you free this week?” |
+| `list_scheduled_events` | Upcoming meetings | “What meetings do I have?” |
+| `cancel_event` | Cancel an appointment | “Cancel my meeting” |
+
+## 8. Troubleshooting
+
+### “redirect uri is malformed or doesn't match”
+
+- Copy the Redirect URI from Integrations → Calendly on the **same host** you use to Connect
+- Paste it unchanged into the Calendly Developer Portal
+- Save the Calendly app, then try Connect again
+
+### “Calendly OAuth app not configured”
+
+- Save Client ID + Client Secret in the OAuth App panel before Connect
+- Whitelabel: configure under the client org’s Integrations view if you use org-scoped apps
+
+### “Failed to load Calendly event types”
+
+- Reconnect Calendly and select event types
+- Confirm the connection appears under Integrations for that workspace/org
+- Ensure you finished OAuth on the same domain where you manage the agent
+
+### No event types found
+
+- Publish at least one event type in Calendly
+- Select event types in the post-connect picker
+
+### Agent ignores scheduling questions
+
+- Enable the **calendly** tool on the agent node
+- Confirm the Calendly connection is active
+- Add scheduling instructions to the prompt
+
+## Support checklist
+
+- [ ] Calendly OAuth app created at developer.calendly.com
+- [ ] Redirect URI matches dashboard host (`…/api/calendly/callback`)
+- [ ] Client ID + Secret saved in Integrations → Calendly
+- [ ] Calendly account connected + event types selected
+- [ ] Calendly tool enabled on the agent
+- [ ] (Whitelabel) Connect performed on the custom domain, not the platform host
+
+For more help, contact support from the dashboard.

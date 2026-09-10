@@ -1,0 +1,121 @@
+---
+title: Testing Flows
+description: Learn how to test your chatbot flows in the Canvas feature during development.
+icon: flask
+---
+
+The **Testing Flows** feature allows you to simulate conversations and interactions with your chatbot while developing it. This helps you identify errors, validate logic, and ensure your flow behaves as expected before deployment.
+
+---
+
+## Why Test Your Flow?
+
+Testing your flow ensures:
+
+- **Accuracy**: Validate edge conditions, tool integrations, and variables.
+- **User Experience**: Simulate real user interactions to optimize responses.
+- **Debugging**: Identify and fix errors in the flow logic or configurations.
+
+---
+
+## How to Test a Flow
+
+### 1. Open the Test Mode
+
+1. Navigate to the **Canvas Workspace**.
+2. Click on the **Test Button** (commonly located in the top-right corner).
+3. A chatbot interface will open, allowing you to interact with your flow.
+
+### 2. Simulate User Interactions
+
+- Enter inputs as if you were a user.
+- Observe the chatbot's responses and the flow progression.
+- Test specific scenarios to verify edge conditions, variable usage, and tool integrations.
+
+### 3. Debugging with the Flow Preview
+
+- While testing, use the **Flow Preview** to visualize the current node, path, and conditions being executed.
+- Identify any nodes or edges that don’t behave as expected.
+
+---
+
+## Key Features in Testing Mode
+
+1. **Real-Time Feedback**:
+
+   - See responses as they are generated.
+   - Highlight issues in tool calls, conditions, or variable substitutions.
+
+2. **Flow Navigation**:
+
+   - View the active node and how the flow progresses.
+   - Test rewinds and dynamic routing logic.
+
+3. **Adjust and Retry**:
+   - Make quick edits to nodes, tools, or conditions.
+   - Retest the flow to verify fixes.
+
+---
+
+## Testing Edge Cases
+
+Ensure your flow handles unusual scenarios effectively:
+
+- **Invalid Inputs**: Test how the chatbot responds to unexpected user inputs.
+- **Tool Failures**: Simulate API or tool errors and verify error handling.
+- **Unmatched Conditions**: Ensure a default path exists for conditions that don’t match.
+
+**Example**:
+
+- If a user asks an unsupported question, the chatbot should gracefully fall back to a help or default response.
+
+---
+
+## Example Testing Workflow
+
+1. Start a test session from the **Canvas Workspace**.
+2. Input queries such as:
+   - “What can you do?”
+   - “Cancel my subscription.”
+3. Observe:
+   - Chatbot responses.
+   - Node transitions and edge conditions.
+4. Debug:
+   - Fix any incorrect responses or misrouted flows.
+   - Retest until the flow behaves as expected.
+
+---
+
+## Best Practices for Testing Flows
+
+- **Test Incrementally**: Test small sections of your flow before combining them into a larger flow.
+- **Simulate Real Scenarios**: Use realistic inputs to replicate user behavior.
+- **Validate All Paths**: Ensure every edge and condition has been tested.
+- **Track Logs**: Review error logs or debug information for troubleshooting.
+
+---
+
+### Example: Customer Service Chatbot Testing
+
+1. User greets the chatbot → Test the Start Node response.
+2. User asks about pricing → Validate routing to the Pricing Node.
+3. User cancels the inquiry → Test the Cancel Node’s response.
+4. User enters invalid input → Ensure the chatbot redirects to clarification or fallback.
+
+**Visual Representation**:
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/F8LED9jwmsE?start=127&si=q6HbOmiHLb5QjAZy"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+_A flow diagram showing tested nodes and responses._
+
+---
+
+Ready to deploy or refine your flow? Learn about [Calling Tools](calling-tools) to add more functionality to your chatbot!

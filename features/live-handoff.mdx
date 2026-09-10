@@ -1,0 +1,245 @@
+---
+title: 'Live-handoff'
+description: ''
+icon: handshake
+---
+
+
+
+<video
+      controls
+  autoPlay
+  muted
+  loop
+  playsInline
+      style={{ width: '700px', borderRadius: '0.8rem' }}
+      src="/images/live-handoff-agent.mp4"></video>
+
+
+Live handoff is a powerful feature that allows human agents to take over conversations from AI agents when necessary. This functionality bridges the gap between automated and personalized support, ensuring that complex queries or sensitive issues are handled with a human touch.
+
+<Note>
+Live handoff is closely integrated with the client dashboard, where it's operated when a client is logged in and available to manage conversations. Read more in the [whitelabel](/help-center/introduction) docs.
+</Note>
+
+## Setting Up Live Handoff
+
+Before you can use live handoff, ensure that your agent is properly configured:
+
+<Steps>
+  <Step title="Agent settings tab">
+    Navigate to your agent's settings tab. 
+  </Step>
+  <Step title="Enable handoff">
+    Enable the handoff functionality by clicking `Enable handoff popup` to allow the agent to display the handoff UI.
+
+    <video
+      controls
+  autoPlay
+  muted
+  loop
+  playsInline
+      style={{ width: '700px', borderRadius: '0.8rem' }}
+      src="/images/enable-live-handoff.mp4"></video>
+
+  </Step>
+  <Step title="Handoff enabled">
+    You can now access the live handoff from the agents conversation tab or by logging in to your client dashboard.
+  </Step>
+</Steps>
+
+
+<Card title="Fixed handoff popup" icon="gear">
+    If you want the agent to always show the handoff at the top of the agents UI. Enable `Fixed handoff popup` for a persistent handoff UI.
+  </Card>
+
+<Warning>
+    You must assign the agent to an **organization** for the fixed handoff popup to work.
+    </Warning>
+
+
+## Set up handoff for client
+
+<Steps>
+  <Step title="Create and Assign Agent to an Organization">
+    For the handoff to work and to ensure your client has the ability to use it, the agent must be assigned to an [organization](/help-center/introduction).
+  </Step>
+  <Step title="Create User Access">
+    Ensure the organization has a [user](/help-center/introduction) who can log in to the client dashboard and that their widget is assigned to it.
+  </Step>
+</Steps>
+
+
+
+
+
+<Info>
+If you haven't granted your client access to **settings**, they won't be able to enable handoff themselves. Consider this when setting up [client permissions](/help-center/introduction).
+</Info>
+
+## Using Live Handoff
+
+Once set up, you can manage live handoffs through the Rannah رنّة platform or the client dashboard:
+
+<AccordionGroup>
+  <Accordion title="Handling Incoming Handoff Requests">
+
+  From the client dashboard:
+
+    <Steps>
+      <Step title="Receive Notification">
+        When a user requests a live handoff, you'll hear a distinct ringing sound and see a notification in the corner.
+      </Step>
+      <Step title="Access Conversation">
+        Click the notification to open the conversation screen or navigate to the tab on the left side. The live oncversation will be marked with a "!".
+      </Step>
+      <Step title="Take Over Chat">
+        On the right side of the conversation UI, click `Handle chat` to begin interacting with the user.
+      </Step>
+    </Steps>
+    <video
+      controls
+  autoPlay
+  muted
+  loop
+  playsInline
+      style={{ width: '700px', borderRadius: '0.8rem' }}
+      src="/images/handle-chat-agency-dashboard.mp4"></video>
+  </Accordion>
+  
+  <Accordion title="Initiating Handoff from AI to Human">
+    If you're monitoring a live chat either from the dashboard or from your agents conversation tab and want to intervene:
+    <Steps>
+      <Step title="Active Conversation">
+        To take over, it has to be an active conversation. These have a `!` beside them and a distinct red writing on them saying `a few seconds ago`. 
+      </Step>
+      <Step title="Initiate Handoff">
+        When you have located an active conversations, Click `Continue chat yourself` to take over from the AI.
+
+       <img src="/images/continue-chat-shots.png" alt="continue chat UI" width="350" />
+
+      </Step>
+    </Steps>
+  </Accordion>
+  
+  <Accordion title="Returning Control to AI">
+    When finished with a live handoff, you might want to pass the conversation back to the AI agent:
+    <Steps>
+      
+      <Step title="Transfer to AI" icon="robot">
+        When engaging with a user you  can Click the `Pass Chat to AI` button to return control to the AI agent.
+
+
+        <img src="/images/pass-ai-shots.png" alt="pass to ai UI" width="350" />
+
+      </Step>
+
+      
+
+    </Steps>
+    <Warning>
+      **Remember** to clearly announce to the user that you are handing the chat back to the AI.
+      </Warning>
+  </Accordion>
+</AccordionGroup>
+
+## Handling Unanswered Requests
+
+To ensure no user query goes unanswered, Rannah رنّة offers a fallback option for users to submit a query directly in the chat:
+
+
+ 
+
+ 
+    <Accordion icon="envelope" title="Submitting query:">
+      If there are no answers from the team, the user will be able click `send email`. Its possible to attach files and the user will be required to provide their email and a message.
+      
+      <video
+    controls
+  autoPlay
+  muted
+  loop
+  playsInline
+    style={{ width: '600px', borderRadius: '0.8rem' }}
+    src="/images/send-message-to-team.mp4"></video>
+
+  
+</Accordion>
+
+
+
+
+
+   <Accordion icon="reply" title="Answering query:">
+      
+    When a form submission is received, it appears in the respective conversation thread and triggers a notification in the dashboard. You must manually check the conversation and respond using the provided email address.  
+      <video
+    controls
+  autoPlay
+  muted
+  loop
+  playsInline
+    style={{ width: '800px', borderRadius: '0.8rem' }}
+    src="/images/form-notification.mp4"></video>
+
+
+
+  
+</Accordion>
+
+
+
+## Managing Notifications
+
+Notifications are accessed from the client dashboard and can be sent to your email or as a browser push notification:
+
+<Steps>
+  <Step title="Access Notification Settings" icon="bell">
+    To find the notification tab, log in to the client dashboard and click the bell in the top-right corner.
+
+
+    <video
+    controls
+  autoPlay
+  muted
+  loop
+  playsInline
+    style={{ width: '800px', borderRadius: '0.8rem' }}
+    src="/images/form-notification.mp4"></video>
+  </Step>
+  <Step title="Customize Alerts" icon="gear">
+    You can adjust notification preferences by clicking the gear in the right corner.
+    
+    **-- Notify through:** Which channel you want to be notified (email or push notification)
+
+    **-- Events to notify:** Which events that should send a notification (all messages or requests only)
+  </Step>
+</Steps>
+
+<Tip>
+For detailed information on managing notifications and other client dashboard features, refer to our [client dashboard documentation](/help-center/introduction).
+</Tip>
+
+## Best Practices for Live Handoff
+
+To make the most of the live handoff feature:
+
+<CardGroup cols={2}>
+  <Card title="Quick Response" icon="bolt">
+    Aim to respond to handoff requests promptly to maintain user engagement.
+  </Card>
+  <Card title="Clear Communication" icon="comments">
+    Inform users when you're taking over from the AI and when you're handing back control.
+  </Card>
+  <Card title="Team Coordination" icon="users">
+    Establish clear protocols for who handles handoffs during different shifts or for various types of queries.
+  </Card>
+  <Card title="Regular Monitoring" icon="eye">
+    Periodically check the conversation tab, even without active handoff requests, to identify potential intervention points.
+  </Card>
+</CardGroup>
+
+
+
+
+

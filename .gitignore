@@ -1,0 +1,19 @@
+# Secrets & local env
+.env
+.env.*
+*.pem
+*.key
+*.p12
+
+# Dependencies & build
+node_modules/
+.mintlify/
+.next/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+
+# Internal rebrand tooling (not published)
+scripts/

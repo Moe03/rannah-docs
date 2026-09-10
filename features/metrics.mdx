@@ -1,0 +1,44 @@
+---
+title: "Agent Metrics"
+description: ""
+icon: display-chart-up
+---
+
+Rannah رنّة Agent Metrics feature provides insights into the performance of agents by tracking key metrics. These metrics help evaluate the effectiveness of the agent's actions, measure response efficiency, and identify areas for improvement.
+
+### Key Features
+
+- **Performance Tracking**: Monitors various parameters to assess the agent's performance.
+- **Historical Data Analysis**: Allows tracking of trends and patterns over time.
+- **Customizable Metrics**: Enables users to define custom performance indicators relevant to their use case.
+
+### Usage
+
+#### Accessing Agent Metrics
+
+- Navigate to your agent’s dashboard and locate the Metrics tab.
+- click on Metrics tab.
+- Metrics table which shows the Metrics info
+
+#### Customizing Metrics
+
+Users can customize the tracked metrics based on their business needs:
+
+<Steps>
+    <Step title='Agent Metrics Tab'>
+        Navigate to your agent’s dashboard and locate the Metrics tab.
+    </Step>
+    <Step title='Define Metric'>
+        Define new metrics is very simple you only have to set the following parameters:
+            - **Metric key**: the key of metric to measure.
+            - **Metric type**: the type of metric (either number, boolean or enum).
+            - **Metric description**: an optional short description about the metric.
+        
+        <Note>Enum metric type will require additional parameter which is the options to choose from.</Note>
+        
+        For Example: sentiment could be either positive, negative or netural so we need to tell the metric that this enum metric type could have one of these three values
+    </Step>
+    <Step title='Save Changes'>
+        Save changes to apply custom metrics.
+    </Step>
+</Steps>

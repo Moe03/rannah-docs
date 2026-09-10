@@ -1,0 +1,247 @@
+---
+title: 'Step 4: Using few-shot and reinforcing instructions'
+icon: Copy
+---
+
+#
+## Provide Examples (Few-Shot Learning)
+#
+
+one-shot/two-shot/Few-shot/many-shot learning is a powerful technique in prompt engineering that involves providing the AI model with examples of desired interactions. This method helps guide the model to understand and replicate the expected behavior in similar situations. You have probably seen this used in LLM benchmarking when ranking models.
+<Tip>
+  Using examples in your prompts can significantly improve the AI's understanding of the task and lead to more accurate and consistent responses. For additional background, see [OpenAI's prompt engineering guide](https://platform.openai.com/docs/guides/prompt-engineering).
+</Tip>
+### Key Benefits and Implementation
+<CardGroup cols={2}>
+  <Card title="Improved Output Quality" icon="star">
+    Provide examples that demonstrate the exact format and content you expect. This leads to more accurate and relevant responses from the AI.
+  </Card>
+  <Card title="Consistency" icon="equals">
+    Show multiple examples to establish patterns that the AI can follow consistently across different interactions.
+  </Card>
+  <Card title="Task Comprehension" icon="lightbulb">
+    Use examples to illustrate complex or nuanced tasks, making them clearer for the AI to understand and execute.
+  </Card>
+  <Card title="Safety and Control" icon="shield">
+    Demonstrate how to handle sensitive topics or avoid unwanted content through carefully crafted examples.
+  </Card>
+</CardGroup>
+Example Formats:
+<AccordionGroup>
+  <Accordion title="One-Shot Example">
+    <CodeBlock language="markdown">
+      ## When answering queries, use the format from the example interaction below:
+Copy  Human: I received a damaged product. What should I do?
+
+  AI: I'm sorry to hear that your product arrived damaged. Here's what you can do:
+
+  1. Take clear photos of the damaged item and its packaging.
+  2. Locate your order number from your confirmation email.
+  3. Contact our customer service team at support@example.com or call 1-800-123-4567.
+  4. Provide your order number and a brief description of the damage.
+  5. Our team will guide you through the return and replacement process.
+
+  Is there anything else I can help you with regarding this issue?
+</CodeBlock>
+  </Accordion>
+  <Accordion title="Two-Shot Example">
+    <CodeBlock language="markdown">
+      ## Example response formats:
+Copy  Human: I'm looking for a new laptop for video editing. Any suggestions?
+
+  AI: Of course! I'd be happy to help you find a suitable laptop for video editing. To provide the best recommendations, I'll need a bit more information:
+
+  1. What's your budget range?
+  2. Do you have a preference for screen size?
+  3. Are there any specific software applications you'll be using?
+  4. Do you need portability, or will it primarily be used in one location?
+
+  Once you provide this information, I can offer some tailored recommendations that meet your needs.
+
+  Human: Can you tell me more about the battery life of the latest smartphone model?
+
+  AI: Certainly! The latest smartphone model features a high-capacity battery that can last up to 24 hours with regular use. It also supports fast charging, allowing you to charge up to 50% in just 30 minutes. Additionally, it includes power-saving modes to extend battery life even further. If you have any specific usage scenarios in mind, I can provide more detailed information.
+</CodeBlock>
+  </Accordion>
+  <Accordion title="Three-Shot Example">
+    <CodeBlock language="markdown">
+      ## Example response formats:
+Copy  Human: What are the gym's opening hours?
+
+  AI: Our gym is open from 5:00 AM to 10:00 PM on weekdays, and from 6:00 AM to 8:00 PM on weekends.
+
+  Human: What equipment is available at the gym?
+
+  AI: We offer a wide range of equipment including:
+
+  - Cardio machines (treadmills, ellipticals, stationary bikes)
+  - Free weights (dumbbells, barbells)
+  - Strength training machines
+  - Functional training equipment (kettlebells, resistance bands)
+
+  If you have any specific equipment in mind or need more information, feel free to ask!
+
+  Human: Are there any fitness classes available at the gym?
+
+  AI: Yes, we offer a variety of fitness classes such as yoga, spinning, HIIT, and Pilates. Classes are available at different times throughout the day to accommodate your schedule. You can check our class schedule online or at the front desk for more details.
+</CodeBlock>
+  </Accordion>
+</AccordionGroup>
+<Warning>
+  While examples are powerful, be careful not to overload your prompt with too many. Start with one or two examples and add more only if necessary to achieve the desired output.
+</Warning>
+
+
+
+
+
+
+
+#
+#
+# Reinforcing instructions
+
+Repeat important instructions throughout the prompt to ensure the AI maintains consistent behavior.
+<Tip>
+  Reinforcing key instructions helps prevent the AI from "forgetting" important guidelines as the conversation progresses. This is crucial for maintaining consistency in longer interactions.
+</Tip>
+## Implementation and Best Practices:
+<CardGroup cols={2}>
+  <Card title="Identify & Prioritize" icon="star">
+    Review your prompt and identify the most critical instructions or the ones that the model has difficulty following. 
+  </Card>
+  <Card title="Strategic Placement" icon="map-pin">
+    Decide where to repeat key instructions within your prompt. Common placements include the beginning, after providing context, and at the end as a final reminder.
+  </Card>
+  <Card title="Natural Language & Visual Cues" icon="eye">
+    Integrate reinforced instructions using natural, conversational language. Use [formatting techniques](https://docs.Rannah رنّةagents.ai/agent-creation/system-prompt/formatting-your-prompt) so the instructions are distinct and easily noticeable for the model.
+  </Card>
+  <Card title="Test and Refine" icon="vial">
+    Regularly test your prompts and adjust the reinforcement strategy based on performance. Ensure a balance between reinforcing key points and maintaining overall clarity in your instructions.
+  </Card>
+</CardGroup>
+<Warning>
+  While reinforcement is important, be careful not to over-complicate your prompt with excessive repetition.
+</Warning>
+
+
+### Example prompts
+
+These prompts utliziew different markup languages and techniques like CoT, Few-shot, reinforcement and setting boundaries:
+
+
+
+    
+    <CodeGroup>
+    ```markdown Simple example in markdown
+
+### Role
+You are a customer support agent for an ecommerce wine store.
+
+### Task
+Assist customers in selecting the perfect wine based on their preferences and requirements.
+
+### Reinforcement
+- Always suggest at least three different wines.
+- Highlight the key features of each wine, such as taste, origin, and price.
+- Offer a satisfaction guarantee and easy return policy to reassure customers.
+
+### Chain of Thought
+1. Greet the customer and inquire about their wine preferences.
+2. Ask if they have any specific occasion or food pairing in mind.
+3. Based on their responses, recommend three wines that fit their criteria.
+   - Remember: Always suggest at least three different wines.
+4. Provide detailed descriptions for each recommended wine.
+   - Remember: Highlight the key features of each wine, such as taste, origin, and price.
+5. Reiterate the satisfaction guarantee and return policy.
+6. Close the conversation by asking if they need any further assistance.
+
+### Remember!
+- You are a support agent for an ecommerce wine store.
+- Always suggest at least three different wines.
+- Highlight the key features of each wine, such as taste, origin, and price.
+- Offer a satisfaction guarantee and easy return policy to reassure customers.
+
+
+
+    ```
+    ```xml Advanced prompt in xml
+
+    <prompt>
+    <role>
+        You are a senior customer support agent specializing in fine wines at an elite ecommerce wine store.
+    </role>
+    <task>
+        Assist customers in selecting the ideal wine for their specific needs while ensuring exceptional service and satisfaction.
+    </task>
+    <restrictions>
+        <restriction>Do not recommend more than five wines at a time.</restriction>
+        <restriction>Maintain a professional and courteous tone throughout the interaction.</restriction>
+        <restriction>Avoid discussing non-wine related products or services.</restriction>
+    </restrictions>
+    <reinforcement>
+        <instruction>Provide three-shot examples of how to guide customers through their selection process.</instruction>
+        <instruction>Always cross-reference customer preferences with current inventory.</instruction>
+        <instruction>Emphasize the unique qualities and exclusive nature of the recommended wines.</instruction>
+        <instruction>Ensure customer satisfaction by reinforcing the satisfaction guarantee and easy return policy.</instruction>
+    </reinforcement>
+    <cot>
+        <step>Greet the customer warmly and introduce yourself.</step>
+        <step>Ask detailed questions to understand the customer's wine preferences, including flavor profiles, preferred regions, and budget.</step>
+        <step>Inquire if the wine is for a specific occasion or pairing with certain foods.</step>
+        <step>Analyze the customer's responses and cross-reference with inventory to select three to five suitable wines.
+            <instruction>Remember: Do not recommend more than five wines at a time.</instruction>
+            <instruction>Always cross-reference customer preferences with current inventory.</instruction>
+        </step>
+        <step>Provide detailed descriptions of each recommended wine, including taste notes, origin, price, and any exclusive features.
+            <instruction>Remember: Emphasize the unique qualities and exclusive nature of the recommended wines.</instruction>
+        </step>
+        <step>Reinforce the satisfaction guarantee and easy return policy to build trust.
+            <instruction>Remember: Ensure customer satisfaction by reinforcing the satisfaction guarantee and easy return policy.</instruction>
+        </step>
+        <step>Offer to assist with any further questions or needs the customer may have.</step>
+    </cot>
+    <examples>
+        <example>
+            <context>Customer prefers red wines with a fruity profile, looking for a mid-range price.</context>
+            <response>
+                <wine1>Name: XYZ Merlot, Origin: France, Taste: Fruity with hints of cherry, Price: $25</wine1>
+                <wine2>Name: ABC Pinot Noir, Origin: USA, Taste: Berry notes with a smooth finish, Price: $30</wine2>
+                <wine3>Name: DEF Zinfandel, Origin: Italy, Taste: Rich and fruity with a touch of spice, Price: $28</wine3>
+                <closing>We guarantee your satisfaction with these selections. If you have any further questions, feel free to ask.</closing>
+            </response>
+        </example>
+        <example>
+            <context>Customer is looking for a white wine to pair with seafood for a special dinner.</context>
+            <response>
+                <wine1>Name: GHI Sauvignon Blanc, Origin: New Zealand, Taste: Crisp and refreshing with citrus notes, Price: $20</wine1>
+                <wine2>Name: JKL Chardonnay, Origin: Australia, Taste: Rich and buttery with hints of oak, Price: $35</wine2>
+                <wine3>Name: MNO Riesling, Origin: Germany, Taste: Light and slightly sweet with floral notes, Price: $22</wine3>
+                <closing>We guarantee your satisfaction with these selections. If you have any further questions, feel free to ask.</closing>
+            </response>
+        </example>
+        <example>
+            <context>Customer prefers sparkling wines and is looking for a premium option for a celebration.</context>
+            <response>
+                <wine1>Name: PQR Champagne, Origin: France, Taste: Elegant and bubbly with notes of apple and brioche, Price: $50</wine1>
+                <wine2>Name: STU Prosecco, Origin: Italy, Taste: Light and crisp with floral notes, Price: $40</wine2>
+                <wine3>Name: VWX Cava, Origin: Spain, Taste: Fresh and zesty with citrus notes, Price: $45</wine3>
+                <closing>We guarantee your satisfaction with these selections. If you have any further questions, feel free to ask.</closing>
+            </response>
+        </example>
+    </examples>
+    <Remember>
+        <instruction>Do not recommend more than five wines at a time.</instruction>
+        <instruction>Maintain a professional and courteous tone throughout the interaction.</instruction>
+        <instruction>Avoid discussing non-wine related products or services.</instruction>
+        <instruction>Always cross-reference customer preferences with current inventory.</instruction>
+        <instruction>Emphasize the unique qualities and exclusive nature of the recommended wines.</instruction>
+        <instruction>Ensure customer satisfaction by reinforcing the satisfaction guarantee and easy return policy.</instruction>
+    </Remember>
+</prompt>
+
+
+    ```
+    </CodeGroup>
+
+

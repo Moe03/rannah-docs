@@ -1,0 +1,56 @@
+---
+title: 'Google Sheets Integration'
+description: 'Enable your AI agent to write to Google Sheets for lead management and data logging.'
+icon: 'table-cells'
+---
+
+## Introduction
+
+Our Google Sheets integration allows your AI agent to write to Google Sheets. This powerful feature enables you to manage lead lists, log conversation data, and interact with your existing workflows directly from your agent.
+
+This guide will walk you through connecting your Google account, setting up the Google Sheets tool in your agent, and configuring it for use.
+
+## 1. Connecting Your Google Account
+
+Before you can use the Google Sheets tool, you need to connect your Google account to your workspace.
+
+1.  Navigate to the **Integrations** tab from the main menu.
+2.  Find **Google Sheets** in the list of available integrations.
+3.  Click the **Connect** button.
+4.  You will be redirected to a Google authentication screen. Log in to the Google account that has access to the sheets you want to use.
+5.  Grant the necessary permissions to allow Rannah رنّة to access your Google Sheets.
+
+Once connected, you will be redirected back to the integrations page, and it will show that your Google Sheets account is connected.
+
+![google-sheets-connected](/images/integrations/google-sheets-1.png)
+
+## 2. Setting Up the Google Sheets Tool
+
+Now that your account is connected, you can add the Google Sheets tool to any of your agents.
+
+1.  Go to the **Agents** tab and select the agent you want to edit.
+2.  Navigate to the **Canvas** for that agent.
+3.  Select an existing node or create a new one where you want to use the Google Sheets functionality.
+4.  In the node configuration panel, click on **Add Tool**.
+5.  From the list of default tools, select **Google Sheets**.
+6.  Provide a descriptive **description** for the tool. This helps the AI understand when and how to use this tool. For example, a good description would be "Use this tool to save the user's name and email to our lead list spreadsheet."
+
+![google-sheets-tool](/images/integrations/google-sheets-2.png)
+
+## 3. Configuring the Sheet and Headers
+
+After adding the tool, you need to configure which sheet to use and how the data should be structured.
+
+1.  **Select a Sheet**: From the dropdown menu, a list of your available Google Sheets will appear. Select the sheet you want the agent to interact with.
+2.  **Header Descriptions**: Once you select a sheet, the tool will fetch all the column headers from the first row of that sheet. You **must** provide a clear and concise description for each header. This is a critical step, as the AI uses these descriptions to understand what each column represents and how to correctly map data to each column. For example, for a header named `email_address`, a good description would be "The user's primary email address".
+3.  **Select Identifier Column**: Choose a column that will serve as a unique identifier for each row. A common choice is a column for `conversation_id` or `session_id`. When an identifier column is set, the system will first try to find an existing row with the same ID and update it. If no existing row is found, it will create a new one. This is useful for updating information for the same user across multiple interactions.
+
+![google-sheets-tool-config](/images/integrations/google-sheets-3.png)
+
+## 4. Usage and Debugging
+
+Your Google Sheets tool is now ready to be used! The agent's AI will decide when to call this tool based on its description and the context of the conversation.
+
+You can monitor the tool's usage and see detailed information in the **Debugger**. When the tool is activated, you will see a tool call event with the data that was sent to Google Sheets and the response received. This is very useful for troubleshooting and ensuring the integration is working as expected.
+
+![google-sheets-debugger](/images/integrations/google-sheets-4.png)

@@ -1,0 +1,173 @@
+---
+title: "Troubleshooting"
+description: "Quick solutions to common issues you may encounter while using Rannah رنّة."
+icon: "wrench"
+---
+
+## Common Issues and Solutions
+
+<Note>
+  Before starting, ensure your browser is updated to the latest version and your
+  internet connection is stable. These simple steps can resolve many issues!
+</Note>
+
+---
+
+### 1. I Don't See My Agents and Credits
+
+<Card>**Symptoms**: - Agents are not showing in the dashboard.</Card>
+
+<Card>
+  **Solutions**: - Double-check your region in the URL and the header. - Clear
+  your browser cache and cookies, then try again.
+</Card>
+
+<Tip>
+  Using incognito mode can help identify whether browser extensions are causing
+  the issue.
+</Tip>
+
+---
+
+### 2. I Don't See the Analytics for My Voiceflow Agent
+
+<Card>
+  **Symptoms**: - Chatbot is unresponsive during a conversation. - Users report
+  delays in responses.
+</Card>
+
+<Card>
+  **Solutions**: - Ensure that your **Voiceflow API Key** and **Voiceflow
+  Project ID** are correct. - Regenerate your Voiceflow API keys if necessary. -
+  Ensure that you are using the latest Voiceflow template from your Rannah رنّة dashboard.
+</Card>
+
+<Warning>
+  If the problem persists, verify that your Voiceflow agent is published and
+  properly deployed.
+</Warning>
+
+---
+
+### 3. Unable to Connect a Custom Domain
+
+<Card>
+  **Symptoms**: - Custom domain setup fails during verification. - Subdomain
+  redirects are not working.
+</Card>
+
+<Card>
+  **Solutions**: 1. Ensure your DNS records (A, CNAME) are correctly configured
+  according to the setup instructions. 2. Wait for DNS propagation (this can
+  take up to 24 hours). 3. If issues persist, contact your domain provider or
+  our support team for assistance.
+</Card>
+
+<Tip>
+  Use online DNS lookup tools to confirm your DNS records are correctly set up.
+</Tip>
+
+---
+
+### 4. CSS and z-index Issues
+
+<Warning>
+  **Cause**: This issue often occurs due to conflicting CSS on your website,
+  especially when multiple elements have high `z-index` values or global styles
+  override the chatbot’s default styles.
+</Warning>
+
+<Card>
+  **Symptoms**: - The chat widget is hidden behind other elements on the
+  webpage. - The styles of the chatbot or dashboard appear broken or misaligned.
+</Card>
+
+<Card>
+**Solutions**:  
+1. **Check z-index Conflicts**:  
+   - Inspect the chat widget using browser developer tools.  
+   - Ensure the widget has a sufficiently high `z-index` (e.g., `9999`) so it appears above other elements.
+
+2. **Audit Global Styles**:
+   - Look for global CSS rules that might override the chatbot’s default styles.
+</Card>
+
+---
+
+### 5. WhatsApp Integration Issues
+
+<Warning>
+  **Cause**: - Incorrect WhatsApp Business ID. - Incorrect Webhook URL. -
+  Expired or invalid tokens. - Configuration errors in the Rannah رنّة
+  dashboard.
+</Warning>
+
+<Card>
+  **Symptoms**: - Unable to connect the WhatsApp account. - Messages are not
+  being sent or received. - Users see an "Integration Failed" or "Disconnected"
+  error.
+</Card>
+
+<Card>  
+**Solutions**:  
+1. **Verify WhatsApp Business ID Credentials**:  
+   - Double-check the API key, phone number ID, and business account ID.
+
+2. **Refresh or Renew Access Tokens**:
+
+   - Generate a new token and update it in the **Channels** section of your Rannah رنّة dashboard.
+
+3. **Verify Number Status**:
+   - Ensure your phone number is verified and connected to the WhatsApp Business API.
+</Card>
+
+<Tip>
+  For detailed setup instructions, refer to the WhatsApp integration section in
+  the [Help Center](/Support/faq).
+</Tip>
+
+---
+
+## Still Need Help?
+
+### 💬 In-App Support
+
+<Card>
+  Open **System → Support** in the dashboard sidebar (`/app/[region]/support`) to chat with Rannah رنّة's support agent. Your workspace context is shared automatically.
+</Card>
+
+### 📧 Contact Support
+
+<Card>
+  Reach out to our support team at:
+  **[support@rannah.io](mailto:support@rannah.io)**
+</Card>
+
+### 💬 Join Our Discord
+
+<Card>
+  Join our Discord community for real-time assistance: [**Join
+  Discord**](mailto:support@rannah.io)
+</Card>
+
+### 🔗 Explore the Knowledge Base
+
+<Tip>
+  Check out our [Help Center](/Support/faq) for detailed guides and tutorials
+  that address many common issues.
+</Tip>
+
+---
+
+## Quick Tips
+
+<Note>
+  Keep your platform up-to-date to ensure compatibility with the latest
+  features.
+</Note>
+<Tip>
+  Regularly back up your chatbot configurations and knowledge base data to avoid
+  data loss.
+</Tip>
+
+We’re here to help you every step of the way!

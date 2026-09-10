@@ -1,0 +1,95 @@
+---
+title: Accessibility Features
+description: Learn how to use features like Rewind Levels and Dynamic Conditions to create flexible, user-friendly flows in the Canvas.
+icon: universal-access
+---
+
+Accessibility features in Canvas help create flexible, user-friendly chatbot flows. These include **Rewind Levels** for navigating back and **Dynamic Conditions** for tailoring user interactions.
+
+---
+
+## Rewind Levels
+
+Rewind Levels allow your chatbot to revisit previous nodes during a conversation, enabling users to correct errors, retry actions, or provide additional details.
+
+### How Rewind Levels Work:
+
+- **Level 0**: No rewind (default behavior).
+- **Level 1–3**: The chatbot can go back up to 3 previous nodes, depending on the configured level.
+
+---
+
+### Steps to Configure Rewind Levels:
+
+1. Open the **Router Configuration** tab in a node’s settings.
+2. Locate the **Rewind Level** slider.
+3. Adjust the slider (0–3) to set the desired rewind depth.
+4. Save the configuration.
+
+**Example Use Case**:
+
+- Set **Rewind Level 2** to allow a scheduling chatbot to retry both the date and time selection steps if the user provides invalid input.
+
+---
+
+## Dynamic Conditions
+
+Dynamic Conditions allow your chatbot to route users based on their input or data variables, ensuring personalized and context-aware interactions.
+
+### How Dynamic Conditions Work:
+
+1. Add conditions to edges between nodes to evaluate user input or data.
+2. Use logic operators (`AND`, `OR`) for complex conditions.
+3. Define a default path for unmatched conditions to maintain flow continuity.
+
+**Example Use Case**:
+
+- If `user_input contains 'pricing'`, route to the Pricing Node.
+- If `user_input contains 'help'`, route to the Help Node.
+- Otherwise, route to a Fallback Node.
+
+---
+
+### Steps to Add Dynamic Conditions:
+
+1. Click on an edge between two nodes to open the **Condition Editor**.
+2. Define conditions using available variables or user inputs.
+3. Test the conditions to verify correct routing.
+
+---
+
+## Testing Accessibility Features
+
+### Rewind Levels:
+
+- Simulate scenarios where users need to correct mistakes or retry actions.
+- Ensure context is preserved when the chatbot rewinds to previous nodes.
+
+### Dynamic Conditions:
+
+- Test all possible user inputs to ensure conditions route correctly.
+- Verify the default path handles unmatched inputs gracefully.
+
+---
+
+## Best Practices for Accessibility Features
+
+- **Set Default Paths**: Always define a fallback route to prevent dead ends in the flow.
+- **Limit Rewind Levels**: Avoid excessive rewinds that might confuse users.
+- **Test Frequently**: Simulate various scenarios to validate edge cases and unexpected inputs.
+- **Use Clear Logic**: Keep conditions simple and descriptive to enhance maintainability.
+
+---
+
+### Example Flow with Accessibility Features
+
+**Scenario**: A customer support chatbot:
+
+1. **Start Node**: Greets the user.
+2. **Dynamic Conditions**: Routes users to specific nodes based on their queries.
+3. **Rewind Levels**: Allows users to retry or modify their input if needed.
+4. **End Node**: Summarizes and concludes the interaction.
+
+---
+
+Ready to see these features in action? Explore [Advanced Flow Examples](examples) for practical implementations.

@@ -1,0 +1,311 @@
+---
+title: 'Quick Start Guide'
+description: 'Get your SIP trunk connected in 5 minutes'
+icon: 'rocket'
+---
+
+# SIP Trunking Quick Start
+
+This guide will walk you through setting up your first SIP trunk and connecting it to a Rannah رنّة AI agent in just a few steps.
+
+## Prerequisites
+
+Before you begin, make sure you have:
+
+- ✅ A Rannah رنّة account with an active workspace
+- ✅ A SIP trunk provider account (e.g., Twilio or Peoplefone)
+- ✅ At least one phone number from your SIP provider
+- ✅ A voice-enabled AI agent configured in Rannah رنّة
+- ✅ Access to the Rannah رنّة SIP server (provided by Rannah رنّة)
+
+## Step 1: Navigate to SIP Trunking
+
+Log into your Rannah رنّة dashboard and navigate to the SIP section.
+
+<Steps>
+  <Step title="Open the Dashboard">
+    Go to your Rannah رنّة workspace dashboard at `https://rannah.io/app/{region}`
+  </Step>
+  
+  <Step title="Find the SIP Menu">
+    Look for the "SIP" option in the left sidebar navigation menu
+  </Step>
+  
+  <Step title="Open SIP Management">
+    Click on the SIP icon to access the SIP trunking management page
+  </Step>
+</Steps>
+
+<img class="rounded-md w-full" src="/images/sip-trunking/sip-trunking-navigation-item.png"></img>
+
+## Step 2: Add Your SIP Provider
+
+Now you'll configure your SIP trunk by adding your provider's details.
+
+<Steps>
+  <Step title="Click 'New SIP Provider'">
+    On the SIP management page, click the **"+ New SIP Provider"** button in the top right
+    <img class="rounded-md w-full" src="/images/sip-trunking/add-sip-provider-button.png"></img>
+  </Step>
+  
+  <Step title="Enter Provider Details">
+    Fill in your SIP provider information:
+    
+    - **Friendly Name**: A descriptive name for your trunk (e.g., "Main Office Line")
+    - **SIP Domain**: Your SIP provider's domain (e.g., `sip.yourprovider.com`)
+    - **Requires Authentication**: Toggle ON if your provider requires credentials
+    - **SIP Username**: Your SIP account username (if authentication is enabled)
+    - **SIP Password**: Your SIP account password (if authentication is enabled)
+  </Step>
+  
+  <Step title="Save the Provider">
+    Click **"Import Provider"** to save your SIP trunk configuration
+  </Step>
+</Steps>
+
+<img class="rounded-md w-full" src="/images/sip-trunking/add-sip-provider-modal.png"></img>
+
+### Example Configuration
+
+Here's a sample configuration for a typical SIP provider:
+
+```
+Friendly Name: Production Hotline
+SIP Domain: sip.example.com
+Requires Authentication: ✓ Enabled
+SIP Username: mycompany_user
+SIP Password: ••••••••••••
+```
+
+<Note>
+  Your SIP credentials are securely encrypted and stored. They are only used to authenticate with your SIP provider.
+</Note>
+
+## Step 3: Add a Phone Number
+
+Once your SIP provider is configured, you can add phone numbers and map them to AI agents.
+
+<Steps>
+  <Step title="Locate Your Trunk">
+    Find the SIP provider you just created in the list
+  </Step>
+  
+  <Step title="Click 'Add Number'">
+    Click the **"Add Number"** button next to your SIP provider
+  </Step>
+  
+  <Step title="Configure the Phone Number">
+    Fill in the phone number details:
+    
+    - **Phone Number**: Enter in E.164 format (e.g., `+15551234567`)
+    - **Agent**: Select the AI agent that will handle calls to this number
+  </Step>
+  
+  <Step title="Save the Number">
+    Click **"Add Number"** to save the configuration
+  </Step>
+</Steps>
+
+<img class="rounded-md w-full" src="/images/sip-trunking/sip-provider-list-add-number.png"></img>
+
+<img class="rounded-md w-full" src="/images/sip-trunking/add-phone-number-modal.png"></img>
+
+### Phone Number Format
+
+Always use E.164 format for phone numbers:
+
+- ✅ **Correct**: `+15551234567` (US)
+- ✅ **Correct**: `+442071234567` (UK)
+- ✅ **Correct**: `+61212345678` (Australia)
+- ❌ **Incorrect**: `555-123-4567`
+- ❌ **Incorrect**: `(555) 123-4567`
+- ❌ **Incorrect**: `5551234567` (missing country code)
+
+## Step 4: Configure Your SIP Provider
+
+Now you need to configure your SIP provider to route calls to Rannah رنّة's SIP server.
+
+### Rannah رنّة SIP Server Details
+
+Point your SIP provider to route calls to:
+
+```
+IP Address: 134.209.121.168
+Port: 5060
+Protocol: UDP
+```
+
+### Configuration Example (Twilio or Peoplefone)
+
+If you're using Twilio, here's how to configure trunk forwarding:
+
+<Steps>
+  <Step title="Log into Twilio Console">
+    Go to the Twilio Console at https://console.twilio.com
+  </Step>
+  
+  <Step title="Create a SIP Trunk">
+    Navigate to **Elastic SIP Trunking** → **Trunks** → **Create new SIP Trunk**
+    <img class="rounded-md w-full" src="/images/sip-trunking/create-trunk-button-twilio.png"></img>
+    <img class="rounded-md w-full" src="/images/sip-trunking/create-trunk-modal-twilio.png"></img>
+  </Step>
+
+  <Step title="Configure Termination URI">
+    Configure the termination URI as this will be used to route calls to the Rannah رنّة SIP server:
+    <img class="rounded-md w-full" src="/images/sip-trunking/twilio-termination-tab.png"></img>
+    Also configure the ACL configuration and credentials configuration:
+    <img class="rounded-md w-full" src="/images/sip-trunking/twilio-termination-tab-acl-configuration.png"></img>
+    <img class="rounded-md w-full" src="/images/sip-trunking/twilio-termination-tab-credentials-configuration.png"></img>
+  </Step>
+  
+  <Step title="Configure Origination URI">
+    Add the Rannah رنّة SIP server as an origination URI:
+    ```
+    sip:134.209.121.168:5060
+    ```
+    <img class="rounded-md w-full" src="/images/sip-trunking/twilio-origination-tab.png"></img>
+    <img class="rounded-md w-full" src="/images/sip-trunking/twilio-origination-tab-add-rannah-asterisk-server-url.png"></img>
+
+  </Step>
+  
+  <Step title="Assign Phone Numbers">
+    Associate your phone numbers with this trunk
+    <img class="rounded-md w-full" src="/images/sip-trunking/twilio-numbers-tab.png"></img>
+  </Step>
+</Steps>
+
+<Tip>
+  The exact configuration steps vary by provider. Check your SIP provider's documentation for specific instructions on routing calls to an external SIP endpoint.
+</Tip>
+
+## Step 5: Test Your Connection
+
+Time to make your first test call!
+
+<Steps>
+  <Step title="Verify Configuration">
+    Double-check that your SIP provider, phone number, and agent are all configured correctly
+  </Step>
+  
+  <Step title="Make a Test Call">
+    Dial the phone number you configured from any phone
+  </Step>
+  
+  <Step title="Listen for the Agent">
+    Your Rannah رنّة AI agent should answer and begin the conversation
+  </Step>
+  
+  <Step title="Check the Conversation Log">
+    After the call, check your Rannah رنّة dashboard under **Conversations** to see the call transcript
+  </Step>
+</Steps>
+
+### Troubleshooting Connection Issues
+
+If your test call doesn't work, check these common issues:
+
+<AccordionGroup>
+  <Accordion title="Call Not Connecting">
+    - Verify your SIP domain is correct
+    - Check that your SIP provider is routing to the correct Asterisk server
+    - Ensure your phone number is in E.164 format
+  </Accordion>
+  
+  <Accordion title="No Audio">
+    - Check your SIP provider's codec settings (should support PCMU/PCMA)
+    - Verify firewall rules allow SIP traffic (UDP 5060) and RTP traffic (UDP 10000-20000)
+    - Ensure NAT traversal is configured if your Asterisk server is behind NAT
+  </Accordion>
+  
+  <Accordion title="Authentication Errors">
+    - Double-check your SIP username and password
+    - Verify the "Requires Authentication" toggle is set correctly
+    - Check if your SIP provider requires IP whitelisting
+  </Accordion>
+  
+  <Accordion title="Agent Not Responding">
+    - Ensure your agent is voice-enabled
+    - Check that the agent is assigned to the correct phone number
+    - Verify the region setting matches your deployment
+  </Accordion>
+</AccordionGroup>
+
+## Step 6: Monitor and Manage
+
+Your SIP trunk is now live! Here's how to monitor and manage it:
+
+### View Active Phone Numbers
+
+On the SIP management page, you can:
+- See all configured SIP providers
+- Expand each provider to view associated phone numbers
+- See which agent is assigned to each number
+- View call counts and statistics
+
+<img class="rounded-md w-full" src="/images/sip-trunking/rannah-sip-numbers.png"></img>
+
+### Managing Your Trunk
+
+<CardGroup cols={2}>
+  <Card title="Add More Numbers" icon="plus">
+    Click "Add Number" on any provider to configure additional phone numbers
+  </Card>
+  <Card title="Delete Numbers" icon="trash">
+    Click the delete button next to any phone number to remove it
+  </Card>
+  <Card title="Edit Provider" icon="edit">
+    Update your SIP provider settings as needed (currently limited)
+  </Card>
+  <Card title="Delete Provider" icon="trash-alt">
+    Remove an entire SIP provider (deletes all associated numbers)
+  </Card>
+</CardGroup>
+
+## What's Next?
+
+Now that you have a working SIP trunk, explore these advanced features:
+
+<CardGroup cols={2}>
+  <Card title="Multiple Phone Numbers" icon="hashtag" href="/voice/sip-trunking/phone-numbers">
+    Learn how to manage multiple phone numbers and route them to different agents
+  </Card>
+  <Card title="Call Analytics" icon="chart-line" href="/features/analytics">
+    Track call metrics, duration, and agent performance
+  </Card>
+</CardGroup>
+
+## Common Questions
+
+<AccordionGroup>
+  <Accordion title="How many phone numbers can I add?">
+    On **v2-2026**: **2** on Business, **3** on White Label, **5** on White Label Elite. Extra Twilio number slots are $3/mo. Voice / SIP starts on Business (or the Voice / SIP add-ons).
+  </Accordion>
+  
+  <Accordion title="Can I use multiple SIP providers?">
+    Yes! You can add multiple SIP providers to your workspace and manage them all from the same interface.
+  </Accordion>
+  
+  <Accordion title="What happens if my SIP provider goes down?">
+    If your SIP provider experiences downtime, calls to your phone numbers will fail at the provider level before reaching Rannah رنّة. Consider setting up failover with your provider.
+  </Accordion>
+  
+  <Accordion title="Can I change which agent handles a phone number?">
+    Yes, you can delete and re-add the phone number with a different agent, or use the edit function if available.
+  </Accordion>
+  
+  <Accordion title="Is there a limit on concurrent calls?">
+    Yes — Rannah رنّة limits concurrent calls by plan (**3** Business, **10** White Label, **25** Elite; extra lines $5/mo), and your SIP provider may have its own cap.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  **Pro Tip**: Set up multiple phone numbers with different agents to A/B test agent configurations and find what works best for your use case!
+</Tip>
+
+## Need Help?
+
+If you encounter any issues during setup:
+
+- 💬 Join our [Discord Community](mailto:support@rannah.io)
+- 📧 Email support at [support@rannah.io](mailto:support@rannah.io)
+

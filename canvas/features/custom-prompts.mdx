@@ -1,0 +1,120 @@
+---
+title: Custom Prompts
+description: Learn how to create and manage custom prompts in the Canvas feature to enhance chatbot behavior.
+icon: lightbulb
+---
+
+The **Custom Prompts** feature allows you to define specific instructions for your chatbot at a node level. This enables greater control over how the chatbot interacts with users by tailoring its responses to specific scenarios or tasks.
+
+---
+
+## What Are Custom Prompts?
+
+Custom prompts are node-specific instructions that modify the chatbot's behavior and responses. By creating custom prompts, you can:
+
+- Define specific tones, styles, or objectives for each node.
+- Tailor responses to match the context of a conversation.
+- Combine prompts with tools and variables to make interactions dynamic.
+
+---
+
+## Creating Custom Prompts
+
+### 1. Using the Text Editor
+
+Custom prompts are written directly in the **Text Editor** of a node. The Text Editor allows you to:
+
+- Write instructions for the chatbot in plain text.
+- Insert variables and tools dynamically using the `{` shortcut.
+
+#### Steps:
+
+1. Open the node's settings and go to the **Overview** tab.
+2. In the **Instructions** field, write the prompt for that node.
+3. Use `{` to insert variables or tools dynamically.
+
+**Example**:
+
+```plaintext
+Hello {user_name}, I see you’re interested in {product_name}. How can I assist you further?
+```
+
+---
+
+### 2. Combining with LLM Configuration
+
+Enhance your custom prompts by adjusting the **LLM Configuration** for the node:
+
+- **Temperature**: Adjust creativity or randomness in responses.
+- **Max Tokens**: Limit the length of responses.
+- **Rewind Level**: Allow the chatbot to recall context from previous nodes.
+
+#### Example:
+
+- Set a custom prompt: “Provide concise and fact-based responses.”
+- Adjust the **Temperature** to `0.3` for precise, non-creative answers.
+
+**Visual Placeholder**:  
+![Custom Prompt with LLM Configuration](PLACEHOLDER_FOR_IMAGE)  
+_Image showing LLM settings paired with a custom prompt._
+
+---
+
+## Examples of Custom Prompts
+
+1. **Customer Support**:
+
+   ```plaintext
+   Hi {user_name}, how can I assist you today? Please be as specific as possible.
+   ```
+
+2. **FAQ Assistance**:
+
+   ```plaintext
+   Based on our knowledge base, here is what I found for {query_topic}.
+   ```
+
+3. **Appointment Scheduling**:
+
+   ```plaintext
+   Let’s schedule your appointment. What date and time works best for you?
+   ```
+
+4. **E-Commerce Recommendation**:
+   ```plaintext
+   I recommend {product_name} for your needs. Would you like to add it to your cart?
+   ```
+
+---
+
+## Testing Custom Prompts
+
+Once created, test your custom prompts to ensure they generate the desired responses:
+
+1. Use the **Test Tool** in the **Canvas Workspace**.
+2. Input sample user queries and observe the chatbot’s response.
+3. Adjust prompts or configurations as needed for better results.
+
+---
+
+## Best Practices for Custom Prompts
+
+- **Be Specific**: Write clear and concise instructions for the chatbot.
+- **Use Variables**: Incorporate dynamic data for personalized responses.
+- **Adjust LLM Settings**: Pair prompts with appropriate temperature and token limits for optimal behavior.
+- **Test Thoroughly**: Simulate various user scenarios to refine prompts.
+
+---
+
+### Example Flow with Custom Prompts
+
+**Scenario**: An e-commerce chatbot flow:
+
+1. **Start Node**: Greets the user with a custom welcome prompt.
+2. **Product Node**: Recommends products based on user input.
+3. **FAQ Node**: Provides detailed answers from the knowledge base.
+4. **End Node**: Thanks the user and summarizes the session.
+
+---
+
+Ready to optimize your chatbot further? Explore [Models Configuration](features/models-configuration) to fine-tune your AI's performance.

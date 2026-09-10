@@ -1,0 +1,218 @@
+---
+title: 'Conversations tab'
+description: 'Monitor live chats, review transcripts, export data, and manage voice notes with playback and transcription.'
+icon: comments
+---
+
+
+The Conversation tab is a crucial feature of your AI agent that provides invaluable insights into user interactions, exporting conversations and sharing insights with clients.
+
+<img src="/images/conversation_tab_shots.png" alt="Conversation Tab Overview" width="700"/>
+
+
+## Key Features
+<CardGroup cols={2}>
+  <Card title="Real-Time Monitoring" icon="eye">
+    Watch live conversations as they unfold between users and your AI agent.
+  </Card>
+  <Card title="Performance Analysis" icon="chart-line">
+    Gain insights to continuously improve your agent's responses and effectiveness.
+  </Card>
+  <Card title="Easy Sharing" icon="share-nodes">
+    Share specific conversations with clients or team members using unique URLs.
+  </Card>
+  <Card title="Customizable Tags" icon="tags">
+    Organize and categorize conversations for efficient management and analysis.
+  </Card>
+</CardGroup>
+
+
+
+The Conversation tab is divided into three main sections.
+
+## Left Panel: Conversation List
+<img src="/images/left_section_shots.png" alt="Left Panel" width="300" />
+The left panel provides a list of all conversations, date, platform and offers various sorting options.
+
+### Conversation Fields
+
+Each conversation in the list displays the following information:
+
+<Steps>
+<Step title="ID" icon="id-card">
+ Unique identifier for each user (auto-generated or set via the [API](/Support/contact))
+</Step>
+<Step title="Interactions" icon="comments">
+ Number of user messages in the current chat
+</Step>
+
+<Step title="Timestamp" icon="clock">
+Start time of the conversation
+</Step>
+<Step title="Channel" icon="wifi">
+The channel were the conversation took place (Website, discord, instagram etc. See [integrations](/integration/Channels/discord) for more information.) This is viewed as the TV screen on the left side.
+</Step>
+</Steps>
+
+### Sorting Options 
+
+There are three ways of sorting your conversations. All of them can be used in conjunction with each other.
+
+<AccordionGroup>
+  <Accordion title="Time-based Sorting">
+    - Recent: Display newest conversations first
+    - Oldest: Display oldest conversations first
+  </Accordion>
+  <Accordion title="Interaction-based Sorting">
+    - More: Sort by highest number of interactions
+    - Less: Sort by lowest number of interactions
+  </Accordion>
+  <Accordion title="Tag-based Filtering">
+    Filter conversations using custom or predefined tags
+  </Accordion>
+</AccordionGroup>
+
+
+
+## Central Panel: Conversation Transcript
+
+The central panel displays the selected conversation transcript and offers session management features.
+
+<img src="/images/middle_section_shots.png" alt="Central Panel" width="700" />
+
+<Steps>
+  <Step title="Session Selection" icon="chevron-down">
+    Choose from sessions by **ID** using the list at the top of the panel.
+  </Step>
+  <Step title="Conversation Flow" icon="comments">
+    Review the back-and-forth messages between the user and AI agent.
+  </Step>
+  <Step title="Voice Notes" icon="microphone">
+    Voice messages from channels such as WhatsApp appear as **voice notes** with an inline audio player and a **Transcription** panel when auto-transcription is enabled. Long transcriptions can be expanded with **Show more**.
+  </Step>
+  <Step title="Pin Session UI" icon="thumbtack">
+    Click the `pin icon` in the upper right to keep the session UI visible while scrolling. Handy when a user has many sessions to go through.
+  </Step>
+</Steps>
+<Note>
+  A new session **starts** each time a user with an `ID` initiates a conversation on your website. Because of this, one user might have many sessions.
+</Note>
+## Right Panel: Conversation Management
+
+The right panel provides tools for managing tags, using the handoff feature or sharing conversations via transcript URL.
+
+<img src="/images/right_section_shots.png" alt="Right Panel" width="400" />
+
+
+<Steps>
+  <Step title="Transcript URL" icon="link">
+    Share specific conversations easily with a unique URL for each conversation. This is especially useful during the demo phase, as sharing a conversation with a client for feedback is more effective than presenting an agent that's still a work in progress.
+<Tip>
+  If configured, **URLs** are hosted on your agency's [domain](/help-center/introduction) and will always be whitelabeled. 
+</Tip>
+  </Step>
+  <Step title="Handoff Takeover" icon="phone">
+    For information on live agent handoff, see [Live Handoff](/features/live-handoff).
+  </Step>
+  <Step title="Pin Session UI" icon="thumbtack">
+    Click the `pin icon` in the upper right to keep the session UI visible while scrolling. Handy when a user has many sessions to go through.
+  </Step>
+</Steps>
+
+### Using Tags
+
+<AccordionGroup>
+  <Accordion title="Creating Custom Tags">
+    1. Click the `+` icon
+    2. Enter a name for your **custom tag**
+    3. Add as many tags as needed
+  </Accordion>
+  <Accordion title="Predefined Tags">
+    - Good Example: Marks with a checkmark (green)
+    - Bad Example: Marks with an X (red)
+    - Leave for later: Marks with a bookmark (purple) — use for conversations that need team review when they cannot clearly be marked good or bad
+  </Accordion>
+</AccordionGroup>
+#
+## Exporting Conversations
+
+Exporting and storing conversations makes for many useful applications. Data storage and further data manipulation can provide deep insights into user behavior and preferences. These capabilities also offer excellent opportunities for upselling to clients by offering detailed data analysis. 
+
+{/* TODO: Check if this is still relevant */}
+{/* Explore the Glowstudio [marketplace](https://glowstudio.ai/markteplace) for templates using Make.com and ChatGPT. */}
+
+<video
+controls
+  autoPlay
+  muted
+  loop
+  playsInline
+  style={{ width: '800px', borderRadius: '0.8rem' }}
+width="100%"
+src="/images/export_delete_conversations_video.mp4">
+</video>
+
+## Export options
+
+Use the **Export** dropdown in the conversation list toolbar (select one or more conversations first for selected exports).
+
+<CardGroup cols={2}>
+  <Card title="As CSV" icon="file-csv">
+    Export the **selected** conversations as CSV. Requires at least one row selected in the list.
+  </Card>
+  <Card title="As Text" icon="file-lines">
+    Export the **selected** conversations as plain-text transcripts.
+  </Card>
+  <Card title="Export All" icon="file-export">
+    Export conversations matching your current filters (archive view, tags, search). Runs client-side against Firestore with a platform cap.
+  </Card>
+</CardGroup>
+
+### Export limits
+
+To protect workspace data and control Firestore read costs, exports are capped:
+
+| Export type | Limit | Notes |
+|-------------|-------|-------|
+| Selected export (dashboard) | **100 conversations** per request | If you select more, only the first 100 are exported and a notice is shown. |
+| Export all matching filters (dashboard) | **500 conversations** | Narrow filters (tags, search, archive view) to export a smaller set. |
+| V3 Chat Export API (`GET /agents/{agentId}/convos/export`) | Paginated: **20** default / **100** max (paid); or **500** `convoIds` selected | **1,500 requests/hour** (paid). Requires `hasEverPaid`. Reads from PG mirror. In-memory rate limits (no Firebase usage tracking). |
+| V2 export proxy (`GET /v2/agents/{agent_id}/convos/export`) | Same as V3 (proxied) | Same as V3. |
+
+<Warning>
+If you hit an API rate limit, wait for the time shown in the error message (or the `Retry-After` header) before retrying. For large archives, export in batches or use the [Conversations API](/Support/contact).
+</Warning>
+
+<Tip>
+Need programmatic exports? See [Export Agent Conversations (V3 API)](/Support/contact) and [Export Convos (V2 API)](/Support/contact).
+</Tip>
+
+
+## Deleting Conversations
+
+
+If you only want to store some conversations or clean up after testing, deleting conversations is a good way to maintain a more organized and relevant dataset.
+#
+
+<Warning>
+  Deleting conversations is **permanent** and cannot be undone. Use caution when deleting conversations.
+</Warning>
+
+#
+
+### Best Practices for conversation tab:
+<CardGroup cols={2}>
+  <Card title="Regular Review" icon="calendar-check">
+    Set aside time to review conversations regularly for continuous improvement.
+  </Card>
+  <Card title="Tag Consistently" icon="tags">
+    Use a consistent tagging system to make sorting and analysis more efficient.
+  </Card>
+  <Card title="Share Insights" icon="lightbulb">
+    Use the transcript URL feature to share notable conversations with your team or clients.
+  </Card>
+  <Card title="Backup Important Data" icon="database">
+    Regularly export crucial conversations to maintain a record outside the platform.
+  </Card>
+</CardGroup>
+

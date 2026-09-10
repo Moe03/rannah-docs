@@ -1,0 +1,117 @@
+---
+title: Calling Tools
+description: Learn how to call tools in the Canvas feature through text editors or node configurations.
+icon: phone
+---
+
+The **Calling Tools** feature allows you to execute external APIs or integrations directly from your chatbot flow. Tools can be called through text editors in nodes and edges or by configuring them in the **Tools** section of the node settings.
+
+---
+
+## What Are Tools?
+
+Tools are external services or APIs that your chatbot can call to perform specific tasks, such as retrieving data, sending notifications, or making calculations.
+
+---
+
+## How to Call Tools
+
+### 1. Calling Tools Through Text Editors
+
+Tools can be called dynamically within any **Text Editor** in nodes or edges using the `{` shortcut.
+
+#### Steps:
+
+1. Open the **Text Editor** for the desired node or edge.
+2. Type `{` to access the tools dropdown.
+3. Select the desired tool from the list.
+4. The tool call will be inserted into the text.
+
+**Example**:
+
+```plaintext
+Your appointment is scheduled for {get_appointment_time}.
+```
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/DFxLsALToJc?si=7xilKwgN402AvVs2&amp;start=21"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+
+### 2. Calling Tools Through Node Configuration
+
+Tools can also be integrated directly into a node via the **Tools** section.
+
+#### Steps:
+
+1. Open the node settings and navigate to the **Tools** tab.
+2. Click **Add Tool** to configure a new tool or select an existing one.
+3. Configure the following:
+   - **Tool Name**: Unique identifier for the tool.
+   - **Server URL**: The endpoint of the API or webhook.
+   - **Request Method**: Choose from `GET`, `POST`, etc.
+   - **Variables**: Define or select variables to pass as parameters.
+
+#### Example:
+
+- **Tool Name**: `get_weather`
+- **Server URL**: `https://api.weather.com/v3/weather`
+- **Request Method**: `GET`
+- **Variables**: `city`, `date`
+
+**Visual Placeholder**:  
+![Node Tools Configuration](PLACEHOLDER_FOR_IMAGE)  
+_Image showing the Tools tab with tool configuration details._
+
+---
+
+## Testing Tool Calls
+
+Before deploying tools, test them to ensure they work correctly.
+
+1. Use the **Test Tool** button in the **Tools Tab**.
+2. Provide test inputs for any required variables.
+3. Observe the tool’s output and **verify the response is in valid JSON format**.
+
+---
+<Warning>
+The response must be in valid JSON format, if not we'll provide the text response to the AI to decide what to do next but ideally JSON is preferred.
+</Warning>
+
+## Example Use Cases for Tool Calls
+
+1. **Scheduling**:
+
+   - Call a scheduling API to book an appointment and return the confirmation details.
+
+2. **Weather Updates**:
+
+   - Use a weather API to provide current conditions or forecasts based on user input.
+
+3. **E-Commerce**:
+   - Retrieve product availability or pricing from an inventory management system.
+
+**Example Flow**:
+
+1. User asks: “What’s the weather tomorrow?”
+2. The chatbot calls the `get_weather` tool via a Text Editor or Tools Tab.
+3. The tool retrieves the forecast and displays it to the user.
+
+---
+
+## Best Practices for Calling Tools
+
+- **Use Descriptive Names**: Clearly label tools for easy identification.
+- **Test Frequently**: Verify tools and their inputs/outputs during development.
+- **Optimize Tool Usage**: Avoid redundant calls to improve performance.
+- **Combine with Variables**: Use dynamic variables to make tool calls context-aware.
+
+---
+
+Ready to unlock more customization? Learn about [Custom Prompts](features/custom-prompts) to tailor your chatbot's behavior!

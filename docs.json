@@ -1,0 +1,353 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "Rannah رنّة",
+  "colors": {
+    "primary": "#2EE6C5",
+    "light": "#2EE6C5",
+    "dark": "#2EE6C5"
+  },
+  "contextual": {
+    "options": [
+      "copy",
+      "chatgpt",
+      "claude",
+      "cursor",
+      "vscode"
+    ]
+  },
+  "favicon": "/logo/rannah-icon-dark.png",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "icon": "rocket",
+            "pages": [
+              "help-center/introduction",
+              "help-center/when-to-use",
+              "help-center/how-rannah-works"
+            ]
+          },
+          {
+            "group": "Build Your Agent",
+            "icon": "robot",
+            "pages": [
+              {
+                "group": "Agent Creation",
+                "icon": "wand-magic-sparkles",
+                "pages": [
+                  "agent-creation/design-and-setup",
+                  "agent-creation/initial-prompt",
+                  "agent-creation/initial-message",
+                  "agent-creation/settings"
+                ]
+              },
+              {
+                "group": "System Prompt",
+                "icon": "file-lines",
+                "pages": [
+                  "agent-creation/system-prompt/Overview",
+                  "agent-creation/system-prompt/formatting-your-prompt",
+                  {
+                    "group": "Prompt Guide",
+                    "pages": [
+                      "agent-creation/system-prompt/step-1-define-the-tone-and-objective",
+                      "agent-creation/system-prompt/step-2-ai-plus-context",
+                      "agent-creation/system-prompt/step-3-implement-cot",
+                      "agent-creation/system-prompt/step-4-examples-and-reinforcing-instructions",
+                      "agent-creation/system-prompt/step-5-advanced-techniques-and-testing"
+                    ]
+                  },
+                  "agent-creation/system-prompt/techtalk",
+                  "agent-creation/system-prompt/bakemate"
+                ]
+              },
+              {
+                "group": "Knowledgebase",
+                "icon": "brain",
+                "pages": [
+                  "agent-creation/knowledgebase/about-the-knowledgebase",
+                  {
+                    "group": "Adding Data",
+                    "pages": [
+                      "agent-creation/knowledgebase/adding-data/direct-text-entry",
+                      "agent-creation/knowledgebase/adding-data/file-upload",
+                      "agent-creation/knowledgebase/adding-data/add-URL"
+                    ]
+                  },
+                  "agent-creation/knowledgebase/adjusting-kb-settings",
+                  "agent-creation/knowledgebase/structuring-kb-documents",
+                  "agent-creation/knowledgebase/previewing-the-kb",
+                  "agent-creation/knowledgebase/kb-and-ui-engine"
+                ]
+              },
+              {
+                "group": "Testing & Configuration",
+                "icon": "flask",
+                "pages": [
+                  "features/ui-engine",
+                  "features/agent-tester",
+                  "agent-dashboard/tabs-configuration",
+                  "agent-dashboard/theme-customization",
+                  "agent-dashboard/widget-configuration",
+                  "agent-dashboard/prototype-testing",
+                  "agent-dashboard/tools-management"
+                ]
+              },
+              {
+                "group": "Canvas",
+                "icon": "diagram-project",
+                "pages": [
+                  "canvas/introduction",
+                  {
+                    "group": "Nodes and Flows",
+                    "pages": [
+                      "canvas/nodes/overview",
+                      "canvas/nodes/managing-nodes",
+                      "canvas/nodes/conditions",
+                      "canvas/nodes/global-nodes",
+                      "canvas/nodes/turbo-mode"
+                    ]
+                  },
+                  {
+                    "group": "Features",
+                    "pages": [
+                      "canvas/features/tools-integration",
+                      "canvas/features/variables",
+                      "canvas/features/rewind-nodes",
+                      "canvas/features/testing-flows",
+                      "canvas/features/calling-tools",
+                      "canvas/features/custom-prompts",
+                      "canvas/features/models-configuration"
+                    ]
+                  },
+                  {
+                    "group": "Advanced Usage",
+                    "pages": [
+                      "canvas/advanced/global-access",
+                      "canvas/advanced/accessibility",
+                      "canvas/advanced/examples",
+                      "canvas/use-cases/confirm-email-template"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Voice",
+            "icon": "microphone",
+            "pages": [
+              "voice/introduction",
+              "voice/how-voice-works",
+              "voice/pricing",
+              {
+                "group": "Setup & Configuration",
+                "icon": "wrench",
+                "pages": [
+                  "voice/setup/twilio",
+                  "voice/setup/webcalling",
+                  "voice/config/transcriber",
+                  "voice/config/speechgen",
+                  "voice/config/advanced"
+                ]
+              },
+              {
+                "group": "Voice Providers",
+                "icon": "microphone-lines",
+                "pages": [
+                  "voice/providers/ultravox"
+                ]
+              },
+              {
+                "group": "SIP Trunking",
+                "icon": "phone",
+                "pages": [
+                  "voice/sip-trunking/introduction",
+                  "voice/sip-trunking/quick-start",
+                  "voice/sip-trunking/adding-provider",
+                  "voice/sip-trunking/phone-numbers",
+                  {
+                    "group": "Technical Details",
+                    "pages": [
+                      "voice/sip-trunking/asterisk-setup"
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Deploy",
+            "icon": "rocket",
+            "pages": [
+              {
+                "group": "Deploy Options",
+                "icon": "rocket",
+                "pages": [
+                  "deploy/react-voice-orb",
+                  "deploy/rannah-widget",
+                  "deploy/script",
+                  "deploy/voice-only"
+                ]
+              },
+              {
+                "group": "Website Integration",
+                "icon": "globe",
+                "pages": [
+                  "integration/deploying-to-website/overview",
+                  "integration/deploying-to-website/shopify",
+                  "integration/deploying-to-website/wix",
+                  "integration/deploying-to-website/wordpress",
+                  "integration/deploying-to-website/squarespace",
+                  "integration/deploying-to-website/iframe"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Channels & Integrations",
+            "icon": "share-nodes",
+            "pages": [
+              {
+                "group": "Communication Channels",
+                "icon": "comments",
+                "pages": [
+                  "integration/Channels/whatsapp-newMethod",
+                  "integration/Channels/whatsapp",
+                  "integration/Channels/meta-channels",
+                  "integration/Channels/discord",
+                  "integration/Channels/telegram",
+                  "integration/Channels/voice",
+                  "Sockets/interact"
+                ]
+              },
+              {
+                "group": "Third-Party Integrations",
+                "icon": "puzzle-piece",
+                "pages": [
+                  {
+                    "group": "Google Integrations",
+                    "icon": "google",
+                    "pages": [
+                      "integration/google/sheets",
+                      "integration/google/calendar",
+                      "integration/google/email"
+                    ]
+                  },
+                  "integration/microsoft/outlook",
+                  "integration/microsoft/zoho-mail",
+                  "integration/shopify",
+                  {
+                    "group": "Airtable",
+                    "icon": "table",
+                    "pages": [
+                      "integration/airtable"
+                    ]
+                  },
+                  "integration/calendly"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Features",
+            "icon": "puzzle-piece",
+            "pages": [
+              {
+                "group": "Agent Intelligence",
+                "icon": "brain",
+                "pages": [
+                  "features/ai-models",
+                  "features/tools",
+                  "features/global-prompts",
+                  "features/prestart-tool",
+                  "features/crawler",
+                  "features/structured-search"
+                ]
+              },
+              {
+                "group": "Analytics & Reporting",
+                "icon": "chart-line",
+                "pages": [
+                  "features/metrics",
+                  "features/analytics",
+                  "features/usage-tab",
+                  "features/events"
+                ]
+              },
+              {
+                "group": "Engagement",
+                "icon": "users",
+                "pages": [
+                  "features/campaigns",
+                  "features/conversations-tab",
+                  "features/live-handoff",
+                  "features/voice-to-voice",
+                  "features/lead-qualification-funnel"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Pricing",
+            "icon": "dollar-sign",
+            "pages": [
+              "Pricing/overview",
+              "Pricing/credits",
+              "Pricing/billing",
+              "Pricing/provider-cost-estimates"
+            ]
+          },
+          {
+            "group": "Support",
+            "icon": "circle-question",
+            "pages": [
+              "Support/faq",
+              "Support/troubleshooting",
+              "Support/imported-twilio",
+              "Support/contact"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Pricing",
+          "href": "/Pricing/overview",
+          "icon": "dollar-sign"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/rannah-icon-light.png",
+    "dark": "/logo/rannah-icon-dark.png"
+  },
+  "appearance": {
+    "default": "dark"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@rannah.io"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Dashboard",
+      "href": "https://rannah.io"
+    }
+  },
+  "footer": {
+    "socials": {
+      "website": "https://rannah.io"
+    }
+  }
+}

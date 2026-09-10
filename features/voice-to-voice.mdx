@@ -1,0 +1,154 @@
+---
+title: 'Voice to voice'
+description: 'Enhance your AI agents with natural voice interactions using the VAPI integration'
+icon: microphone
+---
+
+
+
+In the era of advanced AI and Large Language Models (LLMs), voice interactions have reached unprecedented levels of naturalness. Rannah رنّة Agent harnesses this technology by integrating with VAPI, a cutting-edge voice-to-voice platform, to provide your agents with lifelike conversational abilities.
+
+<Note>
+Voice-to-voice technology now incorporates natural speech patterns, including filler words like "mhmm" and "ya", making conversations feel more authentic. Users can even interrupt the AI mid-sentence, closely mimicking human-to-human interactions.
+</Note>
+
+This guide will walk you through setting up your VAPI profile and enabling voice-to-voice capabilities for your Rannah رنّة Agent.
+
+## Connecting to VAPI
+
+<Steps>
+  <Step title="Create a VAPI Account">
+    Start by creating an account on VAPI at [vapi.ai](https://vapi.ai).
+    
+    <Tip>
+      We love VAPI. For more detailed information, check out their [documentation](https://docs.vapi.ai/introduction).
+    </Tip>
+  </Step>
+
+  <Step title="Create an Assistant">
+    Once your account is set up, create an assistant on VAPI:
+    - Choose from various voice providers (e.g., Elevenlabs, Cartesia, OpenAI)
+    - Select a voice that fits your agent's persona (For instance, our agent Gia uses the "Hannah" voice from Cartesia)
+    - Craft a well-formatted system prompt.
+  </Step>
+
+  <Step title="Obtain API Keys from VAPI">
+    After setting up your assistant:
+    1. Navigate to your profile in the left-hand corner
+    2. Go to `API keys`
+    3. Copy both your **private** and **public keys**
+
+    
+  </Step>
+
+  <Step title="Configure Rannah رنّة Agent Credentials">
+    **In Rannah رنّة Dashboard:**
+    1. Go to the `credentials tab`
+    2. Paste your VAPI private and public keys in the appropriate fields
+    3. For the Default Server URL secret, go back to VAPI, find it under settings > `Server URL`, and paste it in Rannah رنّة's credentials tab
+    <img src="/images/credentials-ui-shots.png" alt="The credentials user interface" width="900"/>
+  </Step>
+
+  
+</Steps>
+
+## Integrating with Your Agent
+
+Now that you've set up VAPI, it's time to enable voice capabilities for your Rannah رنّة Agent:
+
+<Steps>
+  <Step title="Access Agent Channels Tab">
+    Choose the agent you want to set up for voice interactions and navigate to the channels tab.
+  </Step>
+
+  <Step title="Enable Voice Setup">
+    Click the `Voice setup` button or click `connect` via the voice channel.
+  </Step>
+
+  <Step title="Verify Configuration">
+    If set up correctly, you'll see a green checkbox as shown below:
+    
+    <img src="/images/voice-ui-shots.png" alt="Voice setup verification" width="700"/>
+  </Step>
+
+  <Step title="Add VAPI Assistant ID">
+    The last field you need to fill out is the `VAPI assistant ID`. You can find this in your VAPI dashboard - simply copy it from your assistant's details.
+  </Step>
+  <Step title="Congrats" icon="party-horn">
+    You've successfully set up voice-to-voice capabilities in Rannah رنّة, giving users a more natural way to interact with your brand.
+
+<video
+  controls
+  autoPlay
+  muted
+  loop
+  playsInline
+  src="/images/voice-activated-from-conversation-video.mp4"
+  style={{ width: '40%', borderRadius: '0.5rem' }}
+></video>
+  </Step>
+</Steps>
+
+
+
+<Info>
+  During a live conversation with the VAPI agent, the interaction is **transcribed** and is added to your current conversation. You can review these transcripts in the [conversation tab](/features/conversations-tab) for later.
+</Info>
+
+## Voice Integration Settings
+
+The voice setup interface provides several options to customize how VAPI interacts with your agent:
+
+<AccordionGroup>
+  <Accordion title="Sync KB with VAPI">
+    **This option adds your agent's entire Knowledge Base (KB) to your VAPI assistant.**
+    
+    - Each synced document consumes `1 credit`
+    - Rannah رنّة will inject your KB documents into the VAPI assistant whenever changes are made to the KB
+    
+    <Warning>
+      VAPI currently has a limit of **20,000** characters per document.
+    </Warning>
+  </Accordion>
+
+  <Accordion title="Sync all on save">
+    **Enable this to automatically update your VAPI assistant with changes made to your Rannah رنّة Agent, including:**
+    - Initial message
+    - Knowledgebase documents
+    - System prompt
+  </Accordion>
+
+  <Accordion title="Eagerly show VAPI on Load">
+    **When enabled, this option displays the VAPI popup at the start of a new conversation, asking the user if they want to talk with the AI.**
+
+    >See it in action:
+
+    <video
+      controls
+      autoPlay
+      muted
+      loop
+      playsInline
+      src="/images/voice-live-agent-video.mp4"
+      style={{ width: '100%', borderRadius: '0.5rem' }}
+    ></video>
+  </Accordion>
+
+  <Accordion title="Enable VAPI on Web">
+    When enabled (`vapiConfig.enableVapiOnWeb`), the web widget footer shows a microphone button that opens the VAPI voice interface for in-browser calls. Requires a configured VAPI assistant (`vapi.id`).
+
+    **You can customize the VAPI Web popup message in the provided input field.**
+
+    <Note>
+    This setting is separate from **Enable Quick Upload Button** (`enableQuickFileUpload`), which controls the paperclip file/image attachment button. See [Agent Settings](/agent-creation/settings) for upload configuration.
+    </Note>
+  </Accordion>
+  <Accordion title="Max Monthly Minutes">
+    If you want to **restrict** the usage of your VAPI assistant, this can be done by setting a limit for monthly usage. 
+
+    {/* <Tip>
+    Whitelabel user? Incldue this in your monthly subscription. Read more about setting up subscriptions in the [sales docs]() (COMING SOON)
+    </Tip> */}
+  </Accordion>
+</AccordionGroup>
+

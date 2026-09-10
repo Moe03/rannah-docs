@@ -1,0 +1,322 @@
+---
+title: 'Tools'
+description: ''
+icon: wrench
+---
+
+
+# What are Tools?
+
+Tools, also known as <Tooltip tip="In the context of AI models, functions are predefined interfaces that allow the model to interact with external systems or perform specific operations. They are typically defined in JSON format, consisting of a name, description, and a set of parameters. This JSON structure enables structured data exchange between the AI and external services, allowing for precise control over inputs and outputs.">functions</Tooltip>, are custom capabilities that you can add to your AI agents. They allow your agents to perform specific actions or retrieve information from external sources, greatly enhancing their functionality and usefulness.
+
+
+<Note>
+Rannah رنّة sends parameters as a JSON array to your specified endpoint, enabling seamless integration with a wide range of automation platforms and servers. This flexibility allows you to create powerful, custom interactions between your AI agents and external systems.
+</Note>
+
+
+<img src="/images/tools-main-ui-shots.png"></img>
+
+## Default Tools
+Your agents utilize the capabilities of tools right out of the box. These provide essential functionalities that form the backbone of your agents:
+
+<CardGroup cols={2}>
+  <Card title="KB-Search" icon="brain">
+    The knowledgebase uses a tool to query and retrieve information by default. This significantly enhances the output compared to other methods of retrieval. [Read more](/agent-creation/knowledgebase/about-the-knowledgebase).
+  </Card>
+  <Card title="Live-handoff" icon="phone-flip">
+    The live-handoff is a default tool that triggers whenever a user requests a live-handoff in the chat or via the handoff popup. [Read more](/features/live-handoff).
+  </Card>
+</CardGroup>
+
+
+<Warning>
+Please be **careful** when adjusting these tools as it can break core functionalities if altered incorrectly. Do so at your own risk.
+</Warning>
+
+
+## Custom tools
+
+Whether you need fully customized tools or prefer ready-made solutions, Rannah رنّة AI has you covered: 
+
+<Tip>
+Implement across a **wide range** of platforms, including popular automation services like `Make.com` or `Zapier`. You can design tools for diverse functions such as data retrieval, external API interactions, or complex multi-step processes.
+</Tip>
+
+## Tools Setup Guide
+
+<Steps>
+  <Step title="Access the Tools Tab">
+    Navigate to `Tools` either via the tab from the main menu or through an agents designer. Click on the `+ New Tool` button at the top of the page to start creating a new tool.
+    <Card title="Agent specific tools tab:">
+    <img src="/images/agent-tools-ui-shots.png"></img>
+    </Card> 
+  </Step>
+  <Step title="Choose Tool Type and Name">
+    You have three options:
+
+
+    <AccordionGroup>
+  <Accordion title="Create Your Own Custom Tool">
+    Design and implement a completely customized tool tailored to your specific needs. This option offers the most flexibility, allowing you to define unique functionalities that perfectly align with your use case. 
+<Tip>
+When creating a custom tool, clearly define its purpose, parameters, and expected outputs.
+</Tip>
+  </Accordion>
+  <Accordion title="Select from Preset Templates">
+    Rannah رنّة offers a variety of pre-configured tool templates that can be easily customized to fit your needs. For example, the SendEmail template provides a foundation for email integration that you can build upon.
+<Note>
+Preset templates are an excellent starting point for those new to tool creation or for quickly implementing standard functionalities.
+</Note>
+  </Accordion>
+  {/* <Accordion title="Use Marketplace Templates">
+    Explore the tool templates available in the marketplace. These are created by the Rannah رنّة AI team or community members and offer a wide range of specialized functionalities.
+<Tip>
+Marketplace templates comes with **instructions** and **pre-made** Make.com automations. This makes them a valuable resource saving both dev time and expanding your agent's capabilities.
+</Tip>
+  </Accordion> */}
+</AccordionGroup>
+
+<Card title="Naming your tool" icon="typewriter">
+Choose a clear, descriptive name for your tool. This name will be used to reference it in the agent's system prompt.
+    <img src="/images/new-tool-ui-shots(2).png" width="500"></img>
+    
+</Card>
+
+    
+
+
+    
+  </Step>
+  <Step title="Configure Tool Settings">
+    Before your tool can talk with an external service. You need to set up the necessary information:
+
+  <AccordionGroup>
+    
+
+    <Accordion title="Server URL:">
+
+    Find the endpoint **URL** from where your tool is hosted. In Make.com this is found by going to the webhooks tab and selecting your chosen endpoint.
+
+    Then Copy the Webhook URL, looks like this: https://hook.eu2.make.com/fws5j13b27tq93nrpfjeowejrpwewfj
+
+    
+
+
+    <Info>
+    **Remember** to run a test to make sure your scenario or endpoint works. More on testing below.
+    </Info>
+
+    </Accordion>
+    <Accordion title="Server Key:">
+   Get the `Authentication key` from where your tool is hosted. In Make.com this is found by going to the webhooks tab and selecting your chosen endpoint.
+
+  Copy the Webhook **UDID**. It will look something like this: `fws5j13b27tq93nrp0kinqy926mo4277`
+
+    </Accordion>
+    <Accordion title="Tool Description:">
+    A brief, clear explanation of what the tool does.
+
+    <Info>
+      This description is fed to the LLM every time the tool is used. Make sure its clear and easy to interpret for the model.
+    </Info>
+    ```markdown Email tool description:
+      Send an email to the user you are speaking to.
+
+    ```
+    </Accordion>
+  </AccordionGroup>
+
+  </Step>
+  <Step title="Define Parameters">
+    Specify the parameters your tool needs to function:
+<img src="/images/features-ui-shots.png"></img>
+    
+
+   ### Input options for parameters 
+    Each parameter has a set of values that needs to be filled in correctly for the tool to work:
+
+    <CardGroup cols={2}>
+      <Card title="Parameter Key" icon="key">
+        The name of the parameter **(e.g., "to", "subject", "html")**. Make this short and descriptive, this makes it easier for the LLM to interpret. 
+      </Card>
+      <Card title="Default Value" icon="square-1">
+        An optional preset value for the parameter. Neat if you want a fixed parameter for every tool use. You can also set the parameter as `required`. The LLM will take this into consideration when collecting data from the user. 
+      </Card>
+      <Card title="Type" icon="code">
+        Make sure to define the type of data your parameter will contain and where it will be placed in the request:
+      <AccordionGroup>
+        <Accordion title="Data type:">(e.g., String, Number, Boolean)</Accordion>
+        <Accordion title="Body or Header:">Whether the parameter is a part of the Header or Body of the request.</Accordion>
+      </AccordionGroup>
+        <Tip>
+
+          Want to learn more about APIs? Check out [this article](https://www.postman.com/what-is-an-api/) from Postman.
+        </Tip>
+      </Card>
+      <Card title="Description" icon="note">
+        Just like the tools description, this explains the parameter and specifies the data it should include and when to use it. Write **clear** and **detailed** descriptions for optimal LLM interpretation. 
+        
+        ```markdown Example description of 'subject' param:
+          The subject of the email.
+        ```
+      </Card>
+     
+      
+
+    </CardGroup>
+  </Step>
+  <Step title="Save">
+    After configuring your tool, make sure to `save`.
+  </Step>
+</Steps>
+
+## Testing Your Tools
+
+Testing your tools in a **controlled environment** before going live is crucial. It's essential to understand how the webhook processes data and how the models behave when using a tool. This ensures that every user or client can send and receive requests seamlessly.
+
+#
+<Card title="Webhook Testing" icon="webhook">
+    You can test the tool's webhook with random **pre-filled data** in the parameters or fill in the parameters yourself. This is particularly useful when setting up automations and verifying functionality before implementing to the agents LLM.
+
+
+<img src="/images/test-tool-ui-shots.png" width="500"></img>
+
+
+
+</Card>
+<Accordion title="Video: How to test webhook in Make.com"><video src="/images/glowstudio-test-webhook-video.mp4" width="800"
+autoPlay
+controls
+></video>
+<Warning>
+**Syntax Error:** As shown in the video, you may still see an error even when Make receives the payload successfully. If the webhook still does not behave as expected, contact [support@rannah.io](mailto:support@rannah.io).
+</Warning>
+</Accordion>
+
+
+### Using Preview LLM
+Rannah رنّة offers a powerful "Preview LLM" feature for thorough tool testing before deployment.
+<Steps>
+  <Step title="Access Preview LLM">
+    Navigate to your agent's dedicated tools page, select the tool you want to test and click `Preview LLM`.
+
+  <Frame>  
+<video
+src="/images/test-llm-tool-video.mp4"
+width="400"
+autoPlay
+loop
+controls></video></Frame>
+  </Step>
+  <Step title="Configure Test Parameters">
+    <CardGroup cols={2}>
+      <Card title="Adjust Chunks" icon="layer-group">
+        Set the maximum retrievable chunks to control information access.
+      </Card>
+      <Card title="Select Model" icon="robot">
+        Choose from compatible AI models (look for the tools checkmark).
+      </Card>
+    </CardGroup>
+  </Step>
+  <Step title="Run Test Prompts">
+    Input specific prompts to test your tool's functionality. Different models may require tailored prompts depending on your system prompt. Here are some examples of how to test your tool in one interaction:
+<CodeGroup>
+  ```markdown Claude Models
+  Send an email to [email] and name [name] by using SendEmail tool, send it right away and be creative.
+  ```
+  ```markdown GPT Models
+  Send a creative email to [email] right away.
+  ```
+</CodeGroup>
+  </Step>
+  <Step title="Review Debug Information">
+    Analyze the debug output to see how the LLM interacts with your tool and the final results.
+  </Step>
+</Steps>
+<Note>
+Remember to `assign` the tool to your agent **before** testing. Unassigned tools won't be available in the preview or from the widget. Do it from the tools menu or assign it directly from your agents tool tab.<video
+src="/images/assigning-tool-from-agent.mp4"
+width="400"
+autoPlay
+loop></video>
+</Note>
+
+
+## Tools and System Prompt 
+
+When your tool is tested and ready to implement, your agent wont know when or exactly how to use it. This is where the system prompt comes into play where you instruct the agent on how it should use, which information it should collect and when it should use the tool.
+
+
+### Example Prompt for Tools
+
+Here are some examples of how you can instruct your agent to use tools in various scenarios:
+
+<CodeGroup>
+  ```markdown Lead Generation
+  You have access to a tool called 'addLeadToCRM'. When a user expresses interest in our products or services, use this tool to add their information to our CRM system. The tool requires the following parameters:
+  - name: The full name of the lead
+  - email: The lead's email address
+  - interest: A brief description of what they're interested in
+
+  Always confirm with the user before adding their information to the CRM.
+  ```
+
+  ```markdown Fitness Planning
+  You have access to two tools: 'createTrainingPlan' and 'createMealPlan'. Use these tools when users ask for fitness advice.
+
+  For 'createTrainingPlan', you need:
+  - fitnessLevel: beginner, intermediate, or advanced
+  - goal: e.g., weight loss, muscle gain, endurance
+  - daysPerWeek: number of training days
+
+  For 'createMealPlan', you need:
+  - dietType: e.g., vegetarian, keto, balanced
+  - calorieTarget: daily calorie goal
+  - allergies: list of any food allergies
+
+  Gather this information from the user before using the tools.
+  ```
+
+  ```markdown Appointment Booking
+  You have a 'scheduleAppointment' tool. Use this when users want to book a meeting or appointment. The tool needs:
+  - customerName: Full name of the customer
+  - serviceType: Type of service or meeting requested
+  - preferredDate: User's preferred date (format: YYYY-MM-DD)
+  - preferredTime: User's preferred time (format: HH:MM)
+
+  After scheduling, always confirm the details with the user.
+  ```
+
+  ```markdown Newsletter Subscription
+  When you have successfully answered a user query or if the user express interest in subscribing to the newsletter, use the 'subscribeNewsletter' tool. It requires:
+  - email: User's email address
+  - name: User's full name
+  - interests: Comma-separated list of topics they're interested in
+
+  Always ask for explicit consent before subscribing a user.
+  ```
+</CodeGroup>
+#
+{/* TODO: Check if we have a marketplace */}
+{/* ## Explore the Marketplace
+
+
+<Card title="Discover templates and automations that can jump-start your AI agent development:" icon="cart-shopping" href="https://rannah.io">
+  
+  Choose from a wide range of resources including pre-configured agent templates, custom tool bundles with automations and instructions, Make.com automations with ChatGPT and other popular modules and so much more!
+</Card>
+
+<Tip>
+Marketplace offerings can significantly speed up your development process and provide inspiration for advanced use cases. You can download Make.com automations and upload them to your own Make account for seamless integration.
+</Tip> */}
+
+#
+## Conclusion
+
+Tools are a powerful feature in Rannah رنّة that can significantly enhance your AI agents' capabilities. By following this guide and best practices, you can create and integrate tools that allow your agents to perform a wide range of actions, making them more versatile and valuable to your users.
+
+<Info>
+**And Remember:** The key to successful tool implementation is clear communication between your system prompt, the AI agent, and the tool itself. Well-defined parameters and clear instructions will lead to smooth and effective tool usage.
+</Info>
+

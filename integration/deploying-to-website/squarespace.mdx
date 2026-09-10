@@ -1,0 +1,122 @@
+---
+title: 'Squarespace'
+description: 'Integrate your Rannah رنّة Agent into your Squarespace site.'
+icon: squarespace
+---
+
+<Card title="Prerequisites" icon="check">
+Before you begin, make sure you have:
+<CardGroup cols={2}>
+  <Card title="" icon="face-smile-wink">
+    A Rannah رنّة account with a configured AI agent
+  </Card>
+  <Card title="" icon="squarespace">
+    Admin access to your Squarespace website
+  </Card>
+</CardGroup>
+</Card>
+
+## Integration Steps
+
+<Steps>
+  <Step title="Access Your Rannah رنّة Dashboard">
+    Log in to your Rannah رنّة account and navigate to your agent's settings. Note down your unique agent ID.
+
+    <Info>
+        You'll find an agent's unique ID on its dedicated card in the `Agents` tab or in the URL from the agent designer ex. https://rannah.io/app/eu/agents/gib2no07kqdy1f2m/overview 
+    </Info>
+  </Step>
+  
+  <Step title="Log in to Squarespace">
+    Sign in to your Squarespace account and open the website where you want to add the widget.
+  </Step>
+  
+  <Step title="Access Website Tools">
+    1. From the sidebar menu, select `Website`
+    2. Scroll to the bottom of the sidebar menu
+    3. Choose `Website Tools`
+  </Step>
+  
+  <Step title="Open Code Injection">
+    In the Website Tools menu, click on `Code Injection`.
+  </Step>
+  
+  <Step title="Insert Integration Code">
+    In the `Header` section of the Code Injection page, paste the following code:
+
+    ```html
+    <div id="VG_OVERLAY_CONTAINER"></div>
+    <script defer>
+        (function() {
+            window.VG_CONFIG = {
+                ID: "YOUR_AGENT_ID", // Replace with your actual agent ID
+                region: 'eu', // or 'na' for North America
+                render: 'bottom-right', // or 'bottom-left'
+                // modalMode: true, // Set this to 'true' to open the widget in modal mode
+                stylesheets: [
+                    "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+                ],
+            }
+            var VG_SCRIPT = document.createElement("script");
+            VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+            VG_SCRIPT.defer = true;
+            document.body.appendChild(VG_SCRIPT);
+        })()
+    </script>
+    ```
+
+    <Warning>
+      Remember to replace **YOUR_AGENT_ID** with your actual Rannah رنّة Agent ID.
+    </Warning>
+  </Step>
+  
+  <Step title="Save Changes">
+    Click the `Save` button to apply your changes.
+  </Step>
+  
+  <Step title="Test Your Integration">
+    Visit your Squarespace website's frontend and verify that the widget appears and functions correctly.
+  </Step>
+</Steps>
+
+## Customization Options
+
+You can customize your widget's behavior and appearance by adjusting the `VG_CONFIG` options:
+
+<AccordionGroup>
+  <Accordion title="Change Position">
+    Modify the `render` option to 'bottom-left' or 'bottom-right' to change the widget's position.
+  </Accordion>
+  
+  <Accordion title="Autostart Chat">
+    Add `autostart: true,` to the `VG_CONFIG` object to have the widget open automatically when a user visits your website.
+  </Accordion>
+  
+  <Accordion title="Custom Styling">
+    Add your own CSS file to the `stylesheets` array for custom styling:
+    ```javascript
+    stylesheets: [
+        "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+        "https://your-custom-css-url.css"
+    ],
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+
+If you encounter issues with your Rannah رنّة Agent widget integration:
+
+1. Verify that you've copied the entire code snippet correctly into the Header section of Code Injection.
+
+2. Double-check that you've replaced "YOUR_AGENT_ID" with your actual Rannah رنّة Agent ID.
+
+3. Ensure you've saved the changes in the Code Injection page.
+
+4. Clear your browser cache and refresh your Squarespace website to see changes.
+
+5. If the widget doesn't appear, try adding the code to the Footer section instead of the Header section in Code Injection.
+
+<Note>
+  Squarespace may take a few minutes to propagate changes across their content delivery network. If you don't see the widget immediately after saving, wait a few minutes and try refreshing your site again.
+</Note>

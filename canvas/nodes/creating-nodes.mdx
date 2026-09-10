@@ -1,0 +1,108 @@
+---
+title: Creating Nodes
+description: Step-by-step guide to creating, managing, and customizing nodes in the Canvas feature of Rannah رنّة.
+icon: add
+---
+
+Nodes are the backbone of the **Canvas** feature in Rannah رنّة, allowing you to define specific tasks and behaviors within your agent's flow. This guide walks you through the process of creating and managing nodes effectively.
+
+---
+
+## How to Create Nodes
+
+### 1. Default Nodes
+
+Default nodes are the primary nodes you’ll use to build your flow.
+
+**Steps to Create**:
+
+1. Click on the **Default Node** option on the left-side panel.
+2. Drag and drop the node into the Canvas workspace.
+3. Customize the node by clicking on it to access the settings menu.
+
+---
+
+### 2. Global Nodes
+
+Global nodes are reusable nodes accessible across the entire flow.
+
+**Steps to Create**:
+
+1. Create a **Default Node** as explained above.
+2. Open the **Overview** tab in the node settings.
+3. Toggle the **Global Node** switch to enable global functionality.
+
+**Tip**: Use global nodes for common tasks like “Help” or “Cancel” commands.
+
+---
+
+### 3. End Nodes
+
+End nodes conclude the conversation or flow.
+
+**Steps to Create**:
+
+1. Click on the **End Node** option on the left-side panel.
+2. Drag and drop it to the desired position in the flow.
+3. Link it to other nodes to define the logical endpoint.
+
+---
+
+### Placeholder for Visuals
+
+![Node Creation Example](PLACEHOLDER_FOR_IMAGE)  
+_Image showing how to drag and drop nodes into the workspace._
+
+---
+
+## Managing Nodes
+
+After creating nodes, managing them effectively ensures a seamless flow design.
+
+### 1. Customizing Node Behavior
+
+Click on a node to open its customization menu, which includes:
+
+- **Overview**: Set the node's name, description, and instructions.
+- **LLM Configuration**: Adjust AI response settings like temperature and token limits.
+- **Tools**: Integrate external APIs or tools for specific actions.
+- **Knowledge Base**: Enable AI to retrieve relevant knowledge from a database.
+- **Router Configuration**: Define conditions for branching flows.
+
+### 2. Connecting Nodes
+
+Connect nodes by dragging the connector from one node to another:
+
+- **Start Node** to **Default Nodes** for initial interactions.
+- **Default Nodes** to **End Nodes** to finalize conversations.
+- **Global Nodes** anywhere in the flow for reusable tasks.
+
+### Placeholder for Visuals
+
+![Node Connection Example](PLACEHOLDER_FOR_IMAGE)  
+_Image showing how to connect nodes to create a flow._
+
+---
+
+### Example: Simple Flow Creation
+
+1. Start with a **Start Node** that greets the user.
+2. Add a **Default Node** to process the user’s input.
+3. Include a **Global Node** for a "Cancel" command.
+4. End the flow with an **End Node** thanking the user.
+
+**Visual Representation**:
+![Simple Flow Example](PLACEHOLDER_FOR_IMAGE)  
+_Diagram of a simple flow connecting Start, Default, Global, and End Nodes._
+
+---
+
+## Tips for Efficient Node Management
+
+- Use **Global Nodes** for repetitive tasks to save time and effort.
+- Regularly test your flow by using the built-in tools and preview features.
+- Clearly label nodes to maintain clarity in complex flows.
+
+---
+
+Ready to explore further? Move to the next section: [Customizing Nodes](managing-nodes).

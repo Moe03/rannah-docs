@@ -1,0 +1,54 @@
+---
+title: "Setup Example"
+description: "Learn how to setup voice to voice interactions in Rannah رنّة."
+icon: "microphone"
+---
+
+### Example Setup
+
+First we'll create a new simple type agent from the top left
+
+<Warning>Make sure to select Dynamic type agent not Voiceflow one.</Warning>
+
+## Transcriber
+
+This part is responsible for handling speech to text detection & interruptions, by default we use [Deepgram](https://www.deepgram.com/) as our default provider as it is the most reliable, after it comes AssemblyAI.
+
+The transcriber main role is to detect 2 main events:
+
+- Any text transcribed detected in the incoming audio stream to handle interruptions ASAP if needed.
+- Detecting once the user has stopped talking to handle the end of the conversation and trigger the LLM to generate a response.
+
+For every provider there will be different configurations and pricing, we'll charge the credits worth of whatever the provider costs if you're using Rannah رنّة's own API keys, you can use yours by adding them from the credentials tab.
+
+The model used by the transcriber is by default going to be the fastest available one, in this case it's `nova-2` which is the fastest one.
+
+#### Patience factor
+
+This value is the factor multiplier for the transcriber's patience before triggerring the end of the user's speech, the less this value is the more inpatient the transcriber will be and the faster it will trigger the next turn and generate a response from the AI, the more it is the more patient it will be and the longer it will wait for the user to finish talking.
+
+By default this value is set to 0.5 which is the most balanced value between patience and speed, if your target audience is younger we recommend decreasing the value a bit to make it feel more responsive.
+
+#### Language
+
+This value is the language that the transcriber will use to detect the speech, by default it's set to English but you can change it to any other language supported by the provider.
+
+<Warning>
+
+We do NOT check if the provider supports the language you've selected, if the provider does not support it the transcriber will not work.
+
+</Warning>
+
+## LLM
+
+This part is responsible for generating the response from the AI, and is going to depend on whether your use a single prompt or the new [canvas system](/canvas/introduction).
+
+The voice to voice mode is different from normal text to text mainly in how everything is streamed in realtime as fast as possible to acheive the lowest latency and most natural experience.
+
+This step when there is a an interruption detected is going to cancel the ongoing LLM stream generation if there is any.
+
+#### Punctuation marks
+
+This is a collection of puntuation marks that when detected will instanly trigger the Speech gen step to generate audio based on the text so far.
+
+By default this is set to the default puntuation marks most commonly found like `.` or `!` or `?` etc...

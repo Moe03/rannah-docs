@@ -1,0 +1,69 @@
+---
+title: Variables
+description: Manage and use variables to store and pass data in the Canvas feature of Rannah رنّة.
+icon: X
+---
+
+**Variables** allow you to store and pass data across nodes in your flow. They can be created or edited using any **Tool Drawer** or **Variable Drawer**, or selected directly in the **Text Editor** using the `{` shortcut.
+
+---
+
+## Adding Variables
+
+1. Open the **Variable Drawer** in any tool or node.
+2. Click **Add Variable** and configure:
+   - **Key**: Unique identifier for the variable.
+   - **Default Value**: Initial value if no input is provided.
+   - **Type**: Select data type (e.g., string, number).
+   - **Description**: Provide a brief explanation of the variable’s purpose.
+   - **Required**: Toggle if the variable must always be set.
+
+---
+
+### Using Variables in Text Editor
+
+Variables can also be referenced directly in the **Text Editor**:
+
+1. Open the **Text Editor** in the node settings.
+2. Type `{` to open the dropdown of available variables.
+3. Select the variable to insert it into the text.
+
+**Example**:
+
+```plaintext
+Hello, {user_name}! How can I assist you today?
+```
+
+_Visual Placeholder_:
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/DFxLsALToJc?si=7xilKwgN402AvVs2"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+
+---
+
+## Editing Variables
+
+- Open the Variable Drawer to adjust existing variables.
+- Update values, keys, or descriptions directly.
+
+---
+
+## Global Variables
+
+- Mark variables as **Global** to make them accessible across all nodes.
+
+---
+
+## Best Practices
+
+- Use consistent naming conventions for variables.
+- Avoid redundant variables to simplify debugging.
+- Leverage global variables for shared data.

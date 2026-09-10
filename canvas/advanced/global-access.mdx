@@ -1,0 +1,75 @@
+---
+title: Global Access
+description: Learn how to use global nodes and variables to create reusable, scalable flows in the Canvas feature.
+icon: globe
+---
+
+Global access allows you to create nodes and variables that can be reused across the entire flow. This feature simplifies flow design, reduces redundancy, and enhances scalability.
+
+---
+
+## What is Global Access?
+
+Global access in Canvas includes:
+
+- **Global Nodes**: Reusable logic blocks accessible from any part of the flow.
+- **Global Variables**: Data that persists across all nodes, enabling dynamic and personalized interactions.
+
+---
+
+## Creating Global Nodes
+
+Global nodes can handle common tasks like “Help” or “Cancel” commands.
+
+### Steps to Create a Global Node:
+
+1. Open the **Overview** tab for any node.
+2. Toggle the **Global Node** switch.
+3. Configure the node as needed (e.g., prompts, tools, routing).
+
+**Example Use Case**:
+
+- A "Cancel" node that stops the current process and provides a summary to the user.
+- A "Help" node that delivers consistent responses to user queries.
+
+---
+
+## Using Global Variables
+
+Global variables are useful for storing data like user information or session states.
+
+### Steps to Create Global Variables:
+
+1. Open the **Variable Drawer**.
+2. Create a variable and toggle the **Global** option.
+3. Use the variable in any node or text editor with the `{` shortcut.
+
+**Example**:
+
+```plaintext
+Hello {user_name}, how can I assist you today?
+```
+
+---
+
+## Best Practices for Global Access
+
+- **Use Descriptive Names**: Clearly label global nodes and variables to avoid confusion.
+- **Centralize Reusable Logic**: Use global nodes for tasks like FAQs or cancellations to streamline flow design.
+- **Test Thoroughly**: Ensure global features behave consistently across the flow.
+- **Avoid Overuse**: Reserve global nodes and variables for frequently used functions to maintain clarity.
+
+---
+
+### Example Flow with Global Access
+
+**Scenario**: A customer service chatbot:
+
+1. **Start Node**: Greets the user.
+2. **Default Node**: Handles specific queries like “Order Status.”
+3. **Global Node**: Offers a reusable "Help" command available at any point.
+4. **Global Variables**: Personalizes the experience using data like `user_name` or `order_id`.
+
+---
+
+Ready to enhance your chatbot’s usability? Learn about [Accessibility Features](accessibility) next!

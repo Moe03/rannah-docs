@@ -1,0 +1,115 @@
+---
+title: Global Nodes
+description: Learn how to create and use global nodes to define reusable logic across flows in the Canvas feature.
+icon: "globe"
+---
+
+**Global Nodes** are special nodes in the **Canvas** feature that allow you to define reusable logic and functionality. They are accessible from anywhere within your flow, making them essential for tasks like shared responses, common commands, or global settings.
+
+---
+
+## What Are Global Nodes?
+
+Global Nodes are converted from Default Nodes and can:
+
+- Be reused across multiple points in the flow.
+- Handle global commands like "Help" or "Cancel."
+- Simplify complex flows by centralizing repetitive tasks.
+
+**Key Advantage**: Changes to a Global Node are automatically reflected wherever it is used, ensuring consistency and reducing redundancy.
+
+---
+
+## How to Create a Global Node
+
+1. **Start with a Default Node**:
+
+   - Drag and drop a Default Node into the Canvas workspace.
+
+2. **Enable Global Node**:
+
+   - Click on the node to open the **Overview** tab.
+   - Toggle the **Global Node** switch to activate it.
+
+3. **Customize**:
+   - Add a name, description, and instructions in the **Overview** tab.
+   - Configure the node's behavior in the other tabs, such as LLM settings, tools, and routing.
+
+![Creating a Global Node](/assets/global_node_toggle.png)
+_Image showing the process of toggling a Default Node into a Global Node._
+
+---
+
+## Using Global Nodes in Flows
+
+Once created, Global Nodes can be used anywhere in the flow. They are especially useful for:
+
+- **Reusable Prompts**: Provide consistent responses to common queries like “What can you do?” or “Cancel.”
+- **Shared Logic**: Define operations that need to be accessible across various parts of the flow.
+- **Fallback Handling**: Redirect unhandled user inputs to a Global Node for processing.
+
+---
+
+## Example: Common Use Cases
+
+### 1. Help Command
+
+Create a Global Node for handling help requests:
+
+- **Name**: “Help Node.”
+- **Instructions**: Respond with a summary of what the agent can do.
+- **Integration**: Use routing logic to direct users mentioning "Help" to this node.
+
+---
+
+### 2. Cancel Command
+
+Design a Global Node to handle cancellations:
+
+- **Name**: “Cancel Node.”
+- **Instructions**: Respond with “Your request has been canceled. Is there anything else I can assist with?”
+- **Integration**: Connect the Cancel Node from various parts of the flow.
+
+---
+
+## Managing Global Nodes
+
+### Editing Global Nodes
+
+To modify a Global Node:
+
+1. Click on the node to open its settings.
+2. Make changes to the **Overview**, **LLM Configuration**, **Tools**, or other tabs.
+3. Save your changes, which will be applied universally.
+
+---
+
+### Testing Global Nodes
+
+1. Use the **Test Tool** to simulate how the Global Node interacts with other parts of the flow.
+2. Verify that routing logic and responses work as intended.
+3. Adjust settings if necessary.
+
+---
+
+## Best Practices for Global Nodes
+
+- **Use for Reusable Logic**: Keep repetitive tasks centralized to avoid duplication.
+- **Label Clearly**: Name your Global Nodes descriptively to ensure clarity in complex flows.
+- **Test Extensively**: Ensure Global Nodes handle all expected inputs effectively.
+- **Combine with Routing**: Use edge conditions to direct users to Global Nodes dynamically.
+
+---
+
+### Example Flow with Global Nodes
+
+**Scenario**: A customer support chatbot using Global Nodes:
+
+1. **Start Node** greets the user.
+2. User mentions "Help" → Routes to the **Help Node**.
+3. User says "Cancel" → Routes to the **Cancel Node**.
+4. User input not handled by Global Nodes → Routed to Default Nodes for further processing.
+
+---
+
+Ready to explore more about nodes? Move to the [Features of Canvas](/canvas/features/tools-integration) section next!

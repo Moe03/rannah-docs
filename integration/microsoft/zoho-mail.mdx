@@ -1,0 +1,130 @@
+---
+title: 'Zoho Integration'
+description: 'Connect your Zoho Mail account to let your agent read and reply to emails automatically.'
+icon: 'envelope'
+---
+
+## Overview
+
+The Zoho Mail integration allows your AI agent to:
+
+1. Read incoming emails from your connected Zoho Mail account.
+2. Determine if a reply is needed based on the email content.
+3. Automatically send a reply on your behalf.
+
+## Setup Guide
+
+### 1. Connect Your Zoho Mail Account
+
+First, you need to authorize the application to access your Zoho Mail account.
+
+1. Navigate to **Integrations** in the side menu on ConvoCore.
+2. Locate the **Zoho Mail** integration card.
+3. Click **Connect** on the Zoho Mail card.
+4. You will be redirected to Zoho's login page.
+5. Sign in with your Zoho account credentials.
+6. Review the permissions requested:
+   - Read your emails
+   - Send emails on your behalf
+   - Manage your mailbox
+7. Click **Accept** to grant access to ConvoCore.
+
+<img height="250" src="/images/zoho-permissions-page.png" />
+
+8. You'll be redirected back to ConvoCore with a confirmation message.
+
+<img height="250" src="/images/zoho-integrations-page.png" />
+
+### 2. Enable Zoho Webhooks (Real-Time Emails)
+
+After connecting the account, Zoho also needs a webhook URL so it can notify ConvoCore the moment a new email arrives.
+
+1. Stay on the **Zoho Mail** integration card inside ConvoCore and click **Manage**.
+2. Copy the **Real-time Webhook URL** shown for the specific Zoho mailbox. It already includes your workspace, connection, and region parameters.
+3. Log in to the same Zoho mailbox → **Settings** → **Integrations** → **Developer Space** → **Webhooks**.
+4. Create (or edit) an **Outgoing Webhook**:
+   - **Entity**: Mail
+   - **Conditions**: “No conditions. All emails” (or pick the filters you want Zoho to trigger on).
+   - **Webhook URL**: Paste the URL you copied from ConvoCore.
+5. Click **Save**.
+
+Now every new email generates a webhook call, so your agent can react instantly without polling.
+
+### 3. Assign Zoho Mail Account to Your Agent
+
+Once your Zoho Mail account is connected, you need to assign it to the specific agent(s) you want to handle your emails. You can do this in two ways:
+
+#### Option 1: From the Integration Tab (Recommended)
+
+This method allows you to assign Zoho Mail accounts to multiple agents at once from a centralized location.
+
+1. Navigate to **Integrations** in the side menu on ConvoCore.
+2. Locate the **Zoho Mail** integration card and click on it to open the Zoho Mail management modal.
+3. Click on the **Assign to Agents** tab at the top of the modal.
+4. Select the Zoho Mail account you want to assign from the **Select Zoho Mail Account** dropdown.
+5. You'll see a list of all your agents. For each agent:
+   - If the Zoho Mail account is not yet assigned, click **Assign to This Agent** to assign it.
+   - If the Zoho Mail account is already assigned, you'll see a checkmark and can click **Remove** to unassign it.
+6. The assignment is saved automatically. You can assign the same Zoho Mail account to multiple agents if needed.
+
+<img height="400" src="/images/zoho-option1.png" />
+
+#### Option 2: From the Agent Dashboard
+
+This method allows you to configure email settings while assigning the account.
+
+1. Go to your **Agent Dashboard**.
+2. Select the agent you want to configure for email handling.
+3. Navigate to the **Channels** tab.
+4. Look for the **Email** channel option.
+5. Click **Add Email** or the **+** button to add an email source.
+6. From the dropdown, select the Zoho Mail account you connected earlier.
+7. If you have multiple Zoho Mail accounts connected, select the appropriate one.
+
+<img height="300" src="/images/zoho-added-channels.png" />
+
+### 4. Configure Email Channel Settings
+
+After assigning Zoho Mail to your agent (using either method above), you can configure how the agent will handle incoming emails. If you used Option 1 (Integration Tab), you can configure these settings from the Agent Dashboard. If you used Option 2 (Agent Dashboard), you can configure them immediately.
+
+#### Email Configuration Options
+
+**Reply Settings:**
+
+- **Reply Delay**: Set a delay (in seconds) before the agent sends a reply. This can make the response feel more natural and avoid appearing too automated. Recommended range: 5-30 seconds.
+- **When to Reply**: Choose which emails the agent should reply to:
+  - `Always`: Reply to every email
+  - `Smart Mode`: Let the AI determine if a reply is necessary
+  - `Manual Approval`: Flag emails for manual review before replying
+  - `Specific Keywords`: Only reply to emails containing certain keywords
+
+**Email Response Customization:**
+
+- **Reply Length**: Adjust the length of generated responses:
+  - `Short`: 1-2 sentences
+  - `Medium`: 2-3 paragraphs
+  - `Long`: Detailed 3-5 paragraph response
+- **Reply Tone**: Set the tone of the response:
+  - `Professional`: Formal business tone
+  - `Friendly`: Conversational and warm tone
+  - `Casual`: Relaxed and informal tone
+  - `Custom`: Define your own tone guidelines
+
+<img height="400" src="/images/zoho-email-config-options.png" />
+
+### 5. Enable and Activate
+
+After configuring all settings:
+
+1. Click **Save Configuration** to apply your changes.
+2. You'll see a confirmation message indicating the Zoho Mail email channel is now active.
+
+<img height="150" src="/images/zoho-save-configuration.png" />
+
+## Testing Your Setup
+
+1. Send a test email to your connected Zoho Mail account from another email address.
+2. Wait for the configured reply delay.
+3. Check if the agent has sent a reply.
+4. Review the reply quality and tone.
+5. Adjust configuration settings if needed.

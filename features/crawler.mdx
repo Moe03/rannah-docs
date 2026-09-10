@@ -1,0 +1,267 @@
+---
+title: 'Crawler'
+description: 'Efficiently build your agents knowledge base with the Rannah رنّة AI Crawler'
+icon: spider
+---
+
+
+The Crawler is a powerful tool designed to streamline the process of creating and maintaining your agent's knowledge base. By automatically scraping and importing content from specified websites, the crawler ensures your agent stays up-to-date with the latest information.
+
+## Schema / AI Listing crawl + Structured Search
+
+In addition to classic markdown crawls (for Knowledge Base documents), you can run a **Schema / AI Listing** crawl:
+
+1. Turn on **Schema listing crawl (AI)** in New Job.
+2. Paste **one** listing/index URL — the page that shows the full catalog (grid/list of cards). Multiple source URLs are **not** supported in this mode.
+   - Example: `https://www.example.com/venues` (or `/cars`, `/properties`, `/products`).
+   - Do **not** paste a single detail page.
+3. The crawler discovers detail pages from that index, designs a schema, and extracts structured JSON items.
+4. On the job page, use **Structured Search** → **Index** → **Add to agents**.
+
+Agents can then filter catalogs (location, capacity, price, amenities…) and render carousels/cards with real gallery images.
+
+<Card title="Full Structured Search guide" icon="magnifying-glass-chart" href="/features/structured-search">
+  Step-by-step workflow, KB vs Structured Search, limits, and tips for production use.
+</Card>
+
+<Tip>
+  In the dashboard, open **Crawler Jobs → How to use** for an in-app walkthrough of both crawl modes.
+</Tip>
+
+## How the Crawler Works
+
+<Info>
+  The crawler operates by systematically visiting web pages, extracting relevant content, and organizing it into markdown suitable for your agent's knowledge base — or into structured JSON for Structured Search catalogs. This process involves crawling through links, scraping text (or listing fields), and formatting the data for optimal use by AI models.
+</Info>
+
+## Crawler Jobs
+
+The core of the crawler functionality revolves around crawler jobs. Each job is associated with specific source URLs you want to crawl and is identified by a unique ID. The [developer API](/Support/contact) offers several ways to interact with the crawler.
+
+
+
+
+
+<Card title="Job Details UI" icon="briefcase">
+<img src="/images/crawler-ui-shots.png" alt="Scraped Pages Interface" />
+
+</Card>
+
+### Creating a New Crawler Job
+
+To initiate a new crawler job, follow these steps:
+
+<Steps>
+  <Step title="Set Source URLs">
+    Navigate to the crawler tab from the menu on the left side of your dashboard. Click on `new job` and Enter the main URL(s) you want the crawler to begin with (e.g., https://rannah.io).
+    <Warning>
+      Ensure you use valid URLs in the correct format: https://example.com
+    </Warning>
+  </Step>
+  <Step title="Configure Crawl Settings">
+    There are two options to consider that determines the quality of the scrape:
+
+    <Accordion title="Regular crawl">
+      - Default option, costs **1 credit** per page scraped.
+      
+    </Accordion>
+    
+    <Accordion title="Deep crawl">
+      
+      - Autoscrolls and forces loading of images for better quality. Costs **10 credits** per page.
+    </Accordion>
+  </Step>
+  <Step title="Refresh Rate">
+    ## Set Crawler Refresh Rate
+
+The crawler refresh rate determines how often the crawler will update the current job with potential new information from the scraped site. This is particularly useful for websites that update frequently, such as e-commerce sites.
+
+<Tip>
+  You can create separate crawler jobs for different sub-pages. This allows you to set different refresh rates for various sections of a website. For example, on a Shopify site, you might want to update `/collections/protein-powder` more frequently than the main page, as product information changes more often.
+</Tip>
+
+### Available Refresh Rate Options:
+
+
+  ```bash Refresh Rates
+  Every 6 hours
+  Every 12 hours
+  Every 24 hours
+  Every 7 days
+  Never
+  ```
+    
+  </Step>
+  <Step title="Specify Page Limit">
+    Set the maximum number of pages to scrape for that job, ranging from **10** up to **500** pages.
+    <Tip>
+      Review the **sitemap** beforehand to determine the optimal number of pages to scrape. To view, write `/sitemap.xml` at the end of a valid URL. Ex. https://rannah.io/sitemap.xml or use [this](https://www.seowl.co/sitemap-extractor/)
+    </Tip>
+  </Step>
+  <Step title="Define URL Patterns">
+
+
+  <Card title="Match URLs: Include subpages you want to scrape based on the source URL." icon="link">
+    
+
+ <Accordion title="Example: Match URLs">
+        ```
+        /collections
+        /products
+        /blog
+        ```
+
+        This would include URLs containing the above.
+      </Accordion>
+
+    </Card>
+    <Card title="Unmatch Patterns: Specify URLs or patterns to exclude from the scrape." icon="filter">
+
+    
+    <AccordionGroup>
+     
+      <Accordion title="Example: Unmatch Patterns">
+        ```
+        /blog
+        ```
+        This would exclude any URLs containing "/blog"
+      </Accordion>
+    </AccordionGroup>
+
+    </Card>
+  </Step>
+</Steps>
+
+<Note>
+  Coming soon: Ability to assign crawl jobs directly to specific agents for automatic knowledge base updates.
+</Note>
+
+## Scraped Pages
+
+After completing a crawler job, you can review and manage the scraped pages in the jobs dedicated interface. This section provides an overview of all pages collected during the job and status messages, such as when the maximum page limit is reached or when the crawler is active.
+
+<img src="/images/crawler-job-ui-shots.png" alt="Scraped Pages Interface" width="600"/>
+
+
+
+<Card icon="file-lines" title="The pages view provides:">
+
+<AccordionGroup>
+  <Accordion title="Unique document ID">
+    A distinct identifier for each scraped page
+  </Accordion>
+  <Accordion title="URL">
+    The web address of the scraped page
+  </Accordion>
+  <Accordion title="Title">
+    The main title of the document
+  </Accordion>
+  <Accordion title="Description">
+    A brief summary of the page content
+  </Accordion>
+  <Accordion title="Character count">
+    The total number of characters in the scraped document
+  </Accordion>
+</AccordionGroup>
+</Card>
+
+## Managing Scraped Pages
+
+You can perform the following actions on the scraped pages:
+
+<Steps>
+  <Step title="Select Pages" icon="check">
+    Check the pages you want to process further
+  </Step>
+  <Step title="Export" icon="file-export">
+    Download selected pages as a zip file containing .txt documents
+  </Step>
+  <Step title="Import" icon="file-import">
+    Add selected pages to the knowledge base of your chosen agent
+    <video
+  controls
+  autoPlay
+  muted
+  loop
+  playsInline
+      style={{ width: '500px', borderRadius: '0.8rem' }}
+  src="/images/crawler-import-page-video.mp4"
+></video>
+  </Step>
+</Steps>
+
+
+
+## Scraped Page Data
+
+The scraped page data shows a detailed view of each page scraped in the job:
+
+<img src="/images/crawler-page-ui-shots.png" alt="Scraped Page Data Interface" width="600"/>
+
+
+<Card icon="file-lines" title="The page data view provides:"> 
+
+<AccordionGroup>
+  <Accordion title="URL">
+    The web address of the scraped page
+  </Accordion>
+  <Accordion title="Title">
+    The main title of the page
+  </Accordion>
+  <Accordion title="Description">
+    A descriptive sentence that works as a summary of the page content and provides context to the LLM when retrieving from the knowledge base.
+  </Accordion>
+  <Accordion title="Detected URLs">
+    Links found within the scraped page
+  </Accordion>
+  <Accordion title="Content">
+    The main text scraped from the page, formatted in markdown
+  </Accordion>
+</AccordionGroup>
+</Card>
+
+
+#
+
+**Example snippet of scraped information in markdown:**
+
+```markdown
+Rannah رنّة provides access to a wide range of **state-of-the-art** AI models, ensuring that your agents are always equipped with the best and newest models on the market.
+
+=========================================================
+
+As soon as **new models** are released, the Rannah رنّة AI team promptly updates the platform. This means you typically get access to the latest and most powerful models **right away**.
+```
+<Note>
+  Scraped information is formatted in markdown for easy reading by LLMs. To learn more about formatting KB documents, visit the [formatting doc](/agent-creation/knowledgebase/structuring-kb-documents).
+</Note>
+
+## Crawler Job Status
+
+When you initiate a new crawler job, it will progress through several status stages:
+
+1. **Pending**: The crawler has started and is in the process of gathering URLs and scraping content.
+2. **Active**: The crawler is actively scraping pages.
+3. **Completed**: The job has finished, and all specified pages have been scraped.
+
+<Check>
+You will receive a notification in the dashboard when the job status changes to `Completed`.
+</Check>
+
+## Best Practices and Tips
+
+<CardGroup cols={2}>
+  <Card title="Optimize URL Patterns" icon="sitemap">
+    Carefully define match and unmatch patterns to focus on the most relevant content.
+  </Card>
+  <Card title="Monitor Credit Usage" icon="coins">
+    Remember that each page scraped costs credits (1 for normal, 10 for deep scrape).
+  </Card>
+  <Card title="Regular Updates" icon="clock-rotate-left">
+    Set appropriate refresh rates for dynamic content to keep your knowledge base current.
+  </Card>
+  <Card title="Review Before Import" icon="magnifying-glass">
+    Always review scraped content before importing it into your agent's knowledge base.
+  </Card>
+</CardGroup>
+

@@ -1,0 +1,173 @@
+---
+title: 'Voice Calls'
+description: 'Integrate Rannah رنّة voice calls using the @tixae-labs/web-sdk package.'
+icon: 'microphone'
+---
+
+## Overview
+
+The **@tixae-labs/web-sdk** package enables voice call functionality via WebRTC. It allows you to initialize a voice call session with an agent (identified by `agentId` and `region` from your [Rannah رنّة Dashboard](https://rannah.io) and provides event listeners to track call status.
+
+
+## Installation
+Install the package via pnpm or npm:
+
+```bash 
+pnpm install @tixae-labs/web-sdk@latest
+```
+
+Or
+
+```bash
+npm install @tixae-labs/web-sdk@latest
+```
+
+## Getting Started
+
+### Usage
+Below is an example that demonstrates how to initialize the voice call and set up event listeners. (This example is suitable for NextJS 13+ with TypeScript.)
+
+```bash
+"use client";
+import React from "react";
+import { WebCall } from "@tixae-labs/web-sdk";
+
+const VoiceCallPage = () => {
+  const [voiceState, setVoiceState] = React.useState<WebCall | null>(null);
+
+  async function initVoice() {
+    const voice = new WebCall();
+    console.log("Starting voice call...");
+
+    await voice.init({
+      agentId: "", // Replace with a valid agentId from your Rannah رنّة Dashboard URL (e.g., "enit5lczmqbz1s7d")
+      region: "",  // Replace with a valid region (e.g., "eu" or "na")
+    });
+
+    // Set up event listeners
+    voice.on("call-start", () => {
+      console.log("Call has started...");
+    });
+
+    voice.on("final_transcript", (data) => {
+      console.log("Transcript:", data);
+    });
+
+    voice.on("conversation-update", (data) => {
+      console.log("Conversation update:", data);
+    });
+
+    voice.on("call-ended", () => {
+      console.log("Call ended");
+    });
+
+    voice.on("error", (data) => {
+      console.error("Call error:", data);
+    });
+
+    setVoiceState(voice);
+  }
+
+  React.useEffect(() => {
+    initVoice();
+  }, []);
+
+  return (
+    <div className="min-h-screen flex justify-center items-center">
+      <button onClick={() => voiceState?.startCall()}>
+        Start Call
+      </button>
+      <button onClick={() => voiceState?.endCall()}>
+        End Call
+      </button>
+    </div>
+  );
+};
+
+export default VoiceCallPage;
+
+```
+### Voice Call Functions
+
+`.startCall()`
+
+You can start a call by invoking the `.startCall()` function.
+
+
+`.endCall()`
+
+You can end a call by invoking the `.endCall()` function.
+
+
+`.toggleMute()`
+
+You can toggle the local microphone on or off during an active call.
+
+
+### Events
+
+These events allow you to react to changes in the state of the call or user speech.
+
+`call-start`
+
+Occurs when the call has connected and begins.
+
+```bash
+voice.on("call-start", () => {
+      console.log(`call has started..`);
+});
+```
+
+`call-ended`
+
+Occurs when the call has disconnected & ended.
+
+```bash
+voice.on("call-ended", () => {
+    console.log(`call-ended`);
+});
+```
+
+`final_transcript`
+
+Occurs when user finishes speaking.
+
+```bash
+voice.on("final_transcript", (data) => {
+    console.log(`data`, data);
+});
+```
+
+`conversation-update`
+
+Occurs whenever the conversation’s state or message changes.
+
+```bash
+voice.on("conversation-update", (data) => {
+    console.log(`conversation-update`, data);
+});
+```
+
+`error`
+
+Handle errors that occur during the call.
+
+```bash
+voice.on("error", (data) => {
+    console.log(`error`, data);
+});
+```
+---
+
+### Resources
+
+<CardGroup cols={2}>
+  <Card title="NPM" icon="npm" href="https://www.npmjs.com/package/@tixae-labs/web-sdk">
+    View the package on NPM.
+  </Card>
+
+  <Card title="GitHub" icon="github" href="https://github.com/Moe03/ta-web-sdk">
+    View the packageon GitHub
+  </Card>
+  
+</CardGroup>

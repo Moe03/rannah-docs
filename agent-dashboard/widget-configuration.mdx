@@ -1,0 +1,717 @@
+---
+title: "Widget Configuration"
+description: "Deploy and configure your widget with advanced positioning, styling, and integration options for seamless website embedding"
+icon: "sliders"
+---
+
+{/* <img
+  className="block dark:hidden"
+  src="/images/widget-configuration-light.png"
+  alt="Widget Configuration Interface"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/widget-configuration-dark.png"
+  alt="Widget Configuration Interface"
+/> */}
+
+Transform your agent into a deployable widget that seamlessly integrates with any website. The Widget Configuration hub provides comprehensive tools for positioning, customizing, and deploying your conversational AI across different platforms and environments.
+
+## Why Configure Your Widget?
+
+<CardGroup cols={2}>
+  <Card title="Seamless Integration" icon="puzzle-piece">
+    Embed your widget naturally into any website without disrupting user experience or design flow
+  </Card>
+  <Card title="Flexible Deployment" icon="rocket">
+    Choose from multiple deployment methods - script embed, iframe, or full-width integration
+  </Card>
+  <Card title="Advanced Positioning" icon="maximize">
+    Control exactly where and how your widget appears on different devices and screen sizes
+  </Card>
+  <Card title="Enterprise Ready" icon="building">
+    Production-ready code with CDN delivery, security, and performance optimization
+  </Card>
+</CardGroup>
+
+## Quick Deployment Guide
+
+<Steps>
+  <Step title="Access Widget Configuration">
+    Navigate to your agent dashboard and click **Widget** in the left sidebar
+  </Step>
+  <Step title="Configure Position & Behavior">
+    Select widget position, display mode, and interaction settings
+  </Step>
+  <Step title="Generate Integration Code">
+    Choose your deployment method and copy the generated code
+  </Step>
+  <Step title="Deploy to Website">
+    Paste the code into your website and test the integration
+  </Step>
+</Steps>
+
+<Tip>
+Start with the **Script Embed** method for most websites - it's the most flexible and easy to implement!
+</Tip>
+
+## Widget Configuration Options
+
+  <Tabs>
+    <Tab title="Position & Layout">
+    <AccordionGroup>
+      <Accordion title="Widget Positioning" icon="move">
+        <CardGroup cols={3}>
+          <Card title="Bottom Right" icon="arrow-right">
+            **Best For:**
+            - Most websites and layouts
+            - Non-intrusive user experience
+            - Traditional chat positioning
+            - Mobile-friendly design
+            
+            **Behavior:**
+            - Appears as floating chat bubble
+            - Expands when clicked
+            - Stays above page content
+            - Auto-adjusts for mobile
+          </Card>
+          
+          <Card title="Bottom Left" icon="arrow-left">
+            **Best For:**
+            - Left-reading languages (RTL)
+            - Unique brand positioning
+            - Avoiding conflicts with other widgets
+            - Alternative placement strategy
+            
+            **Behavior:**
+            - Mirror of bottom-right positioning
+            - Same floating bubble design
+            - Consistent across devices
+            - Respects content boundaries
+          </Card>
+          
+          <Card title="Full Width" icon="maximize">
+            **Best For:**
+            - Dedicated chat pages
+            - Customer support portals
+            - Embedded in page layouts
+            - Maximum conversation space
+            
+            **Behavior:**
+            - Renders directly in container
+            - Custom width/height control
+            - No floating bubble overlay
+            - Integrated page element
+          </Card>
+        </CardGroup>
+        
+        <Info>
+        **Mobile Optimization**: All positions automatically adapt to mobile screens with optimized touch targets and responsive layouts.
+        </Info>
+      </Accordion>
+      
+      <Accordion title="Display Modes" icon="monitor">
+        <Tabs>
+          <Tab title="Standard Mode">
+            <Frame>
+              <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Standard Widget Display</h4>
+                <ul className="space-y-2 text-sm">
+                  <li>🎯 **Floating bubble** appears in chosen corner</li>
+                  <li>📱 **Click to expand** reveals full chat interface</li>
+                  <li>🔄 **Persistent state** maintains conversation across page navigation</li>
+                  <li>⚡ **Fast loading** with optimized bundle sizes</li>
+                  <li>🎨 **Branded appearance** using your custom theme</li>
+                </ul>
+              </div>
+            </Frame>
+          </Tab>
+          
+          <Tab title="Modal Mode">
+            <div className="space-y-4">
+              ```javascript
+              VG_CONFIG = {
+                modalMode: true,
+                render: 'bottom-right'
+              }
+              ```
+              
+              <CardGroup cols={2}>
+                <Card title="Modal Benefits" icon="window-maximize">
+                  - Center-screen overlay display
+                  - Focused user attention
+                  - Larger conversation area
+                  - Professional presentation
+                </Card>
+                <Card title="Use Cases" icon="lightbulb">
+                  - Customer support portals
+                  - Lead generation forms
+                  - Product consultation
+                  - Detailed assistance flows
+                </Card>
+              </CardGroup>
+            </div>
+          </Tab>
+          
+          <Tab title="Auto-start Mode">
+            <div className="space-y-4">
+              ```javascript
+              VG_CONFIG = {
+                autostart: true,
+                // Widget opens automatically with proactive message
+              }
+              ```
+              
+              <Warning>
+              **Use Auto-start Carefully**: Only enable auto-start for high-intent pages where users expect immediate assistance (like support pages or checkout flows).
+              </Warning>
+              
+              <Info>
+              **Best Practices for Auto-start:**
+              - Use on specific high-value pages only
+              - Provide clear value proposition in opening message
+              - Respect user's ability to minimize/close
+              - Consider timing delays for better UX
+              </Info>
+            </div>
+          </Tab>
+        </Tabs>
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  
+      <Tab title="Deployment Methods">
+    <AccordionGroup>
+      <Accordion title="Script Embed (Recommended)" icon="code">
+        <div className="space-y-4">
+          ```html
+          <!-- Simple Script Integration -->
+          <script defer>
+              (function() {
+                  window.VG_CONFIG = {
+                      ID: "your-agent-id",
+                      region: 'na',
+                      render: 'bottom-right'
+                  }
+                  var VG_SCRIPT = document.createElement("script");
+                  VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+                  VG_SCRIPT.defer = true;
+                  document.body.appendChild(VG_SCRIPT);
+              })()
+          </script>
+          ```
+          
+          <CardGroup cols={2}>
+            <Card title="Advantages" icon="check-double">
+              - Easy implementation
+              - Automatic updates
+              - CDN-optimized delivery
+              - Cross-browser compatibility
+              - No additional dependencies
+            </Card>
+            <Card title="Configuration Options" icon="sliders">
+              - Custom stylesheets
+              - User data pre-population
+              - Regional deployment
+              - Performance tuning
+              - Event callbacks
+            </Card>
+          </CardGroup>
+          
+          <Accordion title="Advanced Script Configuration">
+            ```javascript
+            window.VG_CONFIG = {
+                ID: "your-agent-id",
+                region: 'na', // 'na' or 'eu'
+                render: 'bottom-right',
+                
+                // Optional: User identification
+                user: {
+                    name: 'John Doe',
+                    email: 'john@company.com',
+                    phone: '+1234567890'
+                },
+                
+                // Optional: Custom styling
+                stylesheets: [
+                    "https://cdn.example.com/custom-styles.css"
+                ],
+                
+                // Optional: Custom user ID
+                userID: 'your-internal-user-id',
+                
+                // Optional: Auto-start configuration
+                autostart: false
+            }
+            ```
+          </Accordion>
+        </div>
+      </Accordion>
+      
+      <Accordion title="iFrame Integration" icon="window">
+        <div className="space-y-4">
+          ```html
+          <!-- iFrame Integration -->
+          <iframe
+              src="https://rannah.io/app/na/render/your-agent-id/iframe"
+              style="width: 100%; height: 100vh;"
+              frameborder="0">
+          </iframe>
+          ```
+          
+          <CardGroup cols={2}>
+            <Card title="Best Use Cases" icon="target">
+              - Dedicated chat pages
+              - Customer support portals
+              - Help center integration
+              - Controlled environments
+            </Card>
+            <Card title="Considerations" icon="alert-triangle">
+              - Fixed dimensions required
+              - Limited cross-domain features
+              - Separate security context
+              - Manual responsive handling
+            </Card>
+          </CardGroup>
+          
+          <Info>
+          **iFrame Security**: Modern browsers may restrict some features in iframe contexts. Test thoroughly in your target environment.
+          </Info>
+        </div>
+      </Accordion>
+      
+      <Accordion title="NPM Package Integration" icon="box">
+        <div className="space-y-4">
+          ```bash
+          # Install official NPM package
+          npm install @tixae-labs/web-sdk
+          
+          # Or with yarn
+          yarn add @tixae-labs/web-sdk
+          ```
+          
+          ```html
+          <div id="VG_OVERLAY_CONTAINER"></div>
+          <script defer>
+          (function () {
+            window.VG_CONFIG = {
+              ID: "your-agent-id",
+              region: "na",
+              render: "bottom-right",
+              stylesheets: ["https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css"],
+            };
+            var s = document.createElement("script");
+            s.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+            s.defer = true;
+            document.body.appendChild(s);
+          })();
+          </script>
+          ```
+          
+          <CardGroup cols={2}>
+            <Card title="Advanced Features" icon="rocket">
+              - TypeScript support
+              - Framework integration
+              - Programmatic API
+              - Event system
+              - State management
+            </Card>
+            <Card title="Package Benefits" icon="box">
+              - Version control
+              - Bundle optimization
+              - Development tools
+              - Documentation
+              - Community support
+            </Card>
+          </CardGroup>
+        </div>
+      </Accordion>
+    </AccordionGroup>
+  </Tab>
+  
+      <Tab title="Security & API">
+    <div className="space-y-6">
+      <AccordionGroup>
+        <Accordion title="API Key Management" icon="key">
+          <div className="space-y-4">
+            <Frame>
+              <div className="bg-yellow-50 dark:bg-yellow-900 p-4 rounded-lg border-l-4 border-yellow-400">
+                <h4 className="font-semibold text-yellow-800 dark:text-yellow-400 mb-2">🔐 Secret API Key</h4>
+                <p className="text-yellow-700 dark:text-yellow-400 text-sm">
+                  Your agent's secret API key provides programmatic access to all agent data and operations. 
+                  Keep this secure and never expose it in client-side code.
+                </p>
+              </div>
+            </Frame>
+            
+            <CardGroup cols={2}>
+              <Card title="Secure Usage" icon="shield-check">
+                - Server-side applications only
+                - Environment variables storage
+                - Restricted network access
+                - Regular key rotation
+                - Audit logging
+              </Card>
+              <Card title="Never Expose" icon="shield-slash">
+                - Client-side JavaScript
+                - Public repositories
+                - Browser developer tools
+                - Third-party services
+                - Error messages/logs
+              </Card>
+            </CardGroup>
+            
+            <Info>
+            **API Documentation**: Use your secret key with our [REST API](/Support/contact) for programmatic agent management, conversation handling, and data integration.
+            </Info>
+          </div>
+        </Accordion>
+        
+        <Accordion title="User Data & Privacy" icon="user-shield">
+          <Tabs>
+            <Tab title="User Identification">
+              ```javascript
+              // Pre-populate user data for personalized experience
+              VG_CONFIG = {
+                user: {
+                  name: 'Customer Name',
+                  email: 'customer@email.com',
+                  phone: '+1234567890'
+                },
+                userID: 'your-internal-user-id' // Optional custom ID
+              }
+              ```
+              
+              <Warning>
+              **Privacy Compliance**: Only pre-populate user data when you have explicit consent. Ensure compliance with GDPR, CCPA, and other privacy regulations.
+              </Warning>
+            </Tab>
+            
+            <Tab title="Data Security">
+              <CardGroup cols={2}>
+                <Card title="Encryption" icon="lock">
+                  - TLS 1.3 in transit
+                  - AES-256 at rest
+                  - End-to-end security
+                  - Secure key management
+                </Card>
+                <Card title="Compliance" icon="check">
+                  - GDPR compliance
+                  - SOC 2 Type II
+                  - Privacy by design
+                  - Data minimization
+                </Card>
+              </CardGroup>
+            </Tab>
+          </Tabs>
+        </Accordion>
+      </AccordionGroup>
+    </div>
+  </Tab>
+</Tabs>
+
+## Advanced Configuration
+
+<AccordionGroup>
+  <Accordion title="Custom Styling & CSS" icon="palette">
+    <div className="space-y-4">
+      ```javascript
+      VG_CONFIG = {
+        // Custom CSS files for advanced styling
+        stylesheets: [
+          "https://cdn.example.com/custom-widget-styles.css",
+          "https://fonts.googleapis.com/css2?family=Your+Font"
+        ]
+      }
+      ```
+      
+      ```css
+      /* Example custom widget CSS */
+      .vg-widget-container {
+        /* Custom border radius */
+        border-radius: 20px !important;
+        
+        /* Custom shadow */
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
+        
+        /* Custom animation */
+        transition: transform 0.3s ease !important;
+      }
+      
+      .vg-widget-container:hover {
+        transform: scale(1.05) !important;
+      }
+      
+      /* Custom message bubbles */
+      .vg-message-user {
+        background: linear-gradient(45deg, #your-color1, #your-color2) !important;
+      }
+      ```
+      
+      <Info>
+      **CSS Priority**: Use `!important` declarations to ensure your custom styles override default widget styling.
+      </Info>
+    </div>
+  </Accordion>
+  
+  <Accordion title="Responsive Behavior" icon="mobile">
+    <CardGroup cols={2}>
+      <Card title="Mobile Optimization" icon="mobile">
+        - Automatic touch target sizing
+        - Gesture-friendly interactions
+        - Optimized for thumb navigation
+        - Reduced bandwidth usage
+        - Battery-efficient animations
+      </Card>
+      <Card title="Desktop Enhancement" icon="computer">
+        - Hover state interactions
+        - Keyboard navigation support
+        - Multi-monitor awareness
+        - High-DPI display support
+        - Advanced animation effects
+      </Card>
+    </CardGroup>
+    
+    ```css
+    /* Responsive widget sizing */
+    @media (max-width: 768px) {
+      .vg-widget-container {
+        width: 90vw !important;
+        max-width: 400px !important;
+      }
+    }
+    
+    @media (min-width: 1200px) {
+      .vg-widget-container {
+        width: 450px !important;
+        height: 650px !important;
+      }
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Performance Optimization" icon="gear">
+    <Tabs>
+      <Tab title="Loading Strategy">
+        <CardGroup cols={2}>
+          <Card title="Deferred Loading (Default)" icon="clock">
+            ```html
+            <script defer>
+            // Widget loads after page content
+            VG_SCRIPT.defer = true;
+            ```
+            **Benefits**: Doesn't block page rendering
+            **Use when**: Standard website integration
+          </Card>
+          <Card title="Immediate Loading" icon="bolt">
+            ```html
+            <script>
+            // Widget loads immediately
+            // Remove 'defer' attribute
+            ```
+            **Benefits**: Faster widget availability
+            **Use when**: Widget is primary page function
+          </Card>
+        </CardGroup>
+      </Tab>
+      
+      <Tab title="Bundle Optimization">
+        <div className="space-y-4">
+          ```javascript
+          // Development vs Production builds
+          VG_CONFIG = {
+            // Use 'live' for production (optimized, cached)
+            // Use 'dev' for development (latest features, debugging)
+            version: 'live' // or 'dev'
+          }
+          ```
+          
+          <Info>
+          **Build Versions:**
+          - **Live**: Production-optimized, CDN-cached, stable
+          - **Dev**: Latest features, development tools, frequent updates
+          </Info>
+        </div>
+      </Tab>
+    </Tabs>
+  </Accordion>
+</AccordionGroup>
+
+## Deployment Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Testing Strategy" icon="flask">
+    **Pre-deployment Checklist:**
+    - Test on multiple browsers
+    - Verify mobile responsiveness
+    - Check loading performance
+    - Validate user data flow
+    - Test accessibility features
+    
+    **Staging Environment:**
+    - Use development build initially
+    - Test with real user scenarios
+    - Monitor error logs
+    - Gather user feedback
+  </Card>
+  
+  <Card title="Production Deployment" icon="rocket">
+    **Go-live Preparation:**
+    - Switch to live build version
+    - Configure CDN caching
+    - Set up monitoring alerts
+    - Prepare rollback plan
+    - Document configuration
+    
+    **Post-deployment:**
+    - Monitor performance metrics
+    - Track user engagement
+    - Collect feedback
+    - Plan iterative improvements
+  </Card>
+  
+  <Card title="Maintenance" icon="wrench">
+    **Regular Tasks:**
+    - Update widget configuration
+    - Review performance metrics
+    - Test new features
+    - Optimize loading times
+    - Update custom styling
+    
+    **Version Management:**
+    - Track widget version changes
+    - Test updates in staging
+    - Plan feature rollouts
+    - Maintain documentation
+  </Card>
+  
+  <Card title="Analytics Integration" icon="chart-line">
+    **Tracking Setup:**
+    - Monitor widget interactions
+    - Track conversation metrics
+    - Measure user satisfaction
+    - Analyze performance data
+    - A/B test configurations
+    
+    **KPIs to Monitor:**
+    - Widget engagement rate
+    - Conversation completion
+    - User satisfaction scores
+    - Technical performance
+  </Card>
+</CardGroup>
+
+## Troubleshooting Common Issues
+
+<AccordionGroup>
+  <Accordion title="Widget Not Loading" icon="circle-x">
+    <Steps>
+      <Step title="Verify Configuration">
+        Check that `VG_CONFIG` contains valid agent ID and region settings
+      </Step>
+      <Step title="Check Console Errors">
+        Open browser developer tools and look for JavaScript errors
+      </Step>
+      <Step title="Test Network Connectivity">
+        Ensure CDN resources are accessible and not blocked by firewall
+      </Step>
+      <Step title="Validate Script Placement">
+        Confirm script is placed before closing `</body>` tag
+      </Step>
+    </Steps>
+    
+    ```javascript
+    // Debug configuration
+    console.log('VG_CONFIG:', window.VG_CONFIG);
+    
+    // Check if script loaded
+    console.log('VG Script loaded:', !!window.VG_SCRIPT);
+    ```
+  </Accordion>
+
+  <Accordion title="Styling Issues" icon="palette">
+    <div className="space-y-3">
+      <CardGroup cols={2}>
+        <Card title="CSS Not Applied" icon="x">
+          - Check CSS file accessibility
+          - Verify selector specificity
+          - Use `!important` for overrides
+          - Test without browser cache
+        </Card>
+        <Card title="Layout Conflicts" icon="layout">
+          - Check z-index values
+          - Verify container positioning
+          - Test responsive breakpoints
+          - Review CSS conflicts
+        </Card>
+      </CardGroup>
+      
+      <Warning>
+      **Common Fix**: Clear browser cache and test in incognito mode to see actual styling without cached resources.
+      </Warning>
+    </div>
+  </Accordion>
+
+  <Accordion title="Mobile Issues" icon="mobile">
+    <Tabs>
+      <Tab title="Touch Problems">
+        - Ensure adequate touch target sizes (minimum 44px)
+        - Test gesture interactions
+        - Verify scroll behavior
+        - Check viewport meta tag
+      </Tab>
+      <Tab title="Performance Issues">
+        - Optimize image assets
+        - Reduce animation complexity
+        - Test on slower devices
+        - Monitor memory usage
+      </Tab>
+    </Tabs>
+  </Accordion>
+
+  <Accordion title="File & Image Upload Issues" icon="paperclip">
+    <Steps>
+      <Step title="Enable Quick Upload">
+        In the agent dashboard, open **Settings** and turn on **Enable Quick Upload Button**. The paperclip only appears when this setting is enabled.
+      </Step>
+      <Step title="Check region">
+        Ensure `VG_CONFIG.region` matches your account region (`eu` or `na`). Uploads post to the regional vg-docker API.
+      </Step>
+      <Step title="Verify credits">
+        File uploads consume workspace credits. Confirm the agent owner has available credits if uploads fail silently or return errors.
+      </Step>
+      <Step title="Inspect browser console">
+        Look for failed requests to `/v3/trpc/uploadFile` (embedded widget) or network/CORS errors on third-party sites.
+      </Step>
+    </Steps>
+
+    <Tip>
+    Embedded widgets upload via the public upload API because visitors are anonymous — they do not use `/api/cdn/upload`, which requires a Firebase session.
+    </Tip>
+
+    <Warning>
+    **Multi-image sends:** When users attach several images with a caption, the widget sends a text message (caption) plus a visual message (images). Voiceflow flows should handle `visual` payloads with `images[]`, not only a single `image` field.
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+**Pro Tip**: Use browser developer tools' device emulation to test your widget across different screen sizes and device types before deploying to production.
+</Note>
+
+## What's Next?
+
+<CardGroup cols={2}>
+  <Card title="Advanced Analytics" icon="chart-bar" href="/features/analytics">
+    Track widget performance and user engagement with detailed analytics
+  </Card>
+  <Card title="API Integration" icon="plug" href="/Support/contact">
+    Integrate your widget with backend systems using our REST API
+  </Card>
+  <Card title="Voice Features" icon="microphone" href="/voice/introduction">
+    Add voice capabilities to enhance your widget's conversational experience
+  </Card>
+  <Card title="Deployment Guide" icon="rocket" href="/deploy/script">
+    Detailed deployment guides for different platforms and environments
+  </Card>
+</CardGroup>

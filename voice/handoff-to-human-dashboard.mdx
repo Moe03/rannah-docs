@@ -1,0 +1,367 @@
+---
+title: "Human Handoff Dashboard"
+description: "Live takeover of AI voice calls through the dashboard interface"
+---
+
+## Overview
+
+The Human Handoff Dashboard allows operators to seamlessly take control of active AI voice calls in real-time. This feature enables human agents to step in during conversations when needed, replacing the AI's voice and responses while maintaining the call connection.
+
+<Note>
+This documentation covers the **dashboard-based handoff** feature. There is a separate Twilio phone number handoff system that works differently.
+</Note>
+
+## How It Works
+
+### Core Architecture
+
+The handoff system operates through several coordinated components:
+
+<CardGroup cols={2}>
+<Card title="Live Listen Interface" icon="headphones">
+Web dashboard at `/listen.html` where operators monitor and control active calls
+</Card>
+
+<Card title="Audio Stream Hijacking" icon="microphone">
+Real-time replacement of AI audio generation with human microphone input
+</Card>
+
+<Card title="Session Management" icon="users">
+Centralized tracking of which calls are under human control
+</Card>
+
+<Card title="Format Conversion" icon="arrows-spin">
+Automatic audio format adaptation for different call providers (WebRTC vs Twilio)
+</Card>
+</CardGroup>
+
+### Audio Flow During Handoff
+
+When a human takes over a call, the audio pipeline transforms as follows:
+
+```
+🤖 BEFORE HANDOFF:
+Caller → AI Processing → Speech Generation → FFmpeg → Caller
+
+🎤 DURING HANDOFF:  
+Caller → Human Listens (Dashboard)
+Human Mic → Browser → WebSocket → [Format Conversion] → FFmpeg → Caller
+
+❌ AI Processing: COMPLETELY BLOCKED
+```
+
+<Warning>
+During handoff, **all AI processing is suspended**. The AI cannot generate responses, make speech, or process transcripts until the human returns control.
+</Warning>
+
+## Configuration
+
+### Enabling AI-Initiated Handoffs
+
+The system supports both manual operator takeovers and AI-initiated handoff requests:
+
+<Steps>
+<Step title="Access Advanced Settings">
+Navigate to your agent's advanced settings in the dashboard
+</Step>
+
+<Step title="Enable Human Handoff Dashboard">
+Toggle on the **"Human Handoff Dashboard"** option in advanced settings
+</Step>
+
+<Step title="Configure AI Triggers">
+Once enabled, your AI can automatically:
+- Request human assistance when it encounters complex queries
+- Forward calls when confidence drops below threshold
+- Notify operators about escalation-worthy conversations
+- Trigger handoff based on custom conversation patterns
+</Step>
+</Steps>
+
+<Info>
+When this setting is enabled, the AI becomes proactive about identifying when human intervention might be beneficial, rather than relying solely on manual operator intervention.
+</Info>
+
+## Using the Dashboard
+
+### Accessing Live Calls
+
+1. Navigate to `/listen.html` in your browser
+2. View the list of active voice call sessions
+3. Click on any session to start monitoring the conversation
+
+### Taking Control
+
+<Steps>
+<Step title="Monitor the Call">
+Listen to the live conversation between the caller and AI through your browser
+</Step>
+
+<Step title="Click 'Take Over'">
+Press the **Take Over** button when you want to replace the AI
+- The button will pulse and change color
+- You'll hear an audio notification tone
+- The AI immediately stops all processing
+</Step>
+
+<Step title="Speak Directly">
+Your microphone input now goes directly to the caller
+- Speak normally into your microphone
+- Your voice replaces what the AI would have said
+- The caller hears you in real-time
+</Step>
+
+<Step title="Return Control">
+Click **Return to AI** when ready to hand back control
+- Another audio tone confirms the transition
+- AI processing resumes immediately
+- The AI continues the conversation from where you left off
+</Step>
+</Steps>
+
+### Visual Indicators
+
+The dashboard provides clear feedback about handoff status:
+
+<CardGroup cols={3}>
+<Card title="Normal State" icon="robot">
+- Standard interface colors
+- "Take Over" button available
+- AI responses visible in transcript
+</Card>
+
+<Card title="Human Active" icon="user">
+- Header turns orange/red
+- Pulsing "HUMAN ACTIVE" banner
+- "Return to AI" button available
+</Card>
+
+<Card title="Microphone Status" icon="microphone">
+- Microphone access indicator
+- Real-time audio level display
+- Connection status feedback
+</Card>
+</CardGroup>
+
+## Technical Implementation
+
+### Session Tracking
+
+Each voice call session can be independently controlled:
+
+- **Session Isolation**: Handoffs are per-session, not global
+- **Multiple Operators**: Different operators can control different calls simultaneously
+- **State Persistence**: Handoff status survives page refreshes and reconnections
+
+### Audio Processing
+
+<Tabs>
+<Tab title="WebRTC Calls">
+```
+Browser Mic (48kHz s16le) → WebSocket → Direct Injection → SpeechBufferStream
+```
+Audio goes directly to the call without conversion.
+</Tab>
+
+<Tab title="Twilio Calls">
+```
+Browser Mic (48kHz s16le) → WebSocket → FFmpeg Conversion → 8kHz mulaw → SpeechBufferStream
+```
+Audio is automatically converted to Twilio's required format.
+</Tab>
+</Tabs>
+
+### Real-time Communication
+
+The system uses WebSocket connections for instant communication:
+
+<CodeGroup>
+```javascript Handoff Messages
+// Start handoff
+{
+  "type": "initiate_handoff",
+  "sessionId": "call_session_123"
+}
+
+// End handoff  
+{
+  "type": "end_handoff",
+  "sessionId": "call_session_123"
+}
+
+// Audio data
+{
+  "type": "handoff_audio_data", 
+  "sessionId": "call_session_123",
+  "audioData": "base64_encoded_audio..."
+}
+```
+</CodeGroup>
+
+## Safety Features
+
+### Automatic Cleanup
+
+<CardGroup cols={2}>
+<Card title="Session End Cleanup" icon="trash">
+Handoff automatically ends when the call terminates
+</Card>
+
+<Card title="Disconnect Recovery" icon="wifi-slash">
+Handoff resets if the operator's browser disconnects
+</Card>
+
+<Card title="Error Handling" icon="shield-check">
+System defaults back to AI if handoff encounters errors
+</Card>
+
+<Card title="Resource Management" icon="memory">
+Audio converters and buffers are properly cleaned up
+</Card>
+</CardGroup>
+
+### Monitoring & Debug
+
+Operators and administrators can monitor handoff activity:
+
+- **Real-time Status**: View which sessions are under human control
+- **Session History**: Track handoff events and duration  
+- **Debug Endpoints**: Health checks and status APIs for troubleshooting
+- **Webhook Events**: Integration with external systems via `handoff_status_changed` events
+
+<Info>
+**Debug Endpoints Available:**
+- `/api/debug/handoff-status/:sessionId` - Check specific session status
+- `/health/listener` - Monitor LiveListenManager health
+</Info>
+
+## Best Practices
+
+### When to Use Handoff
+
+<CardGroup cols={2}>
+<Card title="Manual Escalation" icon="arrow-trend-up">
+- Customer requests human assistance
+- Complex technical issues requiring expertise
+- Sensitive conversation topics
+- Quality control interventions
+</Card>
+
+<Card title="AI-Initiated Handoff" icon="robot">
+- AI confidence drops below threshold
+- Complex queries beyond AI capabilities
+- Automated escalation triggers activated
+- Pattern-based handoff conditions met
+</Card>
+
+<Card title="Quality Assurance" icon="star">
+- Training new AI models
+- Testing conversation flows
+- Demonstrating human capabilities
+- Critical customer interactions
+</Card>
+
+<Card title="Emergency Situations" icon="exclamation-triangle">
+- Technical issues with AI processing
+- Customer frustration detected
+- Compliance-sensitive topics
+- High-value customer interactions
+</Card>
+</CardGroup>
+
+<Note>
+With the **Human Handoff Dashboard toggle enabled** in advanced settings, your AI will automatically identify and request handoffs for appropriate scenarios, reducing the need for constant manual monitoring.
+</Note>
+
+### Operational Guidelines
+
+<Steps>
+<Step title="Prepare Your Environment">
+- Use a quiet room with good acoustics
+- Test microphone quality beforehand
+- Ensure stable internet connection
+- Have relevant customer context ready
+</Step>
+
+<Step title="Monitor Before Acting">
+- Listen to the full conversation context
+- Understand the customer's issue
+- Wait for an appropriate moment to intervene
+- Don't interrupt mid-sentence unless urgent
+</Step>
+
+<Step title="Communicate Clearly">
+- Speak clearly and at appropriate volume
+- Introduce yourself as a human agent if needed
+- Maintain professional tone and language
+- Provide smooth transitions back to AI
+</Step>
+
+<Step title="Document the Interaction">
+- Note why handoff was necessary
+- Record any issues that need AI training
+- Update customer records if applicable
+- Report technical problems to development team
+</Step>
+</Steps>
+
+## Troubleshooting
+
+### Common Issues
+
+<AccordionGroup>
+<Accordion title="Microphone Not Working">
+**Symptoms**: No audio reaching caller, microphone access denied
+
+**Solutions**:
+- Grant microphone permissions in browser
+- Check browser security settings
+- Verify microphone hardware functionality
+- Try refreshing the page and re-accepting permissions
+</Accordion>
+
+<Accordion title="Audio Quality Problems">
+**Symptoms**: Distorted audio, echo, or static
+
+**Solutions**:
+- Use headphones to prevent feedback
+- Check microphone positioning and settings
+- Verify internet connection stability
+- Switch to a different browser if issues persist
+</Accordion>
+
+<Accordion title="Handoff Not Activating">
+**Symptoms**: Button doesn't respond, AI continues talking
+
+**Solutions**:
+- Check WebSocket connection status
+- Refresh the page and try again
+- Verify session is still active
+- Contact technical support if problem persists
+</Accordion>
+
+<Accordion title="Cannot Return to AI">
+**Symptoms**: "Return to AI" button not working
+
+**Solutions**:
+- Wait a few seconds and try again
+- Refresh the page (handoff will auto-end)
+- Check browser console for error messages
+- Manually end session if necessary
+</Accordion>
+</AccordionGroup>
+
+<Warning>
+**Emergency Reset**: If handoff becomes stuck, refreshing the browser page will automatically end the handoff and return control to the AI.
+</Warning>
+
+## Integration Notes
+
+The dashboard handoff system integrates with:
+
+- **Webhook System**: Sends `handoff_status_changed` events
+- **Call Analytics**: Tracks handoff duration and frequency  
+- **Session Management**: Coordinates with existing call infrastructure
+- **Audio Pipeline**: Seamlessly integrates with speech processing systems
+
+This creates a comprehensive human-in-the-loop system that maintains call quality while providing flexible human oversight capabilities.

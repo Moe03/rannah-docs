@@ -1,0 +1,222 @@
+---
+title: "Agent Settings"
+description: "Configure and customize your AI agent's behavior and functionality"
+icon: "gear"
+---
+
+# Web Widget Settings
+
+Learn how to configure your AI agent's settings to optimize its performance and user experience.
+
+## Core Settings
+
+<Card title="Enable/Disable Agent" icon="power">
+  Toggle your agent's operational status. When disabled, the agent will
+  immediately stop working and won't accept new queries.
+</Card>
+
+### Basic Configuration
+
+<AccordionGroup>
+  <Accordion title="Display Settings" icon="display">
+    - **Scroll Animation** - Enable/disable smooth scrolling during response generation
+    - **Record Transcripts** - Save interactions with the widget for future reference
+    - **Enable Sound Effects** - Play notification sounds when new messages arrive
+    - **Forget Chat History** - Prevent chat history from persisting on user devices
+  </Accordion>
+
+{" "}
+
+<Accordion title="Startup Behavior" icon="play">
+  - **Autostart With Popup** - Automatically display the chat widget on page
+  load - **Proactive Message** - Configure a welcome message that appears when
+  the widget loads
+  <Note>
+    Simple 1-line proactive message can be used instead of autostart widget
+  </Note>
+</Accordion>
+
+  <Accordion title="Message Configuration" icon="message">
+    - **Chat End Message** - Customize the message shown when a chat session ends
+    - **AI Introduction Message** - Set the initial message users see when starting a chat
+      <Warning>
+        According to Meta's requirements, you MUST declare that users will be interacting with an AI
+      </Warning>
+  </Accordion>
+</AccordionGroup>
+
+## Advanced Settings
+
+### Interaction Controls
+
+<ResponseField name="Message Delay (MS)" type="number" default="1000">
+  Default delay between every message (Milliseconds)
+</ResponseField>
+
+<ResponseField name="User Input Delay (MS)" type="number" default="6000">
+  Time to wait before submitting final query to verify the user has finished
+  typing
+</ResponseField>
+
+### Usage Limits
+
+<CardGroup>
+  <Card title="Monthly Interactions Limit" icon="chart-line">
+    Set maximum number of interactions allowed per month (0 = unlimited)
+  </Card>
+  
+  <Card title="Interactions Limit per User" icon="user">
+    Maximum interactions allowed per user or conversation session (0 = unlimited)
+  </Card>
+
+  <Card title="Monthly AI Tokens Limit" icon="coin">
+    Set total monthly token limit for input and output (0 = unlimited)
+  </Card>
+  
+  <Card title="Credits Limit" icon="coins">
+    Set maximum credits consumption limit, monthly and annual periods (0 = unlimited)
+    
+      Setting limit for both periods will apply to both.
+    
+  </Card>
+</CardGroup>
+
+### Technical Configuration
+
+<AccordionGroup>
+  <Accordion title="Connection Settings" icon="network-wired">
+    - **Prefer HTTP instead of websockets** - Advanced setting for connection method
+      <Warning>
+        Only modify if you understand the implications for UI rendering
+      </Warning>
+    - **Does Know Threshold** - Used for channels like Discord and Slack to determine AI response behavior
+  </Accordion>
+
+  <Accordion title="Handoff Settings" icon="hand">
+    - **Enable Handoff Popup** - Toggle the top handoff popup display
+    - **Fixed Handoff Popup** - Requires organization assignment
+    - **Always Show Handoff** - Display handoff popup regardless of agent availability
+  </Accordion>
+</AccordionGroup>
+
+### Additional Features
+
+<CardGroup>
+  <Card title="Translation Options" icon="language">
+    - **Enable AI Translation** - Requires OpenAI API key in agency config
+    - **Translate User Responses** - Convert user messages to selected language
+  </Card>
+
+  <Card title="Input Methods" icon="microphone">
+    - **Enable Speech-to-Text** - Add voice input capability (1 credit per STT request)
+    - **Enable Quick Upload Button** (`enableQuickFileUpload`) - Shows a paperclip attachment button in the web widget footer. Visitors can attach images and files before sending; images appear as visual messages in the conversation. Uploads from embedded widgets use the secure public upload API (no Firebase login required on the visitor's site). Voiceflow agents receive file URLs via intent triggers when configured.
+  </Card>
+</CardGroup>
+
+## Custom Styling
+### Steps for locating and overriding CSS Properties.
+ 1. Right-click the element and choose **Inspect**.
+ 2. Identify the CSS Class in DevTools.
+ 3. Copy the class you are trying to change.
+ 4. Go to the dashboard.
+ 5. Paste the code into your Custom CSS section of your agent.
+ 4. Override the CSS.
+
+<Tip>
+  Use !important sparingly-only if you need to override higher-specificity rules.
+</Tip>
+
+### CSS Customization
+
+```css
+/* Add custom CSS to modify your agent's appearance across all environments */
+.scroll-container {
+  overflow: hidden !important;
+}
+
+/* Change the size of the window of your chatbot */
+#vg-mother-container {
+  width: 400px !important; 
+  height: 600px !important; 
+}
+
+/* Target the inner container if needed */
+#vg-inner-container {
+  width: 100% !important; 
+  height: 100% !important;
+}
+
+/* Position the agent bubble on the page (Adjust values to reposition as needed.)*/
+.vg-root {
+  bottom: 20px !important;
+  right: 20px !important;
+}
+
+/* Adjust the size of the overlay */
+.vg-overlay-root-container {
+  width: 450px !important; 
+  height: 650px !important; 
+}
+
+/* Add extra padding to widget controls */
+.vg-widget-controls-container {
+  padding-bottom: 200px !important
+}
+
+/* Uncomment for automatic aspect ratio on images */
+/* .vg-card-image {
+    aspect-ratio: auto !important;
+} */
+
+/* Hide proactive popup messages */
+.vg-proactive-message--container {
+  display: none !important;
+}
+
+.vg-proactive-message {
+  display: none !important;
+}
+
+/* Customize the action button style. */
+.vg-action-btn {
+  background-color: #0078d7 !important;
+  color: white !important;
+  font-size: 16px !important;
+  font-family: 'Roboto', sans-serif !important;
+}
+
+/* Display the “open vapi” footer button. */
+.vg-footer-open-vapi {
+  display: block !important;
+}
+
+/* Hide the “open vapi” footer button. */
+.vg-footer-open-vapi {
+  display: none !important;
+}
+
+/*  Turn off the ratings at the end */
+.vg-chat-end {
+  display: none !important;
+}
+
+```
+
+<Tip>
+  Custom CSS allows you to match your agent's appearance to your brand and
+  website design.
+</Tip>
+
+## Best Practices
+
+<Check>
+  - Start with default settings and adjust based on user feedback - Monitor
+  interaction limits to ensure optimal service availability - Test any custom
+  CSS changes across different devices and browsers - Regularly review and
+  update your AI introduction message
+</Check>
+
+<Warning>
+  Always test significant setting changes in a development environment before
+  applying them to your live agent.
+</Warning>

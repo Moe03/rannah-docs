@@ -1,0 +1,313 @@
+---
+title: 'Google Calendar Integration'
+description: 'Enable your AI agent to manage appointments, check availability, and automate scheduling with Google Calendar integration.'
+icon: 'calendar'
+---
+
+## Introduction
+
+Our Google Calendar integration allows your AI agent to manage appointments, check real-time availability, book meetings, send calendar invites, and handle scheduling conflicts automatically. This powerful feature enables you to automate appointment scheduling, reduce no-shows by up to 60%, and eliminate double-bookings across all your communication channels.
+
+This guide will walk you through connecting your Google account, setting up the Google Calendar tool in your agent, and configuring it for automated scheduling.
+
+---
+
+## Key Features
+
+- **Real-Time Availability Checking**: AI checks calendar availability before booking
+- **Automatic Appointment Booking**: Schedule appointments through natural language
+- **Smart Conflict Resolution**: Automatically prevent double-bookings
+- **Multi-Calendar Support**: Manage multiple team member calendars
+- **Event Management**: Create, update, reschedule, and cancel appointments
+- **Automated Reminders**: Send confirmation emails and calendar invites
+- **Natural Language Processing**: Book with requests like "next Tuesday at 3pm"
+- **Omnichannel Integration**: Works across voice, chat, WhatsApp, Instagram, Messenger, Discord, and Telegram
+
+---
+
+## 1. Connecting Your Google Account
+
+Before you can use the Google Calendar tool, you need to connect your Google account to your workspace.
+
+1. Navigate to the **Integrations** tab from the main menu.
+2. Find **Google Calendar** in the list of available integrations.
+3. Click the **Connect** button.
+4. You will be redirected to a Google authentication screen. Log in to the Google account that has access to the calendars you want to use.
+5. Grant the necessary permissions to allow Rannah رنّة to access your Google Calendar.
+
+<Note>
+  Make sure to grant both read and write permissions to allow the AI to check availability and create appointments.
+</Note>
+
+Once connected, you will be redirected back to the integrations page, and it will show that your Google Calendar account is connected.
+
+![google-calendar-connected](/images/integrations/google-calendar-1.png)
+
+---
+
+## 2. Setting Up the Google Calendar Tool
+
+Now that your account is connected, you can add the Google Calendar tool to any of your agents.
+
+1. Go to the **Agents** tab and select the agent you want to edit.
+2. Navigate to the **Canvas** for that agent.
+3. Select an existing node or create a new one where you want to use the Google Calendar functionality.
+4. In the node configuration panel, click on **Add Tool**.
+5. From the list of default tools, select **Google Calendar**.
+6. Provide a descriptive **description** for the tool. This helps the AI understand when and how to use this tool.
+
+### Example Tool Descriptions
+
+Here are some effective descriptions for different use cases:
+
+**Appointment Scheduling:**
+```
+Use this tool to check my calendar availability and book appointments for the user. 
+Always check for conflicts before confirming any booking.
+```
+
+**Meeting Coordination:**
+```
+Use this tool to schedule meetings with clients. Check availability for the requested 
+time slot and create calendar events with proper details and invites.
+```
+
+**Rescheduling Handler:**
+```
+Use this tool to reschedule or cancel existing appointments. Always verify the 
+appointment details before making any changes.
+```
+
+![google-calendar-tool](/images/integrations/google-calendar-2.png)
+
+---
+
+## 3. Configuring Calendar Settings
+
+After adding the tool, you need to configure which calendar to use and how appointments should be handled.
+
+### Select Primary Calendar
+
+1. **Choose Calendar**: From the dropdown menu, select which Google Calendar you want the agent to manage. You can select your primary calendar or any other calendars you have access to.
+2. **Calendar Permissions**: Ensure the selected calendar allows the agent to create and modify events.
+
+### Configure Appointment Settings
+
+**Working Hours:**
+- Define your available hours (e.g., 9 AM - 5 PM)
+- Set timezone preferences
+- Block off unavailable times
+
+**Appointment Duration:**
+- Set default appointment length (e.g., 30 minutes, 1 hour)
+- Configure buffer time between appointments
+- Set minimum advance booking time
+
+**Event Details:**
+- Customize default event titles
+- Set up automatic descriptions
+- Configure reminder settings (email, notification)
+
+![google-calendar-config](/images/integrations/google-calendar-3.png)
+
+---
+
+## 4. Multi-Calendar Team Support
+
+If you're managing a team, you can integrate multiple calendars to enable the AI to schedule appointments with the right team member.
+
+### Setting Up Team Calendars
+
+1. Connect each team member's Google Calendar account.
+2. Configure calendar priority and availability rules.
+3. Set up routing logic (e.g., round-robin, skill-based, availability-based).
+4. The AI will automatically check all team calendars and book with the appropriate person.
+
+**Example Team Setup:**
+```
+Team Members:
+- Sales Rep 1 (Monday-Wednesday)
+- Sales Rep 2 (Thursday-Friday)
+- Manager (By request only)
+
+The AI will check availability across all calendars and book with 
+the appropriate team member based on day and availability.
+```
+
+---
+
+## 5. Advanced Features
+
+### Natural Language Booking
+
+Your AI agent can understand and process natural language scheduling requests:
+
+- "Book me for next Tuesday at 3pm"
+- "Schedule a meeting tomorrow afternoon"
+- "Find the next available slot this week"
+- "Reschedule my appointment to Friday"
+
+### Smart Conflict Resolution
+
+The integration automatically:
+- Checks for existing appointments before booking
+- Prevents double-bookings
+- Suggests alternative times if requested slot is unavailable
+- Handles timezone conversions automatically
+
+### Automated Notifications
+
+Configure automatic notifications for:
+- Appointment confirmations
+- Calendar invites sent to attendees
+- Reminder emails (24 hours, 1 hour before)
+- Rescheduling and cancellation notices
+
+---
+
+## 6. Usage and Debugging
+
+Your Google Calendar tool is now ready to be used! The agent's AI will decide when to call this tool based on its description and the context of the conversation.
+
+### Monitoring Tool Usage
+
+You can monitor the tool's usage and see detailed information in the **Debugger**:
+
+1. Open the **Debugger** panel during or after a conversation.
+2. Look for Google Calendar tool call events.
+3. View the data sent to Google Calendar (date, time, attendees, etc.).
+4. See the response received (event ID, confirmation, errors).
+5. Check for any conflicts or issues.
+
+This is very useful for troubleshooting and ensuring the integration is working as expected.
+
+![google-calendar-debugger](/images/integrations/google-calendar-4.png)
+
+---
+
+## 7. Use Cases & Examples
+
+### Healthcare Appointment Scheduling
+
+**Setup:**
+- Connect clinic's Google Calendar
+- Configure HIPAA-compliant settings
+- Set appointment types (consultation, follow-up, etc.)
+
+**Result:**
+- Patients book appointments via phone, web, or WhatsApp
+- Automatic reminder system reduces no-shows by 60%
+- Seamless rescheduling without staff intervention
+
+### Sales Team Meeting Coordination
+
+**Setup:**
+- Connect all sales reps' calendars
+- Configure routing based on territory/expertise
+- Enable automated follow-up scheduling
+
+**Result:**
+- Prospects book demos 24/7 across any channel
+- Round-robin distribution balances team workload
+- Automatic calendar invites sent to all participants
+
+### Service Business Bookings
+
+**Setup:**
+- Connect service provider calendars
+- Set service duration and buffer times
+- Configure payment collection integration
+
+**Result:**
+- Clients book appointments through Instagram/WhatsApp
+- Automatic conflict prevention
+- Confirmation emails with service details
+
+---
+
+## 8. Best Practices
+
+<Tip>
+  **Optimize Your Tool Description**: Be specific about when the AI should check availability vs. immediately booking. This prevents accidental bookings.
+</Tip>
+
+### Recommended Practices:
+
+1. **Always Check Availability First**: Configure the AI to check for conflicts before confirming bookings
+2. **Set Clear Working Hours**: Define your available time slots to prevent off-hours bookings
+3. **Use Buffer Times**: Add 5-10 minutes between appointments to prevent back-to-back scheduling
+4. **Enable Confirmation**: Have the AI confirm appointment details before finalizing
+5. **Test Thoroughly**: Run test bookings to ensure timezone and availability logic work correctly
+
+### Common Mistakes to Avoid:
+
+- ❌ Not setting working hours (leads to after-hours bookings)
+- ❌ Vague tool descriptions (AI won't know when to use it)
+- ❌ No buffer time between appointments
+- ❌ Forgetting to test timezone handling
+- ❌ Not configuring reminder notifications
+
+---
+
+## 9. Troubleshooting
+
+### Common Issues and Solutions
+
+**Issue: Calendar not showing up in dropdown**
+- **Solution**: Ensure you granted full calendar access permissions during connection. Reconnect your Google account if needed.
+
+**Issue: Double-bookings occurring**
+- **Solution**: Verify that the AI is checking availability before booking. Update your tool description to explicitly require availability checks.
+
+**Issue: Wrong timezone for appointments**
+- **Solution**: Set your default timezone in calendar settings and ensure it's communicated to users.
+
+**Issue: AI not using the calendar tool**
+- **Solution**: Make your tool description more specific and conversational. Include clear trigger phrases.
+
+**Issue: Events not syncing immediately**
+- **Solution**: There may be a 1-2 second delay. Ensure your conversation flow accounts for this processing time.
+
+---
+
+## 10. Security & Compliance
+
+### Data Privacy
+
+- All calendar data is encrypted in transit and at rest
+- We only access calendars you explicitly authorize
+- You can revoke access at any time from the Integrations page
+
+### HIPAA Compliance
+
+For healthcare applications:
+- Enable HIPAA-compliant mode in workspace settings
+- Use secure channels (no SMS, prefer encrypted messaging)
+- Configure proper data retention policies
+- Sign Business Associate Agreement (BAA) if required
+
+---
+
+## Support & Resources
+
+<Card title="Need Help?" icon="headset">
+  Have questions about Google Calendar integration? Our support team is here to help!
+  
+  - [Join our Discord Community](mailto:support@rannah.io)
+  - [Contact Support](mailto:support@rannah.io)
+  - [View API Reference](/Support/contact)
+</Card>
+
+---
+
+## Next Steps
+
+Now that your Google Calendar integration is set up:
+
+1. **[Configure Voice Calling](../../voice/introduction)** - Add phone call appointment booking
+2. **[Connect WhatsApp](../whatsapp-embedded)** - Let customers book via WhatsApp
+3. **[Set Up Analytics](../../features/analytics)** - Track booking rates and no-shows
+4. **[Add Payment Integration](../stripe)** - Collect payment during booking
+
+Start automating your scheduling workflow with Rannah رنّة's Google Calendar integration today! 🚀
+

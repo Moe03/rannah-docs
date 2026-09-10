@@ -1,0 +1,134 @@
+---
+title: "Connect WhatsApp"
+description: "Connect your WhatsApp Business account to your AI agent on Rannah رنّة."
+icon: "whatsapp"
+---
+
+### Step 1: Create a Facebook App
+
+1. Go to [developers.facebook.com](https://developers.facebook.com).
+2. Create a new app:
+   - Select the business portfolio you want to connect the app to and click "Next".
+   - Choose "Other" as the product type and click "Next".
+   - Select "Business" as the app type and click "Next".
+   - Provide a name for your app and an app contact email.
+   - Choose the business portfolio.
+   - Click the green "Create App" button.
+
+![Create Facebook App](/images/whatsapp-tut/1.png)
+![Create Facebook App](/images/whatsapp-tut/2.png)
+![Create Facebook App](/images/whatsapp-tut/3.png)
+![Create Facebook App](/images/whatsapp-tut/4.png)
+
+### Step 2: Set Up WhatsApp in Your App
+
+1. On the "Add Products to Your App" page, locate the WhatsApp icon and click "Set Up".
+2. In the sidebar, click on the "Configuration" tab.
+3. In the Configuration window:
+   - Paste the callback URL and verify token from your Rannah رنّة agent (found in Channels > WhatsApp).
+   - Click "Verify and Save".
+   - You should see a green success message in the Rannah رنّة integration window.
+4. Scroll down to "Webhook fields".
+   - Locate the "messages" tab and subscribe to it.
+
+![WhatsApp Configuration](/images/whatsapp-tut/5.png)
+![WhatsApp Configuration](/images/whatsapp-tut/6.png)
+![WhatsApp Configuration](/images/whatsapp-tut/7.png)
+![WhatsApp Configuration](/images/whatsapp-tut/8.png)
+![WhatsApp Configuration](/images/whatsapp-tut/9.png)
+![WhatsApp Configuration](/images/whatsapp-tut/10.png)
+
+### Step 3: API Setup
+
+1. Click on the "API Setup" tab in the sidebar.
+2. On the API Setup page, you'll find:
+   - Your Phone Number ID
+   - WhatsApp Business Account ID
+   - A "Generate Token" button
+   - A list to choose a recipient phone number for testing
+3. Add your phone number and select it for testing.
+4. Click "Generate Token" to create a temporary access token.
+5. Copy your token, phone ID, and business account ID.
+6. Paste these details into the Rannah رنّة integration window.
+7. (Optional) Click the "Send Message" button on the App dashboard to send a test message to your recipient number.
+
+![API Setup](/images/whatsapp-tut/11.png)
+![API Setup](/images/whatsapp-tut/12.png)
+![API Setup](/images/whatsapp-tut/13.png)
+![API Setup](/images/whatsapp-tut/14.png)
+
+### Step 4: Generate a Permanent Access Token
+
+1. Go to [business.facebook.com](https://business.facebook.com).
+2. In the sidebar, click on "Settings" at the bottom.
+3. Go to the "Users" tab and click on "System Users".
+4. Click the "Add" button to create a new system user:
+   - Enter a system user name.
+   - Choose the system user role (e.g., Admin).
+   - Click "Create System User".
+5. For the newly created user:
+   - Click the three dots icon and select "Assign Assets".
+   - In the dialog, select asset type as "Apps".
+   - Choose the app you just created.
+   - In the "Assign Permissions" tab, select "Full Control".
+   - Click "Assign Assets".
+6. Click the "Generate Token" button for the system user:
+   - Select the app you just created and click "Next".
+   - Choose "Never" for token expiration and click "Next".
+   - In permissions, select "whatsapp_business_management" and "whatsapp_business_messaging".
+   - Click "Next", then "Copy" the generated token, and click "Done".
+
+![Generate Permanent Token](/images/whatsapp-tut/15.png)
+![Generate Permanent Token](/images/whatsapp-tut/16.png)
+![Generate Permanent Token](/images/whatsapp-tut/17.png)
+![Generate Permanent Token](/images/whatsapp-tut/18.png)
+![Generate Permanent Token](/images/whatsapp-tut/19.png)
+![Generate Permanent Token](/images/whatsapp-tut/20.png)
+![Generate Permanent Token](/images/whatsapp-tut/21.png)
+![Generate Permanent Token](/images/whatsapp-tut/22.png)
+![Generate Permanent Token](/images/whatsapp-tut/23.png)
+![Generate Permanent Token](/images/whatsapp-tut/24.png)
+
+### Step 5: Update Token and Test Integration
+
+1. Return to [developers.facebook.com/apps/](https://developers.facebook.com/apps/).
+2. In your app's API Setup window, paste the new permanent token in the Access Token field.
+3. Update the token in the Rannah رنّة integration window with this new permanent token.
+4. Send a message from your phone to the test WhatsApp number.
+5. Check the Rannah رنّة conversations window to see if the message appears.
+
+If you see the conversation in Rannah رنّة, congratulations! You have successfully connected WhatsApp to your agent.
+
+![Test Integration](/images/whatsapp-tut/25.png)
+![Test Integration](/images/whatsapp-tut/26.png)
+![Test Integration](/images/whatsapp-tut/27.png)
+
+<Note>
+  You can follow the same steps to connect a WhatsApp Business account to your
+  Rannah رنّة agent. images are provided in the tutorial for each step.
+</Note>
+
+### Voice messages
+
+WhatsApp voice notes are supported on both inbound and outbound flows.
+
+- **Inbound:** Voice messages are automatically transcribed to text for your AI agent (unless you disable **Auto-transcribe audio** in the agent **Channels** tab). The dashboard [Conversations tab](/features/conversations-tab) shows the original audio with an inline player and the transcription text.
+- **Outbound:** Your agent can reply with voice notes when configured to send audio responses.
+
+<Note>
+  Disable auto-transcription in **Agent → Channels** if you prefer the agent to process raw audio only, without a text transcript.
+</Note>
+
+### Learn More
+- This tutorial video provides a comprehensive guide on connecting WhatsApp to your Rannah رنّة agent:
+
+<iframe 
+  width="100%" 
+  height="450" 
+   src="https://www.youtube.com/embed/bLC8fW5tJc0?start=4" 
+  title="Connect VAPI Tutorial" 
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen" 
+  allowfullscreen>
+</iframe>
+

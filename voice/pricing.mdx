@@ -1,0 +1,180 @@
+---
+title: "Voice Pricing"
+description: "Complete transparency on how voice-to-voice interactions are priced, including platform fees and provider costs."
+icon: "money-bill"
+---
+
+<Tip>
+  Compare live rates on [Pricing](/Pricing/overview) (Voice section), or use the **Pricing Calculator** on your dashboard **Billing** page.
+</Tip>
+
+<Note>
+  On the **v2-2026** catalog, Voice / phone (SIP + Twilio) starts on **Business** ($99/mo), or via the **Voice / phone** add-on ($29/mo) on a lower tier. Extra concurrent lines are $5/mo; extra Twilio number slots are $3/mo. Pre–August 2026 plans keep their existing voice access.
+</Note>
+
+---
+
+## Full transparency pricing
+
+Voice is billed **per minute of call time**. Total cost ≈ **platform fee + STT + TTS** (or a realtime STS model) **+ LLM (if separate) + telephony (optional)**.
+
+**1 credit = $0.001** · **1,000 credits = $1**
+
+---
+
+## Platform base fee
+
+Rannah رنّة charges a **platform fee of 20 credits per minute** (**$0.020/min**) on every call, in addition to provider rates. This covers infrastructure, realtime routing, monitoring, and platform features.
+
+<Note>
+  The platform fee is the same across all plans that include voice. Your subscription tier determines how many concurrent calls and Twilio number slots you get — see [Concurrency limits](#concurrency-limits) below.
+</Note>
+
+---
+
+## Total cost breakdown
+
+**Example (standard STT + TTS stack):**
+- Platform fee: $0.020/min (20 cr)
+- STT (AssemblyAI): $0.008/min (8 cr)
+- TTS (Google Cloud): $0.010/min (10 cr)
+- LLM (e.g. GPT-4o Mini): varies by tokens
+- **Providers + platform (ex-LLM): ~$0.038/min or ~$3.80 per 100 minutes**
+
+Provider rates below are **platform USD/min** (and credits). They match the public pricing page.
+
+---
+
+## Realtime speech-to-speech
+
+All-in-one realtime models replace separate STT + TTS (+ often the LLM) with a single per-minute rate, still plus the platform fee.
+
+| Provider | $ / min | Credits / min | + platform |
+|----------|---------|---------------|------------|
+| **Gemini Live (realtime)** | $0.010 | 10 | $0.030 (30 cr) |
+| **Ultravox (realtime)** | $0.070 | 70 | $0.090 (90 cr) |
+| **Grok Live (realtime)** | $0.070 | 70 | $0.090 (90 cr) |
+
+**Gemini Live example (no telephony):** $0.010 provider + $0.020 platform = **$0.030/min** ($3 per 100 minutes).  
+**With Twilio estimate:** add ~$0.015/min → **~$0.045/min**.
+
+---
+
+## Speech-to-text (STT)
+
+| Provider | $ / min | Credits / min | + platform |
+|----------|---------|---------------|------------|
+| **Speechmatics** | $0.0040 | 4 | $0.024 (24 cr) |
+| **Google Cloud Speech** | $0.0060 | 6 | $0.026 (26 cr) |
+| **AssemblyAI** | $0.0080 | 8 | $0.028 (28 cr) |
+| **Deepgram** | $0.010 | 10 | $0.030 (30 cr) |
+| **Gladia** | $0.013 | 13 | $0.033 (33 cr) |
+
+---
+
+## Text-to-speech (TTS)
+
+| Provider | $ / min | Credits / min | + platform |
+|----------|---------|---------------|------------|
+| **Google Cloud TTS** | $0.010 | 10 | $0.030 (30 cr) |
+| **Rime AI** | $0.015 | 15 | $0.035 (35 cr) |
+| **MiniMax TTS** | $0.015 | 15 | $0.035 (35 cr) |
+| **OpenAI TTS** | $0.016 | 16 | $0.036 (36 cr) |
+| **Azure Speech** | $0.019 | 19 | $0.039 (39 cr) |
+| **Cartesia** | $0.022 | 22 | $0.042 (42 cr) |
+| **ElevenLabs** | $0.040 | 40 | $0.060 (60 cr) |
+| **PlayHT** | $0.070 | 70 | $0.090 (90 cr) |
+
+---
+
+## Telephony
+
+| Provider | $ / min | Credits / min | + platform |
+|----------|---------|---------------|------------|
+| **Twilio (telephony est.)** | $0.015 | 15 | $0.035 (35 cr) |
+
+Twilio is only charged when you use phone numbers / PSTN. SIP BYO trunks follow your carrier’s rates separately.
+
+---
+
+## Concurrency limits
+
+On **v2-2026**, included voice capacity:
+
+| Plan | Concurrent calls | Twilio number slots |
+|------|------------------|---------------------|
+| **Free / Starter / Pro** | 0 (voice not included) | 0 |
+| **Business** | 3 | 2 |
+| **White Label** | 10 | 3 |
+| **White Label Elite** | 25 | 5 |
+
+Buy extra capacity without changing plan:
+
+| Add-on | Price |
+|--------|-------|
+| Concurrent call line | $5/mo |
+| Twilio phone number slot | $3/mo |
+| Voice / phone (unlocks voice on a lower tier) | $29/mo |
+| SIP trunk (BYO SIP) | $15/mo |
+
+<Note>
+  The Voice add-on unlocks voice features; it does not add call lines or number slots. Add those separately if your plan’s included capacity is 0.
+</Note>
+
+---
+
+## Bring your own API keys
+
+<Warning>
+  You currently **cannot** use your own API keys for STT/TTS/STS voice providers. BYOK for voice providers is not available yet.
+</Warning>
+
+You **can** bring your own **LLM** API keys (OpenAI, Anthropic, Google, and more), which can cut LLM credit burn dramatically. On **v2-2026**, BYOK + premium (Tier 1) models are included on **Business+**, or via the **BYOK + premium models** add-on ($20/mo).
+
+---
+
+## Pricing summary
+
+| Component | Cost range | Notes |
+|-----------|------------|-------|
+| **Platform fee** | $0.020/min (20 cr) | Fixed on every call |
+| **Speech-to-Text** | $0.004 – $0.013/min | Speechmatics is lowest |
+| **Text-to-Speech** | $0.010 – $0.070/min | Google Cloud TTS is lowest |
+| **Realtime STS** | $0.010 – $0.070/min | Gemini Live is lowest |
+| **Telephony (Twilio)** | ~$0.015/min | Only if using phone numbers |
+| **Concurrency** | 3 / 10 / 25 | Business / White Label / Elite (extra lines $5/mo) |
+
+### Real-world examples
+
+**Budget STT + TTS:**
+- Platform $0.020 + AssemblyAI $0.008 + Google TTS $0.010 ≈ **$0.038/min** (+ LLM)
+
+**Premium STT + TTS:**
+- Platform $0.020 + Deepgram $0.010 + ElevenLabs $0.040 ≈ **$0.070/min** (+ LLM)
+
+**Gemini Live realtime:**
+- Platform $0.020 + Gemini Live $0.010 = **$0.030/min**
+
+<Tip>
+  Use the voice minutes calculator on [Pricing](/Pricing/overview) or Billing to estimate monthly credit burn for your stack.
+</Tip>
+
+---
+
+## Cost optimization tips
+
+1. Prefer **Speechmatics** or **Google Cloud Speech** for budget STT
+2. Prefer **Google Cloud TTS** for budget synthesis
+3. Prefer **Gemini Live** when you want a single realtime stack
+4. Bring your own LLM keys on Business+ to cut token credit burn
+5. Size concurrent lines to real peak load — extras are $5/mo each
+
+---
+
+## Next steps
+
+- **[Billing](../Pricing/billing)** — View plans and subscribe
+- **[Credits](../Pricing/credits)** — Credit system and LLM rates
+- **[Provider cost estimates](../Pricing/provider-cost-estimates)** — STT / TTS tables
+- **[Twilio setup](./setup/twilio)** — Phone calling
+- **[Live pricing](/Pricing/overview)** — Interactive comparison

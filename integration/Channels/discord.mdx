@@ -1,0 +1,170 @@
+---
+title: "Connect Discord"
+description: "Connect your Discord server to your AI agent on Rannah رنّة."
+icon: "discord"
+---
+
+# Discord Integration
+
+Welcome to the Rannah رنّة Discord integration guide! This document will help you quickly connect and configure Discord with Rannah رنّة, enabling seamless communication between your Discord server and AI agent.
+
+## Why Integrate Discord with Rannah رنّة?
+
+<Tip>
+  Discord integration allows your AI agent to interact directly with users in
+  your Discord server, providing automated responses and assistance 24/7.
+</Tip>
+
+By integrating Discord with Rannah رنّة, you can:
+
+- Automate responses to common user queries
+- Provide round-the-clock support in your Discord server
+- Streamline community management and engagement
+
+## Prerequisites
+
+<Card
+  title="Need Help Setting Up?"
+  icon="question"
+  href="https://rannah.io"
+>
+  Our integration specialists are available to guide you through the Discord
+  setup process. Reach out for personalized assistance!
+</Card>
+
+Before you start, ensure you have:
+
+1. An active [Rannah رنّة](https://rannah.io/) account with appropriate permissions
+2. Administrative access to the Discord server where you want to add the bot
+
+---
+
+## Steps to Integrate Discord with Rannah رنّة
+
+<Steps>
+
+<Step title="Locate Discord Integration">
+  1. Log in to your Rannah رنّة dashboard
+  2. Navigate to the **Channels** tab
+  3. Find the **Discord** option
+  4. Click on **Connect**
+
+![Discord Integration Location](/images/discord-tut/discord0.png)
+
+</Step>
+
+<Step title="Add Bot to Discord Server">
+  1. In the configuration modal, locate the **Add to Discord** button
+  2. Click the button to open Discord's authorization window
+  3. Select your target Discord server from the dropdown
+  4. Review and approve the required permissions:
+     - Send Messages
+     - Read Messages/View Channels
+     - Other relevant permissions
+
+{" "}
+
+<Warning>
+  Ensure you grant all necessary permissions for the bot to function properly.
+  Missing permissions may cause integration issues.
+</Warning>
+
+![Bot Authorization](/images/discord-tut/discord1.png)
+
+</Step>
+
+<Step title="Set Up Discord Webhook">
+  1. In your Discord server, navigate to the desired channel
+  2. Click the gear icon (⚙️) to access **Edit Channel**
+  3. Go to **Integrations** > **Webhooks**
+  4. Click **New Webhook**
+  5. Configure the webhook:
+     - Set a name for the webhook
+     - Click **Copy Webhook URL**
+  6. Return to Rannah رنّة dashboard
+  7. Paste the webhook URL in the **Webhook URL** field
+
+![Webhook Setup](/images/discord-tut/discord9.png)
+
+</Step>
+
+<Step title="Configure Channel ID">
+  1. Return to your Discord server
+  2. Right-click on the target channel
+  3. Select **Copy Channel ID**
+  4. Paste the ID in the **Channel ID** field on Rannah رنّة
+
+{" "}
+
+<Tip>
+  If you don't see the Copy Channel ID option, ensure Developer Mode is enabled
+  in Discord's Advanced Settings.
+</Tip>
+
+![Channel ID Configuration](/images/discord-tut/discord8.png)
+
+</Step>
+
+<Step title="Complete Integration">
+  1. Review all entered information
+  2. Click **Submit & Add Channel**
+  3. Wait for confirmation message
+
+![Integration Completion](/images/discord-tut/discord11.png)
+
+</Step>
+
+<Step title="Verify Integration">
+  1. Go to your Discord channel
+  2. Type `ping` in the chat
+  3. The bot should respond with `pong`
+
+{" "}
+
+<Note>
+  If you don't receive a response, double-check the bot permissions and webhook
+  configuration.
+</Note>
+
+![Integration Verification](/images/discord-tut/discord12.png)
+
+</Step>
+
+</Steps>
+
+---
+
+## Troubleshooting
+
+<Note>
+  Most integration issues can be resolved by verifying permissions and
+  configuration settings.
+</Note>
+
+Common issues and solutions:
+
+- **Bot not responding**: Verify bot permissions and webhook URL
+- **Channel ID errors**: Ensure Developer Mode is enabled and the correct ID is copied
+- **Webhook failures**: Confirm the webhook URL is valid and properly configured
+
+## Best Practices
+
+<Card title="Optimize Your Setup" icon="chart-line">
+  Regular monitoring and maintenance of your Discord integration ensures optimal
+  performance and user experience.
+</Card>
+
+- Test the bot in a private channel before deploying to public channels
+- Regularly verify bot functionality
+- Keep bot permissions updated as needed
+
+## Security Considerations
+
+<Warning>
+  Protect your webhook URLs and never share them publicly. They can be used to
+  send messages to your channel.
+</Warning>
+
+- Regularly audit bot permissions
+- Monitor channel activity
+- Update webhook settings as needed

@@ -1,0 +1,654 @@
+---
+title: "Tools Management"
+description: "Create, manage, and deploy custom tools and functions specific to individual agents with advanced configuration and testing capabilities"
+icon: "wrench"
+---
+
+{/* <img
+  className="block dark:hidden"
+  src="/images/tools-management-light.png"
+  alt="Tools Management Interface"
+/>
+<img
+  className="hidden dark:block"
+  src="/images/tools-management-dark.png"
+  alt="Tools Management Interface"
+/> */}
+
+Manage and configure tools specific to individual agents, providing granular control over functionality and ensuring each agent has exactly the capabilities it needs for its specific use case.
+
+## Agent-Specific Tools Overview
+
+<CardGroup cols={2}>
+  <Card title="Focused Functionality" icon="bullseye-arrow">
+    Configure tools specifically for each agent's role and responsibilities
+  </Card>
+  <Card title="Granular Control" icon="sliders">
+    Fine-tune tool availability and behavior on a per-agent basis
+  </Card>
+  <Card title="Performance Optimization" icon="gauge">
+    Optimize agent performance by including only necessary tools
+  </Card>
+  <Card title="Security Isolation" icon="shield">
+    Isolate sensitive functions to appropriate agents only
+  </Card>
+</CardGroup>
+
+## Tool Configuration Interface
+
+<Tabs>
+  <Tab title="Available Tools">
+    <div className="space-y-6">
+      <AccordionGroup>
+        <Accordion title="Tool Library Management" icon="books">
+          <div className="space-y-4">
+            <p>View and manage all tools available to your agent, including workspace-wide tools and agent-specific custom functions.</p>
+            
+            <CardGroup cols={2}>
+              <Card title="Workspace Tools" icon="globe">
+                - Shared across all agents
+                - Centrally managed
+                - Consistent functionality
+                - Bulk updates available
+                - Organization-wide access
+              </Card>
+              <Card title="Agent-Specific Tools" icon="user-gear">
+                - Unique to this agent
+                - Custom configurations
+                - Specialized functionality
+                - Independent versioning
+                - Isolated testing
+              </Card>
+            </CardGroup>
+            
+            ```javascript
+            // Agent tool configuration structure
+            {
+              "agent_id": "your-agent-id",
+              "tools": [
+                {
+                  "tool_id": "customer_lookup",
+                  "name": "Customer Lookup",
+                  "type": "workspace", // or "agent_specific"
+                  "enabled": true,
+                  "configuration": {
+                    "api_endpoint": "${CUSTOMER_API_URL}",
+                    "auth_token": "${CUSTOMER_API_KEY}",
+                    "timeout": 5000
+                  }
+                }
+              ]
+            }
+            ```
+          </div>
+        </Accordion>
+        
+        <Accordion title="Tool Assignment & Configuration" icon="gear">
+          <Tabs>
+            <Tab title="Enable/Disable Tools">
+              <div className="space-y-4">
+                <Frame>
+                  <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+                    <h4 className="font-semibold mb-2">Tool Management Actions</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                      <div>
+                        <strong>Enable Tools:</strong>
+                        <ul className="mt-1 space-y-1">
+                          <li>• Select from available library</li>
+                          <li>• Configure tool parameters</li>
+                          <li>• Set access permissions</li>
+                          <li>• Test functionality</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <strong>Disable Tools:</strong>
+                        <ul className="mt-1 space-y-1">
+                          <li>• Remove from agent's toolkit</li>
+                          <li>• Preserve configuration</li>
+                          <li>• Maintain audit logs</li>
+                          <li>• Re-enable when needed</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </Frame>
+                
+                <Info>
+                **Tool State Persistence**: Disabled tools retain their configuration settings, making it easy to re-enable them later without reconfiguration.
+                </Info>
+              </div>
+            </Tab>
+            
+            <Tab title="Custom Parameters">
+              ```json
+              {
+                "tool_name": "order_lookup",
+                "agent_specific_config": {
+                  "search_scope": "last_90_days",
+                  "include_refunds": true,
+                  "max_results": 10,
+                  "priority_statuses": ["pending", "processing"],
+                  "custom_fields": {
+                    "show_tracking": true,
+                    "include_notes": false,
+                    "display_format": "detailed"
+                  }
+                }
+              }
+              ```
+              
+              <Warning>
+              **Configuration Validation**: All parameter changes are validated before being applied to prevent agent functionality issues.
+              </Warning>
+            </Tab>
+          </Tabs>
+        </Accordion>
+        
+        <Accordion title="Knowledge Base Tools" icon="database">
+          <div className="space-y-4">
+            <p>Specialized tools for managing and querying your agent's knowledge base with advanced search and content management capabilities.</p>
+            
+            <CardGroup cols={2}>
+              <Card title="Search Functions" icon="magnifying-glass">
+                **Semantic Search**
+                - Vector-based similarity search
+                - Context-aware retrieval
+                - Multi-language support
+                - Relevance scoring
+                
+                **Keyword Search**
+                - Traditional text matching
+                - Boolean operators
+                - Phrase matching
+                - Wildcard support
+              </Card>
+              <Card title="Content Management" icon="pen-to-square">
+                **Document Operations**
+                - Add new documents
+                - Update existing content
+                - Delete outdated information
+                - Bulk operations
+                
+                **Metadata Management**
+                - Tag assignment
+                - Category organization
+                - Custom attributes
+                - Version tracking
+              </Card>
+            </CardGroup>
+            
+            ```javascript
+            // KB tool configuration
+            {
+              "kb_tools": {
+                "search_config": {
+                  "max_results": 5,
+                  "relevance_threshold": 0.7,
+                  "include_metadata": true,
+                  "search_types": ["semantic", "keyword"]
+                },
+                "content_management": {
+                  "auto_categorize": true,
+                  "quality_check": true,
+                  "duplicate_detection": true
+                }
+              }
+            }
+            ```
+          </div>
+        </Accordion>
+      </AccordionGroup>
+    </div>
+  </Tab>
+  
+  <Tab title="Tool Development">
+    <div className="space-y-6">
+      <AccordionGroup>
+        <Accordion title="Custom Tool Creation" icon="plus">
+          <Steps>
+            <Step title="Define Tool Specification">
+              Create the tool schema with name, description, parameters, and expected outputs
+            </Step>
+            <Step title="Implement Functionality">
+              Write the tool logic using API calls, database queries, or custom algorithms
+            </Step>
+            <Step title="Configure Security">
+              Set up authentication, access controls, and data validation
+            </Step>
+            <Step title="Test & Validate">
+              Use the built-in testing framework to ensure proper functionality
+            </Step>
+            <Step title="Deploy to Agent">
+              Activate the tool for use in conversations
+            </Step>
+          </Steps>
+        </Accordion>
+        
+        <Accordion title="Tool Templates" icon="box">
+          <div className="space-y-4">
+            <CardGroup cols={3}>
+              <Card title="API Integration" icon="plug">
+                ```json
+                {
+                  "type": "api_call",
+                  "method": "GET",
+                  "url": "${endpoint}",
+                  "headers": {
+                    "Authorization": "Bearer ${token}"
+                  }
+                }
+                ```
+              </Card>
+              <Card title="Data Query" icon="database">
+                ```sql
+                SELECT * FROM customers 
+                WHERE email = '${user_email}' 
+                AND status = 'active'
+                ```
+              </Card>
+              <Card title="Webhook" icon="webhook">
+                ```json
+                {
+                  "type": "webhook",
+                  "url": "${webhook_url}",
+                  "method": "POST",
+                  "payload": "${data}"
+                }
+                ```
+              </Card>
+            </CardGroup>
+            
+            <Info>
+            **Template Library**: Choose from pre-built templates for common use cases like CRM integration, e-commerce queries, or notification systems.
+            </Info>
+          </div>
+        </Accordion>
+        
+        <Accordion title="Tool Testing Framework" icon="flask">
+          <div className="space-y-4">
+              ```javascript
+              // Tool test configuration
+              {
+                "test_suite": {
+                  "name": "customer_lookup_tests",
+                  "tests": [
+                    {
+                      "name": "valid_customer_email",
+                      "input": {
+                        "email": "test@example.com"
+                      },
+                      "expected_output": {
+                        "status": "found",
+                        "customer_id": "12345"
+                      },
+                      "timeout": 3000
+                    },
+                    {
+                      "name": "invalid_email_format",
+                      "input": {
+                        "email": "invalid-email"
+                      },
+                      "expected_output": {
+                        "status": "error",
+                        "message": "Invalid email format"
+                      }
+                    }
+                  ]
+                }
+              }
+              ```
+            
+            <CardGroup cols={2}>
+              <Card title="Test Types" icon="circle-check">
+                - **Unit Tests**: Individual function testing
+                - **Integration Tests**: API connectivity validation
+                - **Performance Tests**: Response time measurement
+                - **Error Tests**: Failure scenario handling
+              </Card>
+              <Card title="Test Results" icon="chart-bar">
+                - Pass/fail status for each test
+                - Execution time measurements
+                - Error details and stack traces
+                - Performance benchmarks
+              </Card>
+            </CardGroup>
+          </div>
+        </Accordion>
+      </AccordionGroup>
+    </div>
+  </Tab>
+  
+  <Tab title="Tool Analytics">
+    <div className="space-y-6">
+      <AccordionGroup>
+        <Accordion title="Usage Metrics" icon="chart-line">
+          <div className="space-y-4">
+            <CardGroup cols={2}>
+              <Card title="Execution Statistics" icon="chart-line">
+                - Total function calls
+                - Success/failure rates
+                - Average response times
+                - Peak usage periods
+                - Error frequency analysis
+              </Card>
+              <Card title="Performance Metrics" icon="gauge">
+                - Latency measurements
+                - Throughput analysis
+                - Resource utilization
+                - Cache hit rates
+                - API rate limiting status
+              </Card>
+            </CardGroup>
+            
+            <Frame>
+              <div className="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900 dark:to-green-900 p-4 rounded-lg">
+                <h4 className="font-semibold mb-2">Key Performance Indicators</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <strong>Reliability Metrics:</strong>
+                    <ul className="mt-1 space-y-1">
+                      <li>• Uptime: 99.9%</li>
+                      <li>• Success Rate: 98.5%</li>
+                      <li>• Error Rate: &lt;1.5%</li>
+                      <li>• Timeout Rate: &lt;0.1%</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <strong>Performance Targets:</strong>
+                    <ul className="mt-1 space-y-1">
+                      <li>• Response Time: &lt;2s</li>
+                      <li>• Availability: 99.9%</li>
+                      <li>• Throughput: 1000 req/min</li>
+                      <li>• Cache Hit: &gt;80%</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </Frame>
+          </div>
+        </Accordion>
+        
+        <Accordion title="User Interaction Analysis" icon="users">
+          <CardGroup cols={2}>
+            <Card title="Usage Patterns" icon="chart-line">
+              - Most frequently used tools
+              - User satisfaction ratings
+              - Conversation completion rates
+              - Feature adoption metrics
+              - Time-based usage trends
+            </Card>
+            <Card title="Optimization Opportunities" icon="bullseye-arrow">
+              - Underutilized tools identification
+              - Performance bottleneck analysis
+              - User experience improvements
+              - Feature enhancement suggestions
+              - Cost optimization recommendations
+            </Card>
+          </CardGroup>
+        </Accordion>
+        
+        <Accordion title="Error Analysis & Debugging" icon="bug">
+          <div className="space-y-4">
+              ```javascript
+              // Error tracking configuration
+              {
+                "error_monitoring": {
+                  "log_level": "INFO", // DEBUG, INFO, WARN, ERROR
+                  "capture_stack_traces": true,
+                  "include_request_data": true,
+                  "alert_thresholds": {
+                    "error_rate": 5, // Alert if >5% error rate
+                    "response_time": 5000, // Alert if >5s response
+                    "failure_count": 10 // Alert after 10 consecutive failures
+                  }
+                }
+              }
+              ```
+            
+            <CardGroup cols={2}>
+              <Card title="Error Categories" icon="list">
+                - **API Errors**: External service failures
+                - **Validation Errors**: Invalid input parameters
+                - **Timeout Errors**: Slow response handling
+                - **Authentication Errors**: Access permission issues
+                - **System Errors**: Internal processing failures
+              </Card>
+              <Card title="Resolution Strategies" icon="wrench">
+                - **Automatic Retry**: For transient failures
+                - **Fallback Responses**: When tools are unavailable
+                - **User Notifications**: Clear error explanations
+                - **Escalation Paths**: Human handoff triggers
+                - **Recovery Procedures**: Quick restoration methods
+              </Card>
+            </CardGroup>
+          </div>
+        </Accordion>
+      </AccordionGroup>
+    </div>
+  </Tab>
+</Tabs>
+
+## Advanced Configuration
+
+<AccordionGroup>
+  <Accordion title="Security & Access Control" icon="shield">
+    <div className="space-y-4">
+      <CardGroup cols={2}>
+        <Card title="Authentication Methods" icon="key">
+          - **API Keys**: Bearer token authentication
+          - **OAuth 2.0**: Secure delegated access
+          - **JWT Tokens**: Stateless authentication
+          - **Custom Headers**: Proprietary auth schemes
+          - **Certificate-based**: mTLS authentication
+        </Card>
+        <Card title="Access Permissions" icon="user-check">
+          - **Role-based Access**: Function-level permissions
+          - **Rate Limiting**: Usage throttling
+          - **IP Restrictions**: Network-level security
+          - **Time-based Access**: Scheduled availability
+          - **Audit Logging**: Comprehensive activity tracking
+        </Card>
+      </CardGroup>
+      
+      ```javascript
+      // Security configuration example
+      {
+        "security": {
+          "authentication": {
+            "type": "oauth2",
+            "client_id": "${OAUTH_CLIENT_ID}",
+            "client_secret": "${OAUTH_CLIENT_SECRET}",
+            "scope": "read write"
+          },
+          "rate_limiting": {
+            "requests_per_minute": 100,
+            "burst_limit": 10
+          },
+          "access_control": {
+            "allowed_ips": ["192.168.1.0/24"],
+            "time_restrictions": {
+              "allowed_hours": "09:00-17:00",
+              "timezone": "UTC"
+            }
+          }
+        }
+      }
+      ```
+    </div>
+  </Accordion>
+  
+  <Accordion title="Performance Optimization" icon="gear">
+    <Tabs>
+      <Tab title="Caching Strategies">
+        <div className="space-y-4">
+          ```javascript
+          {
+            "caching": {
+              "enabled": true,
+              "strategy": "smart", // 'none', 'simple', 'smart'
+              "ttl": 300, // Time to live in seconds
+              "cache_key_pattern": "${function_name}_${param_hash}",
+              "invalidation_triggers": [
+                "data_update",
+                "configuration_change"
+              ]
+            }
+          }
+          ```
+          
+          <CardGroup cols={2}>
+            <Card title="Cache Types" icon="database">
+              - **Memory Cache**: Fast in-memory storage
+              - **Distributed Cache**: Shared across instances
+              - **Persistent Cache**: Disk-based storage
+              - **Smart Cache**: AI-driven cache management
+            </Card>
+            <Card title="Cache Benefits" icon="arrow-up">
+              - Reduced API calls
+              - Faster response times
+              - Lower costs
+              - Improved reliability
+            </Card>
+          </CardGroup>
+        </div>
+      </Tab>
+      
+      <Tab title="Resource Management">
+        <CardGroup cols={2}>
+          <Card title="Resource Limits" icon="gauge">
+            - **Memory Usage**: Per-tool memory allocation
+            - **CPU Time**: Execution time limits
+            - **Network Bandwidth**: Data transfer limits
+            - **Concurrent Requests**: Parallel execution control
+          </Card>
+          <Card title="Scaling Options" icon="expand">
+            - **Auto-scaling**: Demand-based resource adjustment
+            - **Load Balancing**: Request distribution
+            - **Queue Management**: Request prioritization
+            - **Circuit Breakers**: Failure isolation
+          </Card>
+        </CardGroup>
+      </Tab>
+    </Tabs>
+  </Accordion>
+  
+  <Accordion title="Version Management" icon="code-branch">
+    <div className="space-y-4">
+              ```javascript
+        {
+          "version_control": {
+            "current_version": "2.1.0",
+            "available_versions": [
+              {
+                "version": "2.1.0",
+                "status": "active",
+                "release_date": "2024-01-15",
+                "changelog": "Added new parameter validation"
+              },
+              {
+                "version": "2.0.1",
+                "status": "deprecated",
+                "release_date": "2023-12-10",
+                "changelog": "Bug fixes and performance improvements"
+              }
+            ],
+            "rollback_enabled": true,
+            "auto_update": false
+          }
+        }
+        ```
+      
+      <CardGroup cols={2}>
+        <Card title="Version Features" icon="tag">
+          - **Semantic Versioning**: Clear version numbering
+          - **Backward Compatibility**: Legacy support
+          - **Migration Tools**: Automated upgrades
+          - **Testing Environments**: Safe version testing
+        </Card>
+        <Card title="Deployment Control" icon="rocket">
+          - **Staged Rollouts**: Gradual deployment
+          - **Canary Releases**: Limited testing
+          - **Rollback Capability**: Quick reversion
+          - **Feature Flags**: Selective activation
+        </Card>
+      </CardGroup>
+    </div>
+  </Accordion>
+</AccordionGroup>
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Tool Selection Strategy" icon="bullseye-arrow">
+    **Choosing the Right Tools:**
+    - Align with agent's specific purpose
+    - Consider user experience impact
+    - Evaluate performance requirements
+    - Assess security implications
+    
+    **Tool Portfolio Management:**
+    - Regular usage review
+    - Performance monitoring
+    - Cost-benefit analysis
+    - User feedback integration
+  </Card>
+  
+  <Card title="Security Best Practices" icon="shield">
+    **Access Control:**
+    - Principle of least privilege
+    - Regular permission audits
+    - Strong authentication methods
+    - Comprehensive logging
+    
+    **Data Protection:**
+    - Encrypt sensitive parameters
+    - Validate all inputs
+    - Sanitize outputs
+    - Secure credential storage
+  </Card>
+  
+  <Card title="Performance Optimization" icon="arrow-up">
+    **Efficiency Guidelines:**
+    - Enable intelligent caching
+    - Monitor response times
+    - Optimize API calls
+    - Implement retry logic
+    
+    **Resource Management:**
+    - Set appropriate timeouts
+    - Limit concurrent executions
+    - Monitor resource usage
+    - Plan for scale
+  </Card>
+  
+  <Card title="Maintenance Procedures" icon="wrench">
+    **Regular Maintenance:**
+    - Update tool configurations
+    - Monitor performance metrics
+    - Review error logs
+    - Test functionality
+    
+    **Continuous Improvement:**
+    - User feedback integration
+    - Performance optimization
+    - Security updates
+    - Feature enhancements
+  </Card>
+</CardGroup>
+
+## What's Next?
+
+<CardGroup cols={2}>
+  <Card title="Functions & Integrations" icon="plug" href="/agent-dashboard/functions-integrations">
+    Explore broader integration options and workspace-wide function management
+  </Card>
+  <Card title="Canvas Tools" icon="chart-gantt" href="/canvas/features/tools-integration">
+    Learn how to integrate tools with visual workflow design
+  </Card>
+  <Card title="API Management" icon="screwdriver-wrench" href="/Support/contact">
+    Programmatically manage tools using our comprehensive REST API
+  </Card>
+  <Card title="Analytics Dashboard" icon="chart-line" href="/features/analytics">
+    Monitor tool performance and optimize based on usage analytics
+  </Card>
+</CardGroup>

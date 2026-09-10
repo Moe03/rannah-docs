@@ -1,0 +1,74 @@
+---
+title: 'Structured Search'
+description: 'Index schema-crawl catalogs so agents can filter listings by location, price, capacity, and more — then render rich cards and carousels.'
+icon: magnifying-glass-chart
+---
+
+# Structured Search
+
+Structured Search turns a **Schema / AI Listing crawl** into a filterable catalog your agents can search in real time (venues, cars, hotels, real estate, products, etc.).
+
+Users never see vendor names in the product UI — it is always labeled **Structured Search**.
+
+## Why not only the Knowledge Base?
+
+| | Knowledge Base | Structured Search |
+|---|---|---|
+| Best for | FAQs, policies, long docs | Catalogs with filters |
+| Retrieval | Semantic / hybrid chunks | Filter + free-text over structured fields |
+| Example | “What is your refund policy?” | “Outdoor wedding venues in New Cairo for 200 guests under 100k” |
+| UI | Text answers | Carousels / cards with real images & CTAs |
+
+You can use **both** on the same agent. The search gate decides KB, Structured Search, or both per turn.
+
+## End-to-end workflow
+
+<Steps>
+  <Step title="Create a Schema / AI Listing crawl">
+    Go to **Crawler Jobs** → **New job** → choose **Schema / AI Listing**.
+
+    Paste **one** listing/index URL only — the page that shows all items (not a detail page; multiple source URLs are not supported).
+
+    Example: `https://www.example.com/venues` (or `/cars`, `/properties`, `/products`).
+
+    Set max items, and start the job. Watch **Live logs** while discovery → schema design → extract runs.
+  </Step>
+  <Step title="Review extractions items">
+    Open the job page. Check **Structured**, **Schema**, and **Failed** tabs.
+
+    Spot-check pricing, location, capacity, and gallery images before indexing.
+  </Step>
+  <Step title="Index into Structured Search">
+    On the job page, open the **Structured Search** panel → **Index into Structured Search**.
+
+    <Warning>
+      Requires a paid workspace (`hasEverPaid`). Soft workspace cap: **10 MB** of indexed catalog payload (raised later).
+    </Warning>
+  </Step>
+  <Step title="Attach to agents">
+    Click **Add to agents** and select one or more agents.
+
+    Optionally edit the **Agent tool description** so the model knows when to search this catalog.
+  </Step>
+  <Step title="Chat & verify">
+    Ask natural filter questions. In debug you should see Structured Search queries, filters, hit names, and injected context.
+
+    Prompt the agent to render **carousels/cards** with `images: [url1, url2, url3]` from result galleries (up to 3 images per card).
+  </Step>
+</Steps>
+
+## Extend / update
+
+Use **Extend / update crawl** when the site adds or changes listings. If the job was already indexed, it reindexes automatically when the extend finishes.
+
+## Limits
+
+- Paid workspaces only for index / attach
+- **10 MB** indexed payload per workspace (sum of all indexed jobs)
+- Deleting a crawl job drops its index and detaches agents
+
+## Related
+
+- [Crawler overview](/features/crawler) — markdown crawl + schema crawl
+- [KB and UI Engine](/agent-creation/knowledgebase/kb-and-ui-engine) — cards / carousels from retrieved data
+- [Adding data to KB](/agent-creation/knowledgebase/adding-data) — classic markdown import path

@@ -1,0 +1,170 @@
+---
+title: 'WordPress'
+description: 'Integrate your Rannah رنّة Agent into your WordPress website.'
+icon: wordpress
+---
+
+
+
+<Card title="Prerequisites" icon="check">
+Before you begin, make sure you have:
+<CardGroup cols={2}>
+  <Card title="" icon="face-smile-wink">
+    A Rannah رنّة account with a configured AI agent
+  </Card>
+  <Card title="" icon="wordpress">
+    Admin access to your WordPress website
+  </Card>
+</CardGroup>
+</Card>
+
+## Integration Methods
+
+There are three main ways to integrate your Rannah رنّة Agent widget into WordPress:
+
+<CardGroup cols={3}>
+  <Card title="Plugin Method" icon="puzzle-piece">
+    Using the "Insert Headers and Footers" plugin
+  </Card>
+  <Card title="Theme Editor Method" icon="paintbrush">
+    Directly editing your theme's header.php file
+  </Card>
+  <Card title="Elementor Method" icon="elementor">
+    Using Elementor's Custom Code feature
+  </Card>
+</CardGroup>
+
+## Rannah رنّة Agent Widget Code
+
+Before proceeding with any method, you'll need your Rannah رنّة Agent widget code:
+
+```html
+<div id="VG_OVERLAY_CONTAINER"></div>
+<script defer>
+    (function() {
+        window.VG_CONFIG = {
+            ID: "YOUR_AGENT_ID", // Replace with your actual agent ID
+            region: 'eu', // or 'na' for North America
+            render: 'bottom-right', // or 'bottom-left'
+            // modalMode: true, // Set this to 'true' to open the widget in modal mode
+            stylesheets: [
+                "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+            ],
+        }
+        var VG_SCRIPT = document.createElement("script");
+        VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+        VG_SCRIPT.defer = true;
+        document.body.appendChild(VG_SCRIPT);
+    })()
+</script>
+```
+
+<Warning>
+  Remember to replace **YOUR_AGENT_ID** with your actual Rannah رنّة Agent ID.
+</Warning>
+
+## Method 1: Using a Plugin
+
+<Steps>
+  <Step title="Install Plugin">
+    1. Open your `WordPress` dashboard
+    2. Go to **Plugins** > **Add New**
+    3. Search for **Insert Headers and Footers**
+    4. Install and activate the plugin by **WPBrigade**
+  </Step>
+  <Step title="Access Plugin Settings">
+    Go to **Settings** > **WP Headers and Footers** in the sidebar
+  </Step>
+  <Step title="Add Widget Code">
+    Paste the Rannah رنّة Agent widget code in the header section
+  </Step>
+  <Step title="Save Changes">
+    Click **Save Changes**
+  </Step>
+</Steps>
+
+## Method 2: Using the Theme Editor
+
+<Warning>
+  Editing theme files directly can break your site if not done correctly. Always backup your site before making changes.
+</Warning>
+<Steps>
+  <Step title="Access Theme Editor">
+    1. Open your `WordPress` dashboard
+    2. Go to **Appearance** > **Theme File Editor**
+  </Step>
+  <Step title="Edit Header File">
+    1. In the `Theme Files` section on the right, find and open the **header.php** file
+    2. Locate the closing `</head>` tag
+  </Step>
+  <Step title="Add Widget Code">
+    Paste the Rannah رنّة widget code just before the closing `</head>` tag
+  </Step>
+  <Step title="Save Changes">
+    Click **Update File** to save your changes
+  </Step>
+</Steps>
+
+## Method 3: Using Elementor
+
+<Steps>
+  <Step title="Access Elementor Custom Code">
+    1. Login to WP Admin
+    2. Go to **Elementor** > **Custom Code**
+  </Step>
+  <Step title="Add New Custom Code">
+    Click **Add New Custom Code**
+  </Step>
+  <Step title="Configure Custom Code">
+    1. Enter a **title** for your code snippet
+    2. Choose the **Location**:
+       - `<head>` for page level
+       - `<body>` - Start for beginning of the page's body
+       - `<body>` - End for end of the page's body
+    3. Set the **Priority** (1-10, lower numbers have higher priority)
+    4. Paste the Rannah رنّة widget code in the code block editor
+  </Step>
+  <Step title="Set Display Conditions">
+    1. In the **Publish** block, click **Edit** next to **Conditions**
+    2. Set the desired conditions for where the widget should appear
+  </Step>
+  <Step title="Publish">
+    Click **Publish** to make your changes live
+  </Step>
+</Steps>
+### Customization Options
+You can customize your widget's behavior and appearance by adjusting the VG_CONFIG options:
+
+<AccordionGroup>
+  <Accordion title="Change Position">
+    Modify the `render` option to 'bottom-left' or 'bottom-right' to change the widget's position.
+  </Accordion>
+  <Accordion title="Autostart Chat">
+    Add `autostart: true,` to the `VG_CONFIG` object to have the widget open automatically when a user visits your website.
+  </Accordion>
+  <Accordion title="Custom Styling">
+
+    Add your own CSS file to the `stylesheets` array for custom styling:
+
+```
+javascript
+    stylesheets: [
+        "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+        "https://your-custom-css-url.css"
+    ],
+```
+  </Accordion>
+</AccordionGroup>
+
+## Troubleshooting
+**If you encounter issues with your Rannah رنّة widget integration:**
+
+1. Verify that you've copied the entire code snippet correctly.
+2. Double-check that you've replaced "YOUR_AGENT_ID" with your actual Rannah رنّة Agent ID.
+3. Clear your browser cache and refresh your WordPress website to see changes.
+4. If using a caching plugin, clear the cache after making changes.
+5. Check for conflicts with other plugins or theme customizations.
+
+<Note>
+  If you're using a security plugin, make sure it's not blocking the Rannah رنّة scripts from loading.
+</Note>

@@ -1,0 +1,342 @@
+---
+title: 'Designing Your Agent'
+description: 'A comprehensive guide on how to design your agent with outstanding and undeniable glow.'
+icon: brush
+---
+
+<img src="/images/branding_agent_designer2.png"></img>
+
+# 1. Overview
+
+The Overview section allows you to customize your agents text to fit your client's branding or your unique style.
+
+<img src="/images/overview_UI.png" width="500"></img>
+
+<Accordion title="Title" icon="heading">
+
+The name of your agent.
+
+Example: `Support Assistant`
+
+</Accordion>
+
+<Accordion title="Description" icon="align-left">
+
+A short descriptive statement, information or call to action. Experiment with different descriptions to find out what your customers like the best!
+
+**Examples:**
+
+<CodeGroup>
+```markdown 1
+Any questions? Im here to help!
+```
+
+```markdown 2
+Your helpful AI Agent, [Name]!
+```
+
+```markdown 3
+No. 1 Sneaker store in LA
+```
+
+</CodeGroup>
+</Accordion>
+
+<Accordion title="Branding" icon="palette">
+
+Include branding information and links if necessary.
+
+Example:
+
+```
+⚡Powered by [YOUR AGENCY]⚡
+```
+
+To add a link, use a colon behind the word you want to hyperlink:
+
+```
+⚡Powered by YOUR AGENCY:youragency.com⚡
+```
+
+</Accordion>
+
+# 2. Appearance
+
+Customize the look and feel of your agent to match your brand.
+
+<img src="/images/appearance_UI.png" width="600"></img>
+
+#
+
+**Font family**: Choose from any of the free [Google fonts](Google_font).
+
+Example: `Google Sans Flex`
+
+<Tip>
+  You can change the fonts of specific parts (like header and input field) using **custom
+  CSS**.
+</Tip>
+
+#
+
+**Inherit Font**: Type "inherit" in the font input field to use the same font as webpage. Note: The widget must be put on the website for this to work.
+
+<Warning type="warning">
+  Not recommended, as this may break the agent – use at your own **risk**.
+</Warning>
+
+#
+
+## Widget Language
+
+<CardGroup cols={2}>
+  <Card title="Language Code:" icon="language">
+     Rannah رنّة uses [ISO 639-1 language codes](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes) to set the language, this means your widget can have literally **any** language. **Codes are primarily used in the developer API.
+
+  </Card>
+  <Card title="Automatic Translation:" icon="globe">
+     Labels and placeholders will be **automatically** translated to your chosen language. `Title` and `branding` will keep their original language and text. Choose ✨**Automatic** to pull website language automatically.
+
+  </Card>
+</CardGroup>
+
+<CardGroup cols={2}>
+  <Card title="" icon="">
+
+    <Accordion title="Example:"> English will be `en`.</Accordion>
+
+  </Card>
+  <Card title="" icon="">
+     
+    <video
+    controls
+  autoPlay
+  muted
+  loop
+  playsInline
+  src="/images/changing_language.mp4" style={{ width: '400px', borderRadius: '0.8rem' }}></video>
+
+  </Card>
+</CardGroup>
+
+#
+
+## Buttons Layout
+
+Customize the layout and look of the buttons used in your agent's interface. There are three options to consider with each unique uses cases. Example, `in footer` or `horizontal` is often used as a way to automatically generate follow up questions (**similar to microsoft co-pilot or perplexity**) to guide the user through the conversation with ease.
+
+<img src="/images/shots_button_layout_cropped.png" width="500"></img>
+
+<Tabs>
+  <Tab title="Vertical">
+    Vertical (standard):
+
+    <img src="/images/Vertical_buttons.png"  width="300" style={{
+    borderRadius: '12px',
+    overflow: 'hidden'}}></img>
+
+  </Tab>
+  <Tab title="Horizontal">
+    Horizontal layout:
+     <video
+  autoPlay
+  muted
+  loop
+  playsInline
+  src="/images/Horizontal_buttons_video.mp4" style={{ width: '300px', borderRadius: '0.8rem' }}></video>
+
+  </Tab>
+  <Tab title="In footer">
+    Buttons In footer:
+
+     <video
+
+autoPlay
+muted
+loop
+playsInline
+style={{ width: '300px', borderRadius: '0.8rem' }}
+src="/images/buttons_in_footer.mp4"
+
+> </video>
+
+  </Tab>
+</Tabs>
+
+## 3. Launch Avatar
+
+Set the images that will represent your agent visually.
+
+<Callout type="note">
+  You can either upload an image or provide a valid image link/url. The max size is: 0.5MB
+  per image. We recommend using a square image with at least 400px x 400px for optimal
+  clarity.
+</Callout>
+
+<AccordionGroup>
+  <Accordion title="Launch Avatar Image">
+    Image for the chat bubble. Setting this image alone will default to all other images on the widget except background.
+    <video
+  autoPlay
+  muted
+  loop
+  playsInline
+  style={{ width: '600px', borderRadius: '0.8rem' }}
+  src="/images/launch_avatar_video.mp4"></video>
+
+  </Accordion>
+  <Accordion title="Header Image">
+    Chat icon in the top left corner of the agent.
+
+    <video
+
+autoPlay
+muted
+loop
+playsInline
+style={{ width: '300px', borderRadius: '0.8rem' }}
+src="/images/header_image_video.mp4"></video>
+
+  </Accordion>
+  <Accordion title="Banner Image">
+    Display image at the top of the chat.
+
+    <video
+
+autoPlay
+muted
+loop
+playsInline
+style={{ width: '300px', borderRadius: '0.8rem' }}
+src="/images/banner_image_video.mp4"></video>
+
+  </Accordion>
+  <Accordion title="Chat Avatar">
+    Main image for the agent's chat messages.
+
+    <video
+
+autoPlay
+muted
+loop
+playsInline
+style={{ width: '300px', borderRadius: '0.8rem' }}
+src="/images/chat_avatar_video.mp4"
+
+> </video>
+
+  </Accordion>
+  <Accordion title="Background Chat Image">
+    Background for the chat section of the widget (The white area above the input field, behind the main chat). This background has a low default opacity and might not be as visible if the image is very light. Settings can be modified with custom CSS.
+
+    <img src="/images/Vertical_buttons.png"  width="300" style={{
+    borderRadius: '12px',
+    overflow: 'hidden'}}></img>
+
+  </Accordion>
+</AccordionGroup>
+
+## 4. Custom Theme
+
+Personalize your agent's color scheme to align with your brand.
+
+<Tip>
+  If youre struggling to find your brands primary color. We recommend dowloading the
+  chrome/edge plugin [ColorPick
+  Eyedropper](https://chromewebstore.google.com/detail/colorpick-eyedropper/ohcpnigalekghcmgcdcenkpelffpdolg)
+  to easily find your preferred color from your website color.
+</Tip>
+
+<img
+  src="/images/shots_theme_picker.png"
+  width="400"
+  style={{
+    borderRadius: '12px',
+    overflow: 'hidden',
+  }}
+></img>
+
+<AccordionGroup>
+  
+  
+<Accordion title="Preset themes" icon="palette">
+###
+
+You can choose between six predefined themes that work in both light and dark mode.
+
+<Tip>
+  You can set your agent to light or dark mode. This is nice if you or your client have darker websites, as the agent will fit right in to the branding.
+</Tip>
+</Accordion>
+
+<Accordion title="Autogen Theme from Color" icon="wand-sparkles">
+ 
+**Recommended:** Automatically generate a theme based on your primary color.
+
+<Callout type="warning">
+  Visibility Note: Ensure white text on top of the primary color is clearly visible and experiment with all kinds of color combinations.
+</Callout>
+</Accordion>
+
+<Accordion title="Manual Set Theme Colors" icon="sliders">
+###
+
+**Custom Colors**: Manually input your theme colors using HEX codes or use the color palettes available in the designer.
+
+Example: `#F34534`
+
+<Tip>
+  All colors and elements can be modified using custom CSS.
+</Tip>
+</Accordion>
+</AccordionGroup>
+
+## Showcasing the agent
+
+It's essential to know how the agent behaves and looks before launching on your website or letting a client test it. Rannah رنّة has two options for testing, right from the agent designer:
+
+<CardGroup cols={2}>
+  <Card title="Prototype:" icon="cubes">
+    1.  Your clients will want to test a demo of their agent. Using the prototype link is a great way to do that. If you are in the whitelabeling program, the link will have your custom domain and branding!
+    <img src="/images/prototype_screen_shots.png"></img>
+  </Card>
+  <Card title="Demo:" icon="presentation-screen">
+    2. It's not always easy to visualize how the agent will look on a website. The demo link lets you test it out in chat bubble format, so you get an idea of how the agent will look your website.
+
+    <Tip> This is also a great way to test out custom CSS styling.</Tip>
+
+    <img src="/images/demo_screenshot_shots.png" width="600"></img>
+
+  </Card>
+</CardGroup>
+
+### Additional Tips
+
+<Card title="Launch checklist" icon="check">
+  <Check>
+    {' '}
+    **Save Regularly**: Remember to always save your progress to prevent the loss of your beautiful
+    designs.
+  </Check>
+  <Check>
+    **Thorough Testing**: Test your agent thoroughly to ensure all settings and features
+    are working as intended.
+  </Check>
+</Card>
+
+# ## Related docs:
+
+<CardGroup cols={2}>
+  <Card title="UI-Engine" icon="engine">
+    
+  </Card>
+
+{" "}
+
+<Card title="Tools" icon="gear"></Card>
+<Card title="Prompt guide" icon="text"></Card>
+
+  <Card title="Knowledgebase" icon="brain">
+    
+  </Card>
+</CardGroup>

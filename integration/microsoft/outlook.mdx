@@ -1,0 +1,147 @@
+---
+title: 'Outlook Integration'
+description: 'Connect your Outlook account to let your agent read and reply to emails automatically.'
+icon: 'microsoft'
+---
+
+## Overview
+
+The Outlook integration allows your AI agent to:
+
+1. Read incoming emails from your connected Outlook account.
+2. Determine if a reply is needed based on the email content.
+3. Automatically send a reply on your behalf.
+
+## Setup Guide
+
+### 1. Connect Your Outlook Account
+
+First, you need to authorize the application to access your Outlook account.
+
+1. Navigate to **Integrations** in the side menu on ConvoCore.
+2. Locate the **Outlook** integration card.
+3. Click **Connect** on the Outlook card.
+4. You will be redirected to Microsoft's login page.
+5. Sign in with your Microsoft account (Outlook, Office 365, or Microsoft 365).
+6. Review the permissions requested:
+   - Read your mail
+   - Send mail on your behalf
+   - Manage your mailbox
+7. Click **Accept** to authorize the connection.
+8. You'll be redirected back to ConvoCore with a confirmation message.
+
+<img height="250" src="/images/outlook-integrations-page.png" />
+
+### 2. Assign Outlook Account to Your Agent
+
+Once your Outlook account is connected, you need to assign it to the specific agent(s) you want to handle your emails. You can do this in two ways:
+
+#### Option 1: From the Integration Tab (Recommended)
+
+This method allows you to assign Outlook accounts to multiple agents at once from a centralized location.
+
+1. Navigate to **Integrations** in the side menu on ConvoCore.
+2. Locate the **Outlook** integration card and click on it to open the Outlook management modal.
+3. Click on the **Assign to Agents** tab at the top of the modal.
+4. Select the Outlook account you want to assign from the **Select Outlook Account** dropdown.
+5. You'll see a list of all your agents. For each agent:
+   - If the Outlook account is not yet assigned, click **Assign to This Agent** to assign it.
+   - If the Outlook account is already assigned, you'll see a checkmark and can click **Remove** to unassign it.
+6. The assignment is saved automatically. You can assign the same Outlook account to multiple agents if needed.
+
+<img height="250" src="/images/outlook-option1.png" />
+
+#### Option 2: From the Agent Dashboard
+
+This method allows you to configure email settings while assigning the account.
+
+1. Go to your **Agent Dashboard**.
+2. Select the agent you want to configure for email handling.
+3. Navigate to the **Channels** tab.
+4. Look for the **Email** channel option.
+5. Click **Add Email** or the **+** button to add an email source.
+6. From the dropdown, select the Outlook account you connected earlier.
+7. If you have multiple Outlook accounts connected, select the appropriate one.
+
+<img height="250" src="/images/outlook-option2.png" />
+
+### 3. Configure Email Channel Settings
+
+After assigning Outlook to your agent (using either method above), you can configure how the agent will handle incoming emails. If you used Option 1 (Integration Tab), you can configure these settings from the Agent Dashboard. If you used Option 2 (Agent Dashboard), you can configure them immediately.
+
+#### Email Configuration Options
+
+**Reply Settings:**
+
+- **Reply Delay**: Set a delay (in seconds) before the agent sends a reply. This can make the response feel more natural and avoid appearing too automated. Recommended range: 5-30 seconds.
+- **When to Reply**: Choose which emails the agent should reply to:
+  - `Always`: Reply to every email
+  - `Smart Mode`: Let the AI determine if a reply is necessary
+  - `Manual Approval`: Flag emails for manual review before replying
+  - `Specific Keywords`: Only reply to emails containing certain keywords
+
+**Email Response Customization:**
+
+- **Reply Length**: Adjust the length of generated responses:
+  - `Short`: 1-2 sentences
+  - `Medium`: 2-3 paragraphs
+  - `Long`: Detailed 3-5 paragraph response
+- **Reply Tone**: Set the tone of the response:
+  - `Professional`: Formal business tone
+  - `Friendly`: Conversational and warm tone
+  - `Casual`: Relaxed and informal tone
+  - `Custom`: Define your own tone guidelines
+
+### 4. Enable and Activate
+
+After configuring all settings:
+
+1. Click **Save Configuration** to apply your changes.
+2. You'll see a confirmation message indicating the Outlook email channel is now active.
+
+<img height="300" src="/images/outlook-agent-channels.png" />
+
+## Testing Your Setup
+
+1. Send a test email to your connected Outlook account from another email address.
+2. Wait for the configured reply delay.
+3. Check if the agent has sent a reply.
+4. Review the reply quality and tone.
+5. Adjust configuration settings if needed.
+
+## Troubleshooting
+
+**Agent Not Replying to Emails:**
+
+- Verify the Outlook account is still connected (check Integrations page)
+- Ensure the Email channel is enabled for the agent
+- Review the "When to Reply" setting - it may be filtering out emails
+
+**Authorization Errors:**
+
+- Sign out and reconnect your Outlook account
+- Check that your Microsoft account hasn't revoked permissions
+- Ensure your account hasn't been disabled in Microsoft
+
+**Configuration Not Saving:**
+
+- Refresh the page and try again
+- Ensure you have the correct permissions for the agent
+- Try a different browser or incognito mode
+
+## Privacy & Security
+
+- All emails are processed securely and encrypted in transit
+- Microsoft Outlook integration uses OAuth 2.0 for authentication
+- Your passwords are never stored; only secure tokens are kept
+- You can disconnect or revoke access at any time from the Integrations page
+
+## Disconnecting Outlook
+
+To disconnect your Outlook account:
+
+1. Go to **Integrations** in the side menu
+2. Find the **Outlook** card
+3. Click **Disconnect**
+4. Confirm when prompted
+5. The agent will no longer have access to your Outlook account

@@ -1,0 +1,84 @@
+---
+title: Advanced Flow Examples
+description: Explore examples of advanced chatbot flows using Canvas features like global nodes, dynamic conditions, and rewind levels.
+icon: layer-group
+---
+
+This section showcases how to combine Canvas features like global nodes, dynamic conditions, and rewind levels to create powerful, dynamic chatbot flows.
+
+---
+
+## Example 1: Multi-Step Booking
+
+**Scenario**: A chatbot for scheduling appointments that handles errors and provides user-friendly navigation.
+
+### Flow Overview:
+
+1. **Start Node**: Greets the user and collects their initial details.
+2. **Dynamic Conditions**: Routes users to different booking steps based on input.
+3. **Global Node**: Uses a reusable “Cancel” node to handle cancellations at any step.
+4. **Rewind Levels**: Allows users to go back and correct inputs if needed.
+
+**How It Works**:
+
+- If the user provides invalid details, the chatbot rewinds to the input step.
+- If the user says "Cancel," the chatbot routes to the global Cancel Node.
+
+---
+
+## Example 2: Personalized Recommendations
+
+**Scenario**: An e-commerce chatbot providing tailored product recommendations.
+
+### Flow Overview:
+
+1. **Start Node**: Retrieves user preferences using global variables (e.g., `user_name`, `shopping_category`).
+2. **Dynamic Conditions**: Suggests products based on user preferences and input.
+3. **Global Node**: Provides a reusable Help Node for FAQs.
+4. **End Node**: Concludes with a personalized thank-you message.
+
+**How It Works**:
+
+- The chatbot dynamically suggests products by matching user input with a product database.
+- Users can ask for help or clarification at any time using the Help Node.
+
+---
+
+## Example 3: Error Handling with Rewind
+
+**Scenario**: A support chatbot that manages errors and retries while preserving context.
+
+### Flow Overview:
+
+1. **Start Node**: Welcomes the user and asks for their issue.
+2. **Default Node**: Processes the issue and attempts to resolve it.
+3. **Rewind Levels**: Allows retries if the tool call or logic fails.
+4. **Global Node**: Routes escalated issues to a human agent or advanced support system.
+
+**How It Works**:
+
+- If the initial resolution fails, the chatbot rewinds to the user input step and requests clarification.
+- Escalation is handled through a global node for consistent fallback behavior.
+
+---
+
+## Best Practices for Advanced Flows
+
+- **Combine Features**: Use global nodes, dynamic conditions, and rewind levels together to maximize flexibility.
+- **Test Edge Cases**: Simulate scenarios with invalid inputs, tool failures, and unmatched conditions.
+- **Leverage Personalization**: Use global variables to create tailored experiences for users.
+- **Simplify Logic**: Avoid overcomplicating flows; prioritize clarity and maintainability.
+
+---
+
+## Example Flow Testing
+
+After designing advanced flows, test them thoroughly:
+
+1. Simulate user inputs and follow the flow progression.
+2. Test dynamic conditions to verify proper routing.
+3. Validate rewind functionality to ensure context is preserved.
+
+---
+
+Ready to apply these techniques? Return to the [Canvas Workspace](/canvas/introduction) to implement these advanced flow designs in your chatbot!

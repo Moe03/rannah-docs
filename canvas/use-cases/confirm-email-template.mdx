@@ -1,0 +1,101 @@
+---
+title: Confirm Email Template
+description: Template showcasing an efficient use of a node to confirm an email address.
+icon: "check"
+---
+
+<Note>
+Download the template here: [Confirm Email Template](https://vg-bunny-cdn.b-cdn.net/nodes-templates/SIGN_IN_AGENT_TEMPLATE.json)
+</Note>
+
+One of the most common use cases for any call center is to confirm identity given from the user they are speaking with, the following is a great example of that showcasing how to confirm an email address of a user.
+
+
+#### Node configuration
+Once you've created a new agent from the template this will be the prompt shown:
+![prompt showcase](/canvas/use-cases/assets/first-ss.png)
+
+
+*Greet the user warmly and ask him to provide his email, you'll use the SendEmail tool first to send a code to his email then once used ask the user about the code that was sent, once the user has told you the code use the VerifyCode tool to see if the code he mentioned was valid or not.*
+
+> From the previous node we want the AI to first know the email from the user, then we want it to send a secret code to that email, if you noticed there is another tool called VerifyCode which should be used **after** the SendEmail tool has been used, we also mention that in the node.
+
+<Note>
+Ideally there should be 2 - 3 tools per node, more than that and the AI might start to hallucinate or be slower.
+</Note>
+
+<Note>
+**You can easily mention an entire tool schema by mentioning it in the node's description/instructions/router condition saving you a lot of time and making the AI much less prone to hallucinations.**
+</Note>
+---
+#### SendEmail Tool
+The following is the node configuration for the SendEmail tool
+![send email node](/canvas/use-cases/assets/tf-is-this.png)
+> You can see that we've simply let the AI know "Hey this is used to send a secret code to the user's email" **but we only mentioned the name, email parameters but not the code, this is because the code is a secret and we don't want the AI to know about it.** 
+
+> Even if we tell the AI to not tell the user about the code a clever prompt engineer will make it spit out anything already provided to its context.
+This tool's ```serverUrl``` is a make.com hook that sends ```0192``` to the email provided to it from the payload, you can also test the functionality of the tool by clicking the "Test" button after you've filled in dummy data.
+---
+#### VerifyCode Tool
+
+After the user has sent the code we now need to verify it after the user mentions it to us, this is where the other tool ```VerifyCode``` is used.
+
+![verify code node](/canvas/use-cases/assets/verify-email-tool.png)
+
+> You can see that we've mentioned the ```code``` parameter in the node's description, this is because the code is a secret and we don't want the AI to know about it.
+
+This tool's ```serverUrl``` is a make.com hook that verifies the code provided to it from the payload, you can also test the functionality of the tool by clicking the "Test" button after you've filled in dummy data, if you filled in 0192 it will return a positive response, if you filled in anything else it will return a negative response.
+
+<Note>
+A positive response is basically telling the AI that the code is correct, a negative response is telling the AI that the code is incorrect, after using any tool there must be a response from it to let the AI know what happened, preferably also a hint message to let the AI know what to do next.
+</Note>
+---
+#### Router condition
+Once we verify the email we want the AI to switch to the next node instantly, this is why we have the following condition set:
+![router condition](/canvas/use-cases/assets/condition-ss.png)
+**Route here ONLY if you have used the VerifyEmail tool AND isValid in the response is true.**
+<Note>
+Adding bold can actually help the AI understand conditions better.
+</Note>
+---
+#### Testing out the agent
+<Note>
+The text based debugger works exactly the same as in a realtime voice call or on any channel.
+</Note>
+
+> Let's first start by opening the debugger, then resetting that agent, now we want to first emphasize on a very important part of the nodes system which is the **router**, by default once you're on a node you are in an infinite loop until you break out, so if I keep asking the AI random questions it will stay on the node it's currently on which in this case is the start node.
+![start node](/canvas/use-cases/assets/aspect-fixed/1.png)
+
+> Alright now let's mention an email address and see what happens..
+![email address](/canvas/use-cases/assets/aspect-fixed/2.png)
+As you can see the AI now has detected the email instantly, sent a human like response as if it is a human actually going to do something and send a confirmation code to that email, from the debug messages you can see the tool input, output and **whether the router chose to stay on the current node or switch to another one, in this case it chose to stay since we still have not verified the email with VerifyCode tool.**
+
+> In the response it mentioned that it has actually sent a code to the email, now let's see if the AI can actually verify the code.
+![code](/canvas/use-cases/assets/proof-sent-to-mail.png)
+Yes it did!
+
+> Alright now let's make it harder a bit for the AI and mention a **wrong code**.
+![wrong code](/canvas/use-cases/assets/aspect-fixed/3.png)
+As you can see the AI now knows that the code is incorrect and it will ask the user to try again.
+<Note>
+It was **crucial for the tool response to contain a negative response** for the AI to know that the code is incorrect and to ask the user to try again.
+</Note>
+---
+> Now let's try a correct code.
+![correct code](/canvas/use-cases/assets/aspect-fixed/4.png)
+
+As you can see the AI in the following steps:
+> Again says a human like response like "1 sec please.." *In a voice call such message make it sound super realistic*
+
+> Used the verify code tool again on the new code.
+
+> Got the response from the verify tool with a positive response.
+
+> Based on the response of that tool it has switched to the next node.
+
+> Generated a new response **based on the instructions of the new node** that it has switched to.
+---
+#### Final result
+The secret node has a secret phrase that is never known to the AI unless it has switched to that node and also mentions to the LLM to continue speaking in french, and it can't switch to that node unless it has used the VerifyCode tool and the response was positive.
+![secret node](/canvas/use-cases/assets/aspect-fixed/5.png)
+---

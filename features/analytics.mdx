@@ -1,0 +1,446 @@
+---
+title: 'Analytics'
+description: ''
+icon: chart-line
+---
+
+
+The Analytics tab provides a powerful suite of tools to monitor and analyze your AI agent's performance. Whether you're fine-tuning your agent or reporting to clients, these insights will help you make data-driven decisions to enhance user experience and engagement.
+
+
+<img src="/images/analytics-overview-shots.png" alt="Total Conversations Graph" />
+
+
+
+<Tip>
+Access the Analytics tab for each agent to view detailed performance metrics and user interaction data.
+</Tip>
+
+## Key Metrics at a Glance
+
+<CardGroup cols={2}>
+  <Card title="Monthly Interactions" icon="calendar">
+    Track the number of interactions your agent handles based on time filtering.
+    <img src="/images/monthly-interactions.png" alt="Total Conversations Graph" width="550" />
+    <Check>Custom limit can be set in the agent settings tab</Check>
+  </Card>
+  <Card title="AI Tokens Usage" icon="coin">
+    Monitor the consumption of AI tokens to optimize costs and performance.
+    <img src="/images/total-usage.png" alt="Total Conversations Graph" width="550" />
+    <Check>Custom limit can be set in the agent settings tab</Check>
+  </Card>
+  <Card title="Total Interactions" icon="comments">
+    View the cumulative number of interactions over time.
+  </Card>
+  <Card title="Total Conversations" icon="messages">
+    Keep track of the number of distinct conversations initiated with your agent.
+  </Card>
+  <Card title="Average Messages per Chat" icon="comment-dots">
+    Understand the average length and depth of conversations with your agent.
+  </Card>
+  <Card title="Average Seconds per Chat" icon="clock">
+    Measure the efficiency of your agent by tracking the average duration of interactions.
+  </Card>
+  <Card title="Average Rating" icon="star">
+    For Voiceflow agents, see the average user satisfaction rating given to your agent.
+  </Card>
+</CardGroup>
+
+<Note>
+The **total interactions** and **total conversations** are displayed as key metrics at the top of the Analytics tab and as graphs based on your selected time range.
+</Note>
+
+## Detailed Performance Metrics
+
+<AccordionGroup>
+  <Accordion title="User Retention">
+    Visualize user engagement with a graph showing the total messages exchanged before users leave the conversation. Measured by date and amount of interactions.
+    
+   <img src="/images/user-retention.png" alt="Time Retention Graph" />
+  </Accordion>
+  <Accordion title="Time Retention">
+    Analyze user engagement duration with a graph displaying the total seconds users spend interacting with your agent. Measured by amount of users and time spent.
+     <img src="/images/total-retention.png" alt="User Retention Graph" />
+  </Accordion>
+  <Accordion title="Total conversations over time">
+    Analyze user conversations over time with your agent through a graph. Measure by amount of conversations and date based on your chosen time range.
+
+     
+     <img src="/images/total-conversations.png" alt="Total Conversations Graph" />
+  </Accordion>
+</AccordionGroup>
+
+## Time Range Selection
+
+Analytics data can be filtered by time period to help you analyze trends and performance over specific intervals.
+
+<CardGroup cols={2}>
+  <Card title="Preset Time Ranges" icon="calendar">
+    Select from convenient preset time ranges:
+    - Last 1 Hour
+    - Last 24 Hours
+    - Last 7 Days
+    - Last 30 Days
+    - Last 90 Days
+    - Last Year
+  </Card>
+  <Card title="Custom Date Range" icon="calendar-days">
+    For more targeted analysis, select a custom date range using the date picker:
+    1. Click the calendar icon to open the date picker
+    2. Select your start and end dates
+    3. The analytics will automatically update to show data from your selected period
+  </Card>
+</CardGroup>
+
+<Tip>
+Compare shorter time periods (like the past week) with longer periods (like the past month) to identify trends and patterns in user behavior.
+</Tip>
+
+## Geographic Insights
+
+Enable GeoAnalytics in the [settings](/agenct-creation/agent-settings) tab of your agent to gain insights into the geographical distribution of your users:
+
+<Info>
+GeoAnalytics is an `optional feature` that provides valuable location-based data about users interacting with your agent.
+</Info>
+
+<img src="/images/geo-analytics.png" alt="GeoAnalytics Map" />
+
+GeoAnalytics tracks unique website traffic, capturing all IPs that access your site. While it doesn't directly measure agent usage, it provides insights into the total number of visitors, with a percentage of these visitors likely engaging in conversations with your agent.
+
+<Accordion title="Unique traffic graph"><img src="/images/unique-traffic.png" alt="Unique traffic graph" width="700" />
+</Accordion>
+
+
+<Warning>
+Enabling **GeoAnalytics** incurs an additional credit cost of 0.1 per request on your website.
+</Warning>
+
+## Voiceflow-Specific Analytics
+
+If you're using our Voiceflow integration, you'll have access to additional analytics specific to the platform:
+
+<CardGroup cols={2}>
+  <Card title="Top Intents" icon="chart-pie">
+    Visualize the most frequently triggered intents in a pie chart. Hover over the specific pie pieces to see the intent name.
+    <img src="/images/top-intents.png" alt="Top Intents Pie Chart" />
+  </Card>
+  <Card title="Understood Messages" icon="comments-question-check">
+    See the percentage of messages successfully understood by your assistant. Green represents understood while red represents not understood messages by the voiceflow AI.
+    <img src="/images/understood-messages.png" alt="Understood Messages Pie Chart" />
+  </Card>
+</CardGroup>
+
+## Custom Metric Charts
+
+The custom metric charts feature allows you to create your own personalized charts to track exactly what matters most to your business. Think of it like building your own dashboard of important information!
+
+<Tip>
+Custom charts help you focus on the specific metrics that are most important for your particular use case or business goals.
+</Tip>
+
+<img src="/images/analytics/custom-charts-overview.gif" alt="Custom Charts Overview" />
+
+### Adding Your First Custom Chart
+
+Creating a custom chart is super easy! Just follow these simple steps:
+
+<Steps>
+  <Step title="Click Add Custom Chart" icon="plus">
+    Look for the "Add Custom Chart" button at the top of your Analytics page.
+  </Step>
+  <Step title="Choose a Chart Type" icon="chart-pie">
+    Select from different chart types based on what you want to show:
+    - **Line Charts**: Great for showing changes over time
+    - **Bar/Column Charts**: Perfect for comparing different values
+    - **Pie/Donut Charts**: Excellent for showing percentages or proportions
+    - **Number Charts**: Simple displays of important single values
+  </Step>
+  <Step title="Select Your Metric" icon="database">
+    Choose which piece of data you want to track from the dropdown menu of available metrics.
+  </Step>
+  <Step title="Customize Your Chart" icon="paintbrush">
+    Give your chart a title, description, choose an icon, and set its size on the dashboard.
+  </Step>
+  <Step title="Save Your Chart" icon="floppy-disk">
+    Click "Add Metric Chart" to add it to your dashboard!
+  </Step>
+</Steps>
+
+### Types of Custom Charts
+
+<CardGroup cols={2}>
+  <Card title="Line Charts" icon="chart-line">
+    Show how values change over time. Great for tracking trends like conversation counts or user engagement over days or weeks.
+    <img src="/images/analytics/line-chart-example.png" alt="Line Chart Example" width="350" />
+  </Card>
+  <Card title="Bar & Column Charts" icon="chart-bar">
+    Compare different values side by side. Perfect for comparing metrics across different categories or time periods.
+    <img src="/images/analytics/bar-chart-example.png" alt="Bar Chart Example" width="350" />
+  </Card>
+  <Card title="Pie & Donut Charts" icon="chart-pie">
+    Show proportions or percentages. Ideal for visualizing how different parts make up a whole, like the types of questions users ask.
+    <img src="/images/analytics/pie-chart-example.png" alt="Pie Chart Example" width="350" />
+  </Card>
+  <Card title="Number Charts" icon="hashtag">
+    Display a single important value with a big, bold number. Great for key performance indicators (KPIs) that you want to see at a glance.
+    <img src="/images/analytics/number-chart-example.png" alt="Number Chart Example" width="350" />
+  </Card>
+</CardGroup>
+
+### Customizing Your Charts
+
+Make your charts truly yours with these customization options:
+
+<AccordionGroup>
+  <Accordion title="Chart Size">
+    Choose how much space your chart takes up on the dashboard:
+    - **Small**: Takes up 1/5 of the row width
+    - **Medium**: Takes up 2/5 of the row width
+    - **Large**: Takes up 3/5 of the row width
+    - **Full Width**: Spans the entire row
+  </Accordion>
+  <Accordion title="Chart Icons">
+    Pick an icon that represents your data best! Choose from preset icons like users, chat bubbles, timer, or even upload your own custom icon.
+  </Accordion>
+  <Accordion title="Value Filtering">
+    For boolean (true/false) or enum (category) metrics, you can choose which specific values to display in your chart.
+  </Accordion>
+  <Accordion title="Aggregation Options">
+    For number charts, choose whether to display the total sum or the average of values.
+  </Accordion>
+</AccordionGroup>
+
+### Managing Your Custom Charts
+
+<Info>
+Once you've added charts to your dashboard, you can easily manage them to keep your analytics view organized and relevant.
+</Info>
+
+- **Edit Charts**: Click the edit icon on any custom chart to change its settings
+- **Delete Charts**: Remove charts you no longer need by clicking the delete icon
+- **Expand Charts**: Click the expand icon to see a larger view with more detailed data
+
+<img src="/images/analytics/managing-charts.gif" alt="Managing Custom Charts" />
+
+### Chart Examples To Try
+
+Here are some useful custom charts you might want to create:
+
+- **Conversion Rate**: Track how many chat visitors become customers
+- **Question Categories**: See what types of questions users ask most often
+- **Support Issues**: Monitor common support issues to improve your agent
+- **Regional Activity**: Compare user engagement across different regions
+- **Time-to-Resolution**: Measure how quickly your agent resolves user queries
+
+<Note>
+Remember that the available metrics depend on what data your agent collects. Some metrics might need to be set up by your development team.
+</Note>
+
+## Handoff Analytics
+
+<Info>
+Handoff Analytics provides detailed insights into how live agent handoffs are performing, helping you optimize human agent response times and handling efficiency.
+</Info>
+
+When customers need human assistance, they can request a handoff to a live agent. The Handoff Analytics section helps you track and analyze these handoff interactions to ensure optimal customer service.
+
+<img src="/images/handoff-analytics-overview.png" alt="Handoff Analytics Overview" />
+
+### Overview Metrics
+
+Get a quick snapshot of handoff performance with three key metrics at the top of the section:
+
+<CardGroup cols={3}>
+  <Card title="Total Accepted Handovers" icon="hand">
+    The total number of handoff requests that were accepted by live agents during the selected time period.
+  </Card>
+  <Card title="Average Response Time" icon="clock">
+    The average time agents take to respond to customer messages during a handoff, calculated per customer message.
+  </Card>
+  <Card title="Average Handling Time (AHT)" icon="timer">
+    The average duration from when an agent accepts a handoff until the conversation is completed or passed back to AI.
+  </Card>
+</CardGroup>
+
+<Tip>
+All calculations are performed on the backend to ensure accuracy. These metrics automatically respect your selected time range filter.
+</Tip>
+
+### Per-Agent Handoff Analytics
+
+View detailed performance metrics for each agent who has handled handoffs:
+
+<AccordionGroup>
+  <Accordion title="Agent Column">
+    Displays the agent's profile picture, name, and unique agent ID. Each agent's avatar is highlighted with a primary colored border.
+  </Accordion>
+  <Accordion title="Organization Column">
+    Shows which organization the agent belongs to:
+    - **Rannah رنّة**: Main dashboard agents (your primary team)
+    - **Organization Name**: Agents from specific organizations (if using multi-org setup)
+    
+    Organization logos are displayed as circular avatars with primary colored borders.
+  </Accordion>
+  <Accordion title="Accepted Handovers">
+    The number of handoff requests this specific agent has accepted during the time period.
+  </Accordion>
+  <Accordion title="Avg Response Time">
+    How long this agent takes on average to respond to customer messages, calculated as total handling time divided by number of customer messages.
+  </Accordion>
+  <Accordion title="Avg Handling Time">
+    The average duration this agent takes to complete a handoff from acceptance to completion.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+Agents are automatically sorted by the number of accepted handovers (highest to lowest) to highlight your most active team members.
+</Note>
+
+### Per-Organization Handoff Analytics
+
+For teams with multiple organizations, view aggregated metrics by organization:
+
+<CardGroup cols={2}>
+  <Card title="Organization Performance" icon="building">
+    See which organizations are handling the most handoffs and how efficiently they're responding to customers.
+  </Card>
+  <Card title="Cross-Organization Comparison" icon="chart-bar">
+    Compare performance metrics across different organizations to identify best practices and areas for improvement.
+  </Card>
+</CardGroup>
+
+The organization table includes:
+- Organization logo and name
+- Total accepted handovers for that organization
+- Average response time across all agents in that organization
+- Average handling time for the organization
+
+### How Handoff Metrics Are Calculated
+
+<Steps>
+  <Step title="Accepted Handover Count" icon="hand-holding">
+    Counts all handoff requests that were accepted by live agents within your selected time range. Each handoff is tracked individually, even if the same conversation has multiple handoffs.
+  </Step>
+  <Step title="Average Response Time" icon="clock">
+    For each handoff, we calculate:
+    1. Count total customer messages during the handoff period
+    2. Divide the total handling time by number of customer messages
+    3. Average across all handoffs
+    
+    This gives you the average time an agent had per customer message, providing a more accurate measure of responsiveness.
+  </Step>
+  <Step title="Average Handling Time" icon="timer">
+    Calculated as the duration from when the agent accepts the handoff to when:
+    - The conversation is passed back to the AI agent
+    - The chat is marked as complete
+    
+    Only completed handoffs are included in this calculation.
+  </Step>
+</Steps>
+
+<Warning>
+Incomplete handoffs (where the conversation hasn't been completed or passed back to AI) are excluded from Average Handling Time calculations to ensure accuracy.
+</Warning>
+
+### Multiple Handoffs Per Conversation
+
+<Check>
+The system properly tracks multiple handoffs within the same conversation!
+</Check>
+
+If a conversation is passed to AI and then later handed off again, each handoff is tracked separately:
+
+**Example Scenario:**
+1. Customer chats with AI
+2. Handoff to Agent A from Rannah رنّة → Tracked ✓
+3. Agent A passes back to AI
+4. Later, handoff to Agent B from Organization "ACME Corp" → Also tracked ✓
+
+Analytics will show:
+- Agent A: 1 accepted handover
+- Agent B: 1 accepted handover  
+- Rannah رنّة: 1 handover
+- Organization "ACME Corp": 1 handover
+
+### Customizing Handoff Analytics Display
+
+You can control whether handoff analytics are visible in your dashboard:
+
+<Steps>
+  <Step title="Access Settings" icon="gear">
+    Navigate to your agent's Settings tab or Organization Client settings.
+  </Step>
+  <Step title="Find Analytics Options" icon="chart-line">
+    Look for the "Hide Handoff Analytics" checkbox in the analytics configuration section.
+  </Step>
+  <Step title="Toggle Visibility" icon="eye-slash">
+    Check the box to hide handoff analytics from the Analytics tab, or uncheck to show them.
+  </Step>
+</Steps>
+
+<Info>
+This setting is useful if you don't use live agent handoffs or want to simplify your analytics dashboard.
+</Info>
+
+### Best Practices for Handoff Analytics
+
+<AccordionGroup>
+  <Accordion title="Monitor Response Times">
+    Keep an eye on average response times to ensure customers aren't waiting too long. Set internal benchmarks and track improvements over time.
+  </Accordion>
+  <Accordion title="Identify Top Performers">
+    Use the per-agent analytics to recognize team members who handle handoffs efficiently and learn from their best practices.
+  </Accordion>
+  <Accordion title="Optimize Staffing">
+    Analyze handoff patterns across different time periods to understand when you need more live agents available.
+  </Accordion>
+  <Accordion title="Compare Organizations">
+    If using multiple organizations, compare metrics to identify which teams need additional training or support.
+  </Accordion>
+  <Accordion title="Track Improvements">
+    After implementing changes to your handoff process, use different time ranges to measure the impact on response and handling times.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+Combine handoff analytics with other metrics like conversation ratings and retention to get a complete picture of customer satisfaction during live agent interactions.
+</Tip>
+
+## Interpreting Your Analytics
+
+Understanding your analytics is crucial for optimizing your AI agent's performance and enhancing user experience. By regularly reviewing these metrics, you can gain valuable insights into how users interact with your agent, identify areas for improvement, and make data-driven decisions to increase efficiency and engagement.
+
+
+<Tip>
+Regular analysis of your analytics can help you:
+- Identify peak usage times
+- Understand user behavior
+- Optimize your agent's responses
+- Track improvements after updates to your agent
+</Tip>
+
+
+### Tips to use the analytics efficiently:
+
+<Steps>
+  <Step title="Select Time Range" icon="calendar-days">
+    Use the time range filter or custom date picker to view data for specific periods:
+    <img src="/images/time-range-filter.png" alt="Time Range Filter" width="400" />
+  </Step>
+  <Step title="Compare Metrics" icon="chart-mixed">
+    Analyze trends by comparing different metrics side by side. This allows you to identify correlations and patterns across various performance indicators.
+  </Step>
+  <Step title="Monitor Trends" icon="chart-line">
+    Look for patterns in user interactions over time. This helps you understand peak usage times and general engagement patterns.
+  </Step>
+  <Step title="Optimize Performance" icon="gauge-high">
+    If average chat duration is high, consider ways to make your agent more efficient. This might involve refining responses or improving the knowledge base.
+  </Step>
+  <Step title="Enhance User Retention" icon="user-plus">
+    Analyze the user retention graph to see where users tend to drop off and improve those areas. This can help increase overall engagement and satisfaction.
+  </Step>
+  <Step title="Identify Areas for Improvement" icon="magnifying-glass-chart">
+    When using voiceflow, utilize metrics like "Understood Messages" to refine your agent's comprehension. Focus on improving areas where the agent struggles to understand user inputs.
+  </Step>
+</Steps>

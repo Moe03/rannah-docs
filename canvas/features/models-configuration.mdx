@@ -1,0 +1,133 @@
+---
+title: Models Configuration
+description: Learn how to configure and optimize AI models in the Canvas feature to improve chatbot performance.
+icon: robot
+---
+
+The **Models Configuration** feature in the Canvas allows you to tailor the behavior of your AI by adjusting key parameters. This enables you to create responses that match your desired tone, precision, and length, ensuring the chatbot performs optimally in any scenario.
+
+---
+
+## Key Parameters in Models Configuration
+
+### 1. **Temperature**
+
+The **Temperature** parameter controls the creativity of the chatbot’s responses:
+
+- **Lower Values (0–0.3)**: Generate precise, fact-based, and deterministic answers.
+- **Higher Values (0.7–1.0)**: Produce creative, varied, and open-ended responses.
+
+**Use Case**:
+
+- **Customer Support**: Set the temperature to `0.2` for factual and consistent responses.
+- **Creative Tasks**: Set the temperature to `0.8` for generating innovative ideas or content.
+
+---
+
+### 2. **Max Tokens**
+
+The **Max Tokens** parameter limits the length of the chatbot’s response.
+
+- A higher token limit allows for detailed answers.
+- A lower token limit ensures concise and to-the-point responses.
+
+**Use Case**:
+
+- **Summaries**: Limit tokens to `100` for short summaries.
+- **Detailed Explanations**: Increase the limit to `500` for in-depth explanations.
+
+---
+
+### 3. **Rewind Level**
+
+The **Rewind Level** determines how far back the chatbot can reference previous nodes in the flow:
+
+- **Level 0**: No rewind, the chatbot only considers the current node.
+- **Level 1–3**: The chatbot can reference up to 3 previous nodes for additional context.
+
+**Use Case**:
+
+- **Error Handling**: Set the rewind level to `1` to retry failed actions.
+- **Complex Conversations**: Use rewind levels of `2–3` for maintaining context across multiple nodes.
+
+---
+
+## Configuring Models in the Node Settings
+
+<div style={{ display: 'flex', alignItems: 'flex-start' }}>
+  <div style={{ flex: 1 }}>
+
+1.  Open the **LLM Configuration** tab in a node’s settings.
+2.  Adjust the following parameters:
+
+    - **Temperature**: Slide the control to the desired level.
+    - **Max Tokens**: Set a specific token limit for responses.
+    - **Rewind Level**: Choose the rewind level for managing conversation context.
+
+  </div>
+  <div style={{ flex: 1, textAlign: 'center' }}>
+    <img src="/assets/model_config_with_rewind.png" alt="LLM Configuration Tab" />
+    <p>_Image showing the LLM Configuration tab with Temperature, Max Tokens, and Rewind Level settings._</p>
+  </div>
+</div>
+
+---
+
+## Example Configurations
+
+### 1. Precise and Factual Responses
+
+- **Temperature**: `0.1`
+- **Max Tokens**: `200`
+- **Rewind Level**: `0`
+
+**Use Case**: An FAQ chatbot that provides accurate, concise answers.
+
+---
+
+### 2. Creative and Open-Ended Responses
+
+- **Temperature**: `0.9`
+- **Max Tokens**: `500`
+- **Rewind Level**: `2`
+
+**Use Case**: A brainstorming assistant for generating ideas or solutions.
+
+---
+
+### 3. Contextual Conversations
+
+- **Temperature**: `0.3`
+- **Max Tokens**: `300`
+- **Rewind Level**: `3`
+
+**Use Case**: A customer service chatbot that maintains context across multiple steps.
+
+---
+
+## Testing Model Settings
+
+1. Use the **Test Tool** in the Canvas Workspace to simulate responses.
+2. Input queries matching your intended use case.
+3. Adjust the parameters as needed for better results.
+
+---
+
+## Best Practices for Models Configuration
+
+- **Align Parameters with Use Cases**: Tailor Temperature and Max Tokens to the specific requirements of your chatbot.
+- **Test Iteratively**: Run multiple tests to fine-tune the settings.
+- **Balance Creativity and Precision**: Use mid-range Temperature values (`0.4–0.6`) for responses that are both creative and accurate.
+- **Leverage Rewind Levels**: Enable context retention for better user interactions.
+
+---
+
+### Example Flow with Configured Models
+
+**Scenario**: A multi-purpose chatbot:
+
+1. **Start Node**: Welcomes the user with a creative tone (Temperature `0.7`).
+2. **FAQ Node**: Provides precise answers with a factual tone (Temperature `0.2`).
+3. **Feedback Node**: Asks for user feedback with an engaging tone (Temperature `0.5`).
+
+---

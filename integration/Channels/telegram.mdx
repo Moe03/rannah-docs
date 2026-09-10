@@ -1,0 +1,103 @@
+---
+title: "Connect Telegram"
+description: "Learn how to integrate your Telegram bot with Rannah رنّة for seamless AI-powered conversations"
+icon: "telegram"
+---
+
+## Overview
+
+Telegram integration allows you to connect your AI agent with Telegram's messaging platform, enabling your users to interact with your AI through Telegram. This integration supports:
+
+<Card>
+  - Real-time message processing - Rich media handling - Group chat
+  compatibility - Secure webhook connections - Automated responses
+</Card>
+
+<Note>
+  Before starting the integration process, ensure you have: - A Telegram account
+  - Access to your Rannah رنّة dashboard - Administrative privileges for bot
+  creation
+</Note>
+
+## Integration Steps
+
+### 1. Creating Your Telegram Bot
+
+First, you'll need to create a bot on Telegram using BotFather, Telegram's official bot creation tool.
+
+<Steps>
+  <Step title="Access BotFather">
+    Open Telegram and search for "@BotFather" in the search bar
+  </Step>
+
+  <Step title="Initialize Bot Creation">
+    Send the `/newbot` command to BotFather
+  </Step>
+
+  <Step title="Configure Bot Details">
+    Follow the prompts to: - Set a display name for your bot - Choose a unique
+    username (must end in 'bot')
+  </Step>
+
+  <Step title="Secure Your Token">
+    <Warning>
+      Keep your bot token secure! Never share it publicly or commit it to
+      version control.
+    </Warning>
+    Save the bot token provided by BotFather - you'll need this for the next step.
+    ![BotFather Token](/images/meta-tut/20.PNG)
+  </Step>
+</Steps>
+
+<Tip>
+  After creating your bot, send it a `/start` command to activate it. ![Start
+  Bot](/images/meta-tut/21.PNG)
+</Tip>
+
+### 2. Connecting to Rannah رنّة
+
+Now that you have your Telegram bot, let's connect it to your Rannah رنّة dashboard.
+
+<Steps>
+  <Step title="Access Channel Settings">
+    Navigate to your agent's dashboard and locate the Channels tab
+  </Step>
+
+  <Step title="Configure Telegram Integration">
+    - Click on "Connect Telegram" - Paste your bot token in the designated field
+    - Click "Save & Test" to establish the connection ![Dashboard
+    Configuration](/images/meta-tut/22.PNG)
+  </Step>
+</Steps>
+
+### 3. Verify Integration
+
+<Steps>
+  <Step title="Test the Connection">
+    Send a message to your bot on Telegram to verify the integration
+  </Step>
+
+  <Step title="Check Dashboard">
+    Verify that messages appear in your Rannah رنّة dashboard under the
+    Conversations section ![Conversation View](/images/meta-tut/23.PNG)
+    ![Message History](/images/meta-tut/24.PNG)
+  </Step>
+</Steps>
+
+<Card title="Troubleshooting">
+  If your bot isn't responding: - Verify your bot token is entered correctly -
+  Ensure the webhook is properly configured - Check your bot's privacy settings
+  in BotFather - Confirm your Rannah رنّة subscription is active
+</Card>
+
+## Best Practices
+
+<Tip>
+  For optimal performance: - Use clear, descriptive bot names - Set up a welcome
+  message - Configure fallback responses - Regularly monitor bot analytics
+</Tip>
+
+<Warning>
+  Remember to: - Never share your bot token - Regularly update your bot's
+  settings - Monitor your webhook status - Back up your configuration
+</Warning>

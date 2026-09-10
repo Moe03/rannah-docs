@@ -1,0 +1,168 @@
+---
+title: "Billing"
+description: "Manage Rannah رنّة subscriptions, v2-2026 plans, add-ons, payment methods, and invoices."
+icon: credit-card
+---
+
+# Billing
+
+Manage your workspace plan, add-ons, credits, payment methods, and invoices from the dashboard **Billing** page (bottom left).
+
+<Note>
+  **Credits:** **1 USD = 1,000 credits**. The **v2-2026** catalog and its feature gates apply to **new users only**. If you were on any older plan before August 2026, you keep **all features unlocked** and are not forced onto the new ladder.
+</Note>
+
+<Tip>
+  Compare tiers on [Pricing](/Pricing/overview), then subscribe or change plan from **Billing → Plans**.
+</Tip>
+
+---
+
+## Subscription plans (v2-2026)
+
+Annual = ~33% off (billed once per year as the “annual billed” amount below).
+
+### Free — $0
+Sandbox / hobby trial.
+- Web widget, tools builder, basic analytics
+- 2 agents · 1 workspace seat · 2 trial client seats
+- **500 credits one-time** (not refreshed monthly)
+- 1,000 KB docs · Tier 4 models
+- No REST API
+
+### Starter — $29/mo · $228/yr ($19/mo effective)
+- Web + Telegram
+- 3 agents · 5,000 credits/mo · 1,000 KB docs
+- Calendar & email integrations · Tier 3+ models
+- Community / email support
+
+### Pro — $59/mo · $468/yr ($39/mo effective) — most popular
+- All chat channels (WhatsApp, Instagram, Messenger, Discord, Email)
+- Live handoff + ticketing, lead funnel, CRM
+- 10 agents · 2 workspace seats · 15,000 credits/mo · 25,000 KB docs
+- Overage credits · Tier 2+ models · Monthly crawler refresh
+- Email support
+
+### Business — $99/mo · $792/yr ($66/mo effective)
+- Everything in Pro, plus voice / phone, campaigns, widget branding removed
+- BYOK + premium (Tier 1) models, MCP + webhooks, agent simulator
+- Crawler access + auto-update · API **read**
+- 20 agents · 5 workspace seats · 25,000 credits/mo · 100,000 KB docs
+- **2** Twilio numbers · **3** concurrent call lines
+- Weekly crawler refresh · Priority email
+
+### White Label — $199/mo · $1,596/yr ($133/mo effective)
+- Agency platform: full API, per-client analytics, crawler proxy + auto-scrape
+- Unlimited agents · 10 workspace seats · **20** client seats
+- 60,000 credits/mo · 500,000 KB docs
+- **3** Twilio numbers · **10** concurrent lines
+- Daily crawler · Priority + onboarding
+
+### White Label Elite — $349/mo · $2,796/yr ($233/mo effective)
+- SaaS mode, client self-signup, client-facing analytics, rebrandable API
+- Agency auto-billing (Stripe Connect for your clients)
+- Unlimited seats, clients, and KB docs · 120,000 credits/mo
+- **5** Twilio numbers · **25** concurrent lines · Dedicated support
+
+<Note>
+  Paid-plan monthly credits are added each billing cycle. Unused credits (including purchased top-ups) roll over.
+</Note>
+
+<Note>
+  Public REST API: **Business+** for read, **White Label+** for write. See [API Authentication](/Support/contact).
+</Note>
+
+---
+
+## Grandfathered plans (pre–August 2026)
+
+If your workspace was on **any older plan before August 2026** — classic Pay as you go, legacy, managed, or other pre-v2 catalogs — you are fully grandfathered:
+
+- **All features stay unlocked** (channels, voice, API, crawler, agency tools, etc. — same as before)
+- You are **not** migrated onto the v2-2026 ladder
+- Existing Stripe prices, add-ons, and billing for your cohort stay as before
+- The new Starter → Elite limits and capability gates apply only to **new / never-paid** workspaces
+
+You only see the new plan ladder if you are a new user (or you later choose a v2 plan through an intentional upgrade path).
+
+---
+
+## Add-ons
+
+Buy capacity or unlock a feature without changing base plan. In Billing, open **Add-ons** (or modify plan). Yearly add-on price ≈ monthly × 8.
+
+### Capacity
+- **Workspace seat** — $10/mo
+- **Client seat** — $15/mo
+- **Agent seat** — $5/mo
+- **Concurrent call line** — $5/mo
+- **Twilio phone number** — $3/mo
+- **White Label (legacy)** — $200/mo (agency dashboard / clients / custom domains)
+
+### Feature (v2)
+Channels ($5–$15), omnichannel pack ($29), live handoff ($15), lead funnel ($15), CRM ($10), widget branding ($19), widget tabs ($9), voice/phone ($29), SIP ($15), campaigns ($29), BYOK + premium ($20), MCP + webhooks ($15), API read ($15) / full ($39), agent simulator ($19), crawler options ($10–$15), SaaS mode ($99).
+
+Full list: [Pricing overview → Add-ons](./overview#add-ons).
+
+---
+
+## Managing your subscription
+
+1. Log in → **Billing** (bottom left)
+2. Open **Plans** (or **Change plan**)
+3. Choose **monthly** or **annual**
+4. Confirm checkout (card / wallet) or confirm in-app change if you already have a payment method
+
+Upgrades and many plan changes are prorated; you’ll see a preview before confirming.
+
+<Tip>
+  Use the plan comparison on Billing or [Pricing](/Pricing/overview) before you subscribe.
+</Tip>
+
+---
+
+## Credits & overages
+
+- Included monthly credits come with your paid plan (or Free’s one-time trial).
+- **Pro+** can purchase overage / top-up credits from Billing when you need more.
+- Hitting credit (or message) limits can lock AI usage for the period until the next cycle or a top-up — watch the quota banner in the app.
+
+**[Credits deep-dive →](./credits)**
+
+---
+
+## Payment methods & invoices
+
+- Add or update cards in **Billing → Billing details**
+- Download invoices from **Billing → Invoices**
+- Business tax / company fields are optional on the billing forms where shown
+
+---
+
+## Auto-billing / renewals
+
+Subscriptions renew automatically each cycle while a valid payment method is on file.
+
+- To cancel or change renewal, use **Billing → Current plan** (or the Stripe customer portal link if shown)
+- Agency **auto-billing for clients** (Stripe Connect) requires **White Label Elite** (or the SaaS-mode entitlement), not standard White Label
+
+---
+
+## Troubleshooting
+
+| Issue | What to try |
+|-------|-------------|
+| Payment declined | Check card details, funds, and 3DS / bank approval |
+| Plan change blocked | Clear unpaid invoices; wait for a pending Stripe change to finish |
+| Missing feature after upgrade | Refresh the app; confirm the workspace shows the new plan on Billing |
+| API 403 | Need Business+ (read) or White Label+ (write) on v2 |
+| Still on old billing / everything unlocked | Expected for any pre–August 2026 plan — v2 gates are new users only |
+
+---
+
+## Next steps
+
+- **[Pricing overview](./overview)** — Ladder, model tiers, add-ons
+- **[Credits](./credits)** — Consumption and optimization
+- **[Provider cost estimates](./provider-cost-estimates)** — STT / TTS
+- **[Voice pricing](../voice/pricing)** — Per-minute call stack

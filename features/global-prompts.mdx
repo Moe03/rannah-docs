@@ -1,0 +1,807 @@
+---
+title: "Global Prompts"
+description: "Create reusable prompt templates that can be shared across multiple agents for consistent behavior and reduced maintenance"
+icon: "file-lines"
+---
+
+Global Prompts are reusable instruction templates that can be assigned to multiple agents, enabling you to maintain consistent behavior, policies, and guidelines across your entire agent ecosystem without duplicating content.
+
+## Overview
+
+<CardGroup cols={2}>
+  <Card title="Centralized Management" icon="globe">
+    Create and manage prompts in one place, then assign to multiple agents
+  </Card>
+  <Card title="Consistency at Scale" icon="layer-group">
+    Ensure all agents follow the same company policies and brand guidelines
+  </Card>
+  <Card title="Easy Updates" icon="arrows-rotate">
+    Update a prompt once and all assigned agents automatically use the new version
+  </Card>
+  <Card title="Flexible Assignment" icon="users">
+    Assign up to 10 global prompts per agent for comprehensive instruction sets
+  </Card>
+</CardGroup>
+
+---
+
+## How Global Prompts Work
+
+Global prompts are appended to an agent's system prompt at runtime. When a conversation starts:
+
+1. The agent's base system prompt is loaded
+2. All assigned global prompts are retrieved from the database
+3. Global prompts are concatenated and appended to the system prompt
+4. The combined prompt guides the agent's behavior throughout the conversation
+
+```javascript
+// Final System Prompt Structure
+Final System Prompt = 
+  Base System Prompt 
+  + Node-Specific Instructions 
+  + Global Prompt 1
+  + Global Prompt 2
+  + ... (up to 10 global prompts)
+```
+
+<Info>
+**Runtime Injection**: Global prompts are dynamically injected when the agent initializes, ensuring agents always use the latest version without requiring manual updates.
+</Info>
+
+---
+
+## Use Cases
+
+<AccordionGroup>
+  <Accordion title="Company-Wide Policies" icon="building">
+    <div className="space-y-4">
+      <p>Enforce consistent policies across all customer-facing agents:</p>
+      
+      <CardGroup cols={2}>
+        <Card title="Brand Voice & Tone" icon="megaphone">
+          - Communication style guidelines
+          - Language and terminology standards
+          - Personality and character traits
+          - Customer interaction principles
+        </Card>
+        <Card title="Legal & Compliance" icon="scale-balanced">
+          - Data privacy policies
+          - GDPR/CCPA compliance rules
+          - Disclosure requirements
+          - Terms of service references
+        </Card>
+      </CardGroup>
+      
+      **Example Global Prompt**:
+      ```plaintext
+      COMPANY VOICE GUIDELINES:
+      - Always use a friendly, professional tone
+      - Address customers by their first name when known
+      - Never make promises we can't keep
+      - Escalate pricing questions to human agents
+      - Follow our brand voice: Helpful, Clear, and Trustworthy
+      ```
+    </div>
+  </Accordion>
+  
+  <Accordion title="Technical Constraints" icon="gears">
+    <div className="space-y-4">
+      <p>Define technical rules and output formatting requirements:</p>
+      
+      ```plaintext
+      OUTPUT FORMATTING RULES:
+      - Always respond in valid JSON when using structured output
+      - Maximum response length: 500 characters for each response
+      - Include source citations for all factual claims
+      - Use markdown formatting for emphasis
+      - Never output sensitive information (passwords, API keys, etc.)
+      
+      API USAGE GUIDELINES:
+      - Always verify data before calling external tools
+      - Use the KB-Search tool before answering factual questions
+      - Handle API errors gracefully with fallback responses
+      ```
+      
+      <Warning>
+      **Technical Prompts**: Keep technical constraints in separate global prompts from behavioral guidelines for better organization.
+      </Warning>
+    </div>
+  </Accordion>
+  
+  <Accordion title="Industry-Specific Knowledge" icon="graduation-cap">
+    <div className="space-y-4">
+      <p>Share domain expertise and terminology across specialized agents:</p>
+      
+      <CardGroup cols={2}>
+        <Card title="Healthcare" icon="heart-pulse">
+          ```plaintext
+          HEALTHCARE GUIDELINES:
+          - Never provide medical advice
+          - Use HIPAA-compliant language
+          - Direct users to healthcare professionals
+          - Understand medical terminology
+          - Be empathetic and supportive
+          ```
+        </Card>
+        <Card title="Financial Services" icon="dollar-sign">
+          ```plaintext
+          FINANCIAL GUIDELINES:
+          - Provide educational info only
+          - Include regulatory disclaimers
+          - Never give investment advice
+          - Explain financial terms clearly
+          - Prioritize security and privacy
+          ```
+        </Card>
+      </CardGroup>
+    </div>
+  </Accordion>
+  
+  <Accordion title="Agent Coordination" icon="diagram-project">
+    <div className="space-y-4">
+      <p>Coordinate behavior across agent teams for seamless experiences:</p>
+      
+      ```plaintext
+      HANDOFF PROTOCOL:
+      - Always capture: name, email, and inquiry type before handoff
+      - Use the transfer_to_agent tool for complex requests
+      - Provide context summary when needed
+      
+      AGENT SPECIALIZATIONS:
+      - Sales Agent: Handle purchases and product inquiries
+      - Support Agent: Technical issues and troubleshooting
+      - Billing Agent: Invoices, payments, and account questions
+      
+      When a user's request is outside your expertise, immediately
+      transfer to the appropriate specialized agent.
+      ```
+    </div>
+  </Accordion>
+  
+  <Accordion title="Seasonal Campaigns" icon="calendar">
+    <div className="space-y-4">
+      <p>Quickly deploy campaign-specific messaging across all agents:</p>
+      
+      ```plaintext
+      HOLIDAY SALE CAMPAIGN (Dec 1-31, 2024):
+      - Mention our "Holiday Special: 25% off all products"
+      - Offer free shipping on orders over $50
+      - Highlight gift wrapping services
+      - Promote extended return policy through January 15
+      - Use festive but professional language
+      
+      RESPONSE EXAMPLES:
+      - "Great timing! We're offering 25% off during our holiday sale."
+      - "Would you like free shipping? Orders over $50 qualify!"
+      ```
+      
+      <Info>
+      **Quick Deployment**: Create a campaign global prompt, assign it to all agents, and remove it when the campaign ends-no need to edit individual agents.
+      </Info>
+    </div>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Creating Global Prompts
+
+### Access the Prompts Manager
+
+Navigate to **Prompts** from your workspace sidebar:
+
+<Steps>
+  <Step title="Open Prompts Page">
+    Click on **Prompts** in the main navigation (usually in the sidebar)
+  </Step>
+  <Step title="Create New Prompt">
+    Click the **"New Prompt"** button in the top-right corner
+  </Step>
+  <Step title="Fill in Details">
+    Provide a name, write your prompt content, and select agents to assign it to
+  </Step>
+  <Step title="Save and Deploy">
+    Click **"Create"** to save the prompt and immediately deploy it to selected agents
+  </Step>
+</Steps>
+
+### Prompt Creation Form
+
+<Tabs>
+  <Tab title="Basic Information">
+    <div className="space-y-4">
+      <Frame>
+        <div className="space-y-3 p-4">
+          <div>
+            <strong>Prompt Name</strong>
+            <p className="text-sm text-gray-600 mt-1">
+              A descriptive name to identify this prompt (e.g., "Brand Voice Guidelines", "GDPR Compliance", "Holiday Campaign 2024")
+            </p>
+          </div>
+          
+          <div>
+            <strong>Prompt Content</strong>
+            <p className="text-sm text-gray-600 mt-1">
+              The actual instructions that will be appended to agents' system prompts. Write clear, specific guidelines using markdown formatting.
+            </p>
+          </div>
+        </div>
+      </Frame>
+      
+      <Info>
+      **Naming Convention**: Use clear, descriptive names that indicate the prompt's purpose. This makes management easier as your prompt library grows.
+      </Info>
+    </div>
+  </Tab>
+  
+  <Tab title="Agent Assignment">
+    <div className="space-y-4">
+      <p>Select which agents should use this global prompt:</p>
+      
+      <Frame>
+        <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+          <h4 className="font-semibold mb-2">Assignment Rules</h4>
+          <ul className="space-y-2 text-sm">
+            <li><strong>Maximum Limit:</strong> Each agent can have up to 10 global prompts assigned</li>
+            <li><strong>Current Usage:</strong> The UI shows how many prompts each agent already has</li>
+            <li><strong>Multi-Select:</strong> Assign one prompt to multiple agents at once</li>
+            <li><strong>Instant Update:</strong> Changes take effect immediately for new conversations</li>
+          </ul>
+        </div>
+      </Frame>
+      
+      <Warning>
+      **Assignment Limit**: If an agent already has 10 global prompts, you must remove one before assigning another. This prevents prompt overload that could affect agent performance.
+      </Warning>
+    </div>
+  </Tab>
+  
+  <Tab title="Preview & Test">
+    <div className="space-y-4">
+      <p>Before saving, review how your prompt will appear:</p>
+      
+      ```markdown
+      # Your Global Prompt Preview
+      
+      This is how your prompt content will be appended to the
+      agent's system prompt. You can use:
+      
+      - **Bold text** for emphasis
+      - `code blocks` for technical instructions
+      - Lists for structured guidelines
+      - Clear headings for organization
+      ```
+      
+      <CardGroup cols={2}>
+        <Card title="Testing Strategy" icon="flask">
+          1. Create the global prompt
+          2. Assign to a test agent only
+          3. Test conversations thoroughly
+          4. Verify behavior matches expectations
+          5. Assign to production agents
+        </Card>
+        <Card title="Rollback Plan" icon="rotate-left">
+          - Keep backup of previous prompts
+          - Test changes on staging agents first
+          - Monitor conversations after deployment
+          - Quick edit or remove if issues arise
+        </Card>
+      </CardGroup>
+    </div>
+  </Tab>
+</Tabs>
+
+---
+
+## Managing Global Prompts
+
+### Prompts Dashboard
+
+The Prompts dashboard provides a centralized view of all your global prompts:
+
+<CardGroup cols={2}>
+  <Card title="View All Prompts" icon="list">
+    - See all global prompts in your workspace
+    - View assigned agent count
+    - Check last modified date
+    - Quick search and filter
+  </Card>
+  <Card title="Quick Actions" icon="bolt">
+    - **View**: Read the prompt content
+    - **Edit**: Update name, content, or assignments
+    - **Delete**: Remove unused prompts
+    - **Duplicate**: Create variations of existing prompts
+  </Card>
+</CardGroup>
+
+### Editing Prompts
+
+<AccordionGroup>
+  <Accordion title="Updating Content" icon="pen-to-square">
+    <Steps>
+      <Step title="Select Prompt">
+        Click the **Edit** icon next to the prompt you want to modify
+      </Step>
+      <Step title="Make Changes">
+        Update the prompt content, name, or agent assignments
+      </Step>
+      <Step title="Save Changes">
+        Click **"Save"** to deploy updates to all assigned agents immediately
+      </Step>
+      <Step title="Verify Update">
+        Test a conversation with an assigned agent to confirm the changes
+      </Step>
+    </Steps>
+    
+    <Warning>
+    **Immediate Effect**: Changes to global prompts affect all assigned agents immediately for new conversations. Existing conversations continue using the version from when they started.
+    </Warning>
+  </Accordion>
+  
+  <Accordion title="Managing Assignments" icon="users-gear">
+    <div className="space-y-4">
+      <p>You can modify agent assignments at any time:</p>
+      
+      <CardGroup cols={2}>
+        <Card title="Add Agents" icon="user-plus">
+          - Select additional agents from the dropdown
+          - Respect the 10-prompt limit per agent
+          - Changes apply immediately
+        </Card>
+        <Card title="Remove Agents" icon="user-minus">
+          - Uncheck agents to remove assignments
+          - Agent reverts to base system prompt
+          - No impact on other agents
+        </Card>
+      </CardGroup>
+      
+      <Info>
+      **Bulk Operations**: You can assign one prompt to many agents or remove it from many agents in a single operation.
+      </Info>
+    </div>
+  </Accordion>
+  
+  <Accordion title="Deleting Prompts" icon="trash">
+    <div className="space-y-4">
+      <p>When you delete a global prompt:</p>
+      
+      <Frame>
+        <div className="bg-red-50 dark:bg-red-900 p-4 rounded-lg">
+          <h4 className="font-semibold mb-2">⚠️ Deletion Impact</h4>
+          <ul className="space-y-2 text-sm">
+            <li>The prompt is immediately removed from all assigned agents</li>
+            <li>Agents revert to using only their base system prompts</li>
+            <li>Deletion is permanent and cannot be undone</li>
+            <li>Active conversations will not experience behavior changes</li>
+          </ul>
+        </div>
+      </Frame>
+      
+      <Warning>
+      **Best Practice**: Before deleting, export or copy the prompt content in case you need to recreate it later. Consider removing agent assignments first to test the impact before full deletion.
+      </Warning>
+    </div>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Viewing Assigned Prompts
+
+### In Agent Settings
+
+When configuring an individual agent, you can see all assigned global prompts:
+
+<Steps>
+  <Step title="Open Agent Settings">
+    Navigate to your agent's configuration page
+  </Step>
+  <Step title="Find Instructions Section">
+    Look for the **"Global Prompts"** section in the Instructions or System Prompt area
+  </Step>
+  <Step title="View Assignments">
+    See a list of all global prompts currently assigned to this agent
+  </Step>
+  <Step title="Manage from Prompts Page">
+    Click **"Manage Prompts"** to navigate to the Prompts dashboard for editing
+  </Step>
+</Steps>
+
+<Info>
+**Read-Only in Agent Settings**: While you can view assigned global prompts in agent settings, you must use the Prompts dashboard to modify them. This prevents accidental changes that would affect multiple agents.
+</Info>
+
+---
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Keep Prompts Focused" icon="crosshairs">
+    **Single Responsibility:**
+    - Each prompt should address one specific concern
+    - Avoid combining unrelated instructions
+    - Easier to assign and manage
+    - Simpler to remove when no longer needed
+    
+    **Example**:
+    - ✅ Separate: "Brand Voice" + "Data Privacy"
+    - ❌ Combined: "Brand Voice and Data Privacy and Formatting"
+  </Card>
+  
+  <Card title="Clear & Concise Writing" icon="file-lines">
+    **Writing Guidelines:**
+    - Use clear, direct language
+    - Bullet points for rules and lists
+    - Examples to illustrate expectations
+    - Avoid ambiguity and vagueness
+    
+    **Structure**:
+    ```plaintext
+    GOAL: [What this prompt achieves]
+    
+    RULES:
+    - Rule 1 with specific guidance
+    - Rule 2 with concrete examples
+    
+    EXAMPLES:
+    - Good: [Example response]
+    - Bad: [What to avoid]
+    ```
+  </Card>
+  
+  <Card title="Avoid Conflicts" icon="triangle-exclamation">
+    **Conflict Prevention:**
+    - Review all prompts assigned to an agent
+    - Ensure instructions don't contradict
+    - Test combined behavior thoroughly
+    - Use clear priority indicators if needed
+    
+    **Warning Signs**:
+    ```plaintext
+    ❌ Prompt 1: "Always be brief, max 2 sentences"
+    ❌ Prompt 2: "Provide detailed explanations"
+    
+    ✅ Prompt 1: "For FAQs: Be brief, max 2 sentences"
+    ✅ Prompt 2: "For complex inquiries: Provide details"
+    ```
+  </Card>
+  
+  <Card title="Version Control" icon="code-branch">
+    **Track Changes:**
+    - Include dates in prompt names for campaigns
+    - Keep notes on what changed and why
+    - Test thoroughly before updating
+    - Document dependencies between prompts
+    
+    **Naming Examples**:
+    - Brand_Voice_Guidelines_v2
+    - Holiday_Campaign_2024_Q4
+    - GDPR_Compliance_Updated_Nov2024
+  </Card>
+  
+  <Card title="Regular Audits" icon="clipboard-check">
+    **Maintenance Schedule:**
+    - Monthly: Review active prompts
+    - Quarterly: Remove outdated campaigns
+    - Annually: Update policies and guidelines
+    - As needed: Fix issues or conflicts
+    
+    **Audit Checklist**:
+    - [ ] Are all prompts still relevant?
+    - [ ] Do any contradict each other?
+    - [ ] Are campaigns expired?
+    - [ ] Need updates for new policies?
+  </Card>
+  
+  <Card title="Test Before Deployment" icon="flask">
+    **Testing Strategy:**
+    1. Create prompt in test workspace first
+    2. Assign to a single test agent
+    3. Run comprehensive conversation tests
+    4. Verify behavior matches expectations
+    5. Deploy to production agents
+    
+    **Test Scenarios**:
+    - Edge cases and unusual inputs
+    - Interactions with other prompts
+    - Performance and response time
+    - User experience quality
+  </Card>
+</CardGroup>
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Agent Not Following Global Prompt" icon="circle-question">
+    <div className="space-y-4">
+      <p><strong>Possible Causes:</strong></p>
+      
+      <CardGroup cols={2}>
+        <Card title="Conflicting Instructions" icon="code-compare">
+          - Agent's base prompt contradicts global prompt
+          - Multiple global prompts conflict
+          - Node-specific prompts override global
+          
+          **Solution**: Review all prompt layers and resolve conflicts
+        </Card>
+        <Card title="Prompt Not Applied" icon="link-slash">
+          - Assignment didn't save properly
+          - Prompt was removed after conversation started
+          - Caching issues in the system
+          
+          **Solution**: Verify assignment, start new conversation
+        </Card>
+      </CardGroup>
+      
+      <Frame>
+        <div className="bg-yellow-50 dark:bg-yellow-900 p-4 rounded-lg">
+          <h4 className="font-semibold mb-2">Debug Steps:</h4>
+          <ol className="space-y-1 text-sm list-decimal list-inside">
+            <li>Check Prompts dashboard - is the agent listed as assigned?</li>
+            <li>View agent settings - do global prompts appear in instructions?</li>
+            <li>Start a fresh conversation (old ones use old prompts)</li>
+            <li>Test with a clear, simple instruction to verify prompt is active</li>
+            <li>Check for conflicting instructions in other prompt layers</li>
+          </ol>
+        </div>
+      </Frame>
+    </div>
+  </Accordion>
+  
+  <Accordion title="Prompt Limit Reached" icon="ban">
+    <div className="space-y-4">
+      <p><strong>When you can't assign more prompts:</strong></p>
+      
+      <Steps>
+        <Step title="Identify Low-Value Prompts">
+          Review all 10 assigned prompts and identify which are least critical
+        </Step>
+        <Step title="Consolidate If Possible">
+          Combine related prompts into a single, comprehensive prompt
+        </Step>
+        <Step title="Remove Outdated Prompts">
+          Delete expired campaigns or obsolete guidelines
+        </Step>
+        <Step title="Prioritize Current Needs">
+          Remove lower-priority prompts to make room for more critical ones
+        </Step>
+      </Steps>
+      
+      <Info>
+      **10-Prompt Limit**: This limit prevents prompt overload which can confuse the AI and degrade performance. If you consistently need more, consider consolidating related prompts or embedding some instructions in the agent's base system prompt.
+      </Info>
+    </div>
+  </Accordion>
+  
+  <Accordion title="Performance Issues" icon="gauge">
+    <div className="space-y-4">
+      <p><strong>If agents respond slowly after adding prompts:</strong></p>
+      
+      <CardGroup cols={2}>
+        <Card title="Prompt Length" icon="ruler">
+          - Very long prompts increase token usage
+          - More tokens = higher latency and cost
+          - Aim for concise, focused instructions
+          
+          **Optimization**: Remove unnecessary examples and verbose explanations
+        </Card>
+        <Card title="Too Many Prompts" icon="layer-group">
+          - 8-10 prompts may be excessive
+          - Each adds processing overhead
+          - Complex instruction sets confuse the AI
+          
+          **Optimization**: Consolidate related prompts, remove redundant ones
+        </Card>
+      </CardGroup>
+      
+      <Warning>
+      **Token Budget**: Each global prompt adds to the system prompt, consuming tokens from your model's context window. Keep prompts concise to preserve space for conversation history.
+      </Warning>
+    </div>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Integration with Other Features
+
+<Tabs>
+  <Tab title="Canvas Nodes">
+    <div className="space-y-4">
+      <p>Global prompts work seamlessly with Canvas node-based workflows:</p>
+      
+      <Frame>
+        <div className="bg-blue-50 dark:bg-blue-900 p-4 rounded-lg">
+          <h4 className="font-semibold mb-2">Prompt Hierarchy</h4>
+          <div className="space-y-2 text-sm">
+            <p><strong>Order of Application:</strong></p>
+            <ol className="list-decimal list-inside space-y-1">
+              <li>Global Prompts (from Prompts dashboard)</li>
+              <li>Canvas Global Configuration (appendBeforePrompt)</li>
+              <li>Node-Specific Instructions (per-node prompts)</li>
+            </ol>
+          </div>
+        </div>
+      </Frame>
+      
+      <CardGroup cols={2}>
+        <Card title="Use Case: Node Override" icon="code-fork">
+          **Scenario**: Global prompt says "Always be brief"
+          
+          **Node Prompt**: "For this technical explanation, provide detailed step-by-step instructions"
+          
+          **Result**: Node-specific prompt takes precedence for that node
+        </Card>
+        <Card title="Use Case: Node Enhancement" icon="plus">
+          **Scenario**: Global prompt defines brand voice
+          
+          **Node Prompt**: "Apply brand voice while explaining our refund policy"
+          
+          **Result**: Both prompts work together harmoniously
+        </Card>
+      </CardGroup>
+    </div>
+  </Tab>
+  
+  <Tab title="Voice Agents">
+    <div className="space-y-4">
+      <p>Global prompts work with both text and voice agents:</p>
+      
+      <CardGroup cols={2}>
+        <Card title="Voice-Specific Prompts" icon="microphone">
+          ```plaintext
+          VOICE CONVERSATION GUIDELINES:
+          - Keep responses under 30 seconds
+          - Use natural, conversational language
+          - Avoid complex terminology
+          - Confirm understanding before proceeding
+          - Use verbal cues like "I understand" or "Got it"
+          ```
+        </Card>
+        <Card title="Channel-Agnostic Prompts" icon="globe">
+          ```plaintext
+          GENERAL CUSTOMER SERVICE RULES:
+          - Always be polite and professional
+          - Never share personal customer data
+          - Escalate billing issues to specialists
+          - Follow GDPR data handling rules
+          
+          (These apply to text, voice, and all channels)
+          ```
+        </Card>
+      </CardGroup>
+      
+      <Warning>
+      **Voice Considerations**: Voice agents benefit from shorter, more conversational prompts. Consider creating voice-specific versions of your global prompts for optimal performance.
+      </Warning>
+    </div>
+  </Tab>
+  
+  <Tab title="Multi-Channel Deployment">
+    <div className="space-y-4">
+      <p>Use global prompts across different deployment channels:</p>
+      
+      <Frame>
+        <div className="space-y-3 p-4">
+          <div>
+            <strong>Website Chat Widget</strong>
+            <p className="text-sm text-gray-600">Standard prompts with UI Engine formatting</p>
+          </div>
+          
+          <div>
+            <strong>WhatsApp/SMS</strong>
+            <p className="text-sm text-gray-600">Add brevity guidelines, avoid complex formatting</p>
+          </div>
+          
+          <div>
+            <strong>Voice (Phone)</strong>
+            <p className="text-sm text-gray-600">Conversational tone, shorter responses</p>
+          </div>
+          
+          <div>
+            <strong>Email</strong>
+            <p className="text-sm text-gray-600">More formal, can be longer and detailed</p>
+          </div>
+        </div>
+      </Frame>
+      
+      <Info>
+      **Channel Detection**: You can create channel-specific global prompts and assign them only to agents deployed on those channels for optimal user experience.
+      </Info>
+    </div>
+  </Tab>
+</Tabs>
+
+---
+
+## API Integration
+
+Global prompts can be managed programmatically via the API:
+
+```javascript
+// Example: Create a new global prompt via API
+const response = await fetch('https://rannah.io/v3/prompts', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    name: 'Holiday Campaign 2024',
+    prompt: `HOLIDAY SALE PROMOTION:
+- Mention 25% off all products
+- Highlight free shipping over $50
+- Promote gift wrapping services
+- Extended returns through Jan 15`,
+    agentIds: ['agent1', 'agent2', 'agent3'],
+    workspaceId: 'your_workspace_id'
+  })
+});
+
+// Example: Update an existing prompt
+const updateResponse = await fetch('https://rannah.io/v3/prompts/prompt_id', {
+  method: 'PUT',
+  headers: {
+    'Authorization': 'Bearer YOUR_API_KEY',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    prompt: 'Updated prompt content...',
+    agentIds: ['agent1', 'agent2'] // Update assignments
+  })
+});
+```
+
+<Info>
+For complete API documentation, see the [API Reference](/Support/contact).
+</Info>
+
+---
+
+## Migration Guide
+
+### Moving from Agent-Specific Prompts to Global Prompts
+
+<Steps>
+  <Step title="Identify Common Instructions">
+    Review your agents and find instructions that are duplicated across multiple agents
+  </Step>
+  <Step title="Create Global Prompts">
+    Extract common instructions into global prompts with descriptive names
+  </Step>
+  <Step title="Assign to Agents">
+    Assign the new global prompts to all relevant agents
+  </Step>
+  <Step title="Remove Duplicates">
+    Remove the duplicated instructions from individual agent prompts
+  </Step>
+  <Step title="Test Thoroughly">
+    Verify each agent still behaves correctly with the new global prompts
+  </Step>
+</Steps>
+
+<Warning>
+**Migration Testing**: Always test agents in a development environment before removing instructions from production agents. Ensure global prompts are properly assigned and working before cleanup.
+</Warning>
+
+---
+
+## What's Next?
+
+<CardGroup cols={2}>
+  <Card title="System Prompt Best Practices" icon="file-lines" href="/agent-creation/system-prompt/Overview">
+    Learn how to write effective prompts that guide agent behavior
+  </Card>
+  <Card title="Canvas Global Configuration" icon="diagram-project" href="/canvas/advanced/global-access">
+    Configure global settings for node-based agents
+  </Card>
+  <Card title="Tools Management" icon="wrench" href="/agent-dashboard/tools-management">
+    Manage tools that can be referenced in your global prompts
+  </Card>
+  <Card title="Variables" icon="code" href="/canvas/features/variables">
+    Learn about global variables that work with global prompts
+  </Card>
+</CardGroup>
+

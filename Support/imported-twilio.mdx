@@ -1,0 +1,196 @@
+---
+title: 'Imported Twilio'
+description: 'Quick solutions to common issues with imported Twilio phone numbers in Rannah رنّة.'
+icon: phone
+---
+
+
+# Troubleshooting Imported Twilio Phone Numbers
+
+This guide will help you diagnose and resolve common issues with imported Twilio phone numbers in your voice agent configuration.
+
+## Critical Routing Status Check
+
+**⚠️ IMPORTANT:** The most common cause of imported Twilio numbers not working is inactive routing.
+
+### Step 1: Verify Routing Status
+
+1. Navigate to your Twilio Console
+2. Go to **Phone Numbers** → **Manage** → **Active numbers**
+3. Click on your imported phone number
+4. In the **Voice Configuration** section, check the **Routing** status
+
+**The routing status MUST show "Active" for your number to work properly.**
+
+In the Twilio Console under your number's **Voice Configuration**, look for the regional routing line:
+
+```
+✅ United States (US1) Region call routing is: Active
+❌ United States (US1) Region call routing is: Inactive
+```
+
+If your routing shows as **Inactive**, this will prevent calls from being processed correctly.
+
+### How to Activate Routing
+
+If your routing is inactive:
+
+1. Contact Twilio Support to activate routing for your region
+2. Ensure your Twilio account has the necessary permissions
+3. Verify your account is in good standing with proper billing setup
+
+## Common Configuration Issues
+
+### 2. Webhook Configuration
+
+Ensure your webhook settings are configured correctly:
+
+**Configure with:** `Webhook, TwiML Bin, Function, Studio Flow, Proxy Service`
+
+**A call comes in:**
+- Method: `Webhook`
+- URL: `https://voice-api.v2v.live/na/webhook/twilio/incoming-call`
+- HTTP: `HTTP POST`
+
+**Primary handler fails:**
+- Method: `Webhook` 
+- URL: `https://voice-api.v2v.live/na/webhook/twilio/incoming-call`
+- HTTP: `HTTP POST`
+
+Can be /na/ or /eu/
+
+### 3. Emergency Address Requirements
+
+**⚠️ Warning:** You may incur a $75.00 charge per emergency call if no emergency address is registered.
+
+- Navigate to the **Emergency Calling** section
+- Click **Add Emergency Address**
+- Complete the required address information
+
+## Step-by-Step Troubleshooting
+
+### Step 1: Check Phone Number Status
+```bash
+# In Twilio Console
+Phone Numbers → Manage → Active numbers → [Your Number]
+```
+
+Verify:
+- ✅ Number is active and not suspended
+- ✅ Billing is current
+- ✅ No service restrictions
+
+### Step 2: Validate Webhook URLs
+```
+Primary Webhook: https://voice-api.v2v.live/na/webhook/twilio/incoming-call
+Fallback Webhook: https://voice-api.v2v.live/na/webhook/twilio/incoming-call
+```
+
+Test the webhook endpoint:
+```bash
+curl -X POST https://voice-api.v2v.live/na/webhook/twilio/incoming-call
+```
+
+### Step 3: Regional Routing Verification
+
+1. **Check Routing Status**: Must be "Active"
+2. **Verify Region**: Ensure the region matches your service area
+3. **Go to other configurations**: Use this link if you need to switch regions
+
+### Step 4: Voice Configuration Settings
+
+Ensure these settings match exactly:
+
+| Setting | Value |
+|---------|--------|
+| Configure with | Webhook, TwiML Bin, Function, Studio Flow, Proxy Service |
+| A call comes in | Webhook |
+| URL | https://voice-api.v2v.live/na/webhook/twilio/incoming-call |
+| HTTP Method | HTTP POST |
+| Primary handler fails | Webhook |
+| Fallback URL | https://voice-api.v2v.live/na/webhook/twilio/incoming-call |
+| HTTP Method | HTTP POST |
+
+## Testing Your Configuration
+
+### Test Incoming Calls
+
+1. **Call your Twilio number** from an external phone
+2. **Monitor Twilio Debugger**: Check for any error logs
+3. **Verify webhook delivery**: Ensure webhooks are reaching your endpoint
+
+### Debugging Tools
+
+**Twilio Debugger:**
+- Go to **Monitor** → **Logs** → **Errors & Warnings**
+- Look for failed webhook deliveries
+- Check for HTTP timeout errors
+
+**Webhook Logs:**
+- Monitor your application logs
+- Verify incoming POST requests
+- Check for proper TwiML responses
+
+## Common Error Messages
+
+### "Number not configured for voice"
+- **Cause**: Voice capability not enabled
+- **Solution**: Enable voice in Twilio Console under number settings
+
+### "Webhook timeout"
+- **Cause**: Your webhook endpoint is not responding within 15 seconds
+- **Solution**: Optimize your webhook response time
+
+### "TwiML response invalid"
+- **Cause**: Malformed TwiML being returned
+- **Solution**: Validate your TwiML structure
+
+### "Routing inactive"
+- **Cause**: Regional routing is disabled
+- **Solution**: Contact Twilio Support to activate routing
+
+## Support Escalation
+
+If you've verified all the above and still experience issues:
+
+1. **Document the issue:**
+   - Phone number experiencing problems
+   - Exact error messages
+   - Time of failed attempts
+   - Screenshots of configuration
+
+2. **Contact Support with:**
+   - Twilio Account SID
+   - Phone number in question
+   - Debugging session logs
+   - Configuration screenshots
+
+3. **Check Status Pages:**
+   - [Twilio Status](https://status.twilio.com/)
+   - [Service Status](https://status.v2v.live/)
+
+## Preventive Measures
+
+### Regular Monitoring
+- Set up monitoring alerts for failed calls
+- Regularly test your phone numbers
+- Monitor webhook response times
+
+### Configuration Backup
+- Document your working configurations
+- Take screenshots of critical settings
+- Keep webhook URLs documented
+
+### Account Maintenance
+- Keep billing information current
+- Monitor account limits and usage
+- Maintain emergency address information
+
+---
+
+**Need additional help?** Contact our support team with your Twilio configuration screenshots and specific error messages.
+
+## Related documentation
+
+- [Twilio Setup](/voice/setup/twilio) — purchase, assign, and import numbers from the agent Voice dashboard
+- [Import a Twilio number (API)](/Support/contact) — programmatic import via V3 REST

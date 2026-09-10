@@ -1,0 +1,119 @@
+---
+title: 'Wix'
+description: 'Integrate your Rannah رنّة Agent into your Wix store.'
+icon: wix
+---
+
+
+<Card title="Prerequisites" icon="check">
+Before you begin, make sure you have:
+<CardGroup cols={2}>
+  <Card title="" icon="face-smile-wink">
+    A Rannah رنّة account with a configured AI agent
+  </Card>
+  <Card title="" icon="wix">
+    Admin access to your Wix website
+  </Card>
+</CardGroup>
+</Card>
+
+
+
+## Integration Steps
+
+<Steps>
+  <Step title="Access Your Rannah رنّة Dashboard">
+    Log in to your Rannah رنّة account and navigate to your agent's settings. Note down your unique agent ID.
+
+    <Info> 
+        You'll find an agent's unique ID on its dedicated card in the `Agents` tab or in the URL from the agent designer ex. https://rannah.io/app/eu/agents/gib2no07kqdy1f2m/overview 
+    </Info>
+  </Step>
+  
+  <Step title="Log in to Wix">
+    Access your **Wix Admin Panel** and choose your site.
+  </Step>
+  
+  <Step title="Navigate to Settings">
+    In the left-hand menu near the bottom, click on `Settings`.
+  </Step>
+  
+  <Step title="Access Custom Code">
+    Scroll down to `Advanced Settings` and choose `Custom Code`.
+  </Step>
+  
+  <Step title="Add Custom Code">
+    Click on `Add Custom Code`.
+  </Step>
+  
+  <Step title="Insert Integration Code">
+    At the top input field, paste the following code (or the code of your choosing):
+
+    ```html
+    <div id="VG_OVERLAY_CONTAINER"></div>
+    <script defer>
+        (function() {
+            window.VG_CONFIG = {
+                ID: "YOUR_AGENT_ID", // Replace with your actual agent ID
+                region: 'eu', // or 'na' for North America
+                render: 'bottom-right', // or 'bottom-left'
+                // modalMode: true, // Set this to 'true' to open the widget in modal mode
+                stylesheets: [
+                    "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+                ],
+            }
+            var VG_SCRIPT = document.createElement("script");
+            VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+            VG_SCRIPT.defer = true;
+            document.body.appendChild(VG_SCRIPT);
+        })()
+    </script>
+    ```
+
+    <Warning>
+      Remember to replace **YOUR_AGENT_ID** with your actual Rannah رنّة Agent ID.
+    </Warning>
+  </Step>
+  
+  <Step title="Configure Code Settings">
+    1. Select the **domain** it will be connected to.
+    2. Set a **name** for your custom code (e.g., "Rannah رنّة widget").
+    3. Choose between **add code to all pages** or specify which pages you want the widget to appear on.
+    4. Tick the `Head` box to place the code in the header.
+    
+    <Note>
+      If the widget doesn't appear after publishing, try ticking the `Body - end` option instead.
+    </Note>
+  </Step>
+  
+  <Step title="Save and Publish">
+    Click `apply` to save your changes, then publish your site to make the changes live.
+  </Step>
+  
+  <Step title="Test Your Integration">
+    Visit your Wix website's frontend and verify that the widget appears and functions correctly.
+  </Step>
+</Steps>
+
+
+
+
+
+
+## Troubleshooting
+
+**If you encounter issues with your Rannah رنّة widget integration:**
+
+1. Verify that you've copied the entire code snippet correctly into the HTML iframe.
+
+2. Double-check that you've replaced `YOUR_AGENT_ID` with your actual Rannah رنّة Agent ID.
+
+3. Ensure you've applied the custom code to all pages (or the specific pages where you want the widget to appear).
+
+4. Clear your browser cache and refresh your Wix website to see changes.
+
+5. If the widget doesn't appear, try adding it as a `custom code element` from the Wix editor instead. 
+
+<Note>
+  Wix may sometimes cache your site, which can delay the appearance of new elements. If you don't see the widget immediately after publishing, wait a few minutes and try again.
+</Note>
