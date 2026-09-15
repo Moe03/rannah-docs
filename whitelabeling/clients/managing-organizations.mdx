@@ -1,0 +1,105 @@
+---
+title: Managing Client Organizations
+description: Create organizations, assign agents, and control the client dashboard experience.
+icon: users
+---
+
+Client organizations are the core container for your customers inside the whitelabel system. Each organization can have its own users, assigned agents, dashboard settings, permissions, and billing state.
+
+<Frame>
+  <img src="/images/clients-ui.png" />
+</Frame>
+
+## Create an organization
+
+<Steps>
+  <Step title="Open Clients">
+    Navigate to the `Clients` area of your whitelabel dashboard.
+  </Step>
+  <Step title="Create a new client">
+    Click `+ New Client`.
+  </Step>
+  <Step title="Add organization details">
+    Enter the organization name and optionally upload a logo or image.
+
+    <Frame>
+      <img src="/images/create-new-org.png" />
+    </Frame>
+  </Step>
+  <Step title="Save">
+    Click `+ Add` to create the organization.
+  </Step>
+</Steps>
+
+## Assign agents
+
+After the organization exists, assign the agents that client should be able to use.
+
+<Steps>
+  <Step title="Find available agents">
+    Use the agent list shown on the right side of the Clients view.
+  </Step>
+  <Step title="Search if needed">
+    Use the search bar to quickly find the right agent.
+  </Step>
+  <Step title="Attach the agent to the org">
+    Drag the selected agent onto the target organization.
+  </Step>
+</Steps>
+
+<Tip>
+  One organization can have multiple assigned agents. This works well for clients with separate use cases such as support, sales, onboarding, or voice.
+</Tip>
+
+## Configure organization settings
+
+Open `Manage` on an organization, then open `Org Info` to adjust the client-facing experience.
+
+<AccordionGroup>
+  <Accordion title="Dashboard language">
+    Choose the language used by the client dashboard interface. This affects the dashboard UI, not the content inside the agent itself.
+  </Accordion>
+  <Accordion title="Dashboard layout">
+    Select the navigation layout used in the client dashboard, such as vertical or horizontal navigation.
+  </Accordion>
+  <Accordion title="Handoff settings">
+    Control whether the client experience supports human handoff, whether smart handoff is enabled, and whether handoff-related UI messages should be shown.
+  </Accordion>
+  <Accordion title="Canned responses">
+    Enable saved responses if your client teams need faster handling during conversations and handoff workflows.
+  </Accordion>
+  <Accordion title="Billing state">
+    If your agency uses client billing, organization-level billing options determine whether the customer can access billing and subscription flows in their dashboard.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  Remember to save the organization after editing settings so the changes are applied to the client dashboard.
+</Note>
+
+<img src="/images/org-info-settings.png" alt="Organization Info settings panel" />
+
+## Recommended setup order
+
+1. Create the organization.
+2. Assign the correct agents.
+3. Add client users.
+4. Review dashboard layout and handoff settings.
+5. Enable billing only if the client should manage subscription or payment activity in the dashboard.
+
+## Related documentation
+
+<CardGroup cols={2}>
+  <Card title="Creating Users" icon="user-plus" href="/whitelabeling/clients/creating-users">
+    Add users and define who can access the client dashboard.
+  </Card>
+  <Card title="Managing Teams" icon="people-group" href="/whitelabeling/clients/managing-teams">
+    Organize client-side staff for collaboration and handoff workflows.
+  </Card>
+  <Card title="Client Dashboard Features" icon="gauge" href="/whitelabeling/clients/client-dashboard/features">
+    See what the client experience looks like after setup.
+  </Card>
+  <Card title="Billing Activation" icon="credit-card" href="/whitelabeling/clients/client-billing/billing-activation">
+    Learn when and how to enable billing for an organization.
+  </Card>
+</CardGroup>

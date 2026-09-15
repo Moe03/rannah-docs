@@ -1,0 +1,65 @@
+---
+title: 'Overview Tab'
+description: ''
+icon: tree
+---
+
+The Agency Overview tab is where you establish your agency's identity within the Rannah رنّة platform. This information will be prominently displayed in your client dashboard, creating a cohesive and branded experience for your customers.
+
+<Frame>
+  <img src="/images/agency-overview-tab.png" alt="Agency Overview Tab" />
+</Frame>
+## Configuring Your Agency Details
+<Steps>
+  <Step title="Agency Name">
+    Enter your agency's name in the `Agency Name` field. This will be displayed in the top left corner of the dashboard.
+<CodeGroup>
+```plaintext Example
+Agency Name: Rannah رنّة
+```
+</CodeGroup>
+  </Step>
+  <Step title="Branding Text">
+    Input your agency's slogan or a brief description in the `Branding Text` field. This supports Markdown formatting.
+<Tip>
+Use the format `[YOUR_TEXT](YOUR_LINK)` to create a clickable link within your branding text.
+</Tip>
+
+<CodeGroup>
+```markdown Example
+Create awesome AI Agents with [Rannah رنّة](https://rannah.io)
+```
+</CodeGroup>
+  </Step>
+  <Step title="Login Settings">
+    Toggle `Enable Password Login` to determine how clients can access their dashboard:
+    - Enabled: Clients can log in with a password
+    - Disabled: Clients can also log in using OTP codes sent to their email
+<Warning>
+If you disable password login, ensure your email domain is properly set up for white-labeling. See our [Email Configuration Guide](/whitelabeling/agency/email) for details.
+</Warning>
+  </Step>
+  <Step title="Secret Key">
+    This key is used for the Admin magic link that controls all widgets. 
+<Note>
+For security reasons, you can regenerate this secret by clicking the `Regen Secret` button.
+</Note>
+  </Step>
+  <Step title="Agency Logo Upload">
+    Upload square logos (256x256 PNG) for both light and dark modes:
+<AccordionGroup>
+  <Accordion title="Light Mode Logo">
+    Drag and drop or select a file for your light mode logo. This will be used when the client's dashboard is in light mode.
+  </Accordion>
+  <Accordion title="Dark Mode Logo">
+    Drag and drop or select a file for your dark mode logo. This will be displayed when the client's dashboard is in dark mode.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+We recommend uploading **both** light and dark mode logos for the best user experience across different dashboard themes.
+</Tip>
+  </Step>
+</Steps>
+
+

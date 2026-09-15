@@ -1,0 +1,95 @@
+---
+title: 'Configure Email Routing'
+description: ''
+icon: envelope
+---
+
+Configuring a custom email domain ensures your brand consistency extends beyond the URL to client communications. Whether it's important notifications or login invitations, your branding remains front and center throughout the client experience.
+
+
+<Frame>
+<img src="/images/agency-email-tab.png" alt="Email tab" width="500" className="rounded-md"/>
+</Frame>
+
+<Note>
+A custom email domain reinforces your professional image and enhances client trust.
+</Note>
+## Setup Process
+<Steps>
+  <Step title="Add Custom Email Domain">
+    Input your domain in the `Custom Email Domain` field and click `+ Add`.
+    <Frame>
+<video src="/images/agency-add-email-domain.mp4" alt="add email doamin video" width="500" className="rounded-md" autoPlay loop/>
+</Frame>
+<Info>
+Enter only the domain (e.g., yourdomain.com) without any protocol (https://). For example, we added **rannah.io**
+</Info>
+  </Step>
+  <Step title="Add DNS Records">
+    You'll be prompted to add three DNS records to your provider:
+<Frame>
+<img src="/images/agency-email-dns-records.png" alt="DNS email records" width="500" className="rounded-md"/>
+</Frame>
+
+Access your DNS settings from your provider (e.g., [Godaddy.com](https://godaddy.com)) and add the following records (**keep in mind:** Your records will differ):
+
+<AccordionGroup>
+  <Accordion title="MX Record">
+    <CodeGroup>
+    ```plaintext
+    Type: MX
+    Name/Host: send
+    Value: feedback-smtp.us-east-1.amazonses.com
+    Priority: 10
+    TTL: Auto
+    ```
+    </CodeGroup>
+  </Accordion>
+  <Accordion title="TXT Record 1">
+    <CodeGroup>
+    ```plaintext
+    Type: TXT
+    Name/Host: send
+    Value: v=spf1 include:amazonses.com ~all
+    Priority: N/A
+    TTL: Auto
+    ```
+    </CodeGroup>
+  </Accordion>
+  <Accordion title="TXT Record 2">
+    <CodeGroup>
+    ```plaintext
+    Type: TXT
+    Name/Host: resend._domainkey
+    Value: p=MIGMAOGGSP[...]
+    Priority: N/A
+    TTL: Auto
+    ```
+    </CodeGroup>
+  </Accordion>
+</AccordionGroup>
+  </Step>
+  <Step title="Verify DNS Records">
+    After adding the records to your provider, click `Verify DNS Records`.
+<Warning>
+If you need to start over, use the `Delete Domain` button to reset the process.
+</Warning>
+  </Step>
+  <Step title="Good To Go" icon="party-horn">
+    Once correctly set up, you can send notifications and invites directly from your **own** email domain!
+  </Step>
+</Steps>
+
+## Additional Email Settings
+From the Email tab, you can also configure:
+<CardGroup cols={2}>
+  <Card title="Business Address" icon="building">
+    Enter your agency's physical address to be included in the emails footer sent from your dashboard.
+  </Card>
+  <Card title="Support Email" icon="envelope">
+    Add your agency's dedicated support email, which will also appear in the emails footer.
+  </Card>
+</CardGroup>
+<Note>
+  Advanced email-related capabilities may continue to expand over time. If you need help with your current email setup or rollout, contact [support@rannah.io](mailto:support@rannah.io).
+</Note>

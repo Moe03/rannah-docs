@@ -18,7 +18,7 @@ The Zoho Mail integration allows your AI agent to:
 
 First, you need to authorize the application to access your Zoho Mail account.
 
-1. Navigate to **Integrations** in the side menu on ConvoCore.
+1. Navigate to **Integrations** in the side menu on Rannah رنّة.
 2. Locate the **Zoho Mail** integration card.
 3. Click **Connect** on the Zoho Mail card.
 4. You will be redirected to Zoho's login page.
@@ -27,25 +27,25 @@ First, you need to authorize the application to access your Zoho Mail account.
    - Read your emails
    - Send emails on your behalf
    - Manage your mailbox
-7. Click **Accept** to grant access to ConvoCore.
+7. Click **Accept** to grant access to Rannah رنّة.
 
 <img height="250" src="/images/zoho-permissions-page.png" />
 
-8. You'll be redirected back to ConvoCore with a confirmation message.
+8. You'll be redirected back to Rannah رنّة with a confirmation message.
 
 <img height="250" src="/images/zoho-integrations-page.png" />
 
 ### 2. Enable Zoho Webhooks (Real-Time Emails)
 
-After connecting the account, Zoho also needs a webhook URL so it can notify ConvoCore the moment a new email arrives.
+After connecting the account, Zoho also needs a webhook URL so it can notify Rannah رنّة the moment a new email arrives.
 
-1. Stay on the **Zoho Mail** integration card inside ConvoCore and click **Manage**.
+1. Stay on the **Zoho Mail** integration card inside Rannah رنّة and click **Manage**.
 2. Copy the **Real-time Webhook URL** shown for the specific Zoho mailbox. It already includes your workspace, connection, and region parameters.
 3. Log in to the same Zoho mailbox → **Settings** → **Integrations** → **Developer Space** → **Webhooks**.
 4. Create (or edit) an **Outgoing Webhook**:
    - **Entity**: Mail
    - **Conditions**: “No conditions. All emails” (or pick the filters you want Zoho to trigger on).
-   - **Webhook URL**: Paste the URL you copied from ConvoCore.
+   - **Webhook URL**: Paste the URL you copied from Rannah رنّة.
 5. Click **Save**.
 
 Now every new email generates a webhook call, so your agent can react instantly without polling.
@@ -58,7 +58,7 @@ Once your Zoho Mail account is connected, you need to assign it to the specific 
 
 This method allows you to assign Zoho Mail accounts to multiple agents at once from a centralized location.
 
-1. Navigate to **Integrations** in the side menu on ConvoCore.
+1. Navigate to **Integrations** in the side menu on Rannah رنّة.
 2. Locate the **Zoho Mail** integration card and click on it to open the Zoho Mail management modal.
 3. Click on the **Assign to Agents** tab at the top of the modal.
 4. Select the Zoho Mail account you want to assign from the **Select Zoho Mail Account** dropdown.

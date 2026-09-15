@@ -1,0 +1,199 @@
+---
+title: 'Managing Teams'
+description: 'Create and manage teams within client organizations'
+icon: users
+---
+
+Teams allow you to organize users within a client organization into functional groups. This is useful for managing departments, handling chat handoffs to specific teams, and tracking team performance.
+
+<Note>
+  Teams are different from access roles. Use teams for routing and organization, and use [Access, Roles, and Activity Logs](/whitelabeling/clients/access-and-roles) for workspace admin, org admin, and client-user permissions.
+</Note>
+
+## Overview
+
+The Teams feature enables you to:
+
+<CardGroup cols={2}>
+  <Card title="Organize Users" icon="layer-group">
+    Group organization members into logical teams like "Sales", "Support", or "Technical".
+  </Card>
+  <Card title="Manage Handoffs" icon="hand-holding-hand">
+    Direct chat handoffs to specific teams based on customer needs.
+  </Card>
+  <Card title="Track Performance" icon="chart-line">
+    Monitor team-specific analytics and response times.
+  </Card>
+  <Card title="Control Access" icon="shield-check">
+    Assign team-based permissions and access controls.
+  </Card>
+</CardGroup>
+
+## Accessing Teams Management
+
+<Steps>
+  <Step title="Navigate to Client Tab">
+    Go to the `Client` tab in your Rannah رنّة dashboard.
+  </Step>
+  <Step title="Select Organization">
+    Find the client organization you want to manage from the list.
+  </Step>
+  <Step title="Access Management">
+    Click the `Manage` button next to the organization name.
+  </Step>
+  <Step title="Switch to Teams Tab">
+    Click on the `Teams (X)` tab to view and manage teams.
+  </Step>
+</Steps>
+
+## Creating a New Team
+
+<Steps>
+  <Step title="Click Add Team">
+    Click the `Add Team` button in the top right corner.
+  </Step>
+  <Step title="Enter Team Label">
+    Provide a human-readable name for the team (e.g., "Customer Support", "Sales Team").
+  </Step>
+  <Step title="Set Team Key">
+    Create a unique identifier for the team using lowercase letters and underscores.
+    
+    **Example:** `customer_support` or `sales_team`
+    
+    <Warning>
+      Team keys must be lowercase with underscores for spaces. This key is used for API integrations and routing.
+    </Warning>
+  </Step>
+  <Step title="Add Description (Optional)">
+    Provide a brief description of what this team does or handles.
+  </Step>
+  <Step title="Select Team Members">
+    Choose users from the organization to add to this team. Users can belong to multiple teams.
+    
+    <Note>
+      Only users that have been created in the organization will appear in the team members list.
+    </Note>
+  </Step>
+  <Step title="Create Team">
+    Click the `Create Team` button to finalize the team creation.
+  </Step>
+</Steps>
+
+## Understanding the Teams Table
+
+The Teams table displays all teams within the organization with the following information:
+
+<AccordionGroup>
+  <Accordion title="Team Label">
+    The display name of the team shown to users and administrators.
+  </Accordion>
+  <Accordion title="Team Key">
+    The unique identifier used in the system and API calls. Includes a copy button for easy reference.
+  </Accordion>
+  <Accordion title="Description">
+    Optional information about the team's purpose or responsibilities.
+  </Accordion>
+  <Accordion title="Members">
+    Shows the number of members and displays user avatars with names for easy identification.
+  </Accordion>
+  <Accordion title="Last Changed">
+    Displays when the team was last modified, helping you track recent updates.
+  </Accordion>
+  <Accordion title="Control">
+    Action buttons to manage members, edit team details, or delete the team.
+  </Accordion>
+</AccordionGroup>
+
+## Managing Existing Teams
+
+### Editing a Team
+
+1. Click the **Edit** icon (pencil) in the Control column
+2. Update the team label, key, description, or members
+3. Click `Save Changes` to apply updates
+
+<Warning>
+  Changing the team key may affect existing integrations and routing rules. Update your configurations accordingly.
+</Warning>
+
+### Managing Team Members
+
+1. Click the **Manage Members** icon (users) in the Control column
+2. Select or deselect users to add or remove from the team
+3. Changes are applied immediately
+
+### Deleting a Team
+
+1. Click the **Delete** icon (trash) in the Control column
+2. Confirm the deletion in the prompt
+
+<Warning>
+  Deleting a team will remove all team associations and may affect chat routing. This action cannot be undone.
+</Warning>
+
+## Use Cases for Teams
+
+<CardGroup cols={2}>
+  <Card title="Department Organization" icon="building-columns">
+    Create teams for Sales, Support, Technical, and Billing to organize your organization structure.
+  </Card>
+  <Card title="Shift-Based Teams" icon="clock">
+    Set up teams for different shifts or time zones (e.g., "Morning Shift", "APAC Support").
+  </Card>
+  <Card title="Specialized Teams" icon="star">
+    Create teams for specialized functions like "VIP Support", "Enterprise Sales", or "Technical Escalation".
+  </Card>
+  <Card title="Project Teams" icon="diagram-project">
+    Organize temporary or project-based teams for specific campaigns or initiatives.
+  </Card>
+</CardGroup>
+
+## Teams and Live Handoff
+
+Teams integrate with Rannah رنّة's [Live Handoff](/features/live-handoff) feature:
+
+- When a chat is handed off, you can route it to a specific team
+- Team members receive notifications for handoffs to their team
+- Analytics track performance metrics per team
+- Round-robin distribution can be configured per team
+
+<Tip>
+  Use team keys in your agent's handoff logic to route conversations to the appropriate team based on customer intent or query type.
+</Tip>
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Clear Naming" icon="tag">
+    Use descriptive team labels and consistent naming conventions across teams.
+  </Card>
+  <Card title="Document Team Keys" icon="book">
+    Keep a reference of team keys for developers and integrations.
+  </Card>
+  <Card title="Regular Reviews" icon="rotate">
+    Periodically review team membership to ensure accuracy as staff changes.
+  </Card>
+  <Card title="Balanced Teams" icon="scale-balanced">
+    Distribute workload by maintaining appropriate team sizes.
+  </Card>
+</CardGroup>
+
+## Related Documentation
+
+<CardGroup cols={2}>
+  <Card title="Access & Roles" icon="shield-check" href="/whitelabeling/clients/access-and-roles">
+    Learn how role-based access differs from team membership.
+  </Card>
+  <Card title="Creating Users" icon="user-plus" href="/whitelabeling/clients/creating-users">
+    Learn how to add users before assigning them to teams.
+  </Card>
+  <Card title="Managing Organizations" icon="building" href="/whitelabeling/clients/managing-organizations">
+    Understand organization-level settings and configuration.
+  </Card>
+  <Card title="Live Handoff" icon="hand-holding-hand" href="/features/live-handoff">
+    Configure how teams receive and handle customer handoffs.
+  </Card>
+  <Card title="Analytics" icon="chart-bar" href="/features/analytics">
+    Track team performance and response metrics.
+  </Card>
+</CardGroup>

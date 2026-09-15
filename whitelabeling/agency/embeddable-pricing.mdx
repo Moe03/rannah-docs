@@ -1,0 +1,428 @@
+---
+title: "Embeddable Pricing Table"
+description: "Add Rannah رنّة pricing directly to your landing pages with a simple embed code"
+icon: table-cells
+---
+
+Turn your landing page into a conversion powerhouse by embedding your Rannah رنّة pricing plans directly on any website. This feature allows agencies to showcase their plans, handle checkout, and automatically onboard new clients—all without leaving your branded experience.
+
+## What is the Embeddable Pricing Table?
+
+The Embeddable Pricing Table is a fully branded, plug-and-play widget that displays your Rannah رنّة subscription plans on any website. When prospects click a plan, they're taken through a secure Stripe checkout and automatically provisioned as clients in your agency dashboard.
+
+<CardGroup cols={2}>
+  <Card title="Zero Code Required" icon="magic">
+    Copy and paste a simple embed code—works on any website builder
+  </Card>
+  <Card title="Auto Onboarding" icon="rocket">
+    New clients are automatically created and onboarded after checkout
+  </Card>
+  <Card title="Fully Branded" icon="palette">
+    Matches your agency's colors, fonts, and theme automatically
+  </Card>
+  <Card title="Secure Payments" icon="shield-check">
+    Powered by Stripe with built-in fraud protection
+  </Card>
+</CardGroup>
+
+## Why Use Embeddable Pricing?
+
+<Callout type="info">
+  Skip the custom development—go from setup to live in under 5 minutes.
+</Callout>
+
+Traditional pricing pages require:
+- Custom payment integration
+- Manual client provisioning
+- Email verification flows
+- Dashboard access setup
+
+With the Embeddable Pricing Table, all of this happens automatically:
+
+1. **Prospect visits** your landing page
+2. **Clicks a plan** they like
+3. **Completes checkout** via Stripe
+4. **Gets instant access** to their branded dashboard
+
+No passwords needed. No manual setup. Just pure conversion magic.
+
+---
+
+## Prerequisites
+
+Before you can use the embeddable pricing table, ensure you have:
+
+<Steps>
+  <Step title="Active Stripe Connect Account">
+    You must have connected your Stripe account in the **Auto Billing** tab.
+    
+    <Tip>
+      See [Whitelabel Stripe Billing](/whitelabeling/clients/client-billing/billing-overview) for setup instructions.
+    </Tip>
+  </Step>
+
+  <Step title="Created Pricing Plans">
+    You need at least one subscription plan configured in **Step 4: Manage Plans** of the Auto Billing tab.
+
+    <Note>
+      Plans include pricing, features, credits, and subscription limits (agents, channels, etc.)
+    </Note>
+  </Step>
+
+  <Step title="Agency Branding Configured">
+    Set up your logo, colors, and theme in the **Agency Overview** tab for a fully branded experience.
+  </Step>
+</Steps>
+
+---
+
+## Setting Up the Embeddable Pricing Table
+
+<Steps>
+  <Step title="Navigate to Auto Billing Tab">
+    In your Rannah رنّة dashboard, go to the **Agency** section and click the **Auto Billing** tab.
+  </Step>
+
+  <Step title="Scroll to Step 5: Embeddable Pricing Table">
+    After completing Steps 1-4 (Stripe Connect, Email, Pricing, Plans), you'll see the embed code section.
+
+    <Warning>
+      If you haven't created any pricing plans yet, you'll see a warning message. Complete **Step 4** first.
+    </Warning>
+  </Step>
+
+  <Step title="Copy Your Embed Code">
+    Choose your preferred integration method and copy the code:
+
+    <Tabs>
+      <Tab title="Simple Iframe (Recommended)">
+        Perfect for WordPress, Webflow, Wix, Squarespace, or any HTML page.
+
+        ```html
+        <iframe 
+          src="https://na-gcp-api.vg-stuff.com/embed/pricing/YOUR_AGENCY_ID/iframe?region=na"
+          style="width: 100%; min-height: 800px; border: none;"
+          frameborder="0"
+        ></iframe>
+        ```
+      </Tab>
+
+      <Tab title="React/Next.js">
+        For React-based websites and Next.js applications.
+
+        ```tsx
+        export default function PricingPage() {
+          return (
+            <div style={{ width: '100%', minHeight: '800px' }}>
+              <iframe 
+                src="https://na-gcp-api.vg-stuff.com/embed/pricing/YOUR_AGENCY_ID/iframe?region=na"
+                style={{ width: '100%', height: '100%', border: 'none' }}
+                frameBorder="0"
+              />
+            </div>
+          );
+        }
+        ```
+      </Tab>
+
+      <Tab title="WordPress">
+        Add this to any WordPress page using a Custom HTML block.
+
+        ```html
+        <div style="width: 100%; min-height: 800px;">
+          <iframe 
+            src="https://na-gcp-api.vg-stuff.com/embed/pricing/YOUR_AGENCY_ID/iframe?region=na"
+            style="width: 100%; height: 100%; border: none;"
+            frameborder="0"
+          ></iframe>
+        </div>
+        ```
+      </Tab>
+    </Tabs>
+  </Step>
+
+  <Step title="Test the Live Preview">
+    Click the **"Open Live Preview"** button to see your pricing table in action before deploying it.
+  </Step>
+
+  <Step title="Paste on Your Website">
+    Add the code to your landing page, pricing page, or any other page where you want to display pricing.
+
+    <AccordionGroup>
+      <Accordion title="Webflow">
+        1. Open your Webflow page in the Designer
+        2. Add an **Embed** element to your page
+        3. Paste the iframe code
+        4. Publish your site
+      </Accordion>
+
+      <Accordion title="WordPress">
+        1. Edit your page in WordPress
+        2. Add a **Custom HTML** block
+        3. Paste the iframe code
+        4. Update/Publish the page
+      </Accordion>
+
+      <Accordion title="Wix">
+        1. Open your Wix page editor
+        2. Click **Add** > **Embed** > **Custom Code**
+        3. Paste the iframe code
+        4. Publish your site
+      </Accordion>
+
+      <Accordion title="Squarespace">
+        1. Edit your Squarespace page
+        2. Add a **Code Block**
+        3. Paste the iframe code
+        4. Save and publish
+      </Accordion>
+    </AccordionGroup>
+  </Step>
+</Steps>
+
+---
+
+## How It Works
+
+<Steps>
+  <Step title="Visitor Views Pricing">
+    When someone visits your page, they see your plans styled with your agency's branding (logo, colors, fonts).
+
+    <Callout type="info">
+      The pricing table automatically adapts to light/dark mode based on your agency theme settings.
+    </Callout>
+  </Step>
+
+  <Step title="Prospect Selects a Plan">
+    They click "Get Started" on any plan, which triggers a Stripe Checkout session with:
+    - Plan name and pricing
+    - Agency branding
+    - Secure payment processing
+  </Step>
+
+  <Step title="Customer Completes Payment">
+    After entering their email, payment details, and billing address, they complete the purchase.
+
+    <Note>
+      Stripe handles all payment security, PCI compliance, and fraud detection.
+    </Note>
+  </Step>
+
+  <Step title="Automatic Client Provisioning">
+    Behind the scenes, Rannah رنّة automatically:
+    
+    <CardGroup cols={2}>
+      <Card title="Creates Organization" icon="building">
+        A new organization is created with the customer's name
+      </Card>
+      <Card title="Creates Client Account" icon="user">
+        A client account is generated with dashboard access
+      </Card>
+      <Card title="Adds Credits" icon="coins">
+        Credits from the subscribed plan are added to their org
+      </Card>
+      <Card title="Applies Limits" icon="gauge">
+        Subscription limits (agents, channels) are enforced
+      </Card>
+    </CardGroup>
+  </Step>
+
+  <Step title="Client Gets Dashboard Access">
+    The customer is redirected to their branded dashboard with:
+    - **Custom domain** (if you've configured one) or **subdomain**
+    - **Auto-login** (no password needed initially)
+    - **Onboarding flow** (for new users) or direct dashboard access (for existing clients)
+  </Step>
+</Steps>
+
+---
+
+## Branding & Customization
+
+Your embeddable pricing table automatically inherits your agency's branding:
+
+<AccordionGroup>
+  <Accordion title="Colors & Theme">
+    - **Primary Color**: Used for CTAs, highlights, and accents
+    - **Secondary Color**: Used for secondary buttons and elements
+    - **Dark/Light Mode**: Adapts based on your agency's theme type
+    - **Background Colors**: Matches platform dark mode (`#0F0F0F`, `#261D37`) or light mode
+
+    <Tip>
+      Configure these in **Agency** > **Overview Tab** > **Theme Customization**
+    </Tip>
+  </Accordion>
+
+  <Accordion title="Typography">
+    - **Font Family**: Uses your agency's selected Google Font
+    - **Border Radius**: Matches your theme's border radius setting
+
+    <Note>
+      All typography and spacing are designed to be responsive and accessible.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Logos & Branding Text">
+    - **Agency Logo**: Displayed at the top of the pricing table
+    - **Dark Mode Logo**: Automatically swaps based on theme
+    - **Branding Text**: Your agency tagline or description
+  </Accordion>
+
+  <Accordion title="Powered By Rannah رنّة (Whitelabel)">
+    - **Standard Plans**: Show "Powered by Rannah رنّة" footer
+    - **Whitelabel Addon**: Footer is removed for a fully branded experience
+
+    <Callout type="success">
+      Upgrade to the **Whitelabel Addon** to remove all Rannah رنّة branding.
+    </Callout>
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Client Onboarding Flow
+
+### New Clients
+
+When a **new customer** subscribes via the embeddable pricing table:
+
+1. ✅ **Client account created** in your agency workspace
+2. ✅ **Organization created** with subscription details
+3. ✅ **Credits added** based on their plan
+4. ✅ **Auto-login token generated** for seamless access
+5. ✅ **Redirected to onboarding** at `/app/{region}/client/onboarding`
+6. ✅ **Guided through setup** (agent creation, dashboard tour, etc.)
+
+<Tip>
+  You can customize the onboarding steps in **Agency** > **SAAS Mode** > **Client Onboarding**
+</Tip>
+
+### Existing Clients
+
+If a customer with an existing organization subscribes to a new plan:
+
+1. ✅ **Subscription updated** with new plan details
+2. ✅ **Credits added** to their existing balance
+3. ✅ **Billing enabled** in their dashboard
+4. ✅ **Auto-logged in** and redirected to their dashboard home
+
+---
+
+## Subscription Management
+
+Once a client subscribes via the embeddable pricing table, they can manage their subscription directly from their dashboard:
+
+<CardGroup cols={2}>
+  <Card title="View Current Plan" icon="eye">
+    See active plan, billing cycle, and next renewal date
+  </Card>
+  <Card title="Upgrade/Downgrade" icon="arrow-up-arrow-down">
+    Switch to a different plan seamlessly
+  </Card>
+  <Card title="Update Payment" icon="credit-card">
+    Change payment method in Stripe's secure portal
+  </Card>
+  <Card title="Cancel Subscription" icon="xmark">
+    Cancel anytime with automatic access until period end
+  </Card>
+</CardGroup>
+
+<Note>
+  All subscription changes are processed through Stripe webhooks and automatically sync with Rannah رنّة.
+</Note>
+
+
+
+## Security & Privacy
+
+<CardGroup cols={2}>
+  <Card title="PCI Compliant" icon="shield-check">
+    All payment processing is handled by Stripe—no card data touches your servers
+  </Card>
+  <Card title="Auto-Login Tokens" icon="key">
+    Secure, one-time use tokens with 24-hour expiry for seamless dashboard access
+  </Card>
+  <Card title="Email Verification" icon="envelope">
+    Customer emails are validated during Stripe checkout
+  </Card>
+  <Card title="Fraud Detection" icon="shield-halved">
+    Stripe's built-in Radar protects against fraudulent transactions
+  </Card>
+</CardGroup>
+
+<Callout type="warning">
+  Auto-login tokens are stored in Firestore with a 24-hour TTL. After that, clients must log in with their email or password.
+</Callout>
+
+---
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Stripe Billing Setup" icon="stripe" href="/whitelabeling/clients/client-billing/billing-overview">
+    Learn how to connect Stripe and configure your account
+  </Card>
+  <Card title="Custom Domain" icon="globe" href="/whitelabeling/agency/custom-domain">
+    Set up a custom domain for client dashboard redirects
+  </Card>
+  <Card title="Theme Customization" icon="palette" href="/whitelabeling/agency/theme">
+    Customize colors, fonts, and branding for your agency
+  </Card>
+  <Card title="Client Management" icon="users-gear" href="/whitelabeling/clients/overview">
+    Manage clients, organizations, and teams
+  </Card>
+</CardGroup>
+
+---
+
+## FAQs
+
+<AccordionGroup>
+  <Accordion title="Can I customize the pricing table layout?">
+    The layout is fixed to ensure consistency and responsiveness across all devices. However, you can fully customize:
+    - Colors (primary, secondary, background, text)
+    - Fonts (via Google Fonts)
+    - Border radius
+    - Plan names, features, and pricing
+
+    For advanced customization, contact support about custom CSS injection.
+  </Accordion>
+
+  <Accordion title="What happens if a customer already has an account?">
+    If they use the same email:
+    - Their **existing organization** is updated with the new subscription
+    - **Credits are added** to their account
+    - They're **auto-logged in** and redirected to the dashboard
+    - **No duplicate accounts** are created
+  </Accordion>
+
+  <Accordion title="Can I use this for one-time purchases?">
+    Currently, the embeddable pricing table only supports **subscription-based** plans. One-time purchases are not supported.
+
+    If you need one-time payments, use Stripe's standard checkout or payment links.
+  </Accordion>
+
+  <Accordion title="How do I update pricing plans?">
+    1. Go to **Auto Billing** > **Step 4: Manage Plans**
+    2. Update the plan details (price, features, credits, limits)
+    3. Save changes
+
+    The embeddable pricing table will **automatically reflect** the updates—no need to re-embed the code.
+  </Accordion>
+
+  <Accordion title="Can I embed on multiple pages?">
+    Yes! You can embed the same pricing table on as many pages as you want:
+    - Landing page
+    - Pricing page
+    - Checkout page
+    - Webinars or campaign pages
+
+    All embeds use the same agency ID and pull the same pricing data.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Callout type="success">
+  **Ready to convert visitors into clients?** Head to the **Auto Billing** tab and grab your embed code!
+</Callout>

@@ -1,0 +1,146 @@
+---
+title: "Whitelabel Stripe Billing "
+description: "Set up billing with Stripe for seamless customer transactions in Rannah رنّة."
+icon: dollar-sign
+---
+
+Easily manage client billing through our new **Stripe Integration** feature, designed for whitelabeling. This enables agencies and businesses to connect their Stripe account to charge customers directly while maintaining a seamless and professional experience.
+
+<Frame>
+  <img src="/images/client-billing/billing-ui.png" />
+</Frame>
+
+## Why Use Stripe Integration?
+
+<Callout type="info">
+  Connecting Stripe simplifies billing for your clients, saves time, and ensures
+  accurate, secure payments.
+</Callout>
+
+With this feature, you can:
+
+* Enable **automated billing** for your customers.
+
+* Customize credit pricing to match your business model.
+
+* View real-time payout and connection statuses.
+
+* Provide a fully **whitelabeled experience** under your brand.
+
+## Setting Up Stripe Integration
+
+<Steps>
+  <Step title="Connect Your Stripe Account">
+    1. Go to the **Auto Billing** tab in your workspace/agency.
+
+    2. Enter the email linked to your Stripe account.
+
+    3. Click `Manage Stripe Connect` to securely link your account.
+
+    <Frame>
+      <img src="/images/client-billing/billing-manage.png" />
+    </Frame>
+
+    <Tip>
+      Make sure your Stripe account is verified and active to avoid interruptions in payouts.
+    </Tip>
+  </Step>
+
+  <Step title="Enable Payouts">
+    Ensure your Stripe account supports payouts. Stripe may require additional
+    verification.
+
+    <Callout type="warning">
+      Payouts will be disabled if your Stripe account is not set up correctly.
+      Contact Stripe support if necessary.
+    </Callout>
+  </Step>
+
+  <Step title="Define Pricing">
+    1. Set your **cost per credit** (e.g., `$0.004` per credit) this will be on top of our pricing.
+
+    2. Verify the final pricing displayed to your clients (e.g., `$10 = 2500 credits`).
+
+    <CardGroup cols={2}>
+      <Card title="Cost per Credit" icon="dollar-sign">
+        Define how much your clients pay per credit used.
+      </Card>
+
+      <Card title="Final Client Price" icon="calculator">
+        Display final credit pricing transparently to your customers.
+      </Card>
+    </CardGroup>
+
+    <Frame>
+      <img src="/images/client-billing/billing-finalpricing.png" />
+    </Frame>
+  </Step>
+</Steps>
+
+## Customizing the Experience
+
+After setting up Stripe, you can further enhance the customer experience:
+
+<AccordionGroup>
+  <Accordion title="Payout Status">
+    View the current **payout status** in the Auto Billing tab. Resolve issues
+    promptly to ensure smooth transactions.
+  </Accordion>
+
+  <Accordion title="Client Credit Pricing">
+    Adjust credit pricing at any time to align with your agency's goals. These
+    changes will reflect instantly for your clients.
+  </Accordion>
+
+  <Accordion title="Monitoring Transactions">
+    Use Stripe's dashboard to view, analyze, and manage all transactions
+    securely.
+
+    <Tip>
+      Stripe's dashboard also offers insights into refunds, fees, and customer
+      payments.
+    </Tip>
+  </Accordion>
+</AccordionGroup>
+
+{/* ## Example: Final Pricing View
+
+<Tip>
+  The pricing you set will be transparently displayed to clients for clarity.
+  Here's how it looks:
+</Tip>
+
+<Frame>
+  <img src="/images/final-pricing-display.png" />
+</Frame> */}
+
+## Troubleshooting Common Issues
+
+<AccordionGroup>
+  <Accordion title="Payout Delays">
+    Check if Stripe requires additional verification or if there are issues with
+    your linked bank account.
+  </Accordion>
+
+  <Accordion title="Connection Errors">
+    Reconnect your Stripe account by clicking `Manage Stripe Connect` in the
+    Auto Billing tab.
+  </Accordion>
+</AccordionGroup>
+
+<Note>
+  Always double-check your Stripe account settings to avoid any disruptions in
+  billing or payouts.
+</Note>
+
+## Related Resources
+
+<CardGroup cols={2}>
+  <Card title="Activation for Clients" icon="rocket" href="/whitelabeling/clients/client-billing/billing-activation">
+    Explore how to activate this feature for your clients.
+  </Card>
+
+  <Card title="Client Billing FAQs" icon="question" href="/whitelabeling/clients/client-billing/billing-faq">
+    Find answers to common questions about billing and credits.
+  </Card>
+</CardGroup>

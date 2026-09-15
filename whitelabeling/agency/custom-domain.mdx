@@ -1,0 +1,115 @@
+---
+title: 'Custom Domain'
+description: 'Connect a Rannah رنّة subdomain or your own custom domain for the agency dashboard.'
+icon: file
+---
+
+# Set Up a Custom Domain
+<Frame>
+  <img src="/images/agency-domain-tab.png" alt="Custom Domain Setup Interface" width="600" class="rounded-md" />
+</Frame>
+Navigate to the Domains tab in your agency settings to connect a domain that will be used for all links and connections associated with your agency. This includes your dashboard link, prototype link, and iframe link.
+
+### Domain Setup Options
+You have two options for setting up your domain:
+<CardGroup cols={2}>
+  <Card title="Rannah رنّة Agent Subdomain" icon="globe">
+    Connect to a Rannah رنّة domain (e.g., youragency.rannah.io)
+  </Card>
+  <Card title="Custom Domain" icon="server">
+    Use a custom domain that you've set up yourself
+  </Card>
+</CardGroup>
+## Using a Rannah رنّة Subdomain
+<Steps>
+  <Step title="Enter Desired Name">
+    Type your desired subdomain name in the provided field.
+  </Step>
+  <Step title="Automatic Creation">
+    Rannah رنّة will automatically create a new subdomain for you.
+  </Step>
+  <Step title="Verification">
+    Wait for the `Domain verified successfully` and `Domain is live` messages to confirm success.
+  </Step>
+  <Step title="Domain is Live" icon="party-horn">
+    If everything is done correctly, your domain should be live. If you run into trouble, contact us at [support@rannah.io](mailto:support@rannah.io).
+  </Step>
+</Steps>
+<Warning>
+  DNS settings might take some time to propagate. Be patient if the domain doesn't become live immediately.
+</Warning>
+## Using Your Own Custom Domain
+For a truly personalized brand experience, use a subdomain of your existing domain **(e.g., dashboard.youragency.com, chat.youragency.com, or agentportal.youragency.com)**.
+<Steps>
+  <Step title="Enter Domain">
+    Input your chosen domain in the designated field.
+
+
+    <Frame>
+  <video src="/images/custom-domain-video.mp4" alt="Custom Domain verification" width="500" class="rounded-md" autoPlay loop />
+</Frame>
+  </Step>
+  <Step title="DNS Check">
+    The DNS checking tool will automatically verify if your domain has the necessary records.
+  </Step>
+  <Step title="Add DNS Records">
+    Add the following records to your domain provider:
+    <AccordionGroup>
+      <Accordion title="CNAME Record">
+        <CodeGroup>
+          ```plaintext
+          Type: CNAME
+          Name: [YOUR_SUBDOMAIN]
+          Value: cname.vercel-dns.com.
+          TTL: Leave as is
+          ```
+        </CodeGroup>
+      </Accordion>
+      <Accordion title="TXT Record">
+        <CodeGroup>
+          ```plaintext
+          Type: TXT
+          Name: _vercel
+          Value: vc-domain-verify=[YOUR-DOMAIN],(YOUR-UNIQUE-IDENTIFIER)
+          TTL: Leave as is
+          ```
+        </CodeGroup>
+      </Accordion>
+    </AccordionGroup>
+  </Step>
+  <Step title="Verification">
+    Wait for the DNS checker to update and display checkmarks for `Domain verified successfully` and `Domain is live`.
+  </Step>
+   <Step title="Domain is Live" icon="party-horn">
+    If everything is done correctly, your domain should be live. If you run into trouble, contact us at [support@rannah.io](mailto:support@rannah.io).
+
+    <Frame>
+  <img src="/images/agency-verified-domain.png" alt="Custom Domain verification" width="600" class="rounded-md" />
+</Frame>
+
+
+  </Step>
+</Steps>
+<Tip>
+  We use [Godaddy](https://godaddy.com) for domain management, but any reputable domain provider will work.
+</Tip>
+### After Domain Setup
+Once your domain is successfully set up:
+<CardGroup cols={2}>
+  <Card title="Access Client Management" icon="users" href="/whitelabeling/clients/overview">
+    Adding your domain unlocks the Clients tab so you can create organizations and manage their agents.
+  </Card>
+  <Card title="Calendly / OAuth integrations" icon="calendar-check" href="/whitelabeling/integrations">
+    For Calendly (and other BYO OAuth apps), register Redirect URI on **this custom domain**
+    (e.g. `https://app.youragency.com/api/calendly/callback`) — not the platform host. See
+    [Whitelabeled Integrations](/whitelabeling/integrations) and
+    [Calendly setup](/integration/calendly).
+  </Card>
+</CardGroup>
+
+
+
+
+
+
+

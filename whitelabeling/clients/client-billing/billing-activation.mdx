@@ -1,0 +1,89 @@
+---
+title: Activation for Clients
+description: Enable billing visibility for a client organization inside your whitelabel dashboard.
+icon: credit-card
+---
+
+Billing activation controls whether a client organization can access billing-related functionality in the client dashboard.
+
+This is typically used after you have already configured your agency billing setup and want a specific client organization to manage subscription or payment activity from their side.
+
+## Before you enable billing
+
+Make sure these pieces are already in place:
+
+- Your agency billing setup is configured
+- Stripe Connect is connected for the owner workspace
+- The target client organization already exists
+
+If you have not completed the billing setup yet, start with [Billing Overview](/whitelabeling/clients/client-billing/billing-overview).
+
+## Enable billing for an organization
+
+<Steps>
+  <Step title="Open Clients">
+    Go to the `Clients` area in your whitelabel dashboard.
+  </Step>
+  <Step title="Manage the organization">
+    Find the organization you want to update and click `Manage`.
+
+    <Frame>
+      <img src="/images/client-billing/billing-orginfo.png" />
+    </Frame>
+  </Step>
+  <Step title="Open Org Info">
+    Open the `Org Info` panel for that organization.
+  </Step>
+  <Step title="Turn on billing">
+    Scroll to the billing-related settings and enable billing for the organization.
+
+    <Frame>
+      <img src="/images/client-billing/billing-modal.png" />
+    </Frame>
+  </Step>
+</Steps>
+
+## What this changes
+
+Once billing is enabled, the client organization can access billing-related UI inside the whitelabel dashboard, depending on your agency configuration and subscription setup.
+
+This may include:
+
+- Viewing subscription or billing details
+- Accessing credit or usage information
+- Managing billing-related actions exposed in the client dashboard
+
+<Info>
+  Billing activation at the organization level does not replace the agency-wide Stripe setup. It only exposes billing functionality to the selected client organization.
+</Info>
+
+## Frequently asked questions
+
+<AccordionGroup>
+  <Accordion title="Can I disable billing later?">
+    Yes. You can return to the organization's settings and turn billing off again if you no longer want the client to manage billing through the dashboard.
+  </Accordion>
+  <Accordion title="Does enabling billing automatically create a subscription?">
+    No. Billing activation controls access to billing-related functionality. Your actual subscription and checkout flow still depends on your agency plan setup and pricing flow.
+  </Accordion>
+  <Accordion title="Do I need Stripe Connect first?">
+    Yes. If your agency billing setup is not complete, client billing features will be limited or unavailable.
+  </Accordion>
+</AccordionGroup>
+
+## Related documentation
+
+<CardGroup cols={2}>
+  <Card title="Billing Overview" icon="receipt" href="/whitelabeling/clients/client-billing/billing-overview">
+    Understand the full whitelabel billing model, including plans and subscriptions.
+  </Card>
+  <Card title="Billing FAQ" icon="question" href="/whitelabeling/clients/client-billing/billing-faq">
+    Review common billing questions and expected client behavior.
+  </Card>
+  <Card title="Managing Organizations" icon="users" href="/whitelabeling/clients/managing-organizations">
+    See how organization settings fit into the broader client management workflow.
+  </Card>
+  <Card title="Embeddable Pricing" icon="browser" href="/whitelabeling/agency/embeddable-pricing">
+    Learn how clients subscribe through your public pricing flow.
+  </Card>
+</CardGroup>
