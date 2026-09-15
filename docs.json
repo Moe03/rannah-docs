@@ -692,8 +692,8 @@
     }
   },
   "logo": {
-    "light": "/logo/rannah-icon-light.png",
-    "dark": "/logo/rannah-icon-dark.png"
+    "light": "/logo/rannah-logo.png",
+    "dark": "/logo/rannah-logo.png"
   },
   "api": {
     "openapi": [
