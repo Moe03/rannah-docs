@@ -1,0 +1,34 @@
+---
+title: 'General Scrape'
+description: 'Ad-hoc research scrape that is not tied to an agent KB or workspace crawler plan gate.'
+openapi: 'POST /scrape'
+---
+
+## When to use
+
+- Research / planning **before** an agent exists
+- One-off page extraction without creating a `kb_ingest` crawler job
+
+For agent KB ingest crawls, keep using [`POST /workspaces/{workspaceId}/crawler/jobs`](/api-reference/v3/crawler/createJob) (`type: kb_ingest` when `toAgentId` is set).
+
+## Request
+
+```json
+{
+  "url": "https://example.com/hotel"
+}
+```
+
+## Response
+
+```json
+{
+  "success": true,
+  "content": "# Example Hotel\n\n…markdown-ish text…",
+  "images": ["https://example.com/hero.jpg"],
+  "links": ["https://example.com/rooms"],
+  "jobId": "scrape_job_id"
+}
+```
+
+A `scrape_jobs/{jobId}` row is recorded with `type: "general"` and `agentId: null` for auditability.

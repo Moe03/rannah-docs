@@ -1,0 +1,36 @@
+---
+title: 'Create Tool'
+description: 'Creates a new tool, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'POST /agents/{agentId}/tools'
+---
+
+## Example Request
+
+```json
+{
+  "tool": {
+    "name": "Get Weather",
+    "description": "Fetches current weather data for a given location",
+    "serverUrl": "https://api.example.com/weather",
+    "method": "GET",
+    "fields": [
+      {
+        "id": "location",
+        "key": "city",
+        "type": "string",
+        "in": "query",
+        "description": "City name for weather lookup",
+        "required": true
+      }
+    ]
+  }
+}
+```
+
+<Note>
+`name` and `description` are required. The description helps the AI understand when to use the tool.
+</Note>
+
+<Tip>
+Configure `channels` to restrict which platforms can use this tool (e.g., `["web-chat", "whatsapp"]`).
+</Tip>

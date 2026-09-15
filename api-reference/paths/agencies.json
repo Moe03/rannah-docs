@@ -1,0 +1,170 @@
+{
+  "agencies": {
+    "get": {
+      "description": "Returns the agency associated with the workspace",
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agency retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agencies retrieved successfully"
+                  },
+                  "data": {
+                    "description": "Agency object",
+                    "type": "object",
+                    "$ref": "../schemas/Agency.json#/AgencyModelGet"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "description": "Creates/Edit an agency",
+      "requestBody": {
+        "description": "New agency data to create/edit",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Agency.json#/AgencyModel"
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agency created/edited successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agency created/edited successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "description": "Deletes the agency associated with the workspace",
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agency deleted successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agency deleted successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

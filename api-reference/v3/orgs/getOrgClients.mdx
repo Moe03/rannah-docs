@@ -1,0 +1,13 @@
+---
+title: "Get Organization Clients"
+description: "Retrieve client users belonging to a specific organization"
+openapi: "GET /orgs/{orgId}/clients"
+---
+
+<Note>
+Returns human client users within the organization. You must own the organization via your workspace secret.
+</Note>
+
+<Tip>
+These are login users under an org — not the organization records themselves. To list orgs, use `GET /orgs`.
+</Tip>

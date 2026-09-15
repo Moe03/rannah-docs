@@ -1,0 +1,19 @@
+---
+title: "Assign Organization Agent"
+description: "Assign or unassign a workspace agent on an organization"
+openapi: "POST /orgs/{orgId}/agents/{agentId}"
+---
+
+<Note>
+Adds or removes an agent from the organization's `widgetIDs` list. The agent must belong to the same workspace.
+</Note>
+
+## Example Request
+
+```json
+{
+  "action": "assign"
+}
+```
+
+Use `"action": "unassign"` to remove the agent.

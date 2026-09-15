@@ -1,0 +1,31 @@
+---
+title: 'Create Lead'
+description: 'Creates a new lead with the specified configuration, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'POST /leads'
+---
+
+## Example Request
+
+```json
+{
+  "lead": {
+    "agentId": "your_agent_id",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "phone": "+1234567890",
+    "metaData": {
+      "company": "Acme Inc",
+      "source": "api",
+      "notes": "Interested in enterprise plan"
+    }
+  }
+}
+```
+
+<Note>
+`agentId` is required. At least one contact field (`email`, `phone`, or `name`) is recommended.
+</Note>
+
+<Tip>
+Use the `metaData.source` field to track where leads come from (e.g., 'chat', 'web', 'api', 'import').
+</Tip>

@@ -1,0 +1,110 @@
+{
+  "ChatMessage": {
+    "type": "object",
+    "properties": {
+      "from": {
+        "type": "string",
+        "description": "Sender of the message.",
+        "enum": ["human", "bot"]
+      },
+      "type": {
+        "type": "string",
+        "description": "Type of the message.",
+        "enum": [
+          "launch",
+          "text",
+          "choice",
+          "MultiSelect",
+          "cardV2",
+          "carousel",
+          "visual",
+          "GetBrowserData",
+          "Embed",
+          "iFrame",
+          "FileUpload",
+          "GoogleForm",
+          "EmailForm",
+          "SetConvoData",
+          "VoiceNote",
+          "SetRuntime",
+          "no-reply",
+          "VGVF_Channel",
+          "VFVG_Channel",
+          "VG_Response",
+          "knowledgeBase",
+          "jsx",
+          "info:default",
+          "info:success",
+          "info:danger",
+          "info:primary",
+          "end"
+        ]
+      },
+      "item": {
+        "type": "object",
+        "description": "Additional data specific to the message type."
+      },
+      "delay": {
+        "type": "number",
+        "description": "Delay in milliseconds before sending the message."
+      },
+      "ts": {
+        "type": "number",
+        "description": "Timestamp of the message."
+      }
+    },
+    "required": ["from", "type", "item", "ts"]
+  },
+  "SimpleChatMessage": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "Type of the message.",
+        "enum": [
+          "launch",
+          "text",
+          "choice",
+          "MultiSelect",
+          "cardV2",
+          "carousel",
+          "visual",
+          "GetBrowserData",
+          "Embed",
+          "iFrame",
+          "FileUpload",
+          "GoogleForm",
+          "EmailForm",
+          "SetConvoData",
+          "VoiceNote",
+          "SetRuntime",
+          "no-reply",
+          "VGVF_Channel",
+          "VFVG_Channel",
+          "VG_Response",
+          "knowledgeBase",
+          "jsx",
+          "info:default",
+          "info:success",
+          "info:danger",
+          "info:primary",
+          "end"
+        ]
+      },
+      "payload": {
+        "type": "object",
+        "description": "Relevant data of the message according to the message type."
+      },
+      "ts": {
+        "type": "string",
+        "description": "Timestamp of the message."
+      }
+    }
+  },
+  "MessageOriginType": {
+    "type": "string",
+    "description": "Channel origin of the message.",
+    "enum": ["web-chat", "whatsapp", "discord", "gb-chat"]
+  }
+}
+

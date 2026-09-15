@@ -1,0 +1,117 @@
+---
+title: Get Started
+description: Use the Rannah رنّة V3 REST API to manage workspaces, agents, tools, variables, knowledge base documents, and conversations.
+icon: rocket
+---
+
+<Info>
+  V3 is the recommended Rannah رنّة API for new integrations.
+</Info>
+
+## Use Rannah رنّة with Claude, ChatGPT, or Cursor (MCP)
+
+The fastest way to work against this API is from the dashboard — you do not need to wire HTTP by hand.
+
+1. Open your [Rannah رنّة dashboard](https://rannah.io).
+2. In the **bottom-left**, open **Rannah رنّة MCP** for your workspace.
+3. Connect it in **Claude**, **ChatGPT**, or **Cursor**.
+
+Your assistant can then change agents, KB, orgs, settings, and more in that workspace by calling the same V3 endpoints documented in this API reference.
+
+## Base URLs
+
+Your workspace lives in either the `EU` or `NA` region. Use the base URL that matches your dashboard region.
+
+### EU
+
+`https://eu-gcp-api.vg-stuff.com/v3`
+
+### NA
+
+`https://na-gcp-api.vg-stuff.com/v3`
+
+<Warning>
+  If you use the wrong region, requests may fail or return data from the wrong environment.
+</Warning>
+
+## Authentication
+
+Most V3 endpoints use a standard Bearer token:
+
+```bash
+Authorization: Bearer YOUR_SECRET_KEY
+```
+
+You can authenticate with either:
+
+- Your **workspace secret** for workspace-level operations
+- Your **agent secret** for agent-specific operations
+
+<Frame caption="Get a workspace secret from the workspace switcher in the dashboard.">
+  <img src="https://i.ibb.co/XjVNjdV/Untitled.jpg" />
+</Frame>
+
+<Frame caption="Get an agent secret from the agent Settings page.">
+  <img src="https://i.ibb.co/vY8CbgL/Capture.png" />
+</Frame>
+
+## Plan requirement
+
+On the current **v2-2026** pricing catalog:
+
+| Access | Minimum plan |
+| --- | --- |
+| **Read** (GET) | **Business** or higher |
+| **Write** (POST / PUT / PATCH / DELETE) | **White Label** or higher |
+
+Free, Starter, and Pro do **not** include API access. If a request is blocked, the API returns `403` with a link to the [billing / plans page](https://rannah.io/app/eu/account/billing?active_tab=plans).
+
+Legacy Pay-as-you-go workspaces are not affected by this gate.
+
+## What V3 covers
+
+The V3 API is organized around the main product objects:
+
+- `Workspaces`
+- `Agency` (whitelabel branding / config)
+- `Orgs` (organizations — dashboard “Clients” cards, agent assignment, teams)
+- `Clients` (human users under an org)
+- `Agents` (including **clone**, **canonical templates**, **audit log**, lean **interact**)
+- `Tools`
+- `Variables`
+- `Knowledge Base` (including **image gallery upload** and **bulk docs**)
+- `Scrape` (general-purpose, non-KB research scrape)
+- `Leads`
+- `Conversations`
+- `Calls & Numbers`
+- `Campaigns`
+- `Custom Metrics`
+- `Crawler` (workspace KB-ingest jobs)
+
+Use the sidebar to jump directly into any resource group.
+
+## Region-aware request example
+
+```bash
+curl --request GET \
+  --url https://eu-gcp-api.vg-stuff.com/v3/agents \
+  --header "Authorization: Bearer YOUR_SECRET_KEY"
+```
+
+## Choosing between API surfaces
+
+- Use **V3 REST** when you want a stable, Bearer-authenticated HTTP API.
+- Use **Rannah رنّة MCP** from the dashboard (bottom-left) when you want Claude / ChatGPT / Cursor to drive the same API for you.
+- Use **V2 / legacy endpoints** only if you are maintaining an older integration that already depends on them.
+- Use **WebSocket interact** when you need real-time streaming behavior during live conversations.
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="shield-halved" href="/api-reference/authentication">
+    Learn how secrets work and how to authorize requests safely.
+  </Card>
+  <Card title="Endpoints & Regions" icon="server" href="/api-reference/endpoints">
+    Review all available API base URLs, including V2, V3, and WebSocket endpoints.
+  </Card>
+</CardGroup>

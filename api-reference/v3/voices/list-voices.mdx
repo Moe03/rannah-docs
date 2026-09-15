@@ -1,0 +1,54 @@
+---
+title: 'List voices (unified)'
+description: 'Search and list voices across one or more TTS providers in a single normalized shape. Filter by language, gender, accent and providers[].'
+openapi: 'GET /voices'
+---
+
+The unified endpoint is the easiest way to find a voice. It fans out to every requested provider in parallel, normalizes the result, then applies your filters.
+
+## Examples
+
+### Only English female voices across all providers
+
+```bash
+curl "https://eu-gcp-api.vg-stuff.com/v3/voices?language=en&gender=female&limit=50" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### German voices from ElevenLabs and Cartesia only
+
+```bash
+curl "https://eu-gcp-api.vg-stuff.com/v3/voices?providers=elevenlabs,cartesia&language=de" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+### Australian-accent voices
+
+```bash
+curl "https://eu-gcp-api.vg-stuff.com/v3/voices?accent=australian&limit=20" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## How filters work
+
+- **`language`** — accepts ISO short codes (`en`), BCP-47 (`en-US`) or English names (`English`). Matches are inclusive: filter `en` returns `en`, `en-US`, `en-GB`, `English`, etc.
+- **`gender`** — `male` / `female` / `neutral`. Also accepts `masculine`, `feminine`, `m`, `f` (case-insensitive).
+- **`accent`** — substring match (case-insensitive). `american` matches `American`, `North American`, etc.
+- **`providers`** — comma-separated list (`?providers=elevenlabs,cartesia`). When omitted, every supported provider is queried in parallel.
+
+## Response
+
+The response always contains:
+
+- `voices[]` — the paginated, filtered list (each entry has `voiceId`, `name`, `provider`, `previewUrl`, `filters`)
+- `total` — total matches before pagination
+- `providersQueried` — providers that were actually queried
+- `providersFailed` — providers that errored (e.g. missing workspace API key) along with the error message — **the request still succeeds**
+
+<Tip>
+Each voice has a ready-to-play `previewUrl` MP3. Drop it straight into an `<audio>` element.
+</Tip>
+
+<Note>
+This endpoint is read-only and does **not** consume credits.
+</Note>

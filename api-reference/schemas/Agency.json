@@ -1,0 +1,153 @@
+{
+  "AgencyModel": {
+    "required": ["name"],
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "The name of the agency."
+      },
+      "squarePhotoURL": {
+        "type": "string",
+        "description": "URL to the agency's square photo."
+      },
+      "darkModeSquarePhotourl": {
+        "type": "string",
+        "description": "URL to the agency's dark mode square photo."
+      },
+      "brandingText": {
+        "type": "string",
+        "description": "Text for agency branding (supports markdown)."
+      },
+      "customDomain": {
+        "type": "string",
+        "description": "(Edit only from dashboard) Custom domain for the agency."
+      },
+      "VGsubDomain": {
+        "type": "string",
+        "description": "(Edit only from dashboard) subdomain for the agency."
+      },
+      "customThemeJSONString": {
+        "type": "string",
+        "description": "### MUST JSON.stringify() this object before passing it to the API.\n Custom theme object for the agent",
+        "$ref": "./Agent.json#/CustomTheme"
+      },
+      "isVerifiedSubDomain": {
+        "type": "boolean",
+        "description": "Indicates if the subdomain is verified."
+      },
+      "isVerifiedCustomDomain": {
+        "type": "boolean",
+        "description": "Indicates if the custom domain is verified."
+      },
+      "withVGBranding": {
+        "type": "boolean",
+        "description": "Indicates if the agency has Rannah رنّة branding."
+      },
+      "themeVariant": {
+        "type": "string",
+        "enum": ["default", "bordered", "flat", "faded"],
+        "description": "Theme variant for the agency."
+      },
+      "themeColorUsage": {
+        "type": "string",
+        "enum": ["gradient", "colorful", "plain"],
+        "description": "Color usage for the theme."
+      },
+      "googleFont": {
+        "type": "string",
+        "description": "Google font used by the agency [Browse fonts](https://fonts.google.com)"
+      },
+      "mainWebsite": {
+        "type": "string",
+        "description": "Main website URL for the agency."
+      },
+      "supportEmail": {
+        "type": "string",
+        "description": "Support email address for the agency."
+      },
+      "tosPage": {
+        "type": "string",
+        "description": "Terms of service page URL."
+      },
+      "privacyPolicyPage": {
+        "type": "string",
+        "description": "Privacy policy page URL."
+      },
+      "secret": {
+        "type": "string",
+        "description": "Secret key for the agency."
+      },
+      "OPENAI_API_KEY": {
+        "type": "string",
+        "description": "API key for OpenAI."
+      },
+      "OPENAI_DEFAULT_MODEL": {
+        "type": "string",
+        "enum": ["gpt-3.5-turbo", "gpt-4-1106-preview"],
+        "description": "Default OpenAI model for the agency."
+      },
+      "address": {
+        "type": "string",
+        "description": "Address of the agency."
+      },
+      "customCSS": {
+        "type": "string",
+        "description": "Custom CSS for the agency to inject on the dashboard."
+      },
+      "enableHumanHandoff": {
+        "type": "boolean",
+        "description": "Indicates if human handoff is enabled."
+      },
+      "resendEmailDomain": {
+        "type": "string",
+        "description": "Domain for resend email."
+      },
+      "resendEmailDomainId": {
+        "type": "string",
+        "description": "Identifier for the resend email domain."
+      },
+      "resendEmailDomainStatus": {
+        "type": "string",
+        "enum": [
+          "not_started",
+          "pending",
+          "verified",
+          "failure",
+          "temporary_failure"
+        ],
+        "description": "Status of the resend email domain."
+      },
+      "resendEmailDomainRecords_JSON_STRING": {
+        "type": "string",
+        "description": "JSON string representing resend email domain records."
+      }
+    }
+  },
+  "AgencyModelGet": {
+    "allOf": [
+      {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "description": "The unique identifier for the agency."
+          }
+        }
+      },
+      {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The owner user/workspace associated with the agency."
+          }
+        }
+      },
+      {
+        "$ref": "#/AgencyModel"
+      }
+    ]
+  }
+}
+

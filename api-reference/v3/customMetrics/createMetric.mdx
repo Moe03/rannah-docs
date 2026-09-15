@@ -1,0 +1,90 @@
+---
+title: 'Create Custom Metric'
+description: 'Create a new custom metric for tracking agent-specific data'
+openapi: "POST /agents/{agentId}/custom-metrics"
+---
+
+## Overview
+
+Creates a new custom metric that can be tracked during agent conversations. Metrics enable you to measure and analyze specific data points relevant to your business.
+
+## Metric Types
+
+### Number
+For quantifiable metrics like ratings, counts, or durations.
+
+```json
+{
+  "metric": {
+    "key": "customer_satisfaction",
+    "description": "Customer satisfaction rating (1-10)",
+    "type": "number"
+  }
+}
+```
+
+### Boolean
+For yes/no questions or binary states.
+
+```json
+{
+  "metric": {
+    "key": "issue_resolved",
+    "description": "Whether the customer's issue was resolved",
+    "type": "boolean"
+  }
+}
+```
+
+### Enum
+For predefined categorical options.
+
+```json
+{
+  "metric": {
+    "key": "sentiment",
+    "description": "Customer sentiment analysis",
+    "type": "enum",
+    "options": ["positive", "negative", "neutral"]
+  }
+}
+```
+
+<Warning>
+Enum type metrics **must** include an `options` array with at least one value.
+</Warning>
+
+### String
+For open-ended text responses.
+
+```json
+{
+  "metric": {
+    "key": "feedback",
+    "description": "Customer feedback comments",
+    "type": "string"
+  }
+}
+```
+
+## Key Guidelines
+
+<Note>
+- Metric keys must be **unique** per agent
+- Keys should be descriptive (e.g., `customer_satisfaction` not `cs`)
+- Keys are **case-sensitive**
+- Maximum key length: 100 characters
+</Note>
+
+## Common Use Cases
+
+- **NPS Score**: Track Net Promoter Score
+- **Resolution Time**: Measure average time to resolve issues
+- **Sentiment Analysis**: Categorize conversation sentiment
+- **Lead Quality**: Score lead quality (1-5)
+- **Product Interest**: Track which products customers ask about
+
+<Tip>
+After creating a metric, your agent will automatically start tracking it during conversations where the information is available.
+</Tip>
+

@@ -1,0 +1,13 @@
+---
+title: 'Delete Tool'
+description: 'Deletes a tool, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'DELETE /tools/{toolId}'
+---
+
+<Warning>
+**This action is irreversible.** Deleting a tool permanently removes it and any references to it in agent instructions will no longer work.
+</Warning>
+
+<Note>
+Variables associated with the tool are not automatically deleted. Clean them up separately if needed.
+</Note>

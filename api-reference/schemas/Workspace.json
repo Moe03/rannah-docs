@@ -1,0 +1,72 @@
+{
+  "WorkspaceModel": {
+    "type": "object",
+    "properties": {
+      "photoURL": {
+        "type": "string",
+        "description": "URL to the user's photo."
+      },
+      "workspaceName": {
+        "type": "string",
+        "description": "The name of the workspace."
+      },
+      "workspaceEmails": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of email addresses associated with the workspace."
+      },
+      "workspacePhotoURL": {
+        "type": "string",
+        "description": "URL to the workspace photo."
+      },
+      "workspaceSecret": {
+        "type": "string",
+        "description": "Secret key for the workspace."
+      }
+    }
+  },
+  "WorkspaceModelGET": {
+    "allOf": [
+      {
+        "required": ["uid"],
+        "type": "object",
+        "properties": {
+          "uid": {
+            "description": "The unique identifier for the user/workspace.",
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "The display name of the user."
+          },
+          "email": {
+            "type": "string",
+            "description": "The email address of the user."
+          },
+          "loadTokens": {
+            "type": "number",
+            "description": "Amount of load tokens in the user account/workspace."
+          },
+          "referredFrom": {
+            "type": "string",
+            "description": "Referral source for the user."
+          },
+          "joinedAt": {
+            "type": "number",
+            "description": "Timestamp indicating when the user joined the workspace."
+          },
+          "ownerId": {
+            "type": "string",
+            "description": "The unique identifier of the workspace owner."
+          }
+        }
+      },
+      {
+        "$ref": "#/WorkspaceModel"
+      }
+    ]
+  }
+}
+

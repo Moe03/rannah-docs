@@ -1,0 +1,63 @@
+---
+title: "Get Agent Conversations"
+description: "Retrieves all conversations associated with a specific agent, using the V3 [endpoints](/api-reference/v3/intro)."
+openapi: "GET /agents/{agentId}/convos"
+---
+
+<Note>
+Returns conversations sorted by timestamp (newest first). Empty conversations without essential data are filtered out.
+</Note>
+
+<Tip>
+Use `page` and `limit` query parameters to paginate large conversation lists efficiently.
+</Tip>
+
+## Query Parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `page` | number | 1 | Page number for pagination |
+| `limit` | number | 20 | Number of conversations per page |
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "message": "Conversations retrieved successfully",
+  "data": [
+    {
+      "ID": "agent123_convo456",
+      "userID": "agent123_convo456",
+      "ts": 1699999999,
+      "messagesNum": 5,
+      "userName": "John Doe",
+      "userEmail": "john@example.com",
+      "userPhone": "+1234567890",
+      "userCompany": "Acme Corp",
+      "notes": "Customer interested in premium plan",
+      "tags": ["new-lead"],
+      "origin": "web-chat",
+      "firstMessageTS": 1699999000,
+      "lastMessageTS": 1699999999
+    }
+  ]
+}
+```
+
+## Response Fields
+
+Each conversation in the array includes:
+
+### Lead Information
+- `userName`, `userEmail`, `userPhone` - Contact details
+- `userAddress`, `userCompany`, `userWebsite` - Additional information
+- `notes` - Internal notes about the lead
+- `userProfilePic` - Profile picture URL
+
+### Conversation Metadata
+- `ID`, `userID` - Identifiers
+- `messagesNum` - Message count
+- `tags` - Categorization tags
+- `origin` - Channel (e.g., "web-chat", "whatsapp")
+- Timestamps: `ts`, `firstMessageTS`, `lastMessageTS`

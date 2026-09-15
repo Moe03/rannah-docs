@@ -1,0 +1,46 @@
+---
+title: 'Interact (REST)'
+description: 'Send a message to an agent synchronously. Supports lean and verbose response modes for test loops.'
+openapi: 'POST /agents/interact'
+---
+
+## Response modes
+
+| `responseMode` | Behavior |
+| --- | --- |
+| `lean` (default) | Compact payload for agent-builder test loops |
+| `verbose` | Full turns, debugMessages, metadata (legacy shape) |
+
+### Lean response
+
+```json
+{
+  "success": true,
+  "assistantText": "Here are the deluxe rooms…",
+  "uiEngineSummary": [{ "type": "calendar", "title": "Book a stay" }],
+  "kbDocsRetrieved": ["STEIGENBERGER EL TAHRIR CAIRO (ROOMS)"],
+  "imagesShown": ["https://cdn.example/room.jpg"]
+}
+```
+
+### Verbose response
+
+Returns `turns`, `lastBotMessage`, `debugMessages`, and `metadata` (token usage, KB sources, variables) — the previous default shape.
+
+## Example
+
+```json
+{
+  "agentId": "your_agent_id",
+  "convoId": "test-loop-1",
+  "bucket": "(default)",
+  "prompt": "Show me rooms at El Tahrir",
+  "isTest": true,
+  "kbPreview": true,
+  "responseMode": "lean"
+}
+```
+
+<Tip>
+Use `lean` for MCP / agent-creator iteration so tool results stay in context. Switch to `verbose` only when debugging tooling or node switches.
+</Tip>

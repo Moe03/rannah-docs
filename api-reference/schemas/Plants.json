@@ -1,0 +1,35 @@
+{
+  "Plant": {
+    "required": ["name"],
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "The name of the plant",
+        "type": "string"
+      },
+      "tag": {
+        "description": "Tag to specify the type",
+        "type": "string"
+      }
+    }
+  },
+  "NewPlant": {
+    "allOf": [
+      {
+        "$ref": "#/Plant"
+      },
+      {
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "description": "Identification number of the plant",
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      }
+    ]
+  }
+}
+

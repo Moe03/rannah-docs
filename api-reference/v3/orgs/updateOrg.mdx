@@ -1,0 +1,26 @@
+---
+title: "Update Organization"
+description: "Patch organization fields for the authenticated workspace"
+openapi: "PATCH /orgs/{orgId}"
+---
+
+<Note>
+Merges fields from `org` into the organization. Ownership fields (`userId`, `agencyId`, `ID`, etc.) cannot be changed.
+</Note>
+
+## Example Request
+
+```json
+{
+  "org": {
+    "name": "Acme Corp Updated",
+    "settings": {
+      "disableClientAccess": false
+    }
+  }
+}
+```
+
+<Tip>
+Prefer `POST /orgs/{orgId}/agents/{agentId}` for agent assignment instead of patching `widgetIDs` directly.
+</Tip>

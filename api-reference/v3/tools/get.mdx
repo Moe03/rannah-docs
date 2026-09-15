@@ -1,0 +1,13 @@
+---
+title: 'Get Tools'
+description: 'Gets all tools for a specific agent, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'GET /agents/{agentId}/tools'
+---
+
+<Note>
+Returns all tools associated with the specified agent including their field configurations.
+</Note>
+
+<Tip>
+Use the tool `id` to reference tools in agent instructions with the syntax `{{tool:tool_id}}`.
+</Tip>

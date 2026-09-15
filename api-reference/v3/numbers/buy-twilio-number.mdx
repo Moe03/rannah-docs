@@ -1,0 +1,22 @@
+---
+title: 'Buy a Twilio Number'
+description: 'Purchase a new Twilio phone number to use with your AI agents for voice calls.'
+openapi: 'POST /utils/buy-twilio-number'
+---
+
+## Example Request
+
+```json
+{
+  "number": "+14155551234",
+  "agentId": "your-agent-id"
+}
+```
+
+<Note>
+The phone number must include the `+` prefix and country code, with no spaces or special characters.
+</Note>
+
+<Tip>
+Leave `agentId` empty to purchase the number without assigning it to an agent immediately.
+</Tip>

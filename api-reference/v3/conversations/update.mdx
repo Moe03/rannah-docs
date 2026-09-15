@@ -1,0 +1,25 @@
+---
+title: "Update Conversation"
+description: "Updates an existing conversation for the specified agent, using the V3 [endpoints](/api-reference/v3/intro)."
+openapi: "PATCH /agents/{agentId}/convos/{convoId}"
+---
+
+## Example Request
+
+```json
+{
+  "conversation": {
+    "tags": ["support", "resolved"],
+    "state": "completed",
+    "title": "Product Inquiry - Resolved"
+  }
+}
+```
+
+<Note>
+Uses partial updates - only provided fields are changed. Tags are **merged** with existing tags (duplicates removed).
+</Note>
+
+<Tip>
+`lastModified` is automatically updated when any field changes.
+</Tip>

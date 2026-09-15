@@ -1,0 +1,26 @@
+---
+title: 'Update Lead'
+description: 'Updates a lead with the specified configuration, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'PATCH /leads/{id}'
+---
+
+## Example Request
+
+```json
+{
+  "lead": {
+    "name": "John Smith",
+    "metaData": {
+      "notes": "Follow up scheduled for next week"
+    }
+  }
+}
+```
+
+<Note>
+Uses partial updates - only provided fields are changed. The `ts` timestamp is automatically updated.
+</Note>
+
+<Tip>
+You cannot change the `agentId` after creation. Create a new lead if you need to reassign.
+</Tip>

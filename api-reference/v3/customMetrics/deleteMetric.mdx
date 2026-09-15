@@ -1,0 +1,59 @@
+---
+title: 'Delete Custom Metric'
+description: 'Delete a custom metric from an agent'
+openapi: "DELETE /agents/{agentId}/custom-metrics/{metricId}"
+---
+
+## Overview
+
+Permanently deletes a custom metric definition from an agent. This stops the metric from being tracked in future conversations.
+
+<Warning>
+**Important:**
+- This action cannot be undone
+- Historical data is **not deleted** - past metric values remain in conversation records
+- The metric will no longer be tracked in new conversations
+- System metrics cannot be deleted
+</Warning>
+
+## What Happens After Deletion
+
+1. ✅ **Historical Data Preserved**: All previously recorded metric values remain in conversations
+2. ✅ **Analytics Access**: You can still query historical data for this metric
+3. ❌ **Future Tracking Stops**: The metric won't be collected in new conversations
+4. ❌ **Metric Not Listed**: The metric disappears from the metrics list
+
+## System Metrics Protection
+
+System metrics are protected and cannot be deleted:
+
+```json
+{
+  "error": {
+    "code": "FORBIDDEN",
+    "message": "System metrics cannot be deleted"
+  }
+}
+```
+
+## Alternative: Disable Instead of Delete
+
+If you want to temporarily stop tracking a metric without losing its definition:
+
+<Tip>
+Consider creating a "disabled" or "archived" state in your application instead of deleting metrics. This preserves the configuration for potential future reactivation.
+</Tip>
+
+## Use Cases
+
+- **Cleanup**: Remove outdated or unused metrics
+- **Reorganization**: Clear metrics before implementing a new tracking strategy
+- **Mistake Correction**: Remove incorrectly configured metrics
+
+## Before Deleting
+
+1. **Export Data**: Back up historical data if needed
+2. **Update Documentation**: Remove references to the metric from internal docs
+3. **Notify Team**: Inform team members who rely on this metric
+4. **Check Dependencies**: Ensure no dashboards or reports depend on this metric
+

@@ -1,0 +1,238 @@
+{
+  "workspaces": {
+    "get": {
+      "description": "Returns workspace associated with the bearer token",
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Workspaces retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Workspaces retrieved successfully"
+                  },
+                  "data": {
+                    "description": "Workspace associated with bearer token",
+                    "type": "object",
+                    "$ref": "../schemas/Workspace.json#/WorkspaceModelGET"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "description": "Creates/Edit a workspace",
+      "requestBody": {
+        "description": "Workspace to create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Workspace.json#/WorkspaceModel"
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Workspace created/edit successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Workspace created successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "description": "Deletes the workspace associated with the bearer token, only works if the workspace doesn't have any load tokens and hasn't paid and is not the main workspace associated with an account.",
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Workspace deleted successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Workspace deleted successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "workspace_usage": {
+    "post": {
+      "operationId": "getUsage",
+      "summary": "Get a workspace usage",
+      "tags": ["Workspaces"],
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "logsPage": {
+                  "type": "number"
+                },
+                "range": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "description": "Unix timestamp referencing period start",
+                      "type": "number"
+                    },
+                    "end": {
+                      "description": "Unix timestamp referencing period end",
+                      "type": "number"
+                    }
+                  },
+                  "required": ["start", "end"],
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "uid",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {},
+                "additionalProperties": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,147 @@
+---
+title: 'Get Metric Data'
+description: 'Retrieve aggregated data and analytics for a specific metric'
+openapi: "GET /agents/{agentId}/custom-metrics/{metricKey}/data"
+---
+
+## Overview
+
+Fetches aggregated analytics data for a specific metric within a time range. Returns statistical summaries and optional time-series data points.
+
+## Numeric Metrics
+
+For number-type metrics, the response includes statistical aggregations:
+
+```json
+{
+  "success": true,
+  "data": {
+    "key": "customer_satisfaction",
+    "type": "numeric",
+    "average": 8.5,
+    "sum": 425,
+    "min": 5,
+    "max": 10,
+    "totalDataPoints": 50,
+    "timeSeries": [
+      {
+        "ts": 1640000000,
+        "value": 8,
+        "convo_id": "convo_123"
+      }
+    ]
+  }
+}
+```
+
+### Available Aggregations
+- **average**: Mean value across all data points
+- **sum**: Total sum of all values
+- **min**: Minimum recorded value
+- **max**: Maximum recorded value
+
+## Categorical Metrics
+
+For boolean, enum, and string types, the response includes count distributions:
+
+```json
+{
+  "success": true,
+  "data": {
+    "key": "sentiment",
+    "type": "categorical",
+    "counts": {
+      "positive": 30,
+      "negative": 10,
+      "neutral": 10
+    },
+    "totalDataPoints": 50,
+    "timeSeries": [...]
+  }
+}
+```
+
+<Note>
+Categories are automatically limited to the top 10 most frequent values. Less frequent values are grouped into "other".
+</Note>
+
+## Time-Series Data
+
+The `timeSeries` array provides individual data points with timestamps and conversation IDs:
+
+```javascript
+// Each time-series point
+{
+  "ts": 1640000000,        // Unix timestamp (seconds)
+  "value": 8,              // Metric value
+  "convo_id": "convo_123"  // Associated conversation ID
+}
+```
+
+<Tip>
+Set `includeTimeSeries: false` to reduce response size when you only need aggregated statistics.
+</Tip>
+
+## Time Range Examples
+
+### Last 24 Hours
+```javascript
+const now = Math.floor(Date.now() / 1000);
+const yesterday = now - (24 * 60 * 60);
+
+const data = await fetch(
+  `/v3/agents/{agentId}/custom-metrics/customer_satisfaction/data?startTs=${yesterday}&endTs=${now}`
+);
+```
+
+### Last 7 Days
+```javascript
+const now = Math.floor(Date.now() / 1000);
+const weekAgo = now - (7 * 24 * 60 * 60);
+
+const data = await fetch(
+  `/v3/agents/{agentId}/custom-metrics/nps_score/data?startTs=${weekAgo}&endTs=${now}`
+);
+```
+
+### Current Month
+```javascript
+const now = new Date();
+const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+const startTs = Math.floor(startOfMonth.getTime() / 1000);
+const endTs = Math.floor(Date.now() / 1000);
+```
+
+## Use Cases
+
+- **Dashboard Analytics**: Power real-time metric dashboards
+- **Trend Analysis**: Identify patterns over time
+- **Performance Reports**: Generate periodic performance summaries
+- **Alerts**: Trigger notifications based on metric thresholds
+- **A/B Testing**: Compare metric performance across different periods
+
+## Performance Tips
+
+<Tip>
+- Use smaller time ranges for faster queries
+- Disable `includeTimeSeries` when you don't need individual data points
+- Cache results for frequently accessed date ranges
+- Query during off-peak hours for large historical data requests
+</Tip>
+
+## No Data Response
+
+When no data points exist for the time range:
+
+```json
+{
+  "success": true,
+  "data": {
+    "key": "customer_satisfaction",
+    "type": "numeric",
+    "totalDataPoints": 0,
+    "timeSeries": []
+  }
+}
+```
+

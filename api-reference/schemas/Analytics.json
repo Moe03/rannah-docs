@@ -1,0 +1,58 @@
+{
+  "AnalyticLoadModel": {
+    "type": "object",
+    "required": ["record"],
+    "properties": {
+      "record": {
+        "type": "string",
+        "enum": ["load", "convo"],
+        "description": "Type of analytics whether its a load on website or the conversation analytics/metadata."
+      },
+      "userID": {
+        "type": "string",
+        "description": "The associated conversation id/user id with the."
+      },
+      "ipAddress": {
+        "type": "string",
+        "description": "The IP address of the user."
+      },
+      "countryCode": {
+        "type": "string",
+        "description": "The country code associated with the user's location."
+      },
+      "langCode": {
+        "type": "string",
+        "description": "The language code indicating the user's language."
+      },
+      "browser": {
+        "type": "string",
+        "description": "The user's browser information."
+      },
+      "platform": {
+        "type": "string",
+        "description": "The platform or device used by the user."
+      },
+      "origin": {
+        "$ref": "./Messages.json#/MessageOriginType",
+        "description": "The channel origin of the message."
+      },
+      "ts": {
+        "type": "number",
+        "description": "Timestamp indicating when the analytic load occurred."
+      },
+      "interactionsNum": {
+        "type": "number",
+        "description": "The number of interactions made by the user. (messages from user only) "
+      },
+      "firstMessageTS": {
+        "type": "number",
+        "description": "Timestamp of the first message sent by the user."
+      },
+      "lastMessageTS": {
+        "type": "number",
+        "description": "Timestamp of the last message sent by the user."
+      }
+    }
+  }
+}
+

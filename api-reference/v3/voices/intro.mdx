@@ -1,0 +1,61 @@
+---
+title: 'Voices API'
+description: 'Discover, search and preview voices across every TTS provider supported by Rannah رنّة. Manage Twilio phone numbers used for voice calls and SMS.'
+---
+
+The Voices API is a set of utility / discovery endpoints. They are **read-only helpers and do not consume credits**.
+
+## What you can do
+
+- **List supported providers** — `GET /voices/providers`
+- **List a provider's TTS models** — `GET /voices/{provider}/models`
+- **Search voices across all providers** with filtering and pagination — `GET /voices`
+- **Browse a single provider's catalog** — `GET /voices/{provider}`
+- **Get a single voice's metadata + preview MP3** — `GET /voices/{provider}/{voiceId}`
+- **Buy / import / release Twilio phone numbers** — `POST /utils/buy-twilio-number`, `POST /utils/import-twilio-number`, `POST /utils/twilio/release-number`
+- **Repair Twilio webhooks** — `POST /utils/twilio/check-number`
+- **Assign a Twilio number to an agent for SMS** — `POST /utils/twilio/sync-sms`
+
+## Supported providers
+
+`elevenlabs`, `deepgram`, `cartesia`, `rime-ai`, `openai`, `google-cloud`, `google-live` (Gemini Live), `ultravox`, `minimax`, `playht`, `azure`.
+
+Every voice returned across providers is normalized to the same shape:
+
+```json
+{
+  "voiceId": "21m00Tcm4TlvDq8ikWAM",
+  "name": "Rachel",
+  "provider": "elevenlabs",
+  "previewUrl": "https://...mp3",
+  "filters": {
+    "accent": "American",
+    "gender": "female",
+    "useCase": "narration",
+    "language": "en"
+  }
+}
+```
+
+## Workspace API keys
+
+Each provider can be used with either:
+
+1. **The platform's server-side API key** (default fallback), or
+2. **Your own workspace key** — saved under `workspaceData.secrets.<KEY_NAME>` (e.g. `ELEVENLABS_API_KEY`, `CARTESIA_API_KEY`).
+
+`GET /voices/providers` returns the exact `workspaceSecretKey` to use for each provider, plus a `requiresWorkspaceApiKey` flag for providers without a platform fallback.
+
+## Filtering & search
+
+The voice listing endpoints (`GET /voices` and `GET /voices/{provider}`) all support:
+
+| Param      | Example                          | Behavior                                                                |
+| ---------- | -------------------------------- | ----------------------------------------------------------------------- |
+| `language` | `en` / `en-US` / `English` / `de`| Inclusive match — `en` matches `en-US`, `en-GB`, `English`, etc.        |
+| `gender`   | `male` / `female` / `neutral`    | Case-insensitive; aliases `masculine` / `feminine` / `m` / `f` accepted |
+| `accent`   | `american` / `british`           | Case-insensitive substring match                                        |
+| `modelId`  | `aura-2` / `eleven_multilingual_v2` | Filters voice catalog for providers with model-specific voices       |
+| `limit`    | `100` (default)                  | 1-500                                                                   |
+| `offset`   | `0` (default)                    | For pagination                                                          |
+| `providers` | `elevenlabs,cartesia` (unified)  | Comma-separated provider slugs (unified endpoint only)                  |

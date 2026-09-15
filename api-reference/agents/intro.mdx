@@ -1,0 +1,37 @@
+---
+title: 'Introduction'
+description: 'The following is the API reference to control your account and agents through REST requests.'
+---
+
+## The following /v2/agents API reference is to control your agent.
+Make sure to replace the `{agent_id}` with the agent ID you want to interact with, and are always on the correct region url.
+#### EU Region:
+https://eu-vg-edge.moeaymandev.workers.dev
+#### NA Region:
+https://na-vg-edge.moeaymandev.workers.dev
+<Warning>If you use the incorrect endpoint the API will not work.</Warning>
+
+## Authorization
+- You can either use your workspace secret or agent secret to authorize any request for agents.
+
+## Agent Platforms
+- If your agent is VF type we recommend directly using the Voiceflow's API for querying the KB.
+- You can currently interact with Rannah رنّة through either the built in AI engine or through Voiceflow, the <strong>agentPlatform</strong> defines how the agent will interact and function across the whole service.
+- The [interact API of voiceflow](https://developer.voiceflow.com/reference/stateinteract-1) inspires how we interact with VF/Rannah رنّة agents, when you do an interact POST request the <strong>action</strong> property functions the same as that on Voiceflow's end. 
+
+## Knowledge Base
+- The knowledge base is a collection of documents that the agent can use to answer user queries.
+- You can either search the KB or directly search the vector store to return the most highest similarity chunks.
+- By default all agents have a <strong>1536 dimension</strong> vector store, the text inserted is also chunked into <strong>1024 characters with overlapping of 50 chars</strong>, using the langchain [recursiveTextSplitter](https://js.langchain.com/docs/modules/data_connection/document_transformers/recursive_text_splitter)
+
+## Conversations
+- All the transcripts of any channel are stored by default.
+- You can also insert a new conversation transcript to the agent yourself (although not recommended as its done automatically when you interact across any channel)
+- **Popular use-case for the conversations API is to export the conversations and send them via email or in a google sheet.**
+
+## Analytics
+- The analytics API is used to get the analytics of the agent, you can get the analytics of the agent by day, week, month, or year.
+- You can also insert your own analytics data to the agent.
+- There are 2 types of analytics that we store:
+    - **Load Analytics**: Analysis of your website traffic if you deploy using the popup, even if the user doesn't interacts with the agent it still records useful insights like geo-analytics.
+    - **Conversation Analytics**: Whenever the user starts interacting with the agent the conversation analytics kicks in to gather information like interactions number or average time per conversation. 

@@ -1,0 +1,20 @@
+---
+title: 'Release a Twilio number'
+description: "Releases a Twilio phone number from the workspace. Platform-rented numbers are released from Twilio; imported numbers are only detached."
+openapi: 'POST /utils/twilio/release-number'
+---
+
+For numbers purchased via `/utils/buy-twilio-number` (`isImportedNumber: false`), this endpoint also releases the number on the platform's Twilio account, freeing up the slot.
+
+For imported numbers (`isImportedNumber: true`), the number is only removed from Rannah رنّة — your own Twilio account keeps it.
+
+```bash
+curl -X POST "https://eu-gcp-api.vg-stuff.com/v3/utils/twilio/release-number" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "phoneNumberSid": "PNxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "isImportedNumber": false }'
+```
+
+<Warning>
+Releasing a platform-rented number is permanent — Twilio cannot guarantee you'll be able to reclaim the same number afterwards.
+</Warning>

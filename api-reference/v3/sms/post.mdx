@@ -1,0 +1,43 @@
+---
+title: 'Send Outbound SMS'
+description: "Send an SMS from an agent's connected Twilio number — direct message or AI-generated opener."
+openapi: 'POST /sms'
+---
+
+## Example — direct send
+
+```json
+{
+  "agentId": "your-agent-id",
+  "to": "+15551234567",
+  "message": "Hi Jane — following up on your appointment.",
+  "campaignId": "campaign-123",
+  "leadInfo": {
+    "username": "Jane",
+    "email": "jane@example.com"
+  }
+}
+```
+
+## Example — AI-generated opener (`mode: agent`)
+
+```json
+{
+  "agentId": "your-agent-id",
+  "to": "+15551234567",
+  "mode": "agent",
+  "leadInfo": { "username": "Jane", "company": "Acme Corp" },
+  "options": {
+    "initialPrompt": "Write a short friendly SMS to remind them about tomorrow's appointment.",
+    "sendViaEdge": true
+  }
+}
+```
+
+<Note>
+`to` and optional `from` must be E.164 (`+` and country code). The agent must have an SMS-capable Twilio number connected (own account or platform rental).
+</Note>
+
+<Tip>
+Use `options.dryRun: true` to validate routing (from number, mode, segment count) without sending.
+</Tip>

@@ -1,0 +1,21 @@
+---
+title: 'Delete Conversation'
+description: 'Deletes a specific conversation for the specified agent, using the V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'DELETE /agents/{agentId}/convos/{convoId}'
+---
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "message": "Conversation deleted successfully"
+}
+```
+
+## Notes
+
+- **This action is irreversible**
+- Deletes the conversation and all associated data (turns, sessions)
+- You must own the agent to delete its conversations
+- Consider exporting the conversation first if you need a backup

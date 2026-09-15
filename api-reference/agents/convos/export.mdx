@@ -1,0 +1,33 @@
+---
+title: 'Export Convos'
+description: 'Export selected agent conversations via the V2 edge API, with per-request ID caps and hourly rate limits.'
+openapi: 'GET /v2/agents/{agent_id}/convos/export'
+---
+
+<Note>
+Pass `convo_ids` as a comma-separated list of conversation IDs. Without `convo_ids`, the endpoint proxies to the V3 bulk export path (see [V3 bulk export](/api-reference/v3/conversations/export) for those limits).
+</Note>
+
+## Rate limits (selected export)
+
+When `convo_ids` is provided:
+
+| Limit | Value |
+|-------|-------|
+| Conversation IDs per request | 100 |
+| Requests per hour | 15 (per workspace + agent) |
+
+Exceeding the ID cap returns **400**. Exceeding the hourly cap returns **429** with a `Retry-After` header when applicable.
+
+## Example
+
+```bash
+curl -G "https://{region}-vg-edge.example.workers.dev/v2/agents/{agent_id}/convos/export" \
+  -H "Authorization: Bearer {SECRET_API_KEY}" \
+  --data-urlencode "convo_ids=convo_1,convo_2,convo_3"
+```
+
+## Related documentation
+
+- [Export Agent Conversations (V3 bulk)](/api-reference/v3/conversations/export)
+- [Conversations tab (dashboard)](/features/conversations-tab)

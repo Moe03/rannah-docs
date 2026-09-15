@@ -1,0 +1,13 @@
+---
+title: 'Get KB Stats'
+description: "<strong>(Rannah رنّة agents only)</strong> Returns agent's knowledge base stats, if your agent is built with VF use [Voiceflow's API instead](https://developer.voiceflow.com/reference/project). This route must use the new V3 [endpoints](/api-reference/v3/intro)."
+openapi: 'GET /agents/{agentId}/kb/stats'
+---
+
+<Tip>
+Use this endpoint to monitor your knowledge base size and track growth over time.
+</Tip>
+
+<Note>
+Stats are calculated from processed documents only. Documents with `PENDING` or `ERROR` status are not included in the counts.
+</Note>

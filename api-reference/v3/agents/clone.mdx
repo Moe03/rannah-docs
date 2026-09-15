@@ -1,0 +1,51 @@
+---
+title: 'Clone Agent'
+description: 'Safely clone an existing agent with explicit overrides and carryOver controls. Never inherits branding or funnel recipients.'
+openapi: 'POST /agents/{agentId}/clone'
+---
+
+## Why this exists
+
+Use clone when you want an agent **like X but for Y**. Unlike import-template from a fat export, clone uses a server-side allowlist and explicit `carryOver` flags so partner branding, funnel emails, and KB docs do not leak by default.
+
+## Request
+
+```json
+{
+  "overrides": {
+    "title": "Steigenberger Cairo",
+    "description": "Dual-property hospitality agent",
+    "systemPrompt": "You are the concierge for Steigenberger properties…",
+    "theme": { "primaryColor": "#0B3D2E", "themeType": "light" },
+    "vg_initMessages": ["Welcome! How can I help with your stay?"]
+  },
+  "carryOver": {
+    "kb": false,
+    "voiceConfig": true,
+    "uiEngineConfig": true
+  }
+}
+```
+
+| Field | Default | Notes |
+| --- | --- | --- |
+| `carryOver.kb` | `false` | Do not copy source KB docs unless requested |
+| `carryOver.voiceConfig` | `true` | Structural voice settings only (API keys scrubbed) |
+| `carryOver.uiEngineConfig` | `true` | Calendar/invoice/forms toggles — not recipient emails |
+
+## Never carried over
+
+- `branding`
+- `funnelConfig` / notification recipients
+- Channel tokens, webhooks, marketplace listing
+- KB docs unless `carryOver.kb: true`
+
+## Response
+
+```json
+{
+  "success": true,
+  "agentId": "new_agent_id",
+  "agent": { "ID": "new_agent_id", "title": "Steigenberger Cairo", "branding": "", "...": "..." }
+}
+```

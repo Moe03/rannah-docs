@@ -1,0 +1,322 @@
+{
+  "orgs_list": {
+    "get": {
+      "description": "Returns all organizations associated with the bearer token",
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Organizations retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Organizations retrieved successfully"
+                  },
+                  "data": {
+                    "description": "Array of organization objects",
+                    "type": "array",
+                    "items": {
+                      "$ref": "../schemas/Client.json#/OrgClientModelGet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "put": {
+      "description": "Creates a new organization",
+      "requestBody": {
+        "description": "Organization to create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Client.json#/OrgClientModelPost"
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Organization created successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Organization created successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "org_by_id": {
+    "get": {
+      "description": "Returns a single organization",
+      "parameters": [
+        {
+          "name": "org_id",
+          "in": "path",
+          "description": "The ID of the organization to retrieve",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Organization retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Organization retrieved successfully"
+                  },
+                  "data": {
+                    "description": "Organization data",
+                    "type": "object",
+                    "$ref": "../schemas/Client.json#/OrgClientModelGet"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "description": "Updates an organization",
+      "parameters": [
+        {
+          "name": "org_id",
+          "in": "path",
+          "description": "The ID of the organization to update",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "New organization data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Client.json#/OrgClientModelPost"
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Organization updated successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Organization updated successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "description": "Deletes an organization",
+      "parameters": [
+        {
+          "name": "org_id",
+          "in": "path",
+          "description": "The ID of the organization to delete",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Organization deleted successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Organization deleted successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

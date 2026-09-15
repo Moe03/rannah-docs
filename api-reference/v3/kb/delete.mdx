@@ -1,0 +1,20 @@
+---
+title: 'Delete KB Doc'
+description: "<strong>(Rannah رنّة agents only)</strong> Deletes a document from the agent's knowledge base, if your agent is built with VF use [Voiceflow's API instead](https://developer.voiceflow.com/reference/project). This route must use the new V3 [endpoints](/api-reference/v3/intro)."
+openapi: 'DELETE /agents/{agentId}/kb/{docId}'
+---
+
+<Warning>
+**This action is irreversible.** Deleting a KB document permanently removes:
+- The document metadata
+- All associated text chunks
+- Vector embeddings from the database
+</Warning>
+
+<Note>
+The agent will no longer be able to reference this document's content when answering questions.
+</Note>
+
+<Tip>
+To temporarily disable a document without deleting it, consider using tags to filter it out during retrieval instead.
+</Tip>

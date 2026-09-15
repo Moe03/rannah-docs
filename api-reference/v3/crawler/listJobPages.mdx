@@ -1,0 +1,21 @@
+---
+title: 'List Crawler Job Pages'
+description: 'Lists scraped page summaries for a crawler job using the V3 API.'
+openapi: 'GET /workspaces/{workspaceId}/crawler/jobs/{jobId}/pages'
+---
+
+## Overview
+
+Returns the scraped pages currently stored for a crawler job.
+
+## Includes
+
+- URL
+- Title
+- Description
+- Character counts
+- Failed page marker
+
+<Tip>
+Use this endpoint to build a page review UI before exporting or importing scraped content elsewhere.
+</Tip>

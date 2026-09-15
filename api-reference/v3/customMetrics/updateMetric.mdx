@@ -1,0 +1,103 @@
+---
+title: 'Update Custom Metric'
+description: 'Update an existing custom metric configuration'
+openapi: "PUT /agents/{agentId}/custom-metrics/{metricId}"
+---
+
+## Overview
+
+Updates the configuration of an existing custom metric. You can modify the description, type, and options (for enum types).
+
+## Partial Updates
+
+You only need to include the fields you want to update:
+
+```json
+{
+  "metric": {
+    "description": "Updated description for the metric"
+  }
+}
+```
+
+## Updating Enum Options
+
+For enum type metrics, you can add or modify options:
+
+```json
+{
+  "metric": {
+    "options": ["positive", "negative", "neutral", "mixed"]
+  }
+}
+```
+
+<Warning>
+**Important Considerations:**
+- Changing the metric type may affect existing data interpretation
+- Historical data is not automatically converted when you change types
+- Duplicate keys are not allowed - the update will fail if the new key already exists
+</Warning>
+
+## Use Cases
+
+- **Refine Descriptions**: Make metric descriptions clearer
+- **Add Enum Options**: Expand categorical options as needs evolve
+- **Correct Typos**: Fix mistakes in metric configuration
+- **Update Metadata**: Keep metric information current
+
+<Note>
+System metrics (where `isSystem: true`) cannot be updated via the API.
+</Note>
+
+## Example: Expanding Options
+
+```json
+{
+  "metric": {
+    "description": "Customer sentiment with granular options",
+    "options": [
+      "very_positive",
+      "positive", 
+      "neutral",
+      "negative",
+      "very_negative"
+    ]
+  }
+}
+```
+
+## Common Update Scenarios
+
+### Update Description Only
+```json
+{
+  "metric": {
+    "description": "Updated: Customer satisfaction rating on a scale of 1-10"
+  }
+}
+```
+
+### Update Key
+```json
+{
+  "metric": {
+    "key": "customer_satisfaction_v2"
+  }
+}
+```
+
+### Update Type
+```json
+{
+  "metric": {
+    "type": "enum",
+    "options": ["low", "medium", "high"]
+  }
+}
+```
+
+<Tip>
+Before changing a metric's type, consider creating a new metric instead to preserve historical data integrity.
+</Tip>
+

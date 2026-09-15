@@ -1,0 +1,25 @@
+---
+title: 'Update Tool'
+description: 'Updates a tool, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'PATCH /tools/{toolId}'
+---
+
+## Example Request
+
+```json
+{
+  "tool": {
+    "name": "Updated Tool Name",
+    "description": "Updated description for the AI",
+    "disabled": false
+  }
+}
+```
+
+<Note>
+Uses partial updates - only provided fields are changed. Other fields remain unchanged.
+</Note>
+
+<Tip>
+Set `disabled: true` to temporarily disable a tool without deleting it.
+</Tip>

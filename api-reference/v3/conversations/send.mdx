@@ -1,0 +1,52 @@
+---
+title: "Send Message to Conversation"
+description: "Send an agent-initiated outbound message into an existing conversation and deliver it on the original channel (WhatsApp, Messenger, Instagram, Telegram, SMS, Discord)."
+openapi: "POST /agents/{agentId}/convos/{convoId}/send"
+---
+
+## Example — plain text recovery message
+
+```json
+{
+  "message": "Hi — just checking in. Still interested in booking a time this week?"
+}
+```
+
+## Example — labeled recovery send
+
+```json
+{
+  "message": "We're back online — how can we help?",
+  "sourceLabel": "recovery",
+  "options": {
+    "skipIfHumanHandoff": true
+  }
+}
+```
+
+## Example — dry run (validate only)
+
+```json
+{
+  "message": "Follow-up ping",
+  "options": {
+    "dryRun": true
+  }
+}
+```
+
+<Note>
+This endpoint **delivers** to the conversation's channel. It is the opposite of [Update Conversation Messages](/api-reference/v3/conversations/update_messages), which only rewrites stored history and does not push to WhatsApp/Messenger/etc.
+</Note>
+
+<Note>
+The message is sent **as-is** (agent-initiated). No LLM turn runs. The conversation `origin` decides the channel — you do not need to pass WhatsApp vs Messenger yourself.
+</Note>
+
+<Warning>
+Meta channels enforce a **24-hour messaging window** after the last customer message. Outside that window, free-form WhatsApp text will fail (use an approved template / campaign). Messenger may allow a limited `HUMAN_AGENT` retry depending on page permissions.
+</Warning>
+
+<Tip>
+Use `options.dryRun: true` to confirm the conversation exists and whether its origin is channel-deliverable before scheduling recovery jobs.
+</Tip>

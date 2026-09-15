@@ -1,0 +1,59 @@
+---
+title: 'Get Single Conversation'
+description: 'Retrieves details of a specific conversation for the specified agent, using the V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'GET /agents/{agentId}/convos/{convoId}'
+---
+
+<Note>
+Returns full conversation metadata including lead information. You must own the agent to access its conversations.
+</Note>
+
+<Tip>
+Use this endpoint to fetch conversation details before exporting or to check user feedback status.
+</Tip>
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "message": "Conversation retrieved successfully",
+  "data": {
+    "ID": "agent123_convo456",
+    "userID": "agent123_convo456",
+    "ts": 1699999999,
+    "messagesNum": 5,
+    "userName": "John Doe",
+    "userEmail": "john@example.com",
+    "userPhone": "+1234567890",
+    "userCompany": "Acme Corp",
+    "userAddress": "123 Main St, City, State",
+    "userWebsite": "https://acme.com",
+    "notes": "Customer interested in premium plan, follow up next week",
+    "tags": ["new-lead", "high-priority"],
+    "origin": "web-chat",
+    "state": "ai-chatting",
+    "firstMessageTS": 1699999000,
+    "lastMessageTS": 1699999999,
+    "lastModified": 1699999999
+  }
+}
+```
+
+## Response Fields
+
+The response includes all conversation metadata:
+
+### Lead Information
+- `userName`, `userEmail`, `userPhone` - Contact information
+- `userAddress`, `userCompany`, `userWebsite` - Additional details
+- `notes` - Internal notes about the conversation/lead
+- `userProfilePic` - Profile picture URL
+
+### Conversation Data
+- `ID`, `userID` - Identifiers
+- `messagesNum` - Number of messages exchanged
+- `tags` - Categorization tags
+- `state` - Current conversation state
+- `origin` - Channel (e.g., "web-chat", "whatsapp")
+- Timestamps: `ts`, `firstMessageTS`, `lastMessageTS`, `lastModified`

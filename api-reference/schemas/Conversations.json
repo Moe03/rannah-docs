@@ -1,0 +1,267 @@
+{
+  "WidgetConvoModel": {
+    "type": "object",
+    "properties": {
+      "ID": {
+        "type": "string",
+        "description": "ID of the conversation."
+      },
+      "userID": {
+        "type": "string",
+        "description": "User ID."
+      },
+      "userName": {
+        "type": "string",
+        "description": "User's name."
+      },
+      "userEmail": {
+        "type": "string",
+        "format": "email",
+        "description": "User's email address."
+      },
+      "userImage": {
+        "type": "string",
+        "description": "URL to user's profile image."
+      },
+      "userPhone": {
+        "type": "string",
+        "description": "User's phone number."
+      },
+      "userBrowser": {
+        "type": "string",
+        "description": "User's browser information."
+      },
+      "userProfilePic": {
+        "type": "string",
+        "description": "URL to user's profile picture."
+      },
+      "origin": {
+        "description": "Channel origin of the message.",
+        "$ref": "./Messages.json#/MessageOriginType"
+      },
+      "messagesNum": {
+        "type": "integer",
+        "description": "Number of messages in the conversation."
+      },
+      "interactionsNum": {
+        "type": "integer",
+        "description": "Number of interactions in the conversation."
+      },
+      "ts": {
+        "type": "number",
+        "description": "Timestamp of the conversation."
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Tags associated with the conversation."
+      },
+      "convoTimeSeconds": {
+        "type": "integer",
+        "description": "Duration of the conversation in seconds."
+      },
+      "firstMessageTS": {
+        "type": "number",
+        "description": "Timestamp of the first message."
+      },
+      "lastMessageTS": {
+        "type": "number",
+        "description": "Timestamp of the last message."
+      },
+      "userPlatform": {
+        "type": "string",
+        "description": "User's platform (e.g., mobile, desktop)."
+      },
+      "state": {
+        "type": "string",
+        "enum": [
+          "requested_chat",
+          "human-chatting",
+          "ai-chatting",
+          "ended_chat"
+        ],
+        "description": "Type of action to perform, launch type doesn't require a payload"
+      },
+      "chatAssignedTo": {
+        "type": "string",
+        "description": "ID of the human agent (client_id) assigned to the conversation."
+      },
+      "lastModified": {
+        "type": "number",
+        "description": "Timestamp of the last modification."
+      },
+      "sessionsNum": {
+        "type": "integer",
+        "description": "Number of sessions in the conversation."
+      }
+    }
+  },
+  "TurnItem": {
+    "type": "object",
+    "properties": {
+      "from": {
+        "type": "string",
+        "description": "Sender of the turn."
+      },
+      "messages": {
+        "type": "array",
+        "items": {
+          "$ref": "./Messages.json#/ChatMessage"
+        },
+        "description": "Messages exchanged in this turn."
+      }
+    }
+  },
+  "TurnProps": {
+    "type": "object",
+    "properties": {
+      "from": {
+        "type": "string",
+        "enum": ["bot", "human"],
+        "description": "The sender of the turn, whether from a bot or a human."
+      },
+      "messages": {
+        "$ref": "./Messages.json#/ChatMessage",
+        "description": "Messages exchanged in this turn."
+      },
+      "ts": {
+        "type": "number",
+        "description": "Timestamp of the turn."
+      }
+    },
+    "required": ["from", "messages"]
+  },
+  "AgentStateInteractBody": {
+    "type": "object",
+    "properties": {
+      "turns": {
+        "type": "array",
+        "items": {
+          "$ref": "#/TurnItem"
+        },
+        "description": "Completely change the entire conversation state. (optional)"
+      },
+      "delete": {
+        "type": "object",
+        "description": "Messages to delete with the provided ids. (optional)",
+        "properties": {
+          "mids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Message IDs to delete."
+          }
+        }
+      },
+      "metadata": {
+        "type": "object",
+        "description": "Metadata related to the conversation transcript.",
+        "$ref": "#/WidgetConvoModel"
+      }
+    }
+  },
+  "AgentInteractBody": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["text", "launch"],
+            "description": "Type of action to perform, launch type doesn't require a payload"
+          },
+          "payload": {
+            "type": "string",
+            "description": "Payload data for the action."
+          }
+        }
+      },
+      "appendMessages": {
+        "type": "array",
+        "items": {
+          "$ref": "./Messages.json#/ChatMessage"
+        },
+        "description": "Messages to append to the conversation."
+      },
+      "transcriptMetadata": {
+        "description": "Metadata related to the conversation transcript.",
+        "$ref": "#/WidgetConvoModel"
+      },
+      "variables": {
+        "type": "object",
+        "description": "Variables to inject to VF."
+      },
+      "origin": {
+        "$ref": "./Messages.json#/MessageOriginType",
+        "description": "Channel to send message through."
+      }
+    }
+  },
+  "AgentInteractRes": {
+    "type": "object",
+    "properties": {
+      "platformName": {
+        "type": "string",
+        "enum": ["vf", "vg"],
+        "description": "Name of the platform (virtual flow or Rannah رنّة)."
+      },
+      "chatState": {
+        "type": "object",
+        "description": "State of the chat."
+      },
+      "actionMessages": {
+        "type": "array",
+        "items": {},
+        "description": "Messages related to actions."
+      },
+      "turns": {
+        "type": "array",
+        "items": {
+          "$ref": "#/TurnProps"
+        },
+        "description": "Turns in the conversation."
+      },
+      "success": {
+        "type": "boolean",
+        "description": "Indicates if the interaction was successful."
+      },
+      "appError": {
+        "type": "string",
+        "description": "Error message related to the app."
+      },
+      "message": {
+        "type": "string",
+        "description": "General message."
+      },
+      "agentData": {
+        "$ref": "./Agent.json#/Agent",
+        "description": "Data related to the agent in the conversation."
+      },
+      "origin": {
+        "$ref": "./Messages.json#/MessageOriginType",
+        "description": "Origin of the message."
+      },
+      "userID": {
+        "type": "string",
+        "description": "User/Conversation ID."
+      },
+      "agentID": {
+        "type": "string",
+        "description": "Agent ID."
+      },
+      "oldTurns": {
+        "type": "array",
+        "items": {
+          "$ref": "#/TurnProps"
+        },
+        "description": "Previously recorded turns in the conversation."
+      }
+    },
+    "required": ["success", "message", "platformName"]
+  }
+}
+

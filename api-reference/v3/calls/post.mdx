@@ -1,0 +1,27 @@
+---
+title: 'Outbound Voice Call'
+description: 'Initiate an outbound voice call using Twilio to connect your AI agent with a phone number.'
+openapi: 'POST /calls'
+---
+
+## Example Request
+
+```json
+{
+  "from": "+14155551234",
+  "to": "+14155556789",
+  "agentId": "your-agent-id"
+}
+```
+
+<Note>
+Both `from` and `to` numbers must include the `+` prefix and country code. The `from` number must be a Twilio number associated with your account.
+</Note>
+
+<Tip>
+Use `options.messagesHistory` to provide conversation context, or `options.agentOverrides` to customize agent behavior for the call.
+</Tip>
+
+<Warning>
+Calls incur usage charges. Monitor your usage to avoid unexpected costs.
+</Warning>

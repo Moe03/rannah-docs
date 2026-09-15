@@ -1,0 +1,21 @@
+---
+title: 'Delete Agent'
+description: 'Deletes an agent, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'DELETE /agents/{id}'
+---
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "message": "Agent deleted successfully"
+}
+```
+
+## Notes
+
+- **This action is irreversible**
+- Deleting an agent also removes all associated tools and variables
+- You must own the agent to delete it
+- Consider exporting the agent template first if you may need it later

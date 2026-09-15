@@ -1,0 +1,30 @@
+---
+title: "Authentication"
+description: "How to authenticate with the Rannah رنّة API."
+---
+
+## Authorization
+
+- We use Bearer token to authorize any request for agents (except for public interact, analytics endpoints), workspaces, Kb, conversations, analytics, etc
+- You can use either the <strong>agent secret</strong> key or the <strong>workspace secret</strong>, both are present in your dashboard.
+
+<Frame caption="To get a Workspace Secret: Rannah رنّة Dashboard > Top left > Select workspace you want > Copy Workspace secret">
+  <img src="https://i.ibb.co/XjVNjdV/Untitled.jpg" />
+</Frame>
+
+<Frame caption="To get the Agent secret: Rannah رنّة Dashboard > Agent > Settings > Scroll down">
+  <img src="https://i.ibb.co/vY8CbgL/Capture.png" />
+</Frame>
+
+## Plan requirement (v2 pricing)
+
+Public REST API access (`/v3/*`) requires a paid plan on the current **v2-2026** pricing catalog:
+
+| Access | Minimum plan |
+| --- | --- |
+| **Read** (GET) | **Business** or higher |
+| **Write** (POST / PUT / PATCH / DELETE) | **White Label** or higher |
+
+Free, Starter, and Pro do **not** include API access. Legacy Pay-as-you-go workspaces are unchanged.
+
+When a request is blocked, the API returns `403` with a link to your [billing / plans page](https://rannah.io/app/eu/account/billing?active_tab=plans) so you can upgrade.

@@ -40,7 +40,7 @@ Each conversation in the list displays the following information:
 
 <Steps>
 <Step title="ID" icon="id-card">
- Unique identifier for each user (auto-generated or set via the [API](/Support/contact))
+ Unique identifier for each user (auto-generated or set via the [API](/api-reference/v3/intro))
 </Step>
 <Step title="Interactions" icon="comments">
  Number of user messages in the current chat
@@ -180,11 +180,11 @@ To protect workspace data and control Firestore read costs, exports are capped:
 | V2 export proxy (`GET /v2/agents/{agent_id}/convos/export`) | Same as V3 (proxied) | Same as V3. |
 
 <Warning>
-If you hit an API rate limit, wait for the time shown in the error message (or the `Retry-After` header) before retrying. For large archives, export in batches or use the [Conversations API](/Support/contact).
+If you hit an API rate limit, wait for the time shown in the error message (or the `Retry-After` header) before retrying. For large archives, export in batches or use the [Conversations API](/api-reference/v3/conversations/export).
 </Warning>
 
 <Tip>
-Need programmatic exports? See [Export Agent Conversations (V3 API)](/Support/contact) and [Export Convos (V2 API)](/Support/contact).
+Need programmatic exports? See [Export Agent Conversations (V3 API)](/api-reference/v3/conversations/export) and [Export Convos (V2 API)](/api-reference/agents/convos/export).
 </Tip>
 
 

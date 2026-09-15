@@ -1,0 +1,39 @@
+---
+title: 'Create Crawler Job'
+description: 'Creates a new crawler or scrape job using the V3 API.'
+openapi: 'POST /workspaces/{workspaceId}/crawler/jobs'
+---
+
+## Overview
+
+Creates a new crawler job for a workspace and starts processing it in the background.
+
+<Note>
+Crawler jobs are immutable after creation. If you need different settings, delete the job and create a new one.
+</Note>
+
+## Supports
+
+- Single-page scrape jobs
+- Multi-URL scrape jobs
+- Crawl jobs with `crawlOptions`
+- Optional outbound webhooks for `page_scraped`, `job_completed`, and `job_failed`
+
+## Job type
+
+Created crawler jobs are tagged:
+
+| `type` | When |
+| --- | --- |
+| `kb_ingest` | `toAgentId` / `toAgentIds` is set (KB-linked) |
+| `general` | No agent destination |
+
+For ad-hoc research scrapes that should not go through the workspace crawler, use [`POST /scrape`](/api-reference/v3/scrape/post).
+
+## Billing
+
+Credits are estimated at submission time and actually consumed per successful scraped page.
+
+<Tip>
+Use `useProxy: true` only when needed. Proxy scraping has higher per-page credit cost.
+</Tip>

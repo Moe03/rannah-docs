@@ -1,0 +1,27 @@
+---
+title: 'Create Variable'
+description: 'Creates a new variable, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'POST /agents/{agentId}/variables'
+---
+
+## Example Request
+
+```json
+{
+  "variable": {
+    "key": "user_name",
+    "type": "string",
+    "description": "Stores the user's name during conversation",
+    "defaultValue": "",
+    "isGlobal": true
+  }
+}
+```
+
+<Note>
+The `key` must be unique within the agent. Duplicate keys will return a 400 error.
+</Note>
+
+<Tip>
+Set `isGlobal: true` for variables that should persist across conversation nodes.
+</Tip>

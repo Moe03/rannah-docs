@@ -1,0 +1,33 @@
+---
+title: 'Update KB Doc'
+description: "<strong>(Rannah رنّة agents only)</strong> Updates knowledge base, if your agent is built with VF use [Voiceflow's API instead](https://developer.voiceflow.com/reference/project). This route must use the new V3 [endpoints](/api-reference/v3/intro)."
+openapi: 'PATCH /agents/{agentId}/kb/{docId}'
+---
+
+## Example: Update Name and Tags
+
+```json
+{
+  "name": "Updated Product FAQ",
+  "tags": ["faq", "product", "v2"]
+}
+```
+
+## Example: Update Content
+
+```json
+{
+  "content": "Updated document content...",
+  "metadata": {
+    "description": "Updated description for better context"
+  }
+}
+```
+
+<Warning>
+Updating `content` triggers re-embedding which may take time for large documents.
+</Warning>
+
+<Tip>
+Only include fields you want to update. Other fields remain unchanged.
+</Tip>

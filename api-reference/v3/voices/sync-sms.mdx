@@ -1,0 +1,19 @@
+---
+title: 'Assign Twilio number to agent (SMS)'
+description: "Links an existing Twilio number to an agent so the agent can send and receive SMS through it."
+openapi: 'POST /utils/twilio/sync-sms'
+---
+
+The number must already exist in `twilio_numbers` and have:
+
+- `capabilities` containing `'sms'`
+- `accountSid` and `authToken` saved (own-account only — platform-rented numbers reuse the platform account)
+
+```bash
+curl -X POST "https://eu-gcp-api.vg-stuff.com/v3/utils/twilio/sync-sms" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "twilioNumberId": "PNxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "agentId": "agent_123" }'
+```
+
+This also updates the agent doc with `twilioSmsPhoneNumber`, `twilioSmsAccountSid`, `twilioSmsAuthToken`, `twilioSmsMode` for backward compatibility with legacy SMS flows.

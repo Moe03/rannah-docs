@@ -1,0 +1,13 @@
+---
+title: 'Get Variables'
+description: 'Gets all variables for a specific agent, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'GET /agents/{agentId}/variables'
+---
+
+<Note>
+Returns all variables associated with the specified agent including their current values.
+</Note>
+
+<Tip>
+Use the variable `id` to reference variables in agent instructions with the syntax `{{var:variable_id}}`.
+</Tip>

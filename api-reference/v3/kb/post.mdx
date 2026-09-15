@@ -1,0 +1,55 @@
+---
+title: 'Create KB'
+description: "<strong>(Rannah رنّة agents only)</strong> Adds a new document to the agent's knowledge base, if your agent is built with VF use [Voiceflow's API instead](https://developer.voiceflow.com/reference/project). This route must use the new V3 [endpoints](/api-reference/v3/intro)."
+openapi: 'POST /agents/{agentId}/kb'
+---
+
+## Example: Add Text Document
+
+```json
+{
+  "name": "Product FAQ",
+  "sourceType": "doc",
+  "content": "Your product FAQ content here...",
+  "metadata": {
+    "description": "Frequently asked questions about our product"
+  },
+  "tags": ["faq", "product"]
+}
+```
+
+## Example: Add URLs
+
+```json
+{
+  "name": "Website Pages",
+  "sourceType": "url",
+  "urls": [
+    "https://example.com/about",
+    "https://example.com/pricing"
+  ],
+  "scrapeContent": true,
+  "refreshRate": "3d"
+}
+```
+
+## Example: Crawl Sitemap
+
+```json
+{
+  "name": "Full Website",
+  "sourceType": "sitemap",
+  "sitemapUrl": "https://example.com/sitemap.xml",
+  "maxPages": 100,
+  "scrapeContent": true,
+  "refreshRate": "7d"
+}
+```
+
+<Warning>
+URL and sitemap sources may take time to process. Check document status via `GET /agents/{agentId}/kb/{docId}`.
+</Warning>
+
+<Tip>
+Set `refreshRate` to automatically re-crawl URL sources. Options: `3d`, `7d`, or `never`.
+</Tip>

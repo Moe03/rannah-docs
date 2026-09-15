@@ -1,0 +1,397 @@
+{
+  "agent_by_id": {
+    "get": {
+      "description": "Returns agent data",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to retrieve",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agent retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Agent.json#/Agent"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "description": "Edits/Creates a new agent in the system",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to create/edit",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "New agent data to create/edit",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Agent.json#/Agent"
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agent created",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agent created successfully"
+                  },
+                  "data": {
+                    "$ref": "../schemas/Agent.json#/Agent"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "description": "Deletes an agent",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to delete",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agent deleted",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agent deleted successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "agent_usage": {
+    "post": {
+      "operationId": "getAgentUsage",
+      "summary": "Get an agent's usage",
+      "tags": ["agents"],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "range": {
+                  "type": "object",
+                  "properties": {
+                    "start": {
+                      "type": "number"
+                    },
+                    "end": {
+                      "type": "number"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Successful response",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "creditsConsumed": {
+                    "type": "number"
+                  },
+                  "metrics": {}
+                },
+                "required": ["creditsConsumed"],
+                "additionalProperties": {}
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "agent_interact": {
+    "post": {
+      "description": "Interact with an agent (VF/VG)",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to interact with",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "user_id",
+          "in": "path",
+          "description": "The ID of the user to interact with",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "Interaction data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Conversations.json#/AgentInteractBody"
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Interaction successful",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "../schemas/Conversations.json#/AgentInteractRes"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "agent_state": {
+    "post": {
+      "description": "Configure the chat history state of the conversation and the associated metadata (name, email, etc)",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to interact with",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "user_id",
+          "in": "path",
+          "description": "The ID of the user to interact with",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "Interaction data",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Conversations.json#/AgentStateInteractBody"
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Interaction successful",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "$ref": "../schemas/Conversations.json#/AgentInteractRes"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

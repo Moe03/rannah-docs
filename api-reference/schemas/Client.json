@@ -1,0 +1,175 @@
+{
+  "ClientModelPost": {
+    "type": "object",
+    "properties": {
+      "orgId": {
+        "type": "string",
+        "description": "The org ID associated with the client."
+      },
+      "name": {
+        "type": "string",
+        "description": "The name of the client."
+      },
+      "squarePhotoURL": {
+        "type": "string",
+        "description": "URL to the square photo of the client."
+      },
+      "email": {
+        "type": "string",
+        "description": "The email address of the client (used as username to signin on dashboard)."
+      },
+      "dashboardPassword": {
+        "type": "string",
+        "description": "Password for the client's dashboard (used as password to signin on dashboard)."
+      },
+      "canAccess": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "/overview",
+            "/home",
+            "/convos",
+            "/analytics",
+            "/kb",
+            "/settings"
+          ],
+          "description": "List of hrefs the client can access."
+        },
+        "description": "List of hrefs the client can access."
+      },
+      "isOrgAdmin": {
+        "type": "boolean",
+        "description": "Indicates if the client is an organization admin."
+      },
+      "notificationsSettings": {
+        "type": "object",
+        "properties": {
+          "notifyThrough": {
+            "type": "string",
+            "enum": ["email", "push", "all", "none"],
+            "description": "Notification method."
+          },
+          "notifyIf": {
+            "type": "string",
+            "enum": ["all", "requestsOnly", "none"],
+            "description": "Notification trigger condition."
+          }
+        },
+        "description": "Notification settings for the client."
+      }
+    }
+  },
+  "ClientModelGet": {
+    "allOf": [
+      {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "description": "The unique identifier for the client."
+          }
+        }
+      },
+      {
+        "type": "object",
+        "properties": {
+          "ownerID": {
+            "type": "string",
+            "description": "The owner user/workspace uid associated with the client."
+          }
+        }
+      },
+      {
+        "type": "object",
+        "properties": {
+          "orgUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/ClientModelGet"
+            },
+            "description": "List of organization users."
+          }
+        }
+      },
+      {
+        "$ref": "#/ClientModelPost"
+      }
+    ]
+  },
+  "OrgClientModelPost": {
+    "required": ["name"],
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string",
+        "description": "The name of the organization client."
+      },
+      "preferredLanguage": {
+        "type": "string",
+        "description": "Preferred language for the client ISO6391 code (fr for french, no for norwegian)."
+      },
+      "squarePhotoURL": {
+        "type": "string",
+        "description": "URL to the square photo of the organization client."
+      },
+      "widgetIDs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of agent IDs associated with the organization client."
+      },
+      "adminIDs": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of admin IDs associated with the organization client."
+      },
+      "canSelfEdit": {
+        "type": "boolean",
+        "description": "Indicates if the organization clients can self-edit."
+      },
+      "disallowAnyTags": {
+        "type": "boolean",
+        "description": "Indicates if any tags are disallowed."
+      },
+      "dashboardLayout": {
+        "type": "string",
+        "enum": ["vertical", "horizontal"],
+        "description": "Layout of the dashboard."
+      },
+      "lastModified": {
+        "type": "number",
+        "description": "Timestamp indicating when the organization client was last modified."
+      }
+    }
+  },
+  "OrgClientModelGet": {
+    "allOf": [
+      {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "type": "string",
+            "description": "The unique identifier for the organization client."
+          }
+        }
+      },
+      {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "description": "The owner user/workspace uid associated with the org client."
+          }
+        }
+      },
+      {
+        "$ref": "#/OrgClientModelPost"
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,29 @@
+---
+title: "List a provider's voices"
+description: "Returns all voices for one TTS provider with optional filtering by language, gender, accent and pagination."
+openapi: 'GET /voices/{provider}'
+---
+
+Use this when you already know which provider you want and just need to browse/search its catalog. Same filters as the unified `/voices` endpoint.
+
+## Example: ElevenLabs female English voices
+
+```bash
+curl "https://eu-gcp-api.vg-stuff.com/v3/voices/elevenlabs?language=en&gender=female&limit=25" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+## Example: Deepgram Aura-2 voices only
+
+```bash
+curl "https://eu-gcp-api.vg-stuff.com/v3/voices/deepgram?modelId=aura-2" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+<Tip>
+For providers with model-specific voice catalogs (`deepgram`, `rime-ai`), pass `modelId` to scope the listing.
+</Tip>
+
+<Note>
+The endpoint uses `workspaceData.secrets.<PROVIDER_KEY>` when present, otherwise the platform's server key. It does **not** consume credits.
+</Note>

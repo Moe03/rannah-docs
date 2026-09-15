@@ -1,0 +1,96 @@
+---
+title: Get Started
+description: Overview of Rannah رنّة API versions, regions, authentication, and where to begin.
+---
+
+Rannah رنّة exposes multiple API surfaces, but for most new integrations you should start with **V3 REST**.
+
+## Use Rannah رنّة with Claude, ChatGPT, or Cursor (MCP)
+
+Prefer not to call HTTP yourself? Use **Rannah رنّة MCP** from the dashboard:
+
+1. Open your [Rannah رنّة dashboard](https://rannah.io).
+2. In the **bottom-left**, open **Rannah رنّة MCP** for your workspace.
+3. Connect it in **Claude**, **ChatGPT**, or **Cursor**.
+
+Your assistant can then adjust anything in that workspace / dashboard by calling the V3 API for you — the same endpoints documented in this reference.
+
+## Choose the right API
+
+### V3 REST
+
+Recommended for new integrations.
+
+- Bearer-authenticated
+- Resource-oriented
+- Best for workspaces, agents, tools, variables, knowledge base docs, leads, and conversations
+
+### V2 / legacy
+
+Still available for older integrations that depend on legacy endpoint behavior.
+
+### WebSocket interact
+
+Best when you need real-time streaming responses during a live conversation.
+
+## Region-specific base URLs
+
+Pick the region that matches your workspace:
+
+### V3
+
+- EU: `https://eu-gcp-api.vg-stuff.com/v3`
+- NA: `https://na-gcp-api.vg-stuff.com/v3`
+
+### V2
+
+- EU: `https://eu-cloudflare.vg-stuff.com`
+- NA: `https://na-cloudflare.vg-stuff.com`
+
+<Warning>
+  Using the wrong region can cause authentication failures or data mismatches.
+</Warning>
+
+## Authentication
+
+Most protected endpoints use:
+
+```bash
+Authorization: Bearer YOUR_SECRET_KEY
+```
+
+You can use either:
+
+- A **workspace secret**
+- An **agent secret**
+
+<Frame caption="Get a workspace secret from the workspace selector in the dashboard.">
+  <img src="https://i.ibb.co/XjVNjdV/Untitled.jpg" />
+</Frame>
+
+<Frame caption="Get an agent secret from the agent Settings page.">
+  <img src="https://i.ibb.co/vY8CbgL/Capture.png" />
+</Frame>
+
+## Plan requirement
+
+On the current **v2-2026** pricing catalog, the public REST API requires:
+
+- **Business** or higher for **read** access
+- **White Label** or higher for **write** access (create / update / delete)
+
+Free, Starter, and Pro do not include API access. See [Authentication](/api-reference/authentication) for upgrade links.
+
+## Where to go next
+
+<CardGroup cols={2}>
+  <Card title="V3 API Intro" icon="rocket" href="/api-reference/v3/intro">
+    Start with the recommended API for new integrations.
+  </Card>
+  <Card title="Authentication" icon="shield-halved" href="/api-reference/authentication">
+    Learn how secrets and authorization work.
+  </Card>
+  <Card title="Endpoints" icon="server" href="/api-reference/endpoints">
+    Review V2, V3, and WebSocket hosts by region.
+  </Card>
+</CardGroup>

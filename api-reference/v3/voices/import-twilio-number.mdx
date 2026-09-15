@@ -1,0 +1,41 @@
+---
+title: 'Import a Twilio number'
+description: 'Import an existing phone number from your own Twilio account into your workspace.'
+openapi: 'POST /utils/import-twilio-number'
+---
+
+## Example Request
+
+```json
+{
+  "twilioNumber": "+14155551234",
+  "twilioAccountSid": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "twilioAccountAuthToken": "your-auth-token",
+  "twilioCallerId": "PNxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "agentId": "your-agent-id",
+  "capabilities": ["voice", "sms"]
+}
+```
+
+<Note>
+You need your Twilio Account SID, Auth Token and the phone number's SID from your Twilio Console.
+</Note>
+
+<Tip>
+Import numbers if you already have Twilio phone numbers you want to use with your AI agents — Rannah رنّة will configure the voice/SMS webhooks for you.
+</Tip>
+
+## Dashboard workflow
+
+You can also import from the UI without calling this endpoint directly:
+
+1. Open **Agents** → your agent → **Voice** → **Phone Numbers**
+2. Click **Import Twilio Number**
+3. Enter credentials and capabilities — the number is assigned to that agent automatically
+
+The `agentId` in the request body must match the agent you want to handle calls for that number.
+
+## Related documentation
+
+- [Twilio Setup](/voice/setup/twilio) — purchase, assign, and import numbers
+- [Troubleshooting Imported Twilio Numbers](/support/imported-twilio) — routing, webhooks, and common errors

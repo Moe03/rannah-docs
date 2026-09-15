@@ -1,0 +1,23 @@
+---
+title: "Create Client"
+description: "Create a client user under an organization"
+openapi: "POST /clients"
+---
+
+<Note>
+Creates a human login under an organization. Passwords are hashed server-side. `ownerID` defaults to the workspace.
+</Note>
+
+## Example Request
+
+```json
+{
+  "clientData": {
+    "name": "Jane Doe",
+    "email": "jane@acme.example",
+    "dashboardPassword": "TestPassw0rd!MCP2026",
+    "orgId": "YOUR_ORG_ID",
+    "status": "offline"
+  }
+}
+```

@@ -1,0 +1,24 @@
+---
+title: 'Send SMS to Leads (bulk)'
+description: "Bulk-send outbound SMS to a list of leads using the agent's connected number."
+openapi: 'POST /smsLeads'
+---
+
+## Example
+
+```json
+{
+  "agentId": "your-agent-id",
+  "message": "Hi! Quick follow-up from our team.",
+  "mode": "direct",
+  "leads": [
+    { "userPhone": "+15551234567", "username": "Jane" },
+    { "userID": "+15559876543", "username": "Bob" }
+  ],
+  "contactMethodsPriority": ["userPhone", "userID", "phone"]
+}
+```
+
+<Note>
+Each lead object is passed through as `leadInfo` on the per-recipient send, so `mode: agent` can personalize openers.
+</Note>

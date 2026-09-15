@@ -1,0 +1,46 @@
+---
+title: 'Update Conversation'
+description: 'Updates an existing conversation for the specified agent, using the V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'PATCH /agents/{agentId}/convos/{convoId}'
+---
+
+## Example Request
+
+```json
+{
+  "conversation": {
+    "tags": ["support", "resolved"],
+    "state": "completed",
+    "title": "Product Inquiry - Resolved",
+    "notes": "Issue resolved. Customer upgraded to premium plan."
+  }
+}
+```
+
+<Note>
+Uses partial updates - only provided fields are changed. Tags are **merged** with existing tags (duplicates removed).
+</Note>
+
+<Tip>
+`lastModified` is automatically updated when any field changes.
+</Tip>
+
+## Updatable Fields
+
+You can update any of the following fields:
+
+### Lead Information
+- `userName` - User's full name
+- `userEmail` - User's email address
+- `userPhone` - User's phone number
+- `userAddress` - User's physical address
+- `userCompany` - User's company name
+- `userWebsite` - User's website URL
+- `notes` - Internal notes about the conversation/lead
+- `userProfilePic` - URL to user's profile picture
+
+### Conversation Metadata
+- `tags` - Array of tags (merged with existing)
+- `title` - Conversation title
+- `state` - Conversation state (e.g., "ai-chatting", "human-chatting")
+- `chatAssignedTo` - User ID of assigned agent

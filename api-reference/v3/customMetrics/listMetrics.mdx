@@ -1,0 +1,46 @@
+---
+title: 'List Custom Metrics'
+description: 'Retrieve all custom metrics configured for a specific agent'
+openapi: "GET /agents/{agentId}/custom-metrics"
+---
+
+## Overview
+
+Returns a paginated list of all custom metrics defined for an agent. These metrics can be tracked during conversations and used for analytics and reporting.
+
+<Note>
+Custom metrics allow you to track agent-specific KPIs like customer satisfaction, issue resolution, or any other measurable data point relevant to your use case.
+</Note>
+
+## Use Cases
+
+- **Dashboard Setup**: Retrieve all metrics to display in your analytics dashboard
+- **Metric Discovery**: Find available metrics before querying their data
+- **Configuration Audit**: Review which metrics are configured for an agent
+
+## Pagination
+
+Use the `limit` and `startAfterId` parameters to paginate through large metric collections:
+
+```javascript
+// First page
+const page1 = await fetch('/v3/agents/{agentId}/custom-metrics?limit=20');
+
+// Next page
+const page2 = await fetch(`/v3/agents/{agentId}/custom-metrics?limit=20&startAfterId=${lastMetricId}`);
+```
+
+## Response
+
+Each metric includes:
+- **id**: Unique identifier
+- **key**: Metric key used in conversations
+- **type**: Data type (number, boolean, enum, string)
+- **description**: What the metric measures
+- **options**: Available values (for enum type only)
+- **isSystem**: Whether it's a built-in system metric
+
+<Tip>
+System metrics (where `isSystem: true`) cannot be deleted and are maintained by the platform.
+</Tip>
+

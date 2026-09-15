@@ -1,0 +1,22 @@
+---
+title: "Update Client"
+description: "Update a client user owned by the authenticated workspace"
+openapi: "POST /clients/update"
+---
+
+<Note>
+Pass `clientId` and/or `clientData.ID`. Ownership fields like `ownerID` cannot be changed.
+</Note>
+
+## Example Request
+
+```json
+{
+  "clientId": "YOUR_CLIENT_ID",
+  "clientData": {
+    "ID": "YOUR_CLIENT_ID",
+    "name": "Jane Doe Updated",
+    "email": "jane@acme.example"
+  }
+}
+```

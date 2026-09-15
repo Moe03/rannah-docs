@@ -1,0 +1,196 @@
+---
+title: 'Get All Metrics Data'
+description: 'Retrieve aggregated data for all custom metrics in a single request'
+openapi: "GET /agents/{agentId}/custom-metrics/data"
+---
+
+## Overview
+
+Fetches aggregated analytics data for **all** metrics of an agent within a specified time range. This endpoint is ideal for dashboard overviews and comprehensive reporting.
+
+## Bulk Analytics
+
+Instead of making individual requests for each metric, get all metric data at once:
+
+```javascript
+// Single request for all metrics
+const allMetrics = await fetch(
+  `/v3/agents/{agentId}/custom-metrics/data?startTs=${startTs}&endTs=${endTs}`
+);
+```
+
+## Response Format
+
+Returns an array with aggregated data for each metric:
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "key": "customer_satisfaction",
+      "type": "numeric",
+      "average": 8.5,
+      "sum": 425,
+      "min": 5,
+      "max": 10,
+      "totalDataPoints": 50
+    },
+    {
+      "key": "sentiment",
+      "type": "categorical",
+      "counts": {
+        "positive": 30,
+        "negative": 10,
+        "neutral": 10
+      },
+      "totalDataPoints": 50
+    },
+    {
+      "key": "issue_resolved",
+      "type": "categorical",
+      "counts": {
+        "true": 45,
+        "false": 5
+      },
+      "totalDataPoints": 50
+    }
+  ]
+}
+```
+
+## Time-Series Control
+
+By default, time-series data is **not included** to keep responses lightweight. Enable it when needed:
+
+```
+GET /v3/agents/{agentId}/custom-metrics/data?startTs=1640000000&endTs=1640100000&includeTimeSeries=true
+```
+
+<Note>
+Setting `includeTimeSeries: true` significantly increases response size. Only enable when you need individual data points for each metric.
+</Note>
+
+## Use Cases
+
+### Dashboard Overview
+Perfect for displaying all KPIs in a single dashboard view:
+
+```javascript
+// Fetch all metrics for today
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+const startTs = Math.floor(today.getTime() / 1000);
+const endTs = Math.floor(Date.now() / 1000);
+
+const dashboardData = await fetch(
+  `/v3/agents/{agentId}/custom-metrics/data?startTs=${startTs}&endTs=${endTs}`
+);
+
+// Display each metric in dashboard cards
+dashboardData.data.forEach(metric => {
+  if (metric.type === 'numeric') {
+    displayNumericCard(metric.key, metric.average, metric.sum);
+  } else {
+    displayCategoricalChart(metric.key, metric.counts);
+  }
+});
+```
+
+### Weekly Reports
+Generate comprehensive weekly performance reports:
+
+```javascript
+const now = Math.floor(Date.now() / 1000);
+const weekAgo = now - (7 * 24 * 60 * 60);
+
+const weeklyReport = await fetch(
+  `/v3/agents/{agentId}/custom-metrics/data?startTs=${weekAgo}&endTs=${now}`
+);
+
+// Generate PDF or email report
+generateWeeklyReport(weeklyReport.data);
+```
+
+### Comparative Analysis
+Compare multiple metrics side-by-side:
+
+```javascript
+const metricsData = await fetchAllMetrics();
+
+// Find correlations between metrics
+const satisfaction = metricsData.find(m => m.key === 'customer_satisfaction');
+const resolution = metricsData.find(m => m.key === 'issue_resolved');
+
+analyzeCorrelation(satisfaction, resolution);
+```
+
+## Performance Considerations
+
+<Tip>
+**Optimization Tips:**
+- Keep time ranges reasonable (7-30 days for routine queries)
+- Cache results for frequently accessed date ranges
+- Use pagination if you have many metrics (50+)
+- Set `includeTimeSeries: false` unless you specifically need it
+- Schedule large historical queries during off-peak hours
+</Tip>
+
+## Response Size
+
+Response size varies based on:
+- Number of configured metrics
+- Time range (more data points = larger response)
+- `includeTimeSeries` setting
+- Complexity of categorical distributions
+
+**Typical sizes:**
+- 10 metrics, 24 hours, no time-series: ~5-10 KB
+- 20 metrics, 7 days, no time-series: ~15-30 KB
+- 20 metrics, 7 days, with time-series: ~500 KB - 2 MB
+
+## Empty Results
+
+When no data exists for any metrics in the time range:
+
+```json
+{
+  "success": true,
+  "data": []
+}
+```
+
+## Integration Example
+
+```typescript
+// TypeScript example
+interface MetricData {
+  key: string;
+  type: 'numeric' | 'categorical';
+  average?: number;
+  sum?: number;
+  min?: number;
+  max?: number;
+  counts?: Record<string, number>;
+  totalDataPoints: number;
+}
+
+async function fetchAgentMetrics(
+  agentId: string,
+  startTs: number,
+  endTs: number
+): Promise<MetricData[]> {
+  const response = await fetch(
+    `/v3/agents/${agentId}/custom-metrics/data?startTs=${startTs}&endTs=${endTs}`,
+    {
+      headers: {
+        'Authorization': `Bearer ${API_KEY}`
+      }
+    }
+  );
+  
+  const result = await response.json();
+  return result.data;
+}
+```
+

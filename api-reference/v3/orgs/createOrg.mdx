@@ -1,0 +1,43 @@
+---
+title: "Create Organization"
+description: "Create a new organization under the authenticated workspace"
+openapi: "POST /orgs"
+---
+
+<Note>
+Creates an organization (the “client” card in the dashboard Clients page). Returns `orgId` plus the full org document in `data`.
+</Note>
+
+## Example Request
+
+Minimal:
+
+```json
+{
+  "name": "Acme Corp",
+  "email": "ops@acme.example",
+  "squarePhotoURL": "https://example.com/logo.png"
+}
+```
+
+With optional org fields (agents, access tabs, language, settings):
+
+```json
+{
+  "name": "Acme Corp",
+  "email": "ops@acme.example",
+  "squarePhotoURL": "https://example.com/logo.png",
+  "preferredLanguage": "en",
+  "widgetIDs": ["agent_abc123"],
+  "canAccess": ["/home", "/convos", "/leads"],
+  "settings": {
+    "disableClientAccess": false
+  }
+}
+```
+
+Server sets ownership fields (`ID`, `userId`, `agencyId`, `ts`, `type: "org"`). Use `PATCH /orgs/{orgId}` to change more fields later.
+
+<Tip>
+After creating an org, assign agents with `POST /orgs/{orgId}/agents/{agentId}` and add users with `POST /clients`. Fetch the full document anytime with `GET /orgs/{orgId}`.
+</Tip>

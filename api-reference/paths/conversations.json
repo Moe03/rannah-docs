@@ -1,0 +1,367 @@
+{
+  "convos_list": {
+    "get": {
+      "description": "Returns agent conversations (metadata only)",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to retrieve its conversations",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "description": "Page of the results to return, default is 1, query per page is 20",
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agent conversations retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agent conversations retrieved successfully"
+                  },
+                  "data": {
+                    "description": "Array of conversations objects",
+                    "type": "array",
+                    "items": {
+                      "$ref": "../schemas/Conversations.json#/WidgetConvoModel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "convos_export": {
+    "get": {
+      "description": "Exports agent conversations. When `convo_ids` is provided, returns up to 100 conversations per request with a 15 requests/hour rate limit per workspace and agent. Without `convo_ids`, proxies to the V3 bulk export endpoint (200 conversations per request; 3/hour and 10/day per workspace).",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to export its conversations",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "page",
+          "in": "query",
+          "description": "Page of the results to return, default is 1, query per page is 20",
+          "schema": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        {
+          "name": "convo_ids",
+          "in": "query",
+          "description": "The ids of the conversations to export (comma separated). Maximum 100 IDs per request.\n #### Example:\n ```test_id_1,test_id_2,test_id_3```",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agent conversations exported",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agent conversations exported successfully"
+                  },
+                  "data": {
+                    "description": "Array of conversations objects",
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "metadata": {
+                          "description": "Conversation metadata",
+                          "$ref": "../schemas/Conversations.json#/WidgetConvoModel"
+                        },
+                        "turns": {
+                          "description": "Array of turns in the conversation between bot - human.",
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "from": {
+                                "description": "Message sender whether it's a human or a bot",
+                                "type": "string",
+                                "enum": ["human", "bot"]
+                              },
+                              "messages": {
+                                "description": "Array containing the messages of the turn with its type, payload and timestamp.",
+                                "type": "array",
+                                "items": {
+                                  "$ref": "../schemas/Messages.json#/SimpleChatMessage"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        },
+        "429": {
+          "description": "Export rate limit exceeded",
+          "headers": {
+            "Retry-After": {
+              "description": "Seconds until the client may retry",
+              "schema": {
+                "type": "integer"
+              }
+            }
+          },
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "convo_by_id": {
+    "post": {
+      "description": "Add a conversation to the agent",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to add the conversation to",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "convo_id",
+          "in": "path",
+          "description": "The ID of the conversation to add",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "Conversation to add to the agent",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Conversations.json#/WidgetConvoModel"
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Conversation added",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Conversation added successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "description": "Deletes a conversation from the agent",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to delete the conversation from",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "convo_id",
+          "in": "path",
+          "description": "The ID of the conversation to delete",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Conversation deleted",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Conversation deleted successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

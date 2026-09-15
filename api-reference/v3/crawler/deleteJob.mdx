@@ -1,0 +1,17 @@
+---
+title: 'Delete Crawler Job'
+description: 'Deletes a crawler job and its stored page data using the V3 API.'
+openapi: 'DELETE /workspaces/{workspaceId}/crawler/jobs/{jobId}'
+---
+
+<Warning>
+Deleting a crawler job removes the job record and its stored scraped page documents.
+</Warning>
+
+## Overview
+
+Use this when you want to remove a crawler job instead of keeping it in history.
+
+<Note>
+Crawler jobs are immutable after submission. Delete and recreate is the supported workflow instead of update.
+</Note>

@@ -1,0 +1,59 @@
+---
+title: 'Create Agent'
+description: 'Creates a new AI agent with the specified configuration, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'POST /agents'
+---
+
+## Example Request
+
+```json
+{
+  "agent": {
+    "title": "My Customer Service Agent",
+    "description": "An AI agent that handles customer inquiries",
+    "agentPlatform": "vg"
+  }
+}
+```
+
+## Setting Instructions on Create
+
+To set custom instructions when creating an agent, include the `nodes` array:
+
+```json
+{
+  "agent": {
+    "title": "My Agent",
+    "agentPlatform": "vg",
+    "nodes": [
+      {
+        "id": "__start__",
+        "name": "Start",
+        "instructions": "You are a helpful customer support agent. Be friendly and concise."
+      }
+    ]
+  }
+}
+```
+
+## Custom Theme
+
+You can set a custom theme during creation:
+
+```json
+{
+  "agent": {
+    "title": "My Agent",
+    "customTheme": {
+      "themeType": "dark",
+      "primary": "#3B82F6"
+    }
+  }
+}
+```
+
+## Notes
+
+- A unique agent ID and secret API key are auto-generated
+- New agents are created with `enableNodes: true` by default for `vg` platform
+- Agent limits are enforced based on your plan

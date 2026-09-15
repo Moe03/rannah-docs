@@ -1,0 +1,72 @@
+---
+title: "Export Single Conversation"
+description: "Exports a single conversation for the specified agent in a format suitable for download, using the V3 [endpoints](/api-reference/v3/intro)."
+openapi: "GET /agents/{agentId}/convos/{convoId}/export"
+---
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "message": "Conversation exported successfully",
+  "data": {
+    "metadata": {
+      "feedback": "Positive",
+      "convo": {
+        "id": "convo123",
+        "userName": "John Doe",
+        "userEmail": "john@example.com",
+        "userPhone": "+1234567890",
+        "userCompany": "Acme Corp",
+        "notes": "Customer interested in premium plan, follow up scheduled",
+        "tags": ["new-lead"],
+        "origin": "web"
+      },
+      "sessions": []
+    },
+    "turns": [
+      {
+        "from": "user",
+        "messages": [
+          {
+            "type": "text",
+            "ts": "December 1st 2024, 10:30:00 am",
+            "payload": {
+              "message": "Hello!",
+              "feedback": "Unset",
+              "aiGenerated": false
+            }
+          }
+        ]
+      },
+      {
+        "from": "bot",
+        "messages": [
+          {
+            "type": "text",
+            "ts": "December 1st 2024, 10:30:02 am",
+            "payload": {
+              "message": "Hi! How can I help you today?",
+              "feedback": "Positive",
+              "aiGenerated": true
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+## Notes
+
+- The conversation must belong to the specified agent
+- Includes full turn history with timestamps
+- Feedback status indicates user feedback on each message
+- All lead fields are included: `userName`, `userEmail`, `userPhone`, `userCompany`, `userAddress`, `userWebsite`, `notes`, `tags`
+
+## Related documentation
+
+- [Export Agent Conversations (bulk)](/api-reference/v3/conversations/export)
+- [Conversations tab (dashboard)](/features/conversations-tab)

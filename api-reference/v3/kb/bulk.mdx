@@ -1,0 +1,42 @@
+---
+title: 'Bulk Create KB Docs'
+description: 'Create up to 20 knowledge base documents in one request.'
+openapi: 'POST /agents/{agentId}/kb/docs/bulk'
+---
+
+## Request
+
+```json
+{
+  "docs": [
+    {
+      "name": "Policies",
+      "sourceType": "doc",
+      "content": "Check-in is from 3pm…",
+      "tags": ["policies"]
+    },
+    {
+      "name": "Dining",
+      "sourceType": "doc",
+      "content": "Breakfast is served 6:30–10:30…",
+      "tags": ["dining"]
+    }
+  ]
+}
+```
+
+Max **20** docs per call. Currently `sourceType: "doc"` is supported in bulk; use [`POST /agents/{agentId}/kb`](/api-reference/v3/kb/post) for URL/sitemap sources.
+
+## Response
+
+```json
+{
+  "success": true,
+  "results": [
+    { "docId": "abc", "status": "success", "name": "Policies" },
+    { "name": "Dining", "status": "error", "error": "…" }
+  ]
+}
+```
+
+Each doc is processed independently — one failure does not roll back the others.

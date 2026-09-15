@@ -1,0 +1,70 @@
+---
+title: 'Import Agent Template'
+description: 'Imports an agent template, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'POST /agents/import-template'
+---
+
+## Import from Template
+
+```json
+{
+  "agentTemplate": {
+    "name": "My Template",
+    "agentData": {...},
+    "tools": [...],
+    "variables": [...],
+    "nodes": [...]
+  },
+  "agentName": "My New Agent"
+}
+```
+
+## Server-side scrub (Phase 0)
+
+Import **never** shallow-copies a full live agent doc. The API allowlists structural fields only (`theme`, scrubbed `voiceConfig`, `enableNodes`, `vg_defaultModel`, nodes/instructions, UI toggles).
+
+**Never inherited:**
+
+- `branding` (forced to `""`)
+- `funnelConfig` / notification recipients
+- `roundedImageURL` from the source
+- Channel tokens, webhooks, marketplace, usage counters, `SECRET_API_KEY`, foreign `ownerID`
+
+Prefer [`POST /agent-templates/{templateId}/create`](/api-reference/v3/agents/from-template) for system templates, or [`POST /agents/{agentId}/clone`](/api-reference/v3/agents/clone) for cloning a live agent with explicit `carryOver`.
+
+## Convert Existing Agent to Node-Based
+
+Use `fromAgentId` to convert a legacy agent to the node-based architecture:
+
+```json
+{
+  "fromAgentId": "existing_agent_id",
+  "agentName": "My Converted Agent"
+}
+```
+
+This will:
+- Create a new node-based agent from scrubbed source fields
+- Migrate `vg_systemPrompt` and `vg_initPrompt` to the start node's instructions
+- Copy all tools and variables with new IDs
+- Migrate knowledge base documents
+
+## Example Response
+
+```json
+{
+  "agentCreated": {
+    "ID": "new_agent_id",
+    "title": "My New Agent",
+    "branding": "",
+    "nodes": [...],
+    "SECRET_API_KEY": "vg_xxxx"
+  }
+}
+```
+
+## Notes
+
+- New unique IDs are generated for the agent, tools, and variables
+- Tool and variable references in instructions are automatically updated
+- Agent limits are enforced based on your plan

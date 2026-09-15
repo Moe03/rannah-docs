@@ -1,0 +1,20 @@
+---
+title: 'Get Crawler Job'
+description: 'Gets a single crawler job by id using the V3 API.'
+openapi: 'GET /workspaces/{workspaceId}/crawler/jobs/{jobId}'
+---
+
+## Overview
+
+Returns one crawler job with its current processing state, scraped URL tracking, and webhook metadata.
+
+<Note>
+Crawler jobs cannot be updated after submission. This endpoint is read-only.
+</Note>
+
+## Typical Use Cases
+
+- Polling job progress
+- Reading final job status
+- Inspecting webhook delivery configuration
+- Reviewing discovered and processed URLs

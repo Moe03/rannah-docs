@@ -1,0 +1,16 @@
+---
+title: 'Get a voice'
+description: "Returns metadata for a specific voice on a specific provider, including a previewUrl MP3."
+openapi: 'GET /voices/{provider}/{voiceId}'
+---
+
+```bash
+curl "https://eu-gcp-api.vg-stuff.com/v3/voices/elevenlabs/21m00Tcm4TlvDq8ikWAM" \
+  -H "Authorization: Bearer YOUR_API_KEY"
+```
+
+You can also pass `?sampleText=...` to customize the previewUrl content.
+
+<Note>
+This endpoint does **not** consume credits.
+</Note>

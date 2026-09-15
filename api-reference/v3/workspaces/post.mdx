@@ -1,0 +1,25 @@
+---
+title: 'Create Workspace'
+description: 'Creates a new workspace, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'POST /workspaces'
+---
+
+## Example Request
+
+```json
+{
+  "workspaceName": "My Team Workspace",
+  "workspaceEmails": [
+    "teammate1@example.com",
+    "teammate2@example.com"
+  ]
+}
+```
+
+<Note>
+`workspaceName` is required. Team members added via `workspaceEmails` will receive an invitation.
+</Note>
+
+<Tip>
+Workspace limits depend on your subscription plan. Check your plan's workspace seat allocation.
+</Tip>

@@ -1,0 +1,21 @@
+---
+title: 'List Crawler Jobs'
+description: 'Lists crawler jobs for a workspace using the V3 API.'
+openapi: 'GET /workspaces/{workspaceId}/crawler/jobs'
+---
+
+## Overview
+
+Returns paginated crawler jobs for the selected workspace.
+
+## Includes
+
+- Job status
+- Page counts
+- Estimated credits
+- Per-page billing rate
+- Webhook summary configuration
+
+<Tip>
+Use the `page` and `limit` query parameters to paginate through large job histories.
+</Tip>

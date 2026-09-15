@@ -1,0 +1,42 @@
+---
+title: "Search Agents"
+description: "Search and paginate agents for the authenticated workspace."
+openapi: "GET /agents/search"
+---
+
+<Note>
+Search matches agent **title**, **description**, and **agent ID** within the authenticated workspace.
+</Note>
+
+## Query parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `workspaceId` | string | authenticated workspace | Optional. Defaults to the bearer workspace (same as `GET /agents`). Pass only when searching another workspace you belong to. Unknown/stale ids (e.g. MCP `Rannah رنّة_WORKSPACE_ID`) fall back to the bearer workspace instead of 401. |
+| `search` | string | | Free-text filter on title, description, or agent ID |
+| `sortBy` | enum | `newest` | `newest`, `oldest`, `firstCreated`, `lastCreated`, or `alphabetical` |
+| `page` | number | `1` | Page number (1-based) |
+| `limit` | number | `20` | Page size (max 50) |
+| `starredOnly` | boolean | `false` | Return only starred agents |
+| `agentIds` | string | | Comma-separated allow-list of agent IDs |
+| `excludeAgentIds` | string | | Comma-separated deny-list of agent IDs |
+| `includeStarredAgents` | boolean | `true` | Include starred agents in the main result set |
+
+<Tip>
+Use `GET /agents` for a full workspace list without filters. Use `GET /agents/search` when you need pagination, text search, or starred-only views.
+</Tip>
+
+## Example
+
+```bash
+curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/search" \
+  -H "Authorization: Bearer {API_KEY}" \
+  --data-urlencode "search=support" \
+  --data-urlencode "page=1" \
+  --data-urlencode "limit=25"
+```
+
+## Related documentation
+
+- [Get Agents](/api-reference/v3/agents/get)
+- [Get Agent by ID](/api-reference/v3/agents/get_id)

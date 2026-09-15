@@ -1,0 +1,43 @@
+---
+title: "Update Conversation Messages"
+description: "Replaces the stored message turn history for a conversation, using the V3 [endpoints](/api-reference/v3/intro)."
+openapi: "PATCH /agents/{agentId}/convos/{convoId}/messages"
+---
+
+## Example Request
+
+```json
+{
+  "turns": [
+    {
+      "from": "human",
+      "ts": 1699999999,
+      "messages": [
+        {
+          "from": "human",
+          "type": "text",
+          "ts": 1699999999,
+          "item": {
+            "payload": {
+              "message": "Hey, I need help with pricing."
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "updateConversationMetadata": true
+}
+```
+
+<Note>
+This replaces the current conversation turn history stored in Firestore at `voiceglow/{agentId}/convos/{convoId}/convo/JSON_STRING`. It does **not** deliver anything to WhatsApp, Messenger, or other channels.
+</Note>
+
+<Tip>
+To send a real outbound message to the customer on their original channel, use [Send Message to Conversation](/api-reference/v3/conversations/send) instead.
+</Tip>
+
+<Tip>
+When `updateConversationMetadata` is true, the endpoint also refreshes `messagesNum`, `lastMessage`, `firstMessageTS`, `lastMessageTS`, and `lastModified` on the light conversation document.
+</Tip>

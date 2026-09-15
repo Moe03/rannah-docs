@@ -1,0 +1,17 @@
+---
+title: 'Get Single KB Doc'
+description: "Returns the specified document from the agent's VF/Rannah رنّة Knowledge Base, this route must use the new V3 [endpoints](/api-reference/v3/intro)."
+openapi: 'GET /agents/{agentId}/kb/{docId}'
+---
+
+<Note>
+This is the endpoint that returns the **hydrated document body**. Use it (or list with `includeContent=true`) when you need the actual KB text — the list route alone does not.
+</Note>
+
+<Note>
+Hydrated text is in `data.vgKbDoc.content` and the nested `data.data.status.data.content` field. The `chunks` array shows how that content was split for vector embeddings.
+</Note>
+
+<Tip>
+Use this endpoint to verify document processing status and inspect how content was chunked for the knowledge base.
+</Tip>

@@ -1,0 +1,24 @@
+---
+title: "List a provider's TTS models"
+description: 'Returns the TTS model IDs available for a given provider. Pass any of these to /voices?modelId=... to filter the voice catalog.'
+openapi: 'GET /voices/{provider}/models'
+---
+
+Different providers expose model-specific voice catalogs. The most common ones:
+
+| Provider      | Models                                                                           |
+| ------------- | -------------------------------------------------------------------------------- |
+| `elevenlabs`  | `eleven_multilingual_v2`, `eleven_flash_v2_5`, `eleven_turbo_v2_5`, ...          |
+| `deepgram`    | `aura-2`, `aura` (different voices per model)                                    |
+| `cartesia`    | `sonic-3`, `sonic-2-2025-03-07`, `sonic-turbo-2025-03-07`, ...                   |
+| `openai`      | `gpt-4o-mini-tts`, `tts-1`, `tts-1-hd`                                           |
+| `rime-ai`     | `mistv2`, `mist`, `arcana`                                                       |
+| `minimax`     | `speech-02-hd`, `speech-02-turbo`                                                |
+| `ultravox`    | `ultravox-v0.7`, `ultravox-v0.6`, `ultravox-v0.6-llama3.3-70b`, ...              |
+| `google-live` | `gemini-2.5-flash-preview-native-audio-dialog`, `gemini-2.0-flash-live-001`      |
+
+`google-cloud` has hundreds of named voices but no model layer — it returns `[]`.
+
+<Note>
+This endpoint does **not** consume credits.
+</Note>

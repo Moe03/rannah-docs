@@ -1,0 +1,232 @@
+---
+title: 'Update Agent'
+description: 'Updates an agent, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'PATCH /agents/{id}'
+---
+
+## Usage
+
+The Update Agent endpoint allows you to update an existing agent's configuration. The API uses deep merging, so you only need to provide the fields you want to update.
+
+<Warning>
+**Unknown top-level keys return HTTP 400** (not a silent 200). Only documented / allowlisted fields are accepted. Use `additionalConfig` only as an escape hatch for fields not yet promoted — secrets and channel credentials inside it are rejected.
+</Warning>
+
+<Warning>
+**Important:** Agent instructions are stored in the `nodes` array, not at the top level. To update your agent's prompt/instructions, you must update the `nodes[0].instructions` field where the node has `id: "__start__"`.
+</Warning>
+
+## Promoted top-level fields
+
+These are first-class PATCH params (no longer “legacy / ignore”):
+
+| Field | Notes |
+| --- | --- |
+| `roundedImageURL`, `branding`, `customThemeJSONString`, `chatBgURL` | Identity / theme |
+| `vg_systemPrompt`, `vg_initPrompt`, `vg_initMessages` | Still prefer `nodes[0].instructions` for the live prompt |
+| `vg_enableUIEngine`, `vg_uiEngineChannelConfig`, `vg_uiEngineInvoiceConfig` | UI Engine |
+| `funnelConfig` | Lead/funnel; keep recipients workspace-scoped |
+| `voiceConfig` | Voice settings |
+| `modelId`, `modelIdLastChangedAt`, `modelIdLastChangedBy` | Set automatically when model changes |
+
+## Updating Agent Instructions
+
+Agent instructions are stored within the `nodes` array. Each agent has a start node with `id: "__start__"` that contains the main instructions.
+
+### Example: Update Instructions Only
+
+```json
+{
+  "id": "your_agent_id",
+  "agent": {
+    "nodes": [
+      {
+        "id": "__start__",
+        "instructions": "Your new instructions here. Be a helpful assistant that answers questions about our products."
+      }
+    ]
+  }
+}
+```
+
+### Example: Update Instructions and LLM Model
+
+```json
+{
+  "id": "your_agent_id",
+  "agent": {
+    "nodes": [
+      {
+        "id": "__start__",
+        "instructions": "You are a friendly customer support agent. Help users with their questions.",
+        "llmConfig": {
+          "modelId": "gpt-4o",
+          "temperature": 0.7,
+          "maxTokens": 2048
+        }
+      }
+    ]
+  }
+}
+```
+
+### Example: Update Agent Metadata and Instructions
+
+```json
+{
+  "id": "your_agent_id",
+  "agent": {
+    "title": "My Updated Agent",
+    "description": "A helpful customer support assistant",
+    "nodes": [
+      {
+        "id": "__start__",
+        "instructions": "Greet users warmly and help them with their inquiries."
+      }
+    ]
+  }
+}
+```
+
+## Node Structure
+
+Each node in the `nodes` array can have the following properties:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `id` | string | **Required.** The node identifier. Use `"__start__"` for the main start node. |
+| `instructions` | string | The prompt/instructions for the LLM at this node. |
+| `name` | string | Display name for the node. |
+| `description` | string | Description of what the node does. |
+| `llmConfig` | object | LLM configuration including `modelId`, `temperature`, and `maxTokens`. |
+| `toolsIds` | array | Array of tool IDs assigned to this node. |
+| `kb` | object | Knowledge base settings with `enabled` (boolean) and `maxChunks` (number). |
+
+### Using Variables and Tools in Instructions
+
+You can reference variables and tools in your instructions using the following syntax:
+
+- **Variables:** `{{var:variable_id}}`
+- **Tools:** `{{tool:tool_id}}`
+
+```json
+{
+  "id": "your_agent_id",
+  "agent": {
+    "nodes": [
+      {
+        "id": "__start__",
+        "instructions": "Greet the user and store their name in {{var:user_name_variable_id}}. When they ask for help, use the {{tool:search_tool_id}} tool to find relevant information."
+      }
+    ]
+  }
+}
+```
+
+## Updating Custom Theme & Color Palette
+
+You can customize your agent's appearance by setting a custom color palette. This requires setting both the `theme` field and the `customThemeJSONString` field.
+
+### Example: Custom Dark Theme
+
+```json
+{
+  "agent": {
+    "theme": "custom-dark",
+    "customThemeJSONString": "{\"themeType\":\"dark\",\"primary\":\"#8A2BE2\",\"nineColorPallet\":[[270,15,10],[270,15,15],[270,10,25],[270,10,50],[270,15,85],[270,25,95],[270,80,55],[270,85,65],[270,90,75],[270,95,85]],\"autogenTheme\":false}"
+  }
+}
+```
+
+### Example: Custom Light Theme
+
+```json
+{
+  "agent": {
+    "theme": "custom-light",
+    "customThemeJSONString": "{\"themeType\":\"light\",\"primary\":\"#0096c7\",\"nineColorPallet\":[[199,100,39],[45,100,50],[0,0,10],[142,76,45],[217,100,61],[25,89,56],[280,83,57],[160,100,40],[187,85,55],[142,100,30]],\"autogenTheme\":false}"
+  }
+}
+```
+
+### Custom Theme JSON Structure
+
+The `customThemeJSONString` is a stringified JSON object with the following properties:
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `themeType` | `"light"` or `"dark"` | Base theme mode. Must match the `theme` field suffix. |
+| `primary` | string | Primary accent color in hex format (e.g., `"#8A2BE2"`). |
+| `nineColorPallet` | array | Array of 10 HSL color values, each as `[Hue, Saturation, Lightness]`. |
+| `autogenTheme` | boolean | If `true`, auto-generates the palette from the primary color. |
+
+### HSL Color Format
+
+Each color in `nineColorPallet` is an array of 3 numbers:
+- **Hue**: 0-360 (position on the color wheel)
+- **Saturation**: 0-100 (color intensity percentage)
+- **Lightness**: 0-100 (brightness percentage)
+
+<Tip>
+**Important:** When updating the custom theme, ensure that:
+1. The `theme` field matches the `themeType` in the JSON string (e.g., `"custom-dark"` with `"themeType": "dark"`)
+2. The `nineColorPallet` array contains exactly 10 HSL color values
+3. The `customThemeJSONString` is a properly escaped JSON string
+</Tip>
+
+### Auto-Generate Palette
+
+If you only want to set a primary color and have the palette auto-generated:
+
+```json
+{
+  "agent": {
+    "theme": "custom-light",
+    "customThemeJSONString": "{\"themeType\":\"light\",\"primary\":\"#6366f1\",\"autogenTheme\":true}"
+  }
+}
+```
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "message": "Agent updated successfully",
+  "data": {
+    "ID": "your_agent_id",
+    "title": "My Updated Agent",
+    "description": "A helpful customer support assistant",
+    "nodes": [
+      {
+        "id": "__start__",
+        "name": "Start",
+        "instructions": "Greet users warmly and help them with their inquiries.",
+        "llmConfig": {
+          "modelId": "gpt-4o",
+          "temperature": 0.7,
+          "maxTokens": 2048
+        }
+      }
+    ]
+  }
+}
+```
+
+## Prompt fields vs nodes
+
+<Note>
+For the **live** agent prompt, prefer updating `nodes` (`id: "__start__"` → `instructions`). Top-level `vg_systemPrompt` / `vg_initPrompt` / `vg_initMessages` are accepted and stored, and are useful for migrations and tooling, but node instructions are what the runtime uses when `enableNodes` is true.
+</Note>
+
+## Notes
+
+- The API uses deep merging, so only the fields you specify will be updated
+- When updating nodes, the merge is performed by matching the `id` field
+- You only need to provide the node properties you want to change; other properties will be preserved
+- The `lastModified` timestamp is automatically updated
+- Model changes stamp `modelId` / `modelIdLastChangedAt` / `modelIdLastChangedBy` and write an audit-log entry
+- Unknown top-level keys → **400**
+- If the agent doesn't exist, a 404 error will be returned
+- You must be the owner of the agent to update it
+- See [`GET /agents/{agentId}/audit-log`](/api-reference/v3/agents/audit-log) for field-level history

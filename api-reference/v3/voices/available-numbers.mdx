@@ -1,0 +1,18 @@
+---
+title: 'Search available Twilio numbers'
+description: "Searches Twilio for US local phone numbers that can be purchased with /utils/buy-twilio-number."
+openapi: 'POST /utils/twilio/available-numbers'
+---
+
+Returns up to 25 currently-available US local Twilio numbers. Pass `inRegion` to bias the search to a specific state.
+
+```bash
+curl -X POST "https://eu-gcp-api.vg-stuff.com/v3/utils/twilio/available-numbers" \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "inRegion": "CA" }'
+```
+
+<Tip>
+Pair this with `/utils/buy-twilio-number` to let users browse-and-buy numbers in your own UI.
+</Tip>

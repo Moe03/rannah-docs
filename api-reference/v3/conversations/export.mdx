@@ -1,0 +1,133 @@
+---
+title: 'Export Agent Conversations'
+description: 'Export chat sessions via the V3 Chat Export API — paginated by default (newest first), with sort and date-range filters. Reads from the PG mirror. Requires a paid workspace (hasEverPaid).'
+openapi: 'GET /agents/{agentId}/convos/export'
+---
+
+<Note>
+Requires a **paid workspace** (`hasEverPaid`). Reads conversation content from the Postgres/Supabase mirror only (not Firestore). Each billable human-message session counts toward the monthly quota (50,000 included; overage billed in packs of 1,000).
+</Note>
+
+## Modes
+
+| Mode | How | Behavior |
+|------|-----|----------|
+| **Paginated** (default) | Omit `convoIds` | Returns a page of chats from the Postgres mirror. Newest first by default. Use `cursor` / `hasMore` to page through. |
+| **Selected** | Pass `convoIds=id1,id2,...` | Exports only those conversation IDs (max 200 per request). |
+
+## Query parameters
+
+| Param | Default | Description |
+|-------|---------|-------------|
+| `limit` | `20` | Page size in paginated mode (max **50**). |
+| `sort` | `desc` | `desc` = most recent chats first; `asc` = oldest first. |
+| `fromTs` | — | Inclusive start of range (unix **seconds**; ms also accepted). |
+| `toTs` | — | Inclusive end of range (unix **seconds**; ms also accepted). |
+| `cursor` | — | Opaque cursor from the previous response’s `nextCursor`. Keep the same `sort` / `fromTs` / `toTs` when paging. |
+| `convoIds` | — | Comma-separated IDs for selected mode (skips pagination). |
+| `format` | `json` | Response format. |
+
+## Rate limits
+
+Per workspace (authenticated owner). In-memory counters (single process). Response includes `rateLimit.remainingHour` so clients can back off before a 429.
+
+| Limit | Unpaid | Paid (`hasEverPaid`) |
+|-------|--------|----------------------|
+| Paginated page size | default 20, max **50** | default 20, max **100** |
+| Selected `convoIds` per request | **200** | **500** |
+| Export requests per hour | **300** | **1,500** |
+
+Export itself requires `hasEverPaid`, so live callers use the paid column. **429** when exceeded.
+
+## Examples
+
+### Newest chats (default)
+
+```bash
+curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
+  -H "Authorization: Bearer {SECRET_API_KEY}" \
+  --data-urlencode "limit=20"
+```
+
+### Oldest first
+
+```bash
+curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
+  -H "Authorization: Bearer {SECRET_API_KEY}" \
+  --data-urlencode "sort=asc" \
+  --data-urlencode "limit=20"
+```
+
+### Date range (unix seconds)
+
+```bash
+# e.g. 2026-01-01 .. 2026-01-31 UTC
+curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
+  -H "Authorization: Bearer {SECRET_API_KEY}" \
+  --data-urlencode "fromTs=1735689600" \
+  --data-urlencode "toTs=1738367999" \
+  --data-urlencode "sort=desc" \
+  --data-urlencode "limit=50"
+```
+
+### Next page
+
+```bash
+curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
+  -H "Authorization: Bearer {SECRET_API_KEY}" \
+  --data-urlencode "limit=20" \
+  --data-urlencode "sort=desc" \
+  --data-urlencode "cursor={nextCursor_from_previous_response}"
+```
+
+### Specific conversation IDs
+
+```bash
+curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
+  -H "Authorization: Bearer {SECRET_API_KEY}" \
+  --data-urlencode "convoIds=convo_a,convo_b,convo_c"
+```
+
+## Example response (paginated)
+
+```json
+{
+  "success": true,
+  "message": "Exported 12 conversation(s) (15 billable session(s)). Paginated newest-first (supabase). ...",
+  "mode": "paginated",
+  "source": "supabase",
+  "limit": 20,
+  "hasMore": true,
+  "nextCursor": "eyJ2IjoxLCJzb3J0IjoiZGVzYyIsInVuaXF1ZUlkIjoiLi4uIn0",
+  "scannedConvoCount": 20,
+  "query": {
+    "sort": "desc",
+    "fromTs": null,
+    "toTs": null
+  },
+  "usage": {
+    "periodKey": "billing_...",
+    "billableUsedThisRequest": 15,
+    "billableUsedThisPeriod": 120,
+    "includedQuota": 50000,
+    "billableRemainingThisPeriod": 49880,
+    "summary": "Used 120 / 50,000 billable session exports this billing cycle..."
+  },
+  "data": []
+}
+```
+
+## Notes
+
+- Reads from the **Supabase `convos` mirror** (`convoTurns` + `convoSessions`), not live Firestore.
+- Default sort is **most recent first** (`sort=desc`).
+- `fromTs` / `toTs` filter on the conversation’s `ts` field (inclusive).
+- When paging, reuse the same `sort`, `fromTs`, and `toTs` with `cursor`.
+- Conversations with no human messages are skipped (not billable).
+- Past sessions under a convo that contain human turns are each billable.
+- Response includes `usage` for quota tracking.
+
+## Related documentation
+
+- [Export Single Conversation](/api-reference/v3/conversations/export_single)
+- [Conversations tab (dashboard export)](/features/conversations-tab)

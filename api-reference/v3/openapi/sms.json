@@ -1,0 +1,188 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Rannah رنّة API - SMS",
+    "description": "Outbound SMS endpoints",
+    "version": "1.0.4"
+  },
+  "servers": [
+    {
+      "url": "https://eu-gcp-api.vg-stuff.com/v3",
+      "description": "EU Production server"
+    },
+    {
+      "url": "https://na-gcp-api.vg-stuff.com/v3",
+      "description": "NA Production server"
+    }
+  ],
+  "paths": {
+    "/sms": {
+      "post": {
+        "operationId": "sms",
+        "summary": "Send an outbound SMS from an agent's connected number",
+        "description": "Initiate an outbound SMS using a Twilio number already connected to the agent. Supports direct sends, AI-generated opener messages, MMS media, campaign/lead metadata, and advanced Twilio delivery options.",
+        "tags": ["Numbers and Telephony"],
+        "security": [{ "Authorization": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["agentId", "to"],
+                "properties": {
+                  "agentId": {
+                    "type": "string",
+                    "description": "Agent ID whose connected SMS number will send the message."
+                  },
+                  "to": {
+                    "type": "string",
+                    "pattern": "^\\+",
+                    "description": "Recipient phone number in E.164 format, e.g. +15551234567."
+                  },
+                  "from": {
+                    "type": "string",
+                    "pattern": "^\\+",
+                    "description": "Specific connected Twilio number to send from."
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "Message body for direct mode."
+                  },
+                  "mediaUrl": { "type": "string", "format": "uri" },
+                  "mediaUrls": {
+                    "type": "array",
+                    "items": { "type": "string", "format": "uri" },
+                    "maxItems": 10
+                  },
+                  "mode": {
+                    "type": "string",
+                    "enum": ["direct", "agent"],
+                    "default": "direct"
+                  },
+                  "campaignId": { "type": "string" },
+                  "convoId": { "type": "string" },
+                  "leadInfo": {
+                    "type": "object",
+                    "additionalProperties": true
+                  },
+                  "options": {
+                    "type": "object",
+                    "additionalProperties": true,
+                    "description": "dryRun, createConvo, initialPrompt, agentOptions, Twilio delivery flags, etc."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SMS sent or dry-run plan",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "status": { "type": "string" },
+                    "dryRun": { "type": "boolean" },
+                    "messageSid": { "type": "string" },
+                    "messageSids": { "type": "array", "items": { "type": "string" } },
+                    "convoId": { "type": "string" },
+                    "from": { "type": "string" },
+                    "to": { "type": "string" },
+                    "mode": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "default": { "$ref": "#/components/responses/error" }
+        }
+      }
+    },
+    "/smsLeads": {
+      "post": {
+        "operationId": "smsLeads",
+        "summary": "Send outbound SMS to a list of leads",
+        "description": "Bulk-send SMS messages to leads using the agent's connected Twilio number.",
+        "tags": ["Numbers and Telephony"],
+        "security": [{ "Authorization": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["agentId", "leads"],
+                "properties": {
+                  "agentId": { "type": "string" },
+                  "leads": { "type": "array", "minItems": 1 },
+                  "message": { "type": "string" },
+                  "mode": {
+                    "type": "string",
+                    "enum": ["direct", "agent"],
+                    "default": "direct"
+                  },
+                  "from": { "type": "string", "pattern": "^\\+" },
+                  "campaignId": { "type": "string" },
+                  "options": { "type": "object", "additionalProperties": true },
+                  "contactMethodsPriority": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bulk send results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "total": { "type": "number" },
+                    "sent": { "type": "number" },
+                    "failed": { "type": "number" },
+                    "results": { "type": "array" }
+                  }
+                }
+              }
+            }
+          },
+          "default": { "$ref": "#/components/responses/error" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "Authorization": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "responses": {
+      "error": {
+        "description": "Error response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": { "type": "string" },
+                "code": { "type": "string" }
+              },
+              "required": ["message", "code"]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+---
+title: 'Agent Audit Log'
+description: 'Read field-level changes for an agent (updates, template clones, clones, migrations).'
+openapi: 'GET /agents/{agentId}/audit-log'
+---
+
+## Usage
+
+Every write path (`PATCH /agents/{id}`, template import, clone, canonical template create) appends diff entries to `agent_audit_log`.
+
+```bash
+curl -X GET "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/audit-log?limit=50" \
+  -H "Authorization: Bearer YOUR_SECRET_KEY"
+```
+
+## Response
+
+```json
+{
+  "success": true,
+  "entries": [
+    {
+      "agentId": "abc",
+      "field": "nodes[__start__].llmConfig.modelId",
+      "oldValue": "gpt-4o-mini",
+      "newValue": "gpt-5.6-luna",
+      "source": "user_update",
+      "actor": "workspace_uid",
+      "ts": 1710000000
+    }
+  ],
+  "nextCursorTs": 1709990000
+}
+```
+
+| `source` | Meaning |
+| --- | --- |
+| `user_update` | `PATCH /agents/{id}` |
+| `template_clone` | Import template / canonical template create |
+| `agent_clone` | `POST /agents/{id}/clone` |
+| `system_migration` | Automated migrations |
+
+Pass `cursorTs` from `nextCursorTs` to page older entries.

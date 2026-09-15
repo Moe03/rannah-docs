@@ -1,0 +1,17 @@
+---
+title: 'Delete Workspace'
+description: 'Deletes a workspace, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'DELETE /workspaces/{id}'
+---
+
+<Warning>
+**This action is irreversible.** Deleting a workspace permanently removes:
+- All agents in the workspace
+- All conversations and leads
+- All tools and variables
+- Team member access
+</Warning>
+
+<Note>
+Only workspace owners can delete workspaces. You cannot delete your primary workspace.
+</Note>

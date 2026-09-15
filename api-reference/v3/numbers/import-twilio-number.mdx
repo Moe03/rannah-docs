@@ -1,0 +1,25 @@
+---
+title: 'Import a Twilio Number'
+description: 'Import an existing phone number from your own Twilio account to use with your agents.'
+openapi: 'POST /utils/import-twilio-number'
+---
+
+## Example Request
+
+```json
+{
+  "twilioNumber": "+14155551234",
+  "twilioAccountSid": "ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "twilioAccountAuthToken": "your-auth-token",
+  "twilioCallerId": "PNxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "agentId": "your-agent-id"
+}
+```
+
+<Note>
+You need your Twilio Account SID, Auth Token, and the phone number's SID from your Twilio Console.
+</Note>
+
+<Tip>
+Import numbers if you already have Twilio phone numbers you want to use with your AI agents.
+</Tip>

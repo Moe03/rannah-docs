@@ -1,0 +1,13 @@
+---
+title: 'Delete Variable'
+description: 'Deletes a variable, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'DELETE /variables/{variableId}'
+---
+
+<Warning>
+**This action is irreversible.** Deleting a variable permanently removes it and any references to it in agent instructions (`{{var:id}}`) will no longer work.
+</Warning>
+
+<Note>
+Tools using this variable will not automatically update. Review tool configurations after deletion.
+</Note>

@@ -1,0 +1,243 @@
+{
+  "Agent": {
+    "required": ["ID", "title", "agentPlatform"],
+    "type": "object",
+    "properties": {
+      "agentPlatform": {
+        "description": "Platform of the Agent",
+        "enum": ["vf", "vg"],
+        "type": "string"
+      },
+      "title": {
+        "description": "Agent title/name",
+        "type": "string"
+      },
+      "description": {
+        "description": "Agent description",
+        "type": "string"
+      },
+      "VF_DIALOGUE_API_KEY": {
+        "description": "For VF agents only -- the API key for the agent",
+        "type": "string"
+      },
+      "VF_PROJECT_API_KEY": {
+        "description": "For VF agents only -- the Project API key",
+        "type": "string"
+      },
+      "theme": {
+        "description": "Predefined themes: 'blue-light' | 'purple-light' | 'blue-dark' | 'purple-dark' | 'custom-light' | 'custom-dark' // custom themes used along customThemeJSONString",
+        "type": "string"
+      },
+      "customThemeJSONString": {
+        "type": "object",
+        "description": "### MUST JSON.stringify() this object before passing it to the API.\n Custom theme object for the agent",
+        "$ref": "#/CustomTheme"
+      },
+      "roundedImageURL": {
+        "description": "Widget popup launch image",
+        "type": "string"
+      },
+      "avatarImageUrl": {
+        "description": "Web widget chat avatar image url",
+        "type": "string"
+      },
+      "headerImageUrl": {
+        "description": "Web widget chat header image url",
+        "type": "string"
+      },
+      "bannerImageUrl": {
+        "description": "Web widget chat banner image url",
+        "type": "string"
+      },
+      "chatBgURL": {
+        "description": "Chatbox background image",
+        "type": "string"
+      },
+      "fontFamily": {
+        "description": "Google font family name [Browse fonts](https://fonts.google.com)",
+        "type": "string"
+      },
+      "branding": {
+        "description": "Branding text under the chatbox",
+        "type": "string"
+      },
+      "lang": {
+        "description": "Language of the agent (ISO 639-1), [Learn more](https://en.wikipedia.org/wiki/List_of_ISO_639_language_codes)",
+        "type": "string"
+      },
+      "UIhandoffdescription": {
+        "description": "Widget handoff title",
+        "type": "string"
+      },
+      "UIhandoffSubdescription": {
+        "description": "Widget handoff subtitle",
+        "type": "string"
+      },
+      "buttonsLayout": {
+        "enum": ["horizontal", "vertical"],
+        "description": "Layout of the buttons in the chatbox",
+        "type": "string"
+      },
+      "ADVANCED_customCSS": {
+        "description": "(Advanced) Custom CSS for the web widget",
+        "type": "string"
+      },
+      "whatsappToken": {
+        "description": "WA access token for sending messages",
+        "type": "string"
+      },
+      "whatsappNumberId": {
+        "description": "WA number_id connected to the agent",
+        "type": "string"
+      },
+      "whatsappBusniessId": {
+        "description": "WA Business ID connected to the agent",
+        "type": "string"
+      },
+      "webhookUrl": {
+        "description": "Discord webhook URL",
+        "type": "string"
+      },
+      "gcloudPrivateKey": {
+        "description": "Google chat integration -- Service account private_key for sending messages",
+        "type": "string"
+      },
+      "gcloudClientEmail": {
+        "description": "Google chat integration -- Service account client_email for sending messages",
+        "type": "string"
+      },
+      "vg_initMessages": {
+        "description": "VG agents specific -- Array of strings for initial messages",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "vg_systemPrompt": {
+        "description": "VG agents specific -- prompt for the agent",
+        "type": "string"
+      },
+      "vg_temperature": {
+        "description": "Temperature of the LLM",
+        "type": "number"
+      },
+      "vg_defaultModel": {
+        "type": "string",
+        "description": "model_id to use to power the agent",
+        "enum": [
+          "gpt-3.5-turbo-0125",
+          "gpt-4-1106-preview",
+          "llama2-70b-4096",
+          "mixtral-8x7b-32768",
+          "gemma-7b-it"
+        ]
+      },
+      "vg_maxTokens": {
+        "description": "Max tokens for the LLM to generate per interaction (message to the AI)",
+        "type": "number"
+      },
+      "vg_kbDefaultDimension": {
+        "description": "(Advanced) Dimensions of the vector store for the agent",
+        "type": "number"
+      },
+      "vg_kbTopChunks": {
+        "description": "(Advanced) Max chunks retrieved as context from the vector store for the agent",
+        "type": "number"
+      },
+      "vg_enableUIEngine": {
+        "description": "Enable or disable the AI UI engine for the agent (Makes the AI generate UI elements on its on for the web widget)",
+        "type": "boolean"
+      },
+      "SECRET_API_KEY": {
+        "description": "Agent secret API key to control kb, conversations, etc",
+        "type": "string"
+      },
+      "messageDelayMS": {
+        "description": "Delay between messages in milliseconds",
+        "type": "number"
+      },
+      "proactiveMessage": {
+        "description": "Popup proactive message",
+        "type": "string"
+      },
+      "recordChatHistory": {
+        "description": "Record chat history on VG dashboard or not",
+        "type": "boolean"
+      },
+      "disableSmoothScroll": {
+        "description": "Disable scroll on new messages",
+        "type": "boolean"
+      },
+      "autoStartWidget": {
+        "description": "Autostart the widget on page load (Consumes an interaction for VF agents)",
+        "type": "boolean"
+      },
+      "listenForUrlChanges": {
+        "description": "VF agents specific -- Listen for URL changes and send an intent to Voiceflow when the URL changes",
+        "type": "boolean"
+      },
+      "chatForget": {
+        "description": "Forget chathistory on widget close",
+        "type": "boolean"
+      },
+      "enableAudioSupport": {
+        "description": "Enable Mic button for voice input",
+        "type": "boolean"
+      },
+      "enableAITranslate": {
+        "description": "VF agents specific -- Enable AI translation of the response coming from VF",
+        "type": "boolean"
+      },
+      "disableNoReplyListener": {
+        "description": "VF agents specific -- Disable no reply listener",
+        "type": "boolean"
+      },
+      "alwaysShowHandoff": {
+        "description": "Always show handoff popup even if no agents are online",
+        "type": "boolean"
+      },
+      "fixedHandoffPopup": {
+        "description": "Make the handoff popup fixed instead of disappearing on scroll",
+        "type": "boolean"
+      },
+      "smartInit": {
+        "description": "VF agents specific -- Make the AI reply to the first message on channels like WA, discord, etc by sending 2 requests on initilization instead of launching the flow only.",
+        "type": "boolean"
+      },
+      "showHandoffEvenIfOffline": {
+        "description": "Always show handoff popup even if no agents are online",
+        "type": "boolean"
+      },
+      "enableQuickFileUpload": {
+        "description": "Enable quick upload button for web widget",
+        "type": "boolean"
+      }
+    }
+  },
+  "CustomTheme": {
+    "type": "object",
+    "required": ["themeType", "primary", "nineColorPallet"],
+    "properties": {
+      "themeType": {
+        "type": "string",
+        "enum": ["dark", "light"],
+        "description": "Theme type"
+      },
+      "primary": {
+        "type": "string",
+        "description": "Primary hex color for the theme, example: '#000000'"
+      },
+      "nineColorPallet": {
+        "type": "array",
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "description": "Array length of 9 where every item is an array of HSL values: [50, 50, 50]"
+      }
+    }
+  }
+}
+

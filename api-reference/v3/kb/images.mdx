@@ -1,0 +1,46 @@
+---
+title: 'Upload KB Images'
+description: 'Upload images to Bunny CDN, auto-caption with vision, and write a markdown gallery KB doc.'
+openapi: 'POST /agents/{agentId}/kb/images'
+---
+
+## Request
+
+```json
+{
+  "images": [
+    { "sourceUrl": "https://example.com/room.jpg" },
+    { "data": "<base64>", "mimeType": "image/jpeg" }
+  ],
+  "autoCaption": true,
+  "tags": ["eltahrir", "rooms"],
+  "targetDocName": "STEIGENBERGER EL TAHRIR CAIRO (ROOMS)"
+}
+```
+
+## Response
+
+```json
+{
+  "success": true,
+  "docId": "kb_doc_id",
+  "assets": [
+    {
+      "assetId": "asset_id",
+      "cdnUrl": "https://vg-bunny-cdn.b-cdn.net/kb-images/…",
+      "caption": "Spacious deluxe room with Nile view…"
+    }
+  ]
+}
+```
+
+## Behavior
+
+1. Uploads each image to Bunny CDN under `kb-images/{agentId}/{docId}/…`
+2. When `autoCaption` is true, runs the same vision captioning pipeline as dashboard KB uploads
+3. Writes `kb_image_assets/{assetId}` rows
+4. Creates or updates a `kb` doc named `targetDocName` with markdown image blocks — the shape runtime KB search already expects
+
+<Tip>
+Match existing card-search naming conventions in `targetDocName` so retrieval stays consistent with hand-authored galleries.
+</Tip>

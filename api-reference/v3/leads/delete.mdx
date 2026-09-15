@@ -1,0 +1,13 @@
+---
+title: 'Delete Lead'
+description: 'Deletes a lead with the specified configuration, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'DELETE /leads/{id}'
+---
+
+<Warning>
+**This action is irreversible.** Deleting a lead permanently removes all associated data.
+</Warning>
+
+<Note>
+The associated conversation is not deleted. Only the lead record is removed.
+</Note>

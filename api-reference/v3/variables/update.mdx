@@ -1,0 +1,24 @@
+---
+title: 'Update Variable'
+description: 'Updates a variable, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'PATCH /variables/{variableId}'
+---
+
+## Example Request
+
+```json
+{
+  "variable": {
+    "value": "John Doe",
+    "description": "Updated description"
+  }
+}
+```
+
+<Note>
+Uses partial updates - only provided fields are changed. The `key` cannot be modified after creation.
+</Note>
+
+<Tip>
+Update `value` to set a variable's current value, or `defaultValue` to change its initial state.
+</Tip>

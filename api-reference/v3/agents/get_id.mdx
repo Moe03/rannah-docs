@@ -1,0 +1,13 @@
+---
+title: 'Get Agent By ID'
+description: 'Gets an agent, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'GET /agents/{id}'
+---
+
+<Note>
+Returns full agent configuration including `SECRET_API_KEY` and `nodes`. You must own the agent to retrieve it.
+</Note>
+
+<Tip>
+The start node (`id: "__start__"`) in the `nodes` array contains the main instructions.
+</Tip>

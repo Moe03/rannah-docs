@@ -1,0 +1,27 @@
+---
+title: 'Update Workspace'
+description: 'Updates a workspace, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'PATCH /workspaces/{id}'
+---
+
+## Example Request
+
+```json
+{
+  "updates": {
+    "workspaceName": "Updated Workspace Name",
+    "marketplaceProfile": {
+      "username": "my-unique-username",
+      "description": "We build AI agents"
+    }
+  }
+}
+```
+
+<Note>
+Uses partial updates - only provided fields are changed. The marketplace `username` must be unique.
+</Note>
+
+<Tip>
+Set up `marketplaceProfile` to publish and share your agents on the marketplace.
+</Tip>

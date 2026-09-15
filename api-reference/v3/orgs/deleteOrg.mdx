@@ -1,0 +1,13 @@
+---
+title: "Delete Organization"
+description: "Delete an organization and its client users"
+openapi: "DELETE /orgs/{orgId}"
+---
+
+<Note>
+Deletes the organization and all associated client users. Credits on the org may be transferred back to the workspace.
+</Note>
+
+<Warning>
+This is destructive. Confirm before calling from automations or MCP tools.
+</Warning>

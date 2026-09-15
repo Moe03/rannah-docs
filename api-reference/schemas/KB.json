@@ -1,0 +1,209 @@
+{
+  "AgentKBDoc": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Name of the document",
+        "type": "string"
+      },
+      "content": {
+        "description": "Content of the document",
+        "type": "string"
+      },
+      "metadata": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "description": "Description of the document",
+            "type": "string"
+          }
+        }
+      },
+      "tags": {
+        "description": "Tags of the document",
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "sourceType": {
+        "description": "Type of the document",
+        "type": "string",
+        "enum": ["doc", "url"]
+      },
+      "status": {
+        "description": "Status of the document in the KB",
+        "type": "string",
+        "enum": ["ERROR", "SUCCESS", "PENDING", "INITIALIZED"]
+      },
+      "ts": {
+        "description": "Timestamp of the document",
+        "type": "number"
+      }
+    },
+    "required": ["status"]
+  },
+  "AgentKBDocGET": {
+    "allOf": [
+      {
+        "required": ["ID"],
+        "type": "object",
+        "properties": {
+          "ID": {
+            "description": "ID of the document",
+            "type": "string"
+          }
+        }
+      },
+      {
+        "properties": {
+          "ts": {
+            "description": "Timestamp of the document",
+            "type": "number"
+          }
+        }
+      },
+      {
+        "$ref": "#/AgentKBDoc"
+      }
+    ]
+  },
+  "SingleKBModel": {
+    "type": "object",
+    "properties": {
+      "documentID": {
+        "type": "string",
+        "description": "The unique identifier for the document."
+      },
+      "data": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of the document data."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the document."
+          },
+          "canEdit": {
+            "type": "boolean",
+            "description": "Indicates whether the document can be edited."
+          }
+        },
+        "required": ["type", "name", "canEdit"],
+        "description": "The data related to the document."
+      },
+      "updatedAt": {
+        "type": "number",
+        "description": "Timestamp indicating when the document was last updated."
+      },
+      "status": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "The type of status for the document."
+          },
+          "data": {
+            "type": "object",
+            "description": "Additional data related to the document status."
+          }
+        },
+        "required": ["type", "data"],
+        "description": "Status information for the document."
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of tags associated with the document."
+      }
+    }
+  },
+  "VectorModel": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string",
+        "description": "The unique identifier for the vector."
+      },
+      "namespace": {
+        "type": "string",
+        "description": "Optional namespace for organizing vectors."
+      },
+      "similarity": {
+        "type": "number",
+        "description": "The similarity score of the vector compared to the search vector."
+      },
+      "payload": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "The text associated with the vector."
+          },
+          "chunk_index": {
+            "type": "integer",
+            "description": "The index of the text chunk within a larger document."
+          },
+          "doc_id": {
+            "type": "string",
+            "description": "The unique identifier of the document containing the vector."
+          },
+          "doc_name": {
+            "type": "string",
+            "description": "The name or title of the document."
+          }
+        },
+        "description": "Additional payload data related to the vector."
+      },
+      "vector": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "description": "The numeric vector representation."
+      },
+      "tags": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "Optional tags associated with the vector."
+      }
+    },
+    "required": ["id", "vector"]
+  },
+  "VectorSearchData": {
+    "type": "object",
+    "properties": {
+      "vector": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "description": "The embedding search vector."
+      },
+      "max_chunks": {
+        "type": "integer",
+        "description": "The maximum number of chunks to consider for the search (defaults to a default value if not provided)."
+      },
+      "with_payload": {
+        "type": "boolean",
+        "description": "Flag indicating whether to include payload data in the search results (defaults to true if not provided)."
+      },
+      "with_vector": {
+        "type": "boolean",
+        "description": "Flag indicating whether to include vectors in the search results (defaults to false if not provided)."
+      },
+      "similarity_threshold": {
+        "type": "number",
+        "description": "The similarity threshold for the search (defaults to 0 if not provided)."
+      }
+    },
+    "required": ["vector"]
+  }
+}
+

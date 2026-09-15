@@ -1,0 +1,66 @@
+---
+title: 'Create Conversation'
+description: 'Creates a new conversation for the specified agent, using the V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'POST /agents/{agentId}/convos'
+---
+
+## Example Request
+
+```json
+{
+  "conversation": {
+    "ts": 1699999999,
+    "messagesNum": 0,
+    "userName": "John Doe",
+    "userEmail": "john@example.com",
+    "userPhone": "+1234567890",
+    "userCompany": "Acme Corp",
+    "notes": "Customer interested in premium plan, follow up next week",
+    "tags": ["new-lead"]
+  }
+}
+```
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "message": "Successfully created conversation: agent123_convo456",
+  "data": {
+    "ID": "agent123_convo456",
+    "userID": "agent123_convo456",
+    "ts": 1699999999,
+    "messagesNum": 0,
+    "userName": "John Doe",
+    "userEmail": "john@example.com",
+    "userPhone": "+1234567890",
+    "userCompany": "Acme Corp",
+    "notes": "Customer interested in premium plan, follow up next week",
+    "tags": ["new-lead"],
+    "lastModified": 1699999999
+  }
+}
+```
+
+## Notes
+
+- A unique conversation ID is auto-generated
+- The `ts` field (timestamp) is required
+- You must own the agent to create conversations for it
+
+## Available Lead Fields
+
+The `conversation` object supports the following optional lead fields:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `userName` | string | User's full name |
+| `userEmail` | string | User's email address |
+| `userPhone` | string | User's phone number |
+| `userAddress` | string | User's physical address |
+| `userCompany` | string | User's company name |
+| `userWebsite` | string | User's website URL |
+| `notes` | string | Internal notes about the conversation/lead |
+| `userProfilePic` | string | URL to user's profile picture |
+| `tags` | string[] | Array of tags for categorization |

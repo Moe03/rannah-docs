@@ -1,0 +1,39 @@
+---
+title: 'Create From Canonical Template'
+description: 'Create an agent from agent_templates/{templateId} — never from a live agents/{id} doc.'
+openapi: 'POST /agent-templates/{templateId}/create'
+---
+
+## Canonical templates
+
+System templates live in `agent_templates/{templateId}` with scrubbed `baseNodes`, `baseTheme`, and `baseVoiceConfig` (no API keys, no client branding, no funnel recipients).
+
+List templates:
+
+```bash
+GET /v3/agent-templates
+```
+
+Seed system templates (idempotent):
+
+```bash
+POST /v3/agent-templates/seed
+```
+
+## Create
+
+```json
+{
+  "templateId": "hospitality",
+  "title": "Steigenberger Cairo",
+  "description": "Dual-property concierge"
+}
+```
+
+Built-in template IDs: `blank`, `customer-support`, `hospitality`.
+
+## Notes
+
+- New agents always start with `branding: ""` and without `funnelConfig`.
+- For cloning a **live** agent, use [`POST /agents/{agentId}/clone`](/api-reference/v3/agents/clone) instead.
+- JSON import via [`POST /agents/import-template`](/api-reference/v3/agents/import-template) still works but runs the same server-side scrub allowlist.

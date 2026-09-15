@@ -366,6 +366,319 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API Reference",
+            "pages": [
+              "api-reference/introduction",
+              "api-reference/authentication",
+              "api-reference/endpoints"
+            ]
+          },
+          {
+            "group": "V3",
+            "pages": [
+              "api-reference/v3/intro",
+              {
+                "group": "Agents",
+                "icon": "robot",
+                "pages": [
+                  "api-reference/v3/agents/post",
+                  "api-reference/v3/agents/usage/get",
+                  "api-reference/v3/agents/get_id",
+                  "api-reference/v3/agents/get",
+                  "api-reference/v3/agents/search",
+                  "api-reference/v3/agents/delete",
+                  "api-reference/v3/agents/update",
+                  "api-reference/v3/agents/clone",
+                  "api-reference/v3/agents/interact",
+                  "api-reference/v3/agents/audit-log",
+                  "api-reference/v3/agents/from-template",
+                  "api-reference/v3/agents/export-template",
+                  "api-reference/v3/agents/import-template"
+                ]
+              },
+              {
+                "group": "Knowledge Base",
+                "icon": "brain",
+                "pages": [
+                  "api-reference/v3/kb/post",
+                  "api-reference/v3/kb/images",
+                  "api-reference/v3/kb/bulk",
+                  "api-reference/v3/kb/get",
+                  "api-reference/v3/kb/get_id",
+                  "api-reference/v3/kb/get_stats",
+                  "api-reference/v3/kb/search",
+                  "api-reference/v3/kb/delete",
+                  "api-reference/v3/kb/update"
+                ]
+              },
+              {
+                "group": "Scrape",
+                "icon": "globe",
+                "pages": [
+                  "api-reference/v3/scrape/post"
+                ]
+              },
+              {
+                "group": "Conversations",
+                "icon": "square-minus",
+                "pages": [
+                  "api-reference/v3/conversations/post",
+                  "api-reference/v3/conversations/update",
+                  "api-reference/v3/conversations/update_messages",
+                  "api-reference/v3/conversations/send",
+                  "api-reference/v3/conversations/get",
+                  "api-reference/v3/conversations/get_id",
+                  "api-reference/v3/conversations/delete",
+                  "api-reference/v3/conversations/export",
+                  "api-reference/v3/conversations/export_single"
+                ]
+              },
+              {
+                "group": "Numbers and Telephony",
+                "icon": "phone",
+                "pages": [
+                  "api-reference/v3/calls/post",
+                  "api-reference/v3/sms/post",
+                  "api-reference/v3/sms/sms-leads"
+                ]
+              },
+              {
+                "group": "Voices",
+                "icon": "microphone",
+                "pages": [
+                  "api-reference/v3/voices/intro",
+                  "api-reference/v3/voices/list-providers",
+                  "api-reference/v3/voices/list-provider-models",
+                  "api-reference/v3/voices/list-voices",
+                  "api-reference/v3/voices/list-provider-voices",
+                  "api-reference/v3/voices/get-voice",
+                  "api-reference/v3/voices/available-numbers",
+                  "api-reference/v3/voices/import-twilio-number",
+                  "api-reference/v3/voices/buy-twilio-number",
+                  "api-reference/v3/voices/check-number",
+                  "api-reference/v3/voices/release-number",
+                  "api-reference/v3/voices/sync-sms"
+                ]
+              },
+              {
+                "group": "Tools",
+                "icon": "wrench",
+                "pages": [
+                  "api-reference/v3/tools/defaults",
+                  "api-reference/v3/tools/post",
+                  "api-reference/v3/tools/get",
+                  "api-reference/v3/tools/get_id",
+                  "api-reference/v3/tools/delete",
+                  "api-reference/v3/tools/update"
+                ]
+              },
+              {
+                "group": "Variables",
+                "icon": "code",
+                "pages": [
+                  "api-reference/v3/variables/post",
+                  "api-reference/v3/variables/get",
+                  "api-reference/v3/variables/get_id",
+                  "api-reference/v3/variables/delete",
+                  "api-reference/v3/variables/update"
+                ]
+              },
+              {
+                "group": "Leads",
+                "icon": "users",
+                "pages": [
+                  "api-reference/v3/leads/post",
+                  "api-reference/v3/leads/get",
+                  "api-reference/v3/leads/get_id",
+                  "api-reference/v3/leads/delete",
+                  "api-reference/v3/leads/update"
+                ]
+              },
+              {
+                "group": "Agency",
+                "icon": "building-columns",
+                "pages": [
+                  "api-reference/v3/agency/getAgency",
+                  "api-reference/v3/agency/upsertAgency",
+                  "api-reference/v3/agency/deleteAgency"
+                ]
+              },
+              {
+                "group": "Orgs",
+                "icon": "building",
+                "pages": [
+                  "api-reference/v3/orgs/getAllOrgs",
+                  "api-reference/v3/orgs/searchOrgs",
+                  "api-reference/v3/orgs/createOrg",
+                  "api-reference/v3/orgs/getOrgById",
+                  "api-reference/v3/orgs/updateOrg",
+                  "api-reference/v3/orgs/deleteOrg",
+                  "api-reference/v3/orgs/getOrgAgents",
+                  "api-reference/v3/orgs/assignOrgAgent",
+                  "api-reference/v3/orgs/getOrgClients",
+                  "api-reference/v3/orgs/getOrgMembersAndTeams",
+                  "api-reference/v3/orgs/listOrgTeams",
+                  "api-reference/v3/orgs/createOrgTeam",
+                  "api-reference/v3/orgs/updateOrgTeam",
+                  "api-reference/v3/orgs/deleteOrgTeam"
+                ]
+              },
+              {
+                "group": "Clients",
+                "icon": "user-group",
+                "pages": [
+                  "api-reference/v3/clients/listClients",
+                  "api-reference/v3/clients/createClient",
+                  "api-reference/v3/clients/getClient",
+                  "api-reference/v3/clients/updateClient",
+                  "api-reference/v3/clients/deleteClient",
+                  "api-reference/v3/clients/checkEmail",
+                  "api-reference/v3/clients/changePassword"
+                ]
+              },
+              {
+                "group": "Custom Metrics",
+                "icon": "chart-line",
+                "pages": [
+                  "api-reference/v3/customMetrics/listMetrics",
+                  "api-reference/v3/customMetrics/getMetric",
+                  "api-reference/v3/customMetrics/createMetric",
+                  "api-reference/v3/customMetrics/updateMetric",
+                  "api-reference/v3/customMetrics/deleteMetric",
+                  "api-reference/v3/customMetrics/getMetricData",
+                  "api-reference/v3/customMetrics/getAllMetricsData"
+                ]
+              },
+              {
+                "group": "Crawler",
+                "icon": "globe",
+                "pages": [
+                  "api-reference/v3/crawler/createJob",
+                  "api-reference/v3/crawler/listJobs",
+                  "api-reference/v3/crawler/getJob",
+                  "api-reference/v3/crawler/deleteJob",
+                  "api-reference/v3/crawler/listJobPages",
+                  "api-reference/v3/crawler/getJobPage"
+                ]
+              },
+              {
+                "group": "Workspaces",
+                "icon": "users",
+                "pages": [
+                  "api-reference/v3/workspaces/post",
+                  "api-reference/v3/workspaces/usage/get",
+                  "api-reference/v3/workspaces/get_id",
+                  "api-reference/v3/workspaces/get",
+                  "api-reference/v3/workspaces/delete",
+                  "api-reference/v3/workspaces/update"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Message Agent",
+            "icon": "plug",
+            "pages": [
+              "Sockets/interact"
+            ]
+          },
+          {
+            "group": "V2 (Legacy)",
+            "pages": [
+              "api-reference/agents/intro",
+              {
+                "group": "Agents",
+                "icon": "robot",
+                "pages": [
+                  "api-reference/agents/get",
+                  "api-reference/agents/post",
+                  "api-reference/agents/delete",
+                  "api-reference/agents/interact/post",
+                  "api-reference/agents/state/post",
+                  {
+                    "group": "Knowledge Base",
+                    "icon": "brain",
+                    "pages": [
+                      "api-reference/agents/kb/get-single",
+                      "api-reference/agents/kb/put",
+                      "api-reference/agents/kb/delete",
+                      "api-reference/agents/kb/get",
+                      "api-reference/agents/kb/post",
+                      "api-reference/agents/kb/vector_search",
+                      "api-reference/agents/kb/stats"
+                    ]
+                  },
+                  {
+                    "group": "Conversations",
+                    "icon": "square-minus",
+                    "pages": [
+                      "api-reference/agents/convos/get",
+                      "api-reference/agents/convos/export",
+                      "api-reference/agents/convos/post",
+                      "api-reference/agents/convos/delete"
+                    ]
+                  },
+                  {
+                    "group": "Analytics",
+                    "icon": "chart-column",
+                    "pages": [
+                      "api-reference/agents/analytics/get-multi",
+                      "api-reference/agents/analytics/get-single",
+                      "api-reference/agents/analytics/post-single",
+                      "api-reference/agents/analytics/delete-single",
+                      "api-reference/agents/analytics/delete-multi"
+                    ]
+                  }
+                ]
+              },
+              {
+                "group": "Workspaces",
+                "icon": "users",
+                "pages": [
+                  "api-reference/workspaces/get",
+                  "api-reference/workspaces/post",
+                  "api-reference/workspaces/delete",
+                  {
+                    "group": "Agency",
+                    "icon": "hotel",
+                    "pages": [
+                      "api-reference/workspaces/agencies/get",
+                      "api-reference/workspaces/agencies/post",
+                      "api-reference/workspaces/agencies/delete"
+                    ]
+                  },
+                  {
+                    "group": "Orgs",
+                    "icon": "building",
+                    "pages": [
+                      "api-reference/workspaces/orgs/@get",
+                      "api-reference/workspaces/orgs/@put",
+                      "api-reference/workspaces/orgs/get",
+                      "api-reference/workspaces/orgs/post",
+                      "api-reference/workspaces/orgs/delete"
+                    ]
+                  },
+                  {
+                    "group": "Clients",
+                    "icon": "handshake",
+                    "pages": [
+                      "api-reference/workspaces/clients/@get",
+                      "api-reference/workspaces/clients/@put",
+                      "api-reference/workspaces/clients/get",
+                      "api-reference/workspaces/clients/post",
+                      "api-reference/workspaces/clients/delete"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
       }
     ],
     "global": {
@@ -381,6 +694,11 @@
   "logo": {
     "light": "/logo/rannah-icon-light.png",
     "dark": "/logo/rannah-icon-dark.png"
+  },
+  "api": {
+    "openapi": [
+      "api-reference/openapi.json"
+    ]
   },
   "appearance": {
     "default": "dark"

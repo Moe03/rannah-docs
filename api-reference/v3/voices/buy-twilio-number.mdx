@@ -1,0 +1,23 @@
+---
+title: 'Buy a Twilio number'
+description: 'Purchase a new Twilio phone number from the platform and assign it to your workspace.'
+openapi: 'POST /utils/buy-twilio-number'
+---
+
+## Example Request
+
+```json
+{
+  "number": "+14155551234",
+  "agentId": "your-agent-id",
+  "capabilities": ["voice", "sms"]
+}
+```
+
+<Note>
+Use `/utils/twilio/available-numbers` first to discover purchasable numbers.
+</Note>
+
+<Warning>
+Requires an available phone-number slot on your plan. The endpoint will return a `INTERNAL_SERVER_ERROR` with a friendly upgrade message if you've exceeded your slot quota.
+</Warning>

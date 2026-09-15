@@ -1,0 +1,34 @@
+---
+title: 'Search KB'
+description: "<strong>(Rannah رنّة agents only)</strong> Searches an agent knowledge base with either a text query or a precomputed embedding vector. This route must use the new V3 [endpoints](/api-reference/v3/intro)."
+openapi: 'POST /agents/{agentId}/kb/search'
+---
+
+## Example: Search with Text
+
+```json
+{
+  "searchQuery": "refund policy for annual subscriptions",
+  "max_chunks": 3,
+  "with_payload": true
+}
+```
+
+## Example: Search with a Vector
+
+```json
+{
+  "vector": [0.12, -0.03, 0.91],
+  "vectorDb": "postgres",
+  "max_chunks": 5,
+  "similarity_threshold": 0.2
+}
+```
+
+<Tip>
+Use `searchQuery` for most requests. The API will create the embedding for you and search the agent KB automatically.
+</Tip>
+
+<Note>
+Results are chunk-level matches, so a single source document may appear multiple times if several chunks are relevant.
+</Note>

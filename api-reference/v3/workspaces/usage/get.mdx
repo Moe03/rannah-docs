@@ -1,0 +1,25 @@
+---
+title: 'Workspace Usage'
+description: 'Retrieves usage statistics and analytics for a workspace, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'POST /workspaces/{uid}/usage'
+---
+
+## Example Request
+
+```json
+{
+  "range": {
+    "start": 1700000000000,
+    "end": 1700086400000
+  },
+  "logsPage": 1
+}
+```
+
+<Note>
+Timestamps should be in Unix milliseconds format. Use `range` to specify custom date ranges.
+</Note>
+
+<Tip>
+Monitor your workspace usage to track costs, message volumes, and API consumption over time.
+</Tip>

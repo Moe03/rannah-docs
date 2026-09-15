@@ -1,0 +1,59 @@
+---
+title: API Endpoints
+description: Reference for Rannah رنّة API hosts, regions, and protocol choices.
+---
+
+## Overview
+
+Rannah رنّة uses different hosts depending on the API version and protocol you are using.
+
+The most important rule is:
+
+- Use the same region as your workspace
+- Use the endpoint family that matches your integration style
+
+## V3 REST API
+
+Use V3 for new server-to-server integrations.
+
+### EU
+
+`https://eu-gcp-api.vg-stuff.com/v3`
+
+### NA
+
+`https://na-gcp-api.vg-stuff.com/v3`
+
+## V2 / Legacy API
+
+These endpoints are still relevant for older integrations and legacy flows.
+
+### EU
+
+`https://eu-cloudflare.vg-stuff.com`
+
+### NA
+
+`https://na-cloudflare.vg-stuff.com`
+
+## WebSocket interact
+
+Use WebSocket interact when you need streaming, real-time conversation updates.
+
+### EU
+
+`wss://eu-gcp-api.vg-stuff.com/interact`
+
+### NA
+
+`wss://na-gcp-api.vg-stuff.com/interact`
+
+## Quick guidance
+
+- Choose **V3 REST** for CRUD operations on agents, KB docs, tools, variables, conversations, and workspace resources.
+- Choose **WebSocket interact** for live chat experiences that need streaming responses.
+- Choose **V2** only when you are maintaining an older integration that already depends on legacy behavior.
+
+<Warning>
+  If you use the wrong region or the wrong endpoint family, your requests may fail or behave unexpectedly.
+</Warning>

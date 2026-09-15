@@ -1,0 +1,543 @@
+{
+  "kb_list": {
+    "get": {
+      "description": "Returns agent knowledge base documents",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to retrieve KB documents from",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agent KB documents retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agent KB documents retrieved successfully"
+                  },
+                  "data": {
+                    "description": "Array of KB Docs",
+                    "type": "array",
+                    "items": {
+                      "$ref": "../schemas/KB.json#/AgentKBDocGET"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "kb_doc": {
+    "get": {
+      "description": "Returns the specified document from the agent's VF/VG KB",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to retrieve the document from",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "doc_id",
+          "in": "path",
+          "description": "The ID of the document to retrieve",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Document retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/KB.json#/SingleKBModel"
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "put": {
+      "description": "<strong>(VG agents only)</strong> Adds a new document to the agent's knowledge base, if your agent is built with VF use [Voiceflow's API instead](https://developer.voiceflow.com/reference/project)",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to add the document to",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "doc_id",
+          "in": "path",
+          "description": "The ID of the document to add",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "Document to add to the agent's KB",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/KB.json#/AgentKBDoc"
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Document added",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Document added successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "description": "<strong>(VG agents only)</strong> Deletes a document from the agent's knowledge base, if your agent is built with VF use [Voiceflow's API instead](https://developer.voiceflow.com/reference/project)",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to delete the document from",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "doc_id",
+          "in": "path",
+          "description": "The ID of the document to delete",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Document deleted",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Document deleted successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "kb_search": {
+    "post": {
+      "description": "<strong>(VG Agents Only)</strong> Searches the agent's knowledge base",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to search the KB of",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "Search query",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "description": "The search query"
+                },
+                "chunks": {
+                  "type": "number",
+                  "description": "The maximum number of results to return"
+                }
+              }
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Search results",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Search successful"
+                  },
+                  "data": {
+                    "description": "Array of KB Docs",
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "similarity": {
+                          "type": "number",
+                          "description": "The similarity of the document to the search query"
+                        },
+                        "doc": {
+                          "$ref": "../schemas/KB.json#/AgentKBDoc"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "kb_vector_search": {
+    "post": {
+      "description": "<strong>(VG Agents Only)</strong> Searches the agent's knowledge base using vectors",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to search the KB of",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "Search body object",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "$ref": "../schemas/KB.json#/VectorSearchData"
+            }
+          }
+        }
+      },
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Search results",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Search successful"
+                  },
+                  "data": {
+                    "description": "Array of objects with the relevant payloads and optionally the vector",
+                    "type": "array",
+                    "items": {
+                      "$ref": "../schemas/KB.json#/VectorModel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "kb_stats": {
+    "get": {
+      "description": "<strong>(VG Agents Only)</strong> Returns agent knowledge base statistics",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to retrieve KB statistics from",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agent KB statistics retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agent KB statistics retrieved successfully"
+                  },
+                  "data": {
+                    "description": "KB statistics",
+                    "type": "object",
+                    "properties": {
+                      "charCount": {
+                        "type": "number",
+                        "description": "Total number of characters in the KB"
+                      },
+                      "docsCount": {
+                        "type": "number",
+                        "description": "Total number of docs in the KB"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

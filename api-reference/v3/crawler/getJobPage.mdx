@@ -1,0 +1,20 @@
+---
+title: 'Get Crawler Job Page'
+description: 'Gets one scraped page including the heavy page payload using the V3 API.'
+openapi: 'GET /workspaces/{workspaceId}/crawler/jobs/{jobId}/pages/{pageId}'
+---
+
+## Overview
+
+Returns a single scraped page plus the stored markdown and HTML payload when available.
+
+## Useful For
+
+- Page preview screens
+- Content export pipelines
+- KB import review
+- Debugging page-specific scrape output
+
+<Note>
+This endpoint is page-focused. Use the job endpoints for overall crawl status and pagination.
+</Note>

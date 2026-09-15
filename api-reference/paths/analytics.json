@@ -1,0 +1,393 @@
+{
+  "analytics_by_agent": {
+    "get": {
+      "description": "Returns agent analytics data with start and stop timestamps",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to retrieve analytics from",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "start_ts",
+          "in": "query",
+          "description": "the start unix timestamp of the analytics, by default 30 days ago.",
+          "schema": {
+            "type": "number"
+          },
+          "required": false
+        },
+        {
+          "name": "stop_ts",
+          "in": "query",
+          "description": "the end unix timestamp of the analytics, by default now.",
+          "schema": {
+            "type": "number"
+          },
+          "required": false
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agent analytics retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agent analytics retrieved successfully"
+                  },
+                  "data": {
+                    "description": "Analytics data",
+                    "type": "object",
+                    "properties": {
+                      "loads": {
+                        "type": "array",
+                        "description": "Loads/Web traffic analytics",
+                        "items": {
+                          "$ref": "../schemas/Analytics.json#/AnalyticLoadModel"
+                        }
+                      },
+                      "convos": {
+                        "type": "array",
+                        "description": "Conversations analytics",
+                        "items": {
+                          "$ref": "../schemas/Analytics.json#/AnalyticLoadModel"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "description": "Deletes ENTIRE analytics for specified agent (Hard reset)",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to delete analytics from",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Agent analytics deleted",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Agent analytics deleted successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "analytics_by_convo": {
+    "get": {
+      "description": "Returns analytics for a conversation of an agent",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "convo_id",
+          "in": "path",
+          "description": "The ID of the conversation to retrieve analytics from",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Analytics retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Analytics retrieved successfully"
+                  },
+                  "data": {
+                    "description": "Analytics data",
+                    "type": "object",
+                    "$ref": "../schemas/Analytics.json#/AnalyticLoadModel"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "description": "Add analytics to a conversation for an agent",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to add the analytics to",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "convo_id",
+          "in": "path",
+          "description": "The ID of the conversation associated with the analytics to be added",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "Analytics to add to the agent",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Analytics.json#/AnalyticLoadModel"
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Analytics added",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Analytics added successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "description": "Deletes analytics from a conversation for an agent",
+      "parameters": [
+        {
+          "name": "agent_id",
+          "in": "path",
+          "description": "The ID of the agent to delete the analytics from",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "convo_id",
+          "in": "path",
+          "description": "The ID of the conversation associated with the analytics to be deleted",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerAgents": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Analytics for a conversation deleted successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Analytics associated with {convo_id} deleted successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

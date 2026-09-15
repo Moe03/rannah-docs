@@ -1,0 +1,37 @@
+---
+title: 'Get Single Metric'
+description: 'Retrieve details of a specific custom metric by its ID'
+openapi: "GET /agents/{agentId}/custom-metrics/{metricId}"
+---
+
+## Overview
+
+Fetches detailed information about a single custom metric, including its configuration and metadata.
+
+## Use Cases
+
+- **Metric Detail View**: Display full configuration of a specific metric
+- **Validation**: Verify metric settings before updating
+- **Reference**: Get metric details for integration purposes
+
+## Example Response
+
+```json
+{
+  "success": true,
+  "metric": {
+    "id": "metric_abc123",
+    "key": "customer_satisfaction",
+    "description": "Customer satisfaction rating on a scale of 1-10",
+    "type": "number",
+    "isSystem": false,
+    "createdAtUNIX": 1640000000,
+    "updatedAtUNIX": 1640100000
+  }
+}
+```
+
+<Warning>
+Make sure the metric ID exists. A 404 error will be returned if the metric is not found.
+</Warning>
+

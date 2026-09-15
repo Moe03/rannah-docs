@@ -1,0 +1,17 @@
+---
+title: 'List voice providers'
+description: 'Returns metadata for every supported TTS / voice provider including capabilities, available models and the workspace secret key used.'
+openapi: 'GET /voices/providers'
+---
+
+Use this endpoint to power a "Choose a voice provider" UI. Each provider entry tells you:
+
+- `displayName` & `iconUrl` — for rendering provider chips/cards
+- `requiresWorkspaceApiKey` — `true` if the provider has no platform fallback (the workspace must save its own API key under `workspaceSecretKey`)
+- `workspaceSecretKey` — name of the field under `workspaceData.secrets.*` to persist the API key (e.g. `ELEVENLABS_API_KEY`)
+- `capabilities` — booleans for `speed`, `volume`, `emotion`, `modelId`, `sampleText`, `customVoiceCloning`
+- `models` — built-in model IDs you can pass to `/voices` and `/voices/{provider}` via `?modelId=`
+
+<Tip>
+This endpoint is a utility helper — it does **not** consume credits and never proxies provider APIs.
+</Tip>

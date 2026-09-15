@@ -1,0 +1,25 @@
+---
+title: 'Get agent KB docs'
+description: 'Retrieves all the KB docs for an agent, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'GET /agents/{agentId}/kb'
+---
+
+<Warning>
+**List does NOT return document bodies by default.**
+
+Each item is metadata only (`id`, `name`, `url`, `tags`, `ts`, status, etc.). The `content` field is usually empty or the placeholder string `IN CONTENT URL` — that is **not** the scraped/uploaded text.
+
+To load real content, either:
+- add `includeContent=true` on this list call (hydrates the current page, max 50 docs), or
+- call [`GET /agents/{agentId}/kb/{docId}`](/api-reference/v3/kb/get_id) for each document.
+</Warning>
+
+<Note>
+By default results are sorted by `ts` (newest first). Docs missing a `ts` field are excluded from that order — pass `orderBy=id` to paginate every KB document.
+</Note>
+
+<Tip>
+**Pagination (pick one):**
+- Preferred: pass `nextCursor` from the previous response as `cursor`.
+- Legacy: `page` + `pageSize` (max 50). Page 2+ advances with Firestore offset.
+</Tip>

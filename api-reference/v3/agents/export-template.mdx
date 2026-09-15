@@ -1,0 +1,37 @@
+---
+title: 'Export Agent Template'
+description: 'Exports an agent template, this route must use the new V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'GET /agents/{agentId}/export-template'
+---
+
+## Example Response
+
+```json
+{
+  "agentTemplate": {
+    "name": "My Agent - Exported 2024-01-15T10:30:00.000Z",
+    "agentData": {
+      "title": "My Agent",
+      "description": "Customer support agent",
+      "nodes": [...]
+    },
+    "tools": [...],
+    "variables": [...],
+    "nodes": [...],
+    "workspaceId": "workspace_123"
+  }
+}
+```
+
+## Use Cases
+
+- **Backup** your agent configuration before making changes
+- **Share** agent templates across workspaces (import will scrub instance-specific fields)
+- Prefer [`POST /agents/{agentId}/clone`](/api-reference/v3/agents/clone) for in-workspace duplication
+
+## Notes
+
+- The exported template includes tools, variables, and nodes
+- `SECRET_API_KEY` is excluded from exports for security
+- On import, branding / funnel recipients / channel secrets are **stripped server-side** — do not rely on client-side sanitization alone
+- Use `/agents/import-template` to restore; use `/agents/{id}/clone` for safe live clones

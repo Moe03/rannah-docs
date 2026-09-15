@@ -1,0 +1,968 @@
+asyncapi: 3.0.0
+info:
+  title: "Rannah Interact WebSocket API"
+  version: 1.0.0
+  description: |
+    Real-time streaming WebSocket API for interacting with Rannah agents.
+
+    The `/interact` channel lets a client open a single WebSocket connection,
+    send a structured **`InteractObject`** payload, and receive a stream of
+    chunked responses (`chunk`, `debug`, `action`, `metadata`,
+    `sync_chat_history`) as the agent thinks, calls tools, and produces its
+    answer.
+
+    Internally this is handled by `nsHandleLlmSession` (and, when the agent
+    has nodes enabled, `v2nsHandleLlmSession`) on the `vg-docker` server.
+
+    ## Connection lifecycle
+    1. Client opens a WebSocket to `wss://<region>-gcp-api.vg-stuff.com/interact`.
+    2. Client sends one JSON-encoded `InteractObject`.
+    3. Server streams back zero or more `ChunkMessage` objects.
+    4. Server closes the socket with code `1000` when the turn is complete.
+
+    ## Regions
+    - `eu` → European Union (`bucket: "voiceglow-eu"`)
+    - `na` → North America (`bucket: "(default)"`)
+
+    ## UI Engine vs plain text
+
+    Each `chunk` event carries a `ui_engine` boolean that tells you how to
+    interpret `chunk.chunk`:
+
+    - **`ui_engine: false`** (default / when the agent has UI Engine
+      disabled, or the client passes `disableUiEngine: true`):
+      `chunk.chunk` is a plain string (Markdown is supported). Concatenate
+      successive chunks to render the streaming assistant message.
+
+    - **`ui_engine: true`** (agent has `vg_enableUIEngine: true` and the
+      client did **not** pass `disableUiEngine: true`):
+      `chunk.chunk` is a **JSON-stringified `TurnProps`** snapshot of the
+      assistant turn so far. Parse it client-side and render
+      `turn.messages[].item` using the `UiEngineMessage` shapes. Each
+      message is one of: `text`, `choice`, `visual`, `cardV2`, `carousel`,
+      `iFrame`, `form`, `input`. The `form` and `input` types are only
+      emitted on web channels (`web-chat` / `text`) when the agent has
+      forms enabled.
+
+    UI Engine output is always overwriting (full snapshot) rather than
+    incremental — replace the in-progress assistant turn with the latest
+    parsed payload on every chunk.
+  contact:
+    name: Rannah Support
+    email: support@rannah.io
+    url: https://rannah.io
+  license:
+    name: Proprietary
+
+defaultContentType: application/json
+
+servers:
+  euProduction:
+    host: eu-gcp-api.vg-stuff.com
+    pathname: /interact
+    protocol: wss
+    description: EU production WebSocket server
+  naProduction:
+    host: na-gcp-api.vg-stuff.com
+    pathname: /interact
+    protocol: wss
+    description: NA production WebSocket server
+
+channels:
+  interact:
+    address: /interact
+    title: Interact channel
+    description: |
+      Single bi-directional channel used to drive one agent turn. The client
+      sends exactly one `InteractObject`; the server streams back chunked
+      responses until it closes the connection (code `1000`).
+    bindings:
+      ws:
+        method: GET
+        bindingVersion: 0.1.0
+    messages:
+      interactObject:
+        $ref: '#/components/messages/InteractObject'
+      chunkMessage:
+        $ref: '#/components/messages/ChunkMessage'
+
+operations:
+  sendInteract:
+    action: receive
+    channel:
+      $ref: '#/channels/interact'
+    title: Start an agent turn
+    summary: Open a session and send a single InteractObject to drive one agent turn.
+    description: |
+      Send exactly one `InteractObject` after the WebSocket opens. The server
+      will then stream back `ChunkMessage`s until it closes the socket.
+
+      Use `prompt: "start"` to trigger the agent's initial greeting (no user
+      message is added to the conversation).
+
+      Use `prompt: "@cancel:<reason>"` mid-stream to cancel an in-flight turn.
+    messages:
+      - $ref: '#/channels/interact/messages/interactObject'
+
+  receiveChunk:
+    action: send
+    channel:
+      $ref: '#/channels/interact'
+    title: Receive streaming chunks
+    summary: Streamed events emitted by the agent during a turn.
+    description: |
+      The server emits a sequence of `ChunkMessage` events. Each message has
+      a `type` discriminator:
+
+      - `chunk` — partial assistant text (or a UI-engine JSON payload when
+        `ui_engine: true`).
+      - `debug` — diagnostic / tool-trace events. Often carries an `action`
+        of type `tool_call` describing which tool ran.
+      - `action` — the agent triggered an action such as `request_handoff`.
+      - `metadata` — final summary (sources, full turns, token counts, model used).
+      - `sync_chat_history` — full `turns` array snapshot, used by node-based
+        agents to keep the client UI in sync.
+    messages:
+      - $ref: '#/channels/interact/messages/chunkMessage'
+
+components:
+  messages:
+    InteractObject:
+      name: InteractObject
+      title: Interact request
+      summary: The single payload the client sends after opening the socket.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/InteractObject'
+
+    ChunkMessage:
+      name: ChunkMessage
+      title: Streaming chunk
+      summary: One streamed event from the agent.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChunkMessage'
+
+  schemas:
+    InteractObject:
+      type: object
+      description: |
+        Payload sent by the client to start an agent turn. Mirrors
+        `EWSInteractModel` in the codebase.
+      required:
+        - agentId
+        - convoId
+        - bucket
+      properties:
+        agentId:
+          type: string
+          description: The ID of the agent to interact with.
+          examples:
+            - "agt_01HZX2K9ABC"
+        convoId:
+          type: string
+          description: |
+            The conversation ID. Reuse the same `convoId` across turns to
+            keep history; use a fresh one to start a new conversation.
+          examples:
+            - "conv_01HZX2K9XYZ"
+        bucket:
+          type: string
+          enum:
+            - "voiceglow-eu"
+            - "(default)"
+          description: |
+            Region bucket. Use `voiceglow-eu` for EU and `(default)` for NA.
+        prompt:
+          type: string
+          description: |
+            User message to send to the agent. Special values:
+            - `"start"` — trigger the agent's initial greeting.
+            - `"@cancel:<reason>"` — cancel the in-flight turn.
+            - `"@rewind:<nodeId>"` — rewind a node-based conversation to a
+              specific node.
+          examples:
+            - "Hello, how can you help me?"
+            - "start"
+        sessionId:
+          type: string
+          description: Optional session id; defaults to `convoId` if omitted.
+        messageType:
+          type: string
+          enum:
+            - text
+            - visual
+          default: text
+          description: |
+            Type of input. Use `visual` together with `visualPayload` to send
+            images.
+        visualPayload:
+          type: object
+          description: "Image/visual content for `messageType: visual` turns."
+          properties:
+            image:
+              type: string
+              format: uri
+              description: Primary image URL.
+            images:
+              type: array
+              items:
+                type: string
+                format: uri
+              description: Additional image URLs.
+            message:
+              type: string
+              description: Optional caption / accompanying user message.
+            imageCount:
+              type: integer
+              minimum: 0
+        replyTo:
+          type: object
+          description: Reply context when the user is replying to a previous message.
+          properties:
+            messageId:
+              type: string
+            messageContent:
+              type: string
+            messageFrom:
+              type: string
+              enum: [human, bot]
+            messageIndex:
+              type: integer
+            turnIndex:
+              type: integer
+        actionMetadata:
+          type: object
+          properties:
+            mid:
+              type: string
+              description: Client-supplied message id (used for de-duplication).
+        agentData:
+          type: object
+          description: |
+            Optional agent override. When provided with at least an `ID`, the
+            server skips loading the agent doc from Firestore and uses this
+            object instead. Mirrors `ChatRuntime`.
+          additionalProperties: true
+          properties:
+            ID:
+              type: string
+            ownerID:
+              type: string
+            title:
+              type: string
+        workspaceData:
+          type: object
+          description: Optional workspace override (mirrors `WorkspaceModel`).
+          additionalProperties: true
+          properties:
+            uid:
+              type: string
+            email:
+              type: string
+              format: email
+        turnsHistory:
+          type: array
+          description: |
+            Optional override of the conversation turns. When provided, the
+            server uses this instead of fetching from Firestore.
+          items:
+            $ref: '#/components/schemas/TurnProps'
+        lightConvoData:
+          $ref: '#/components/schemas/LightConvoData'
+        disableUiEngine:
+          type: boolean
+          description: |
+            Force this turn to stream as plain text even if the agent has
+            `vg_enableUIEngine: true`. When omitted (or `false`) and the
+            agent has UI Engine enabled, `chunk` events will arrive with
+            `ui_engine: true` and `chunk.chunk` will be a JSON-stringified
+            `TurnProps` containing `UiEngineMessage[]`. See the top-level
+            "UI Engine vs plain text" section for details. This override is
+            evaluated per request, so the same UI Engine agent can be called
+            in either structured or plain-text mode across different turns.
+        disableRecordHistory:
+          type: boolean
+          description: Skip persisting this turn to Firestore.
+        v2:
+          type: boolean
+          description: Force routing to the v2 (node-based) handler.
+        isTest:
+          type: boolean
+          description: Marks the turn as a test interaction.
+        isLLMStudio:
+          type: boolean
+          description: Marks the turn as originating from LLM Studio.
+        kbPreview:
+          type: boolean
+          description: Knowledge-base preview mode (skips node routing).
+        agentProfileId:
+          type: string
+          description: |
+            Internal profile id (e.g. `agency_plan_builder_v1`) that swaps
+            in a specialized prompt/tool config.
+        toolTest:
+          type: object
+          description: Run a single tool in test mode.
+          required: [toolId, toolName, mode]
+          properties:
+            toolId:
+              type: string
+            toolName:
+              type: string
+            mode:
+              type: string
+              enum: [validate, generate-and-test]
+        formSubmissionMetadata:
+          type: object
+          description: Payload describing a UI-engine form / input submission.
+          required: [formType, payload]
+          properties:
+            formType:
+              type: string
+              enum: [ui_engine_form, ui_engine_input]
+            formTitle:
+              type: string
+            payload:
+              type: array
+              items:
+                type: object
+                required: [index, label, value, field_id, field_type]
+                properties:
+                  index:
+                    type: integer
+                  label:
+                    type: string
+                  value: {}
+                  field_id:
+                    type: string
+                  field_type:
+                    type: string
+            updateFormPayload:
+              type: object
+              properties:
+                turnIndex:
+                  type: integer
+                messageIndex:
+                  type: integer
+                updatedPayload: {}
+            updateInputPayload:
+              type: object
+              properties:
+                turnIndex:
+                  type: integer
+                messageIndex:
+                  type: integer
+                updatedPayload: {}
+        initNodesOptions:
+          type: object
+          description: Optional overrides for tools / variables / messages history at session init.
+          additionalProperties: true
+      examples:
+        - summary: Minimal text turn
+          value:
+            agentId: agt_01HZX2K9ABC
+            convoId: conv_01HZX2K9XYZ
+            bucket: "(default)"
+            prompt: "Hello, how can you help me?"
+            lightConvoData:
+              userName: John Doe
+              userEmail: john@example.com
+              origin: web-chat
+        - summary: Trigger initial greeting
+          value:
+            agentId: agt_01HZX2K9ABC
+            convoId: conv_01HZX2K9XYZ
+            bucket: voiceglow-eu
+            prompt: start
+        - summary: Visual / image turn
+          value:
+            agentId: agt_01HZX2K9ABC
+            convoId: conv_01HZX2K9XYZ
+            bucket: "(default)"
+            messageType: visual
+            visualPayload:
+              image: "https://cdn.example.com/upload/abc.png"
+              message: "What's in this image?"
+
+    ChunkMessage:
+      type: object
+      description: |
+        One streamed event from the server. The `type` field discriminates
+        between chunked text, UI-engine payloads, debug/tool traces,
+        actions, the final metadata payload, and full chat-history syncs.
+        Mirrors `EWSChunkModel`.
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - chunk
+            - metadata
+            - debug
+            - action
+            - sync_chat_history
+        chunk:
+          type: string
+          description: |
+            For `chunk` / `debug`: the streamed text.
+
+            - When `ui_engine` is `false` (or omitted): plain Markdown text
+              that should be appended to the in-progress assistant message.
+            - When `ui_engine` is `true`: a **JSON-stringified `TurnProps`**
+              snapshot of the assistant turn so far. After
+              `JSON.parse(chunk.chunk)` you get an object whose `messages`
+              array contains `UiEngineMessage` items (`text`, `choice`,
+              `visual`, `cardV2`, `carousel`, `iFrame`, `form`, `input`).
+              Each chunk is a full snapshot — replace, don't append.
+        chunkIndex:
+          type: integer
+          description: Monotonic chunk counter within the turn.
+        ui_engine:
+          type: boolean
+          description: |
+            When `true`, `chunk` is a JSON-stringified `TurnProps` whose
+            `messages[].item` entries follow the `UiEngineMessage` schema
+            (parse it client-side). When `false` or omitted, `chunk` is
+            plain Markdown text.
+        isV2:
+          type: boolean
+          description: Set when emitted by the node-based v2 handler.
+        action:
+          type: object
+          description: Optional structured action emitted by the agent (handoff, tool call, ...).
+          required: [type]
+          properties:
+            type:
+              type: string
+              enum:
+                - request_handoff
+                - tool_call
+            payload:
+              type: string
+              description: Free-form payload (e.g. handoff note).
+            toolMetadata:
+              type: object
+              properties:
+                toolName:
+                  type: string
+                input: {}
+                output: {}
+        turns:
+          type: array
+          description: Full snapshot of conversation turns (used with `sync_chat_history`).
+          items:
+            $ref: '#/components/schemas/TurnProps'
+        metadata:
+          type: object
+          description: Final-turn summary (sources, tokens, model used).
+          properties:
+            sources:
+              type: array
+              items:
+                $ref: '#/components/schemas/VectorSource'
+            turns:
+              type: array
+              items:
+                $ref: '#/components/schemas/TurnProps'
+            inputTokens:
+              type: integer
+            outputTokens:
+              type: integer
+            llmUsed:
+              type: string
+              description: Model id that produced the turn (e.g. `gpt-4o-mini`).
+      examples:
+        - summary: Streaming text chunk
+          value:
+            type: chunk
+            chunk: "Sure! I can help with"
+            chunkIndex: 3
+            ui_engine: false
+        - summary: UI-engine chunk (snapshot of the bot turn)
+          value:
+            type: chunk
+            chunk: "{\"from\":\"bot\",\"ts\":1719931200,\"messages\":[{\"from\":\"bot\",\"type\":\"text\",\"item\":{\"type\":\"text\",\"payload\":{\"message\":\"Hi! Here are some options:\"}}},{\"from\":\"bot\",\"type\":\"choice\",\"item\":{\"type\":\"choice\",\"payload\":{\"buttons\":[{\"name\":\"Pricing\",\"request\":{\"type\":\"text\",\"payload\":{\"message\":\"Tell me about pricing\"}}}]}}}]}"
+            chunkIndex: 7
+            ui_engine: true
+        - summary: Tool-call debug
+          value:
+            type: debug
+            chunk: "Finished tool: KB-Search ..."
+            action:
+              type: tool_call
+              toolMetadata:
+                toolName: KB-Search
+                input: { query: "pricing" }
+                output: "..."
+        - summary: Human-handoff request
+          value:
+            type: action
+            action:
+              type: request_handoff
+              payload: "User wants to talk to a human about refund."
+        - summary: Final metadata
+          value:
+            type: metadata
+            metadata:
+              inputTokens: 1247
+              outputTokens: 512
+              llmUsed: gpt-4o-mini
+              sources: []
+              turns: []
+        - summary: Chat history sync (v2 / node-based)
+          value:
+            type: sync_chat_history
+            turns: []
+
+    LightConvoData:
+      type: object
+      description: |
+        Optional per-conversation user/context metadata. Anything you put
+        here is also surfaced to the agent's system prompt (where supported).
+      additionalProperties: true
+      properties:
+        userID:
+          type: string
+        userName:
+          type: string
+        userEmail:
+          type: string
+          format: email
+        userPhone:
+          type: string
+        userImage:
+          type: string
+          format: uri
+        origin:
+          type: string
+          description: Channel the conversation originates from.
+          enum:
+            - web-chat
+            - voice
+            - telephony
+            - vapi
+            - whatsapp
+            - messenger
+            - instagram
+            - discord
+            - telegram
+            - sms
+            - email
+            - outlook
+            - zoho
+            - gb-chat
+            - slack
+        nodesInfo:
+          type: object
+          description: Used by node-based agents to track flow state.
+          properties:
+            currentNode:
+              type: string
+        capturedVariables:
+          type: object
+          description: Variables collected from the user during the conversation.
+          additionalProperties: true
+
+    TurnProps:
+      type: object
+      description: One turn in the conversation history.
+      properties:
+        from:
+          type: string
+          enum: [bot, human]
+        ts:
+          type: number
+          description: Unix timestamp (seconds).
+        modelId:
+          type: string
+          description: Model id that produced this turn (bot turns only).
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+
+    ChatMessage:
+      type: object
+      properties:
+        from:
+          type: string
+          enum: [bot, human]
+        type:
+          type: string
+          description: |
+            Message type. Common values include `text`, `visual`,
+            `cardV2`, `carousel`, `ui_engine_form`, `ui_engine_input`,
+            `debug:tell`, `debug:error`, `debug:success`,
+            `context:form_submission`.
+        ts:
+          type: number
+        mid:
+          type: string
+        item:
+          description: |
+            Type-specific payload. Shape depends on `type`. For UI-engine
+            agents, this is one of the `UiEngineMessage` shapes (text /
+            choice / visual / cardV2 / carousel / iFrame / form / input).
+          oneOf:
+            - $ref: '#/components/schemas/UiEngineMessage'
+            - type: object
+              additionalProperties: true
+              properties:
+                type:
+                  type: string
+                payload:
+                  type: object
+                  additionalProperties: true
+
+    VectorSource:
+      type: object
+      description: A single retrieved KB / vector source returned in `metadata.sources`.
+      properties:
+        id:
+          type: string
+        namespace:
+          type: string
+        similarity:
+          type: number
+        tags:
+          type: array
+          items:
+            type: string
+        payload:
+          type: object
+          properties:
+            text:
+              type: string
+            chunk_index:
+              type: integer
+            doc_id:
+              type: string
+            doc_name:
+              type: string
+            url:
+              type: string
+            urlDescription:
+              type: string
+
+    UiEngineMessage:
+      type: object
+      description: |
+        One structured UI message produced by the UI Engine. When
+        `vg_enableUIEngine: true` on the agent and `disableUiEngine` is
+        not set on the request, the streamed `chunk.chunk` is a
+        JSON-stringified `TurnProps` whose `messages[].item` entries each
+        match this shape. The `payload` field is discriminated by `type`.
+
+        Mirrors the Zod schemas in `src/app/Types/uiEngineMessageSchemas.ts`.
+      required:
+        - type
+        - payload
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+            - choice
+            - visual
+            - cardV2
+            - carousel
+            - iFrame
+            - form
+            - input
+          description: |
+            Message kind. `form` and `input` are only emitted on web
+            channels (`web-chat` / `text`) when the agent has forms
+            enabled.
+        payload:
+          description: Type-specific payload. See per-type schemas below.
+          oneOf:
+            - $ref: '#/components/schemas/UiEngineTextPayload'
+            - $ref: '#/components/schemas/UiEngineChoicePayload'
+            - $ref: '#/components/schemas/UiEngineVisualPayload'
+            - $ref: '#/components/schemas/UiEngineCardPayload'
+            - $ref: '#/components/schemas/UiEngineCarouselPayload'
+            - $ref: '#/components/schemas/UiEngineIFramePayload'
+            - $ref: '#/components/schemas/UiEngineFormPayload'
+            - $ref: '#/components/schemas/UiEngineInputPayload'
+
+    UiEngineTextPayload:
+      type: object
+      description: 'Payload for `type: "text"`. Plain Markdown message body.'
+      properties:
+        message:
+          type: string
+          description: Message content. Supports Markdown.
+
+    UiEngineButton:
+      type: object
+      description: A single clickable button used inside `choice` and `cardV2`.
+      required: [name, request]
+      properties:
+        name:
+          type: string
+          description: Visible label of the button.
+        request:
+          type: object
+          required: [type, payload]
+          description: |
+            What happens when the user clicks the button. Either opens a
+            URL or sends a user message back into the conversation.
+          properties:
+            type:
+              type: string
+              enum: [open_url, text]
+            payload:
+              oneOf:
+                - type: object
+                  description: 'For `type: "open_url"`.'
+                  required: [url]
+                  properties:
+                    url:
+                      type: string
+                      format: uri
+                      description: |
+                        URL to open when the button is clicked. Must be a
+                        real URL pulled from the KB / tool output.
+                - type: object
+                  description: 'For `type: "text"`.'
+                  required: [message]
+                  properties:
+                    message:
+                      type: string
+                      description: User message that will be sent on click.
+
+    UiEngineChoicePayload:
+      type: object
+      description: 'Payload for `type: "choice"`. Renders an inline button group.'
+      required: [buttons]
+      properties:
+        buttons:
+          type: array
+          items:
+            $ref: '#/components/schemas/UiEngineButton'
+
+    UiEngineVisualPayload:
+      type: object
+      description: 'Payload for `type: "visual"`. Renders a single image.'
+      required: [image]
+      properties:
+        image:
+          type: string
+          format: uri
+          description: |
+            URL of the image. Must end with a valid image extension
+            (`.png`, `.jpg`, `.jpeg`, `.webp`, `.gif`, ...).
+
+    UiEngineCardPayload:
+      type: object
+      description: |
+        Payload for `type: "cardV2"`. A single card with optional image,
+        description, and call-to-action buttons.
+      required: [title]
+      properties:
+        imageUrl:
+          type: string
+          format: uri
+          description: |
+            Optional image URL. Must end with a valid image extension.
+        title:
+          type: string
+          description: Card title (supports Markdown).
+        description:
+          type: object
+          properties:
+            text:
+              type: string
+              description: Card description (supports Markdown).
+        buttons:
+          type: array
+          description: Optional call-to-action buttons.
+          items:
+            $ref: '#/components/schemas/UiEngineButton'
+
+    UiEngineCarouselPayload:
+      type: object
+      description: 'Payload for `type: "carousel"`. A horizontal collection of cards.'
+      required: [cards]
+      properties:
+        cards:
+          type: array
+          items:
+            $ref: '#/components/schemas/UiEngineCardPayload'
+
+    UiEngineIFramePayload:
+      type: object
+      description: |
+        Payload for `type: "iFrame"`. Embeds an external URL or raw iframe
+        markup (e.g. YouTube embed, custom widget).
+      required: [layout, url]
+      properties:
+        layout:
+          type: string
+          enum: [vertical, horizontal]
+          description: |
+            `vertical` for video embeds (YouTube etc.), `horizontal` for
+            general web embeds.
+        url:
+          type: string
+          description: |
+            Either a plain URL, or the full `<iframe ...>` HTML string for
+            custom embeds.
+
+    UiEngineInputField:
+      type: object
+      description: |
+        Single input field definition used inside `form.fields[]` and
+        `input.field`.
+      required: [id, type, label]
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the field (used as the form key).
+        type:
+          type: string
+          enum:
+            - text
+            - email
+            - password
+            - number
+            - tel
+            - url
+            - textarea
+            - select
+            - checkbox
+            - radio
+            - date
+            - time
+            - datetime-local
+            - file
+        label:
+          type: string
+          description: Display label for the field.
+        placeholder:
+          type: string
+        required:
+          type: boolean
+          default: false
+        validation:
+          type: object
+          description: Optional validation rules.
+          properties:
+            minLength:
+              type: integer
+            maxLength:
+              type: integer
+            min:
+              type: number
+            max:
+              type: number
+            pattern:
+              type: string
+              description: Regex pattern.
+            errorMessage:
+              type: string
+        options:
+          type: array
+          description: |
+            REQUIRED for `type: "select"` and `type: "radio"`. Must be a
+            non-empty array of `{ value, label }` pairs. Never emitted as
+            empty.
+          items:
+            type: object
+            required: [value, label]
+            properties:
+              value:
+                type: string
+              label:
+                type: string
+        defaultValue:
+          oneOf:
+            - type: string
+            - type: number
+            - type: boolean
+
+    UiEngineFormPayload:
+      type: object
+      description: |
+        Payload for `type: "form"`. Multi-field form rendered inline in
+        the chat. Only emitted on web channels (`web-chat` / `text`) when
+        the agent has forms enabled.
+      required: [fields, onSubmit]
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        fields:
+          type: array
+          items:
+            $ref: '#/components/schemas/UiEngineInputField'
+        submitButton:
+          type: object
+          properties:
+            label:
+              type: string
+              default: Submit
+            style:
+              type: string
+              enum: [primary, secondary, success, warning, danger]
+              default: primary
+        onSubmit:
+          type: object
+          required: [type]
+          properties:
+            type:
+              type: string
+              enum: [submit_form]
+            message:
+              type: string
+              description: Bot message sent back after a successful submission.
+        submittedData:
+          type: array
+          description: |
+            Populated by the server / client after the user submits the
+            form. Used to render the post-submit "filled" state.
+          items:
+            type: object
+            required: [index, label, value, field_id, field_type]
+            properties:
+              index:
+                type: integer
+              label:
+                type: string
+              value: {}
+              field_id:
+                type: string
+              field_type:
+                type: string
+        isSubmitted:
+          type: boolean
+
+    UiEngineInputPayload:
+      type: object
+      description: |
+        Payload for `type: "input"`. A single inline input field. Only
+        emitted on web channels (`web-chat` / `text`) when the agent has
+        forms enabled.
+      required: [field, onSubmit]
+      properties:
+        field:
+          $ref: '#/components/schemas/UiEngineInputField'
+        submitOnEnter:
+          type: boolean
+          default: true
+        onSubmit:
+          type: object
+          required: [type]
+          properties:
+            type:
+              type: string
+              enum: [submit_input]
+            message:
+              type: string
+              description: Bot message sent back after the user submits.
+        submittedValue: {}
+        isSubmitted:
+          type: boolean

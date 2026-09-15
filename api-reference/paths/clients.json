@@ -1,0 +1,412 @@
+{
+  "clients_list": {
+    "get": {
+      "description": "Returns all clients associated with the bearer token",
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Clients retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Clients retrieved successfully"
+                  },
+                  "data": {
+                    "description": "Array of client objects",
+                    "type": "array",
+                    "items": {
+                      "$ref": "../schemas/Client.json#/ClientModelGet"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "put": {
+      "description": "Creates a new client",
+      "requestBody": {
+        "description": "Client to create",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Client.json#/ClientModelPost"
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Client created successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Client created successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "client_by_id": {
+    "get": {
+      "description": "Returns a client specified belonging to a workspace",
+      "parameters": [
+        {
+          "name": "client_id",
+          "in": "path",
+          "description": "The ID of the client to retrieve",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Client retrieved",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Client retrieved successfully"
+                  },
+                  "data": {
+                    "description": "Client data",
+                    "type": "object",
+                    "$ref": "../schemas/Client.json#/ClientModelGet"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "unexpected error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "post": {
+      "description": "Updates a client specified belonging to a workspace",
+      "parameters": [
+        {
+          "name": "client_id",
+          "in": "path",
+          "description": "The ID of the client to update",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "Client to update",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "../schemas/Client.json#/ClientModelPost"
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Client updated successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Client updated successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    },
+    "delete": {
+      "description": "Deletes a client with specified ID",
+      "parameters": [
+        {
+          "name": "client_id",
+          "in": "path",
+          "description": "The ID of the client to delete",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Client deleted successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Client deleted successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "client_email": {
+    "post": {
+      "description": "Sends an email to the client",
+      "parameters": [
+        {
+          "name": "client_id",
+          "in": "path",
+          "description": "The ID of the client to send the email to",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "description": "Email a client on behalf of an agency <strong>required valid setup of the email on your agency page.</strong>",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "to": {
+                  "type": "string",
+                  "example": "Recipient of the email"
+                },
+                "subject": {
+                  "type": "string",
+                  "example": "Subject of the email"
+                },
+                "html": {
+                  "type": "string",
+                  "example": "<p>HTML content of the email</p>"
+                }
+              }
+            }
+          }
+        },
+        "required": true
+      },
+      "security": [
+        {
+          "bearerWorkspace": []
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Email sent successfully",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "success": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "message": {
+                    "type": "string",
+                    "example": "Email sent successfully"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Bad request",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/Error"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "Unauthorized",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "../schemas/Errors.json#/NoauthError"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

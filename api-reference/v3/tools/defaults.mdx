@@ -1,0 +1,12 @@
+---
+title: 'List Default LLM Tools'
+description: 'Lists built-in default system tools and runtime-auto LLM tools. Use V3 [endpoints](/api-reference/v3/intro).'
+openapi: 'GET /tools/defaults'
+---
+
+Returns the full built-in tools catalog:
+
+- **assignable_system** — enable with `nodes[].toolsIds` on `PATCH /agents/{id}` (e.g. `web-search`, `human-handoff`, `end-call`)
+- **runtime_auto** — injected by the LLM runtime (`KB-Search`, `Structured-Search`, `present`, `resolve_caller_timezone`); not created via Tools CRUD
+
+Custom HTTP tools still use `POST /agents/{agentId}/tools`.
