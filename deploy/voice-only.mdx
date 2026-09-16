@@ -1,25 +1,25 @@
 ---
 title: 'Voice Calls'
-description: 'Integrate Rannah رنّة voice calls using the @tixae-labs/web-sdk package.'
+description: 'Integrate Rannah رنّة voice calls using the @rannah-labs/web-sdk package.'
 icon: 'microphone'
 ---
 
 ## Overview
 
-The **@tixae-labs/web-sdk** package enables voice call functionality via WebRTC. It allows you to initialize a voice call session with an agent (identified by `agentId` and `region` from your [Rannah رنّة Dashboard](https://rannah.io) and provides event listeners to track call status.
+The **@rannah-labs/web-sdk** package enables voice call functionality via WebRTC. It allows you to initialize a voice call session with an agent (identified by `agentId` and `region` from your [Rannah رنّة Dashboard](https://rannah.io) and provides event listeners to track call status.
 
 
 ## Installation
 Install the package via pnpm or npm:
 
 ```bash 
-pnpm install @tixae-labs/web-sdk@latest
+pnpm install @rannah-labs/web-sdk@latest
 ```
 
 Or
 
 ```bash
-npm install @tixae-labs/web-sdk@latest
+npm install @rannah-labs/web-sdk@latest
 ```
 
 ## Getting Started
@@ -30,7 +30,7 @@ Below is an example that demonstrates how to initialize the voice call and set u
 ```bash
 "use client";
 import React from "react";
-import { WebCall } from "@tixae-labs/web-sdk";
+import { WebCall } from "@rannah-labs/web-sdk";
 
 const VoiceCallPage = () => {
   const [voiceState, setVoiceState] = React.useState<WebCall | null>(null);
@@ -162,12 +162,12 @@ voice.on("error", (data) => {
 ### Resources
 
 <CardGroup cols={2}>
-  <Card title="NPM" icon="npm" href="https://www.npmjs.com/package/@tixae-labs/web-sdk">
-    View the package on NPM.
+  <Card title="NPM" icon="npm" href="https://www.npmjs.com/package/@rannah-labs/web-sdk">
+    `@rannah-labs/web-sdk` on npm
   </Card>
 
-  <Card title="GitHub" icon="github" href="https://github.com/Moe03/ta-web-sdk">
-    View the packageon GitHub
+  <Card title="Support" icon="envelope" href="mailto:support@rannah.io">
+    Contact Rannah رنّة support
   </Card>
   
 </CardGroup>

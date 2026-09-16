@@ -6,20 +6,20 @@ icon: 'react'
 
 ## Overview
 
-The **@tixae-labs/react-voice-orb** package provides a React component that renders a voice orb widget. This component uses WebRTC for voice calls and WebGL for rendering the animated orb. It is designed for use in React applications and provides an easy-to-integrate solution.
+The **@rannah-labs/react-voice-orb** package provides a React component that renders a voice orb widget. This component uses WebRTC for voice calls and WebGL for rendering the animated orb. It is designed for use in React applications and provides an easy-to-integrate solution.
 
 ## Installation
 
 Install the package using pnpm or npm:
 
 ```bash
-pnpm install @tixae-labs/react-voice-orb@latest
+pnpm install @rannah-labs/react-voice-orb@latest
 ```
 
 Or
 
 ```bash
-npm install @tixae-labs/react-voice-orb@latest
+npm install @rannah-labs/react-voice-orb@latest
 ```
 
 ## Usage
@@ -49,7 +49,7 @@ https://rannah.io/app/eu/agents/cj5lbhgMJHu4RLxmzM5Q/overview?showDebugger=true
 // layout.tsx
 "use client";
 import React from "react";
-import { VoiceProvider, OrbThemeProvider } from "@tixae-labs/react-voice-orb";
+import { VoiceProvider, OrbThemeProvider } from "@rannah-labs/react-voice-orb";
 
 const layout = (props: { children: React.ReactNode }) => {
   return (
@@ -74,7 +74,7 @@ export default layout;
 ```bash
 // page.tsx
 "use client";
-import { AudioAnimationOrb, useAIVoice, Spinner } from "@tixae-labs/react-voice-orb";
+import { AudioAnimationOrb, useAIVoice, Spinner } from "@rannah-labs/react-voice-orb";
 import React, { useState } from "react";
 import { FaCircleStop, FaMicrophone, FaMicrophoneSlash } from "react-icons/fa6";
 
@@ -147,7 +147,7 @@ const page = () => {
               if (callState === "idle") {
                 webCall.startCall();
               } else {
-                // tixaeVoice?.endCall();
+                // webCall?.endCall();
                 webCall.toggleMute();
               }
             }}
@@ -230,6 +230,16 @@ await voice.init({
 - We use WebGL to render the orb, so it might not work on all devices/browsers.
 
 <Note>
-  If you have a bug report please open an issue on the [GitHub
-  Repository](https://github.com/Moe03/ta-web-sdk/issues).
+  If you have a bug report please contact [support@rannah.io](mailto:support@rannah.io).
 </Note>
+
+### Resources
+
+<CardGroup cols={2}>
+  <Card title="NPM" icon="npm" href="https://www.npmjs.com/package/@rannah-labs/react-voice-orb">
+    `@rannah-labs/react-voice-orb` on npm
+  </Card>
+  <Card title="Support" icon="envelope" href="mailto:support@rannah.io">
+    Contact Rannah رنّة support
+  </Card>
+</CardGroup>
