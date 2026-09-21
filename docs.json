@@ -301,50 +301,6 @@
             ]
           },
           {
-            "group": "Business",
-            "icon": "building",
-            "pages": [
-              {
-                "group": "Agency & Whitelabeling",
-                "icon": "building",
-                "pages": [
-                  "whitelabeling/getting-started",
-                  "whitelabeling/agency/what-is-an-agency",
-                  "whitelabeling/agency/overview-tab",
-                  "whitelabeling/agency/custom-domain",
-                  "whitelabeling/agency/email",
-                  "whitelabeling/agency/theme",
-                  "whitelabeling/agency/custom-tabs",
-                  "whitelabeling/agency/footer",
-                  "whitelabeling/integrations"
-                ]
-              },
-              {
-                "group": "Client Management",
-                "icon": "users-gear",
-                "pages": [
-                  "whitelabeling/clients/overview",
-                  "whitelabeling/clients/managing-organizations",
-                  "whitelabeling/clients/access-and-roles",
-                  "whitelabeling/clients/creating-users",
-                  "whitelabeling/clients/managing-teams",
-                  {
-                    "group": "Dashboard & Billing",
-                    "pages": [
-                      "whitelabeling/clients/client-dashboard/features",
-                      "whitelabeling/clients/client-dashboard/analytics",
-                      "whitelabeling/clients/client-billing/billing-overview",
-                      "whitelabeling/clients/client-billing/billing-activation",
-                      "whitelabeling/clients/client-billing/billing-faq",
-                      "whitelabeling/agency/embeddable-pricing",
-                      "whitelabeling/agency/embeddable-pricing-quick-start"
-                    ]
-                  }
-                ]
-              }
-            ]
-          },
-          {
             "group": "Pricing",
             "icon": "dollar-sign",
             "pages": [
