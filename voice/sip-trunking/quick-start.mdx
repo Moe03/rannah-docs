@@ -69,7 +69,7 @@ Now you'll configure your SIP trunk by adding your provider's details.
 
 Here's a sample configuration for a typical SIP provider:
 
-```
+```text
 Friendly Name: Production Hotline
 SIP Domain: sip.example.com
 Requires Authentication: ✓ Enabled
@@ -129,7 +129,7 @@ Now you need to configure your SIP provider to route calls to Rannah رنّة's 
 
 Point your SIP provider to route calls to:
 
-```
+```text
 IP Address: 134.209.121.168
 Port: 5060
 Protocol: UDP
@@ -160,7 +160,7 @@ If you're using Twilio, here's how to configure trunk forwarding:
   
   <Step title="Configure Origination URI">
     Add the Rannah رنّة SIP server as an origination URI:
-    ```
+    ```text
     sip:134.209.121.168:5060
     ```
     <img class="rounded-md w-full" src="/images/sip-trunking/twilio-origination-tab.png"></img>
@@ -278,7 +278,7 @@ Now that you have a working SIP trunk, explore these advanced features:
 
 <AccordionGroup>
   <Accordion title="How many phone numbers can I add?">
-    On **v2-2026**: **2** on Business, **3** on White Label, **5** on White Label Elite. Extra Twilio number slots are $3/mo. Voice / SIP starts on Business (or the Voice / SIP add-ons).
+    On **v2-2026**: **2** on Business. Extra Twilio number slots are \$3/mo. Voice / SIP starts on Business (or the Voice / SIP add-ons).
   </Accordion>
   
   <Accordion title="Can I use multiple SIP providers?">
@@ -294,7 +294,7 @@ Now that you have a working SIP trunk, explore these advanced features:
   </Accordion>
   
   <Accordion title="Is there a limit on concurrent calls?">
-    Yes — Rannah رنّة limits concurrent calls by plan (**3** Business, **10** White Label, **25** Elite; extra lines $5/mo), and your SIP provider may have its own cap.
+    Yes — Rannah رنّة limits concurrent calls by plan (**3** on Business; extra lines \$5/mo), and your SIP provider may have its own cap.
   </Accordion>
 </AccordionGroup>
 
@@ -308,4 +308,3 @@ If you encounter any issues during setup:
 
 - 💬 Join our [Discord Community](mailto:support@rannah.io)
 - 📧 Email support at [support@rannah.io](mailto:support@rannah.io)
-

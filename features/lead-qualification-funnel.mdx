@@ -10,12 +10,9 @@ The Lead Qualification Funnel is an intelligent system that automatically evalua
 
 This feature is designed for:
 
-<CardGroup cols={3}>
+<CardGroup cols={2}>
   <Card title="Sales Teams" icon="chart-line">
     Qualify inbound leads automatically and get notified when hot prospects engage
-  </Card>
-  <Card title="Agencies" icon="building">
-    Manage lead qualification across multiple client agents with whitelabel notifications
   </Card>
   <Card title="Businesses" icon="rocket">
     Automate lead scoring from chat conversations and phone calls
@@ -152,7 +149,7 @@ If you already have qualification steps configured, AI Assist works in refinemen
 
 ## Email Notifications
 
-The notification system sends branded email alerts when leads meet qualification criteria.
+The notification system sends email alerts when leads meet qualification criteria.
 
 <Note>
 Notifications are sent **once per conversation** when the configured conditions are met (either score threshold reached or specific steps completed).
@@ -207,200 +204,9 @@ Each notification email includes:
     Direct link to view the full conversation in your dashboard.
   </Card>
   <Card title="Branding" icon="palette">
-    - Agency logo and colors (for client agents)
-    - Custom domain (if configured)
-    - Default Rannah رنّة branding (for regular agents)
+    Default Rannah رنّة branding
   </Card>
 </CardGroup>
-
-## Whitelabel Branding
-
-Email notifications automatically use appropriate branding based on agent configuration. This allows agencies to provide a fully branded experience for their clients.
-
-### How Branding Works
-
-The system automatically determines which branding to use:
-
-<CardGroup cols={2}>
-  <Card title="Client Agent Branding" icon="building">
-    When agent is assigned to a client organization:
-    - Uses parent agency branding
-    - Agency logo and theme colors
-    - Custom agency domain
-    - Agency email sender address
-  </Card>
-  <Card title="Regular Agent Branding" icon="circle">
-    When agent belongs to workspace only:
-    - Uses default Rannah رنّة branding
-    - Standard Rannah رنّة logo
-    - rannah.io domain
-    - Default email sender
-  </Card>
-</CardGroup>
-
-<Info>
-This happens automatically. You don't need to manually configure branding for each agent. Just assign the agent to a client, and it will use your agency branding.
-</Info>
-
-### Prerequisites for Whitelabel
-
-Before funnel notifications will use your branding, complete these agency setup steps:
-
-<Steps>
-  <Step title="Agency Account Created" icon="building">
-    You must have an active agency account. See [What is an Agency](/whitelabeling/agency/what-is-an-agency) for setup instructions.
-  </Step>
-  <Step title="Theme Configured" icon="palette">
-    Configure your brand colors and logo in agency settings. See [Theme Configuration](/whitelabeling/agency/theme).
-    
-    Required settings:
-    - Agency logo (displayed in email header)
-    - Primary brand color (used for buttons and accents)
-    - Company name (appears in email footer)
-  </Step>
-  <Step title="Custom Domain Setup" icon="globe">
-    Configure your custom domain for branded conversation links. See [Custom Domain Setup](/whitelabeling/agency/custom-domain).
-    
-    <Note>
-    The conversation link in notification emails will use your custom domain instead of rannah.io.
-    </Note>
-  </Step>
-  <Step title="Email Domain Configured" icon="envelope">
-    Set up your custom email domain for branded sender addresses. See [Email Configuration](/whitelabeling/agency/email).
-    
-    <Check>
-    Emails will come from your domain (e.g., notifications@youragency.com) instead of Rannah رنّة.
-    </Check>
-  </Step>
-</Steps>
-
-<Warning>
-If any agency branding component is missing, the system will fall back to default Rannah رنّة branding for that component.
-</Warning>
-
-### Assigning Agents to Clients
-
-For an agent to use your agency branding, it must be assigned to a client organization:
-
-<Steps>
-  <Step title="Navigate to Clients Tab" icon="users">
-    Go to your dashboard and click on the "Clients" tab in the main navigation.
-  </Step>
-  <Step title="Select or Create Client" icon="building-user">
-    Choose an existing client organization or create a new one. See [Managing Organizations](/whitelabeling/clients/managing-organizations).
-  </Step>
-  <Step title="Assign Agent to Client" icon="link">
-    In the client's settings:
-    1. Go to the "Agents" or "Widgets" section
-    2. Click "Add Agent" or "Assign Agent"
-    3. Select the agent from your workspace
-    4. Confirm the assignment
-    
-    <Info>
-    The agent will now use your agency branding for all client-facing features, including funnel notifications.
-    </Info>
-  </Step>
-  <Step title="Verify Assignment" icon="check-circle">
-    Confirm the agent appears in the client's agent list with your agency branding visible.
-  </Step>
-</Steps>
-
-### Email Branding Components
-
-Understanding what appears in whitelabeled funnel notification emails:
-
-<AccordionGroup>
-  <Accordion title="Email Header">
-    **Agency Branding:**
-    - Your agency logo (from theme settings)
-    - Company name
-    - Brand colors
-    
-    **Default Branding:**
-    - Rannah رنّة logo
-    - Standard color scheme
-  </Accordion>
-  
-  <Accordion title="Email Body">
-    Consistent across all branding:
-    - Lead name and score
-    - Agent name
-    - Qualified steps list with points
-    - Extracted conversation data
-    - Call-to-action button
-    
-    <Note>
-    The button styling uses your agency primary color when whitelabeled.
-    </Note>
-  </Accordion>
-  
-  <Accordion title="Conversation Link">
-    **Agency Branding:**
-    - Your custom domain (e.g., https://dashboard.youragency.com/...)
-    - Links directly to conversation in client dashboard
-    
-    **Default Branding:**
-    - Standard rannah.io domain
-    - Links to main dashboard
-  </Accordion>
-  
-  <Accordion title="Email Footer">
-    **Agency Branding:**
-    - Your business address (from email settings)
-    - Your support email (from email settings)
-    - Agency company name
-    
-    **Default Branding:**
-    - Rannah رنّة address
-    - Rannah رنّة support email
-  </Accordion>
-  
-  <Accordion title="Sender Address">
-    **Agency Email Domain:**
-    - notifications@youragency.com
-    - Or your configured sender address
-    
-    **Default:**
-    - notifications@rannah.io
-  </Accordion>
-</AccordionGroup>
-
-### Testing Whitelabel Notifications
-
-Verify your branding is working correctly:
-
-<Steps>
-  <Step title="Enable Funnel on Client Agent" icon="toggle-on">
-    1. Open the agent assigned to your client
-    2. Go to Prompt tab
-    3. Enable Lead Scoring & Funnel
-    4. Configure qualification steps (or use AI Assist)
-  </Step>
-  <Step title="Configure Notification Rule" icon="bell">
-    1. Enable email notifications
-    2. Set low score threshold (e.g., 30 points) for testing
-    3. Add your email as recipient
-    4. Enable the notification rule
-  </Step>
-  <Step title="Trigger a Test Conversation" icon="messages">
-    1. Open the agent test interface
-    2. Have a conversation that meets qualification criteria
-    3. Mention qualifying information (budget, timeline, etc.)
-    4. Wait for the evaluation to run
-  </Step>
-  <Step title="Check Your Email" icon="inbox">
-    You should receive a notification email with:
-    - Your agency logo in the header
-    - Your brand colors
-    - Your custom domain in conversation link
-    - Your email domain as sender
-    - Your business address in footer
-  </Step>
-</Steps>
-
-<Tip>
-Test with a low qualification threshold initially to ensure notifications trigger easily during testing.
-</Tip>
 
 ## Best Practices
 
@@ -443,25 +249,6 @@ Test with a low qualification threshold initially to ensure notifications trigge
     - Refine qualification steps as business needs change
     - A/B test different funnel configurations
     - Gather feedback from sales team on lead quality
-  </Accordion>
-  <Accordion title="Maintain Consistent Branding (Agencies)">
-    Ensure all agency branding elements are configured:
-    - Use the same logo across all settings
-    - Match colors in theme and email templates
-    - Keep business address and support email current
-    - Update branding if your company rebrands
-    
-    <Check>
-    Consistent branding builds trust and professionalism with your clients.
-    </Check>
-  </Accordion>
-  <Accordion title="Test Before Client Launch (Agencies)">
-    Always test funnel notifications before giving access to clients:
-    - Send test notifications to your team
-    - Verify all branding elements appear correctly
-    - Check conversation links work properly
-    - Confirm email deliverability
-    - Test on mobile and desktop email clients
   </Accordion>
 </AccordionGroup>
 
@@ -517,29 +304,6 @@ The AI agent learns to gather qualification information during natural conversat
     - Score threshold is met or required steps are completed
     - "Require contact info" setting (if enabled, lead must provide email/phone)
     - Conversation has sufficient information matching your qualification criteria
-  </Accordion>
-  <Accordion title="Wrong Branding in Emails">
-    Confirm:
-    - Agent assignment to client organization (for agency branding)
-    - Agency settings are complete (theme, logo, domain)
-    - Email domain is verified and active
-    - No recent agent ownership changes
-    
-    Common issue: Agent was recently moved. Try:
-    1. Remove agent from client
-    2. Wait 30 seconds
-    3. Reassign agent to client
-    4. Test again
-  </Accordion>
-  <Accordion title="Conversation Link Uses rannah.io">
-    This means custom domain is not configured or not active:
-    - Go to agency settings
-    - Navigate to Custom Domain tab
-    - Verify domain is added
-    - Check DNS records are verified
-    - Ensure domain status shows "Active"
-    
-    See [Custom Domain Setup](/whitelabeling/agency/custom-domain) for configuration steps.
   </Accordion>
 </AccordionGroup>
 

@@ -456,15 +456,6 @@
                 ]
               },
               {
-                "group": "Agency",
-                "icon": "building-columns",
-                "pages": [
-                  "api-reference/v3/agency/getAgency",
-                  "api-reference/v3/agency/upsertAgency",
-                  "api-reference/v3/agency/deleteAgency"
-                ]
-              },
-              {
                 "group": "Orgs",
                 "icon": "building",
                 "pages": [
@@ -599,15 +590,6 @@
                   "api-reference/workspaces/get",
                   "api-reference/workspaces/post",
                   "api-reference/workspaces/delete",
-                  {
-                    "group": "Agency",
-                    "icon": "hotel",
-                    "pages": [
-                      "api-reference/workspaces/agencies/get",
-                      "api-reference/workspaces/agencies/post",
-                      "api-reference/workspaces/agencies/delete"
-                    ]
-                  },
                   {
                     "group": "Orgs",
                     "icon": "building",

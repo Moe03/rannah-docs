@@ -19,7 +19,7 @@ icon: handshake
 Live handoff is a powerful feature that allows human agents to take over conversations from AI agents when necessary. This functionality bridges the gap between automated and personalized support, ensuring that complex queries or sensitive issues are handled with a human touch.
 
 <Note>
-Live handoff is closely integrated with the client dashboard, where it's operated when a client is logged in and available to manage conversations. Read more in the [whitelabel](/whitelabeling/getting-started) docs.
+Live handoff is operated from the Rannah رنّة dashboard when you are logged in and available to manage conversations.
 </Note>
 
 ## Setting Up Live Handoff
@@ -61,21 +61,13 @@ Before you can use live handoff, ensure that your agent is properly configured:
 ## Set up handoff for client
 
 <Steps>
-  <Step title="Create and Assign Agent to an Organization">
-    For the handoff to work and to ensure your client has the ability to use it, the agent must be assigned to an [organization](/whitelabeling/clients/managing-organizations).
+  <Step title="Assign the agent to an organization">
+    The agent must be assigned to an organization so it can be operated from the dashboard.
   </Step>
-  <Step title="Create User Access">
-    Ensure the organization has a [user](/whitelabeling/clients/creating-users) who can log in to the client dashboard and that their widget is assigned to it.
+  <Step title="Ensure a user is available">
+    Make sure a user with access to the dashboard is available to handle incoming handoff requests.
   </Step>
 </Steps>
-
-
-
-
-
-<Info>
-If you haven't granted your client access to **settings**, they won't be able to enable handoff themselves. Consider this when setting up [client permissions](/whitelabeling/clients/access-and-roles).
-</Info>
 
 ## Using Live Handoff
 
@@ -216,10 +208,6 @@ Notifications are accessed from the client dashboard and can be sent to your ema
   </Step>
 </Steps>
 
-<Tip>
-For detailed information on managing notifications and other client dashboard features, refer to our [client dashboard documentation](/whitelabeling/clients/client-dashboard/features).
-</Tip>
-
 ## Best Practices for Live Handoff
 
 To make the most of the live handoff feature:
@@ -238,8 +226,3 @@ To make the most of the live handoff feature:
     Periodically check the conversation tab, even without active handoff requests, to identify potential intervention points.
   </Card>
 </CardGroup>
-
-
-
-
-

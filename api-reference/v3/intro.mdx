@@ -48,11 +48,11 @@ You can authenticate with either:
 - Your **agent secret** for agent-specific operations
 
 <Frame caption="Get a workspace secret from the workspace switcher in the dashboard.">
-  <img src="https://i.ibb.co/XjVNjdV/Untitled.jpg" />
+  ![](https://i.ibb.co/XjVNjdV/Untitled.jpg)
 </Frame>
 
 <Frame caption="Get an agent secret from the agent Settings page.">
-  <img src="https://i.ibb.co/vY8CbgL/Capture.png" />
+  ![](https://i.ibb.co/vY8CbgL/Capture.png)
 </Frame>
 
 ## Plan requirement
@@ -62,7 +62,7 @@ On the current **v2-2026** pricing catalog:
 | Access | Minimum plan |
 | --- | --- |
 | **Read** (GET) | **Business** or higher |
-| **Write** (POST / PUT / PATCH / DELETE) | **White Label** or higher |
+| **Write** (POST / PUT / PATCH / DELETE) | **Business** or higher |
 
 Free, Starter, and Pro do **not** include API access. If a request is blocked, the API returns `403` with a link to the [billing / plans page](https://rannah.io/app/eu/account/billing?active_tab=plans).
 
@@ -73,7 +73,6 @@ Legacy Pay-as-you-go workspaces are not affected by this gate.
 The V3 API is organized around the main product objects:
 
 - `Workspaces`
-- `Agency` (whitelabel branding / config)
 - `Orgs` (organizations — dashboard “Clients” cards, agent assignment, teams)
 - `Clients` (human users under an org)
 - `Agents` (including **clone**, **canonical templates**, **audit log**, lean **interact**)

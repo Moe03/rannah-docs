@@ -28,10 +28,10 @@ Transparent, capability-based pricing. The **v2-2026** plan ladder (and its feat
 
 | Cohort | Plans / access | Notes |
 |--------|----------------|--------|
-| **New users (Aug 2026+)** | Free → Starter → Pro → Business → White Label → White Label Elite | Catalog id `v2-2026` — feature gates by tier |
+| **New users (Aug 2026+)** | Free → Starter → Pro → Business | Catalog id `v2-2026` — feature gates by tier |
 | **Any older plan (pre–Aug 2026)** | Your existing plan stays | **All features remain unlocked** — PAYG, legacy, managed, and other pre-v2 catalogs are fully grandfathered |
 
-Public REST API access on v2: **Business+** (read), **White Label+** (write). See [API Authentication](/api-reference/authentication). Grandfathered pre–August 2026 paid workspaces keep their existing API access.
+Public REST API access on v2: **Business+** (read and write). See [API Authentication](/api-reference/authentication). Grandfathered pre–August 2026 paid workspaces keep their existing API access.
 
 ---
 
@@ -43,8 +43,6 @@ Public REST API access on v2: **Business+** (read), **White Label+** (write). Se
 | **Starter** | $29 | $19 / $228 | 5,000 | 3 | 1,000 |
 | **Pro** | $59 | $39 / $468 | 15,000 | 10 | 25,000 |
 | **Business** | $99 | $66 / $792 | 25,000 | 20 | 100,000 |
-| **White Label** | $199 | $133 / $1,596 | 60,000 | Unlimited | 500,000 |
-| **White Label Elite** | $349 | $233 / $2,796 | 120,000 | Unlimited | Unlimited |
 
 Unused monthly credits **roll over** — each cycle adds your plan quota on top of remaining balance, including purchased top-ups. Free’s 500 credits are a one-time trial allotment, not refreshed monthly.
 
@@ -57,7 +55,7 @@ Unused monthly credits **roll over** — each cycle adds your plan quota on top 
 ### Free — $0
 Sandbox to learn the product.
 - Web widget, tools/nodes builder, basic analytics
-- 2 agent slots, 1 workspace seat, 2 trial client seats
+- 2 agent slots, 1 workspace seat
 - Tier 4 AI models (fast / value)
 - One-time 500-credit trial
 
@@ -88,26 +86,9 @@ Proactive growth — voice, campaigns, unbranded widget.
 - BYOK + premium (Tier 1) models
 - MCP + webhooks, agent simulator
 - KB crawler access + auto-update
-- Public API **read** access
+- Public API read and write access
 - 2 Twilio numbers + 3 concurrent call lines included
 - Weekly crawler refresh · Priority email support
-
-### White Label — $199/mo
-Agency platform.
-- Everything in Business (API upgrades to **full** write)
-- Per-client analytics, crawler proxy + auto-scrape
-- Unlimited agents, 10 workspace seats, 20 client seats
-- 3 Twilio numbers + 10 concurrent lines
-- Daily crawler refresh · Priority + onboarding support
-
-### White Label Elite — $349/mo
-SaaS mode for agencies.
-- Everything in White Label
-- SaaS mode, client self-signup, client-facing analytics
-- Unlimited workspace & client seats, unlimited KB docs
-- Rebrandable API
-- Agency auto-billing (Stripe Connect for clients)
-- 5 Twilio numbers + 25 concurrent lines · Dedicated support
 
 Need a custom enterprise deal (on-prem, dedicated build, custom SLAs)? Contact sales from the [pricing page](/Pricing/overview).
 
@@ -136,11 +117,9 @@ You can unlock features below your plan (or add capacity) without jumping tiers.
 | Add-on | Price | Notes |
 |--------|-------|--------|
 | Workspace seat | $10/mo | Extra dashboard seat |
-| Client seat | $15/mo | Extra agency client org |
 | Agent seat | $5/mo | Extra AI agent slot |
 | Concurrent call line | $5/mo | Extra simultaneous voice call |
 | Twilio phone number | $3/mo | Extra number slot |
-| White Label (legacy key) | $200/mo | Agency dashboard / clients / domains |
 
 ### Feature add-ons (v2 catalog)
 | Add-on | Price | Unlocks |
@@ -153,7 +132,7 @@ You can unlock features below your plan (or add capacity) without jumping tiers.
 | Live handoff + ticketing | $15/mo | Human inbox |
 | Lead funnel | $15/mo | Lead capture + auto funnel |
 | CRM integrations | $10/mo | CRM connectors |
-| Remove widget branding | $19/mo | Widget-only (not agency WL) |
+| Remove widget branding | \$19/mo | Widget-only |
 | Widget tabs | $9/mo | Multi-tab widget UX |
 | Voice / phone | $29/mo | Voice agents + listening |
 | SIP trunk | $15/mo | BYO SIP |
@@ -165,7 +144,6 @@ You can unlock features below your plan (or add capacity) without jumping tiers.
 | Agent simulator | $19/mo | Auto tester |
 | Crawler access | $10/mo | KB site ingest |
 | Crawler proxy / auto-update / auto-scrape | $15 / $12 / $15 | Advanced crawl |
-| SaaS mode | $99/mo | Client self-signup |
 
 **[Manage plans & add-ons in Billing →](./billing)**
 
@@ -228,4 +206,4 @@ Earn **30% lifetime commission** on referral spend (subscriptions, credits, add-
 - **[Provider costs](./provider-cost-estimates)** — STT / TTS tables
 - **[Live pricing page](/Pricing/overview)** — Interactive comparison
 
-Questions? Join [Discord](https://discord.com/invite/5zvdYwhZa7) or contact sales for Elite / custom deals.
+Questions? Join [Discord](https://discord.com/invite/5zvdYwhZa7) or contact sales for custom deals.
