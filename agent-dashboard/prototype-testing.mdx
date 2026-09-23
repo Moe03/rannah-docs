@@ -85,7 +85,7 @@ Validate your agent's performance, behavior, and user experience in a comprehens
         <Accordion title="Configuration Options" icon="gear">
           ```javascript
           // Prototype environment configuration
-          window.VG_CONFIG = {
+          window.RANNAH_CONFIG = {
             ID: 'your-agent-id',
             render: 'full-width',
             region: 'na', // or 'eu'
@@ -257,7 +257,7 @@ Validate your agent's performance, behavior, and user experience in a comprehens
     <div className="space-y-4">
         ```javascript
         // Enable debug mode for detailed logging
-        window.VG_CONFIG = {
+        window.RANNAH_CONFIG = {
           debug: true,
           logLevel: 'verbose', // 'error', 'warn', 'info', 'debug', 'verbose'
           
@@ -349,7 +349,7 @@ Validate your agent's performance, behavior, and user experience in a comprehens
     <div className="space-y-4">
         ```javascript
         // A/B testing configuration
-        window.VG_CONFIG = {
+        window.RANNAH_CONFIG = {
           experiment: {
             name: 'greeting_test_v1',
             variant: 'B', // 'A' or 'B'
@@ -547,10 +547,10 @@ Validate your agent's performance, behavior, and user experience in a comprehens
             **Prototype Not Loading:**
             ```javascript
             // Check configuration
-            console.log('VG_CONFIG:', window.VG_CONFIG);
+            console.log('RANNAH_CONFIG:', window.RANNAH_CONFIG);
             
             // Verify required fields
-            if (!window.VG_CONFIG?.ID) {
+            if (!window.RANNAH_CONFIG?.ID) {
               console.error('Missing agent ID');
             }
             ```

@@ -39,20 +39,20 @@ There are three main ways to integrate your Rannah رنّة Agent widget into Wo
 Before proceeding with any method, you'll need your Rannah رنّة Agent widget code:
 
 ```html
-<div id="VG_OVERLAY_CONTAINER"></div>
+<div id="RANNAH_OVERLAY_CONTAINER"></div>
 <script defer>
     (function() {
-        window.VG_CONFIG = {
+        window.RANNAH_CONFIG = {
             ID: "YOUR_AGENT_ID", // Replace with your actual agent ID
             region: 'eu', // or 'na' for North America
             render: 'bottom-right', // or 'bottom-left'
             // modalMode: true, // Set this to 'true' to open the widget in modal mode
             stylesheets: [
-                "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+                "https://rannah.io/vg_live_build/styles.css",
             ],
         }
         var VG_SCRIPT = document.createElement("script");
-        VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+        VG_SCRIPT.src = "https://rannah.io/vg_live_build/vg_bundle.js";
         VG_SCRIPT.defer = true;
         document.body.appendChild(VG_SCRIPT);
     })()
@@ -133,14 +133,14 @@ Before proceeding with any method, you'll need your Rannah رنّة Agent widget
   </Step>
 </Steps>
 ### Customization Options
-You can customize your widget's behavior and appearance by adjusting the VG_CONFIG options:
+You can customize your widget's behavior and appearance by adjusting the RANNAH_CONFIG options:
 
 <AccordionGroup>
   <Accordion title="Change Position">
     Modify the `render` option to 'bottom-left' or 'bottom-right' to change the widget's position.
   </Accordion>
   <Accordion title="Autostart Chat">
-    Add `autostart: true,` to the `VG_CONFIG` object to have the widget open automatically when a user visits your website.
+    Add `autostart: true,` to the `RANNAH_CONFIG` object to have the widget open automatically when a user visits your website.
   </Accordion>
   <Accordion title="Custom Styling">
 
@@ -149,7 +149,7 @@ You can customize your widget's behavior and appearance by adjusting the VG_CONF
 ```
 javascript
     stylesheets: [
-        "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+        "https://rannah.io/vg_live_build/styles.css",
         "https://your-custom-css-url.css"
     ],
 ```

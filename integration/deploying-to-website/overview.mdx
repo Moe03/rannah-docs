@@ -36,20 +36,20 @@ Regardless of the platform you're using, these code snippets form the basis of y
 <Tabs>
   <Tab title="Popup Widget">
     ```html
-    <div id="VG_OVERLAY_CONTAINER"></div>
+    <div id="RANNAH_OVERLAY_CONTAINER"></div>
     <script defer>
         (function() {
-            window.VG_CONFIG = {
+            window.RANNAH_CONFIG = {
                 ID: "YOUR_AGENT_ID",
                 region: 'eu', // or 'na' for North America
                 render: 'bottom-right', // or 'bottom-left'
                 // modalMode: true, // Set this to 'true' to open the widget in modal mode
                 stylesheets: [
-                    "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+                    "https://rannah.io/vg_live_build/styles.css",
                 ],
             }
             var VG_SCRIPT = document.createElement("script");
-            VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+            VG_SCRIPT.src = "https://rannah.io/vg_live_build/vg_bundle.js";
             VG_SCRIPT.defer = true;
             document.body.appendChild(VG_SCRIPT);
         })()
@@ -59,20 +59,20 @@ Regardless of the platform you're using, these code snippets form the basis of y
 
   <Tab title="Embedded Chat">
     ```html
-    <div style="width: 500px; height: 500px;" id="VG_OVERLAY_CONTAINER"></div>
+    <div style="width: 500px; height: 500px;" id="RANNAH_OVERLAY_CONTAINER"></div>
     <script defer>
         (function() {
-            window.VG_CONFIG = {
+            window.RANNAH_CONFIG = {
                 ID: "YOUR_AGENT_ID",
                 region: 'eu', // or 'na' for North America
                 render: 'full-width',
                 // modalMode: true, // Set this to 'true' to open the widget in modal mode
                 stylesheets: [
-                    "https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css",
+                    "https://rannah.io/vg_live_build/styles.css",
                 ],
             }
             var VG_SCRIPT = document.createElement("script");
-            VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+            VG_SCRIPT.src = "https://rannah.io/vg_live_build/vg_bundle.js";
             VG_SCRIPT.defer = true;
             document.body.appendChild(VG_SCRIPT);
         })()
@@ -116,7 +116,7 @@ Regardless of the platform you're using, these code snippets form the basis of y
 
 ## Key Configuration Options
 
-The `VG_CONFIG` object in the script allows for customization of your agent's behavior and appearance:
+The `RANNAH_CONFIG` object in the script allows for customization of your agent's behavior and appearance:
 
 <AccordionGroup>
   <Accordion title="ID">Your unique Rannah رنّة Agent identifier.</Accordion>
@@ -135,10 +135,10 @@ The `VG_CONFIG` object in the script allows for customization of your agent's be
 
 ## Additional Configuration Options
 
-You can further customize your chatbot by adding these optional parameters to the `VG_CONFIG` object:
+You can further customize your chatbot by adding these optional parameters to the `RANNAH_CONFIG` object:
 
 ```javascript
-window.VG_CONFIG = {
+window.RANNAH_CONFIG = {
   // ... other config options ...
   user: {
     name: "John Doe",

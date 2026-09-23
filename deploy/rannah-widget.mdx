@@ -1,12 +1,12 @@
 ---
 title: "Rannah رنّة Widget"
-description: "Add the Rannah رنّة chat widget to any website with the gray-labeled Bunny CDN script"
+description: "Add the Rannah رنّة chat widget to any website"
 icon: "react"
 ---
 
 # Rannah رنّة Widget
 
-Add Rannah رنّة chat to a website with this embeddable script. It loads from `https://vg-bunny-cdn.b-cdn.net`.
+Add Rannah رنّة chat to a website with this embeddable script. It loads from `https://rannah.io`.
 
 For website-builder walkthroughs, see [Deploying to a website](/integration/deploying-to-website/overview).
 
@@ -15,24 +15,24 @@ For website-builder walkthroughs, see [Deploying to a website](/integration/depl
 Paste this before `</body>`. Replace `YOUR_AGENT_ID` and set `region` to `eu` or `na`.
 
 ```html
-<div style="width: 0; height: 0;" id="VG_OVERLAY_CONTAINER"></div>
+<div style="width: 0; height: 0;" id="RANNAH_OVERLAY_CONTAINER"></div>
 <script defer>
 (function () {
-  window.VG_CONFIG = {
+  window.RANNAH_CONFIG = {
     ID: "YOUR_AGENT_ID",
     region: "eu",
     render: "bottom-right",
-    stylesheets: ["https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css"],
+    stylesheets: ["https://rannah.io/vg_live_build/styles.css"],
   };
   var s = document.createElement("script");
-  s.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+  s.src = "https://rannah.io/vg_live_build/vg_bundle.js";
   s.defer = true;
   document.body.appendChild(s);
 })();
 </script>
 ```
 
-For an embedded box instead of a corner popup, set `render: "full-width"` and size `#VG_OVERLAY_CONTAINER` (for example `width: 500px; height: 500px`).
+For an embedded box instead of a corner popup, set `render: "full-width"` and size `#RANNAH_OVERLAY_CONTAINER` (for example `width: 500px; height: 500px`).
 
 ## Config notes
 
@@ -40,4 +40,4 @@ For an embedded box instead of a corner popup, set `render: "full-width"` and si
 - `region` — `eu` or `na`
 - `render` — `bottom-right`, `bottom-left`, or `full-width`
 - `modalMode: true` — open as a center modal
-- `stylesheets` — always include the Bunny CDN stylesheet; add your own CSS URL after it if you need custom styling
+- `stylesheets` — always include the widget stylesheet; add your own CSS URL after it if you need custom styling

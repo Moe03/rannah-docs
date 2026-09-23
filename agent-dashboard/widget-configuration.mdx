@@ -130,7 +130,7 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
           <Tab title="Modal Mode">
             <div className="space-y-4">
               ```javascript
-              VG_CONFIG = {
+              RANNAH_CONFIG = {
                 modalMode: true,
                 render: 'bottom-right'
               }
@@ -156,7 +156,7 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
           <Tab title="Auto-start Mode">
             <div className="space-y-4">
               ```javascript
-              VG_CONFIG = {
+              RANNAH_CONFIG = {
                 autostart: true,
                 // Widget opens automatically with proactive message
               }
@@ -188,13 +188,13 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
           <!-- Simple Script Integration -->
           <script defer>
               (function() {
-                  window.VG_CONFIG = {
+                  window.RANNAH_CONFIG = {
                       ID: "your-agent-id",
                       region: 'na',
                       render: 'bottom-right'
                   }
                   var VG_SCRIPT = document.createElement("script");
-                  VG_SCRIPT.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+                  VG_SCRIPT.src = "https://rannah.io/vg_live_build/vg_bundle.js";
                   VG_SCRIPT.defer = true;
                   document.body.appendChild(VG_SCRIPT);
               })()
@@ -220,7 +220,7 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
           
           <Accordion title="Advanced Script Configuration">
             ```javascript
-            window.VG_CONFIG = {
+            window.RANNAH_CONFIG = {
                 ID: "your-agent-id",
                 region: 'na', // 'na' or 'eu'
                 render: 'bottom-right',
@@ -291,17 +291,17 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
           ```
           
           ```html
-          <div id="VG_OVERLAY_CONTAINER"></div>
+          <div id="RANNAH_OVERLAY_CONTAINER"></div>
           <script defer>
           (function () {
-            window.VG_CONFIG = {
+            window.RANNAH_CONFIG = {
               ID: "your-agent-id",
               region: "na",
               render: "bottom-right",
-              stylesheets: ["https://vg-bunny-cdn.b-cdn.net/vg_live_build/styles.css"],
+              stylesheets: ["https://rannah.io/vg_live_build/styles.css"],
             };
             var s = document.createElement("script");
-            s.src = "https://vg-bunny-cdn.b-cdn.net/vg_live_build/vg_bundle.js";
+            s.src = "https://rannah.io/vg_live_build/vg_bundle.js";
             s.defer = true;
             document.body.appendChild(s);
           })();
@@ -372,7 +372,7 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
             <Tab title="User Identification">
               ```javascript
               // Pre-populate user data for personalized experience
-              VG_CONFIG = {
+              RANNAH_CONFIG = {
                 user: {
                   name: 'Customer Name',
                   email: 'customer@email.com',
@@ -416,7 +416,7 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
   <Accordion title="Custom Styling & CSS" icon="palette">
     <div className="space-y-4">
       ```javascript
-      VG_CONFIG = {
+      RANNAH_CONFIG = {
         // Custom CSS files for advanced styling
         stylesheets: [
           "https://cdn.example.com/custom-widget-styles.css",
@@ -519,7 +519,7 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
         <div className="space-y-4">
           ```javascript
           // Development vs Production builds
-          VG_CONFIG = {
+          RANNAH_CONFIG = {
             // Use 'live' for production (optimized, cached)
             // Use 'dev' for development (latest features, debugging)
             version: 'live' // or 'dev'
@@ -607,7 +607,7 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
   <Accordion title="Widget Not Loading" icon="circle-x">
     <Steps>
       <Step title="Verify Configuration">
-        Check that `VG_CONFIG` contains valid agent ID and region settings
+        Check that `RANNAH_CONFIG` contains valid agent ID and region settings
       </Step>
       <Step title="Check Console Errors">
         Open browser developer tools and look for JavaScript errors
@@ -622,7 +622,7 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
     
     ```javascript
     // Debug configuration
-    console.log('VG_CONFIG:', window.VG_CONFIG);
+    console.log('RANNAH_CONFIG:', window.RANNAH_CONFIG);
     
     // Check if script loaded
     console.log('VG Script loaded:', !!window.VG_SCRIPT);
@@ -675,7 +675,7 @@ Start with the **Script Embed** method for most websites - it's the most flexibl
         In the agent dashboard, open **Settings** and turn on **Enable Quick Upload Button**. The paperclip only appears when this setting is enabled.
       </Step>
       <Step title="Check region">
-        Ensure `VG_CONFIG.region` matches your account region (`eu` or `na`). Uploads post to the regional vg-docker API.
+        Ensure `RANNAH_CONFIG.region` matches your account region (`eu` or `na`). Uploads post to the regional vg-docker API.
       </Step>
       <Step title="Verify credits">
         File uploads consume workspace credits. Confirm the agent owner has available credits if uploads fail silently or return errors.
