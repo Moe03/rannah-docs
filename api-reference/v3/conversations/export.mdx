@@ -44,7 +44,7 @@ Export itself requires `hasEverPaid`, so live callers use the paid column. **429
 ### Newest chats (default)
 
 ```bash
-curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
+curl -G "https://rannah.io/v3/agents/{agentId}/convos/export" \
   -H "Authorization: Bearer {SECRET_API_KEY}" \
   --data-urlencode "limit=20"
 ```
@@ -52,7 +52,7 @@ curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
 ### Oldest first
 
 ```bash
-curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
+curl -G "https://rannah.io/v3/agents/{agentId}/convos/export" \
   -H "Authorization: Bearer {SECRET_API_KEY}" \
   --data-urlencode "sort=asc" \
   --data-urlencode "limit=20"
@@ -62,7 +62,7 @@ curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
 
 ```bash
 # e.g. 2026-01-01 .. 2026-01-31 UTC
-curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
+curl -G "https://rannah.io/v3/agents/{agentId}/convos/export" \
   -H "Authorization: Bearer {SECRET_API_KEY}" \
   --data-urlencode "fromTs=1735689600" \
   --data-urlencode "toTs=1738367999" \
@@ -73,7 +73,7 @@ curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
 ### Next page
 
 ```bash
-curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
+curl -G "https://rannah.io/v3/agents/{agentId}/convos/export" \
   -H "Authorization: Bearer {SECRET_API_KEY}" \
   --data-urlencode "limit=20" \
   --data-urlencode "sort=desc" \
@@ -83,7 +83,7 @@ curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
 ### Specific conversation IDs
 
 ```bash
-curl -G "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/convos/export" \
+curl -G "https://rannah.io/v3/agents/{agentId}/convos/export" \
   -H "Authorization: Bearer {SECRET_API_KEY}" \
   --data-urlencode "convoIds=convo_a,convo_b,convo_c"
 ```

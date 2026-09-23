@@ -15,7 +15,7 @@ info:
     has nodes enabled, `v2nsHandleLlmSession`) on the `vg-docker` server.
 
     ## Connection lifecycle
-    1. Client opens a WebSocket to `wss://<region>-gcp-api.vg-stuff.com/interact`.
+    1. Client opens a WebSocket to `wss://rannah.io/interact`.
     2. Client sends one JSON-encoded `InteractObject`.
     3. Server streams back zero or more `ChunkMessage` objects.
     4. Server closes the socket with code `1000` when the turn is complete.
@@ -58,12 +58,12 @@ defaultContentType: application/json
 
 servers:
   euProduction:
-    host: eu-gcp-api.vg-stuff.com
+    host: rannah.io
     pathname: /interact
     protocol: wss
     description: EU production WebSocket server
   naProduction:
-    host: na-gcp-api.vg-stuff.com
+    host: rannah.io
     pathname: /interact
     protocol: wss
     description: NA production WebSocket server

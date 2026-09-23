@@ -163,8 +163,8 @@ All endpoints should include standard error responses:
 
 | Region | V3 URL |
 |--------|--------|
-| EU | `https://eu-gcp-api.vg-stuff.com/v3` |
-| NA | `https://na-gcp-api.vg-stuff.com/v3` |
+| EU | `https://rannah.io/v3` |
+| NA | `https://rannah.io/v3` |
 
 ## 📖 Documentation Tools
 

@@ -11,21 +11,21 @@ The unified endpoint is the easiest way to find a voice. It fans out to every re
 ### Only English female voices across all providers
 
 ```bash
-curl "https://eu-gcp-api.vg-stuff.com/v3/voices?language=en&gender=female&limit=50" \
+curl "https://rannah.io/v3/voices?language=en&gender=female&limit=50" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
 ### German voices from ElevenLabs and Cartesia only
 
 ```bash
-curl "https://eu-gcp-api.vg-stuff.com/v3/voices?providers=elevenlabs,cartesia&language=de" \
+curl "https://rannah.io/v3/voices?providers=elevenlabs,cartesia&language=de" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 
 ### Australian-accent voices
 
 ```bash
-curl "https://eu-gcp-api.vg-stuff.com/v3/voices?accent=australian&limit=20" \
+curl "https://rannah.io/v3/voices?accent=australian&limit=20" \
   -H "Authorization: Bearer YOUR_API_KEY"
 ```
 

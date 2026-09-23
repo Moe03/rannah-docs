@@ -9,7 +9,7 @@ For numbers purchased via `/utils/buy-twilio-number` (`isImportedNumber: false`)
 For imported numbers (`isImportedNumber: true`), the number is only removed from Rannah رنّة — your own Twilio account keeps it.
 
 ```bash
-curl -X POST "https://eu-gcp-api.vg-stuff.com/v3/utils/twilio/release-number" \
+curl -X POST "https://rannah.io/v3/utils/twilio/release-number" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{ "phoneNumberSid": "PNxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "isImportedNumber": false }'

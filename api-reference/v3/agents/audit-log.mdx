@@ -9,7 +9,7 @@ openapi: 'GET /agents/{agentId}/audit-log'
 Every write path (`PATCH /agents/{id}`, template import, clone, canonical template create) appends diff entries to `agent_audit_log`.
 
 ```bash
-curl -X GET "https://eu-gcp-api.vg-stuff.com/v3/agents/{agentId}/audit-log?limit=50" \
+curl -X GET "https://rannah.io/v3/agents/{agentId}/audit-log?limit=50" \
   -H "Authorization: Bearer YOUR_SECRET_KEY"
 ```
 

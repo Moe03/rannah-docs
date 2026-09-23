@@ -7,7 +7,7 @@ openapi: 'POST /utils/twilio/check-number'
 If something has changed the number's `voiceUrl` or `smsUrl` in the Twilio console (or Twilio re-provisioned it), this endpoint will re-apply the correct Rannah رنّة webhooks.
 
 ```bash
-curl -X POST "https://eu-gcp-api.vg-stuff.com/v3/utils/twilio/check-number" \
+curl -X POST "https://rannah.io/v3/utils/twilio/check-number" \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{ "phoneNumberSid": "PNxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "isImportedNumber": false }'

@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "https://eu-gcp-api.vg-stuff.com/v3"
+      "url": "https://rannah.io/v3"
     }
   ],
   "paths": {
