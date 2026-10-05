@@ -13,12 +13,12 @@ Events are sent as HTTP POST requests to your configured endpoint with a structu
 ## Platform Compatibility
 
 <Warning>
-**Important:** Not all events are available for all agent platforms. VoiceFlow (VF) agents support a subset of events compared to Rannah رنّة agents.
+**Important:** Not all events are available for all agent platforms. VoiceFlow (VF) agents support a subset of events compared to Rannah agents.
 </Warning>
 
 | Platform | Description |
 |----------|-------------|
-| **Rannah رنّة** | Rannah رنّة agents (built with the Rannah رنّة node-based builder) |
+| **Rannah** | Rannah agents (built with the Rannah node-based builder) |
 | **VF** | VoiceFlow agents (imported from VoiceFlow or using VoiceFlow runtime) |
 
 ---
@@ -27,16 +27,16 @@ Events are sent as HTTP POST requests to your configured endpoint with a structu
 
 Below are all possible event types you can subscribe to:
 
-| Event Type              | Category           | Rannah رنّة Support | VF Support | Description                             |
-|------------------------|--------------------|-----------:|:----------:|-------------------------------------------------|
+| Event Type | Category | Rannah Support | VF Support | Description |
+| --- | --- | --: | :-: | --- |
 | `message_received`     | Message Events     | ✅         | ✅         | Message received on any channel                  |
 | `conversation_updated` | Chat Events        | ✅         | ✅         | Full convo snapshot after persist (light + turns)|
 | `chat_delegated`       | Chat Events        | ✅         | ✅         | Chat was delegated to a team member              |
 | `bug_reported`         | Bug Events         | ✅         | ✅         | Bug or issue was reported                        |
 | `agent_deleted`        | Agent Events       | ✅         | ✅         | Agent was deleted                                |
 | `webhook_test`         | Test Event         | ✅         | ✅         | Used for testing your webhook endpoint           |
-| `lead_captured`        | Lead Events        | ✅         | ❌         | Lead was captured by an agent (Rannah رنّة only)   |
-| `form_submitted`       | Form Events        | ✅         | ❌         | Form was submitted (Rannah رنّة only)              |
+| `lead_captured` | Lead Events | ✅ | ❌ | Lead was captured by an agent (Rannah only) |
+| `form_submitted` | Form Events | ✅ | ❌ | Form was submitted (Rannah only) |
 | `organisation_created` | Organisation Events| ✅         | ✅         | Organisation was created                         |
 | `organisation_updated` | Organisation Events| ✅         | ✅         | Organisation was updated                         |
 | `organisation_deleted` | Organisation Events| ✅         | ✅         | Organisation was deleted                         |
@@ -45,9 +45,9 @@ Below are all possible event types you can subscribe to:
 | `client_deleted`       | Client Events      | ✅         | ✅         | Client was deleted                               |
 
 <Info>
-**Why are some events Rannah رنّة-only?**
+**Why are some events Rannah-only?**
 
-Rannah رنّة agents use WebSocket-based interactions that support advanced features like:
+Rannah agents use WebSocket-based interactions that support advanced features like:
 - Automatic lead collection based on conversation analysis
 - UI Engine forms with dynamic form submissions
 - Real-time streaming responses
@@ -240,7 +240,7 @@ Fired after a conversation is persisted. Also POSTed to the agent's `advanced.se
 **Types:** `lead_captured`
 
 <Warning>
-**Platform Support:** This event is only available for **Rannah رنّة agents**. VoiceFlow (VF) agents do not support automatic lead capture.
+**Platform Support:** This event is only available for **Rannah agents**. VoiceFlow (VF) agents do not support automatic lead capture.
 </Warning>
 
 **Payload fields:**
@@ -279,7 +279,7 @@ Fired after a conversation is persisted. Also POSTed to the agent's `advanced.se
 **Types:** `form_submitted`
 
 <Warning>
-**Platform Support:** This event is only available for **Rannah رنّة agents**. VoiceFlow (VF) agents do not support UI Engine forms.
+**Platform Support:** This event is only available for **Rannah agents**. VoiceFlow (VF) agents do not support UI Engine forms.
 </Warning>
 
 **Payload fields:**
