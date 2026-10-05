@@ -20,7 +20,7 @@ Each phone number in your SIP trunk can be mapped to a specific AI agent. When s
 ```mermaid
 flowchart LR
     A[👤 Caller<br/>Dials +15551234567] --> B[📞 SIP Provider<br/>Twilio/Peoplefone]
-    B --> C[🖥️ Rannah رنّة SIP Server<br/>134.209.121.168:5060]
+    B --> C[🖥️ Rannah SIP Server<br/>134.209.121.168:5060]
     C --> D[🔍 Lookup Number<br/>in Database]
     D --> E[🤖 Customer Support Agent<br/>AI Agent Answers]
 
@@ -67,7 +67,7 @@ Before adding a phone number, ensure:
 <img
   class="rounded-md w-full"
   src="/images/sip-trunking/add-phone-number-modal.png"
-></img>
+/>
 
 ## Phone Number Configuration
 
@@ -136,7 +136,7 @@ To view all phone numbers for a SIP provider:
 <img
   class="rounded-md w-full"
   src="/images/sip-trunking/expanded-provider-with-numbers.png"
-></img>
+/>
 
 ### Understanding the Number Count Badge
 
@@ -180,7 +180,7 @@ To delete a phone number:
 
 After deletion:
 
-- The number is immediately removed from Rannah رنّة
+- The number is immediately removed from Rannah
 - Calls to this number will fail until reconfigured
 - The number count badge updates automatically
 - The configuration is also removed from the Asterisk server
@@ -256,7 +256,7 @@ These parameters can be used for:
 
 ## Number Limits and Quotas
 
-Your Rannah رنّة plan determines how many phone numbers you can configure. On **v2-2026**:
+Your Rannah plan determines how many phone numbers you can configure. On **v2-2026**:
 
 | Plan | Twilio number slots |
 |------|---------------------|
@@ -353,15 +353,15 @@ If you want to port an existing phone number to your SIP provider:
 
 <Steps>
   <Step title="Contact Your SIP Provider">
-    Initiate the porting process with your SIP provider (not Rannah رنّة)
+    Initiate the porting process with your SIP provider (not Rannah)
   </Step>
 
   <Step title="Wait for Port Completion">
     Number porting typically takes 7-21 business days
   </Step>
 
-  <Step title="Add to Rannah رنّة">
-    Once ported, add the number to your SIP trunk in Rannah رنّة
+  <Step title="Add to Rannah">
+    Once ported, add the number to your SIP trunk in Rannah
   </Step>
 
   <Step title="Test Thoroughly">
@@ -370,7 +370,7 @@ If you want to port an existing phone number to your SIP provider:
 </Steps>
 
 <Warning>
-  Number porting is handled entirely by your SIP provider. Rannah رنّة is not
+  Number porting is handled entirely by your SIP provider. Rannah is not
   involved in the porting process.
 </Warning>
 

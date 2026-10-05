@@ -1,12 +1,12 @@
 ---
 title: "Understanding the SIP Server"
-description: "Learn how Rannah رنّة's SIP server bridges your calls to AI agents"
+description: "Learn how Rannah's SIP server bridges your calls to AI agents"
 icon: "server"
 ---
 
 # Understanding the SIP Server
 
-Rannah رنّة provides a fully managed SIP server that bridges calls from your SIP trunk provider to your AI agents. This page explains how it works behind the scenes.
+Rannah provides a fully managed SIP server that bridges calls from your SIP trunk provider to your AI agents. This page explains how it works behind the scenes.
 
 ## What is the SIP Server?
 
@@ -19,10 +19,10 @@ The SIP server (running Asterisk) is the communication bridge that:
 
 **[IMAGE PLACEHOLDER: Diagram showing SIP server's role in the call flow]**
 _Filename suggestion: `asterisk-role-diagram.png`_
-_Description: Architecture diagram showing: SIP Provider → Rannah رنّة SIP Server (with boxes for SIP Handler, Audio Processor, Call Router) → Rannah رنّة AI Agent_
+_Description: Architecture diagram showing: SIP Provider → Rannah SIP Server (with boxes for SIP Handler, Audio Processor, Call Router) → Rannah AI Agent_
 
 <Note>
-  **Important**: The SIP server is fully managed by Rannah رنّة. You don't need to
+  **Important**: The SIP server is fully managed by Rannah. You don't need to
   install, configure, or maintain anything.
 </Note>
 
@@ -46,17 +46,17 @@ When someone calls your phone number:
 sequenceDiagram
     participant Caller
     participant SIP Provider
-    participant Rannah رنّة SIP Server
+    participant Rannah SIP Server
     participant AI Agent
 
     Caller->>SIP Provider: Dials Phone Number
-    SIP Provider->>Rannah رنّة SIP Server: Routes Call via SIP
-    Rannah رنّة SIP Server->>AI Agent: Establishes Connection
-    Note over Rannah رنّة SIP Server,AI Agent: Bidirectional Audio Stream
+    SIP Provider->>Rannah SIP Server: Routes Call via SIP
+    Rannah SIP Server->>AI Agent: Establishes Connection
+    Note over Rannah SIP Server,AI Agent: Bidirectional Audio Stream
     AI Agent->>Caller: Responds in Real-Time
     Note over Caller,AI Agent: Conversation Continues
-    Caller->>Rannah رنّة SIP Server: Hangs Up
-    Rannah رنّة SIP Server->>AI Agent: Terminates Connection
+    Caller->>Rannah SIP Server: Hangs Up
+    Rannah SIP Server->>AI Agent: Terminates Connection
 ```
 
 ### Step-by-Step Process
@@ -68,7 +68,7 @@ sequenceDiagram
   </Step>
 
   <Step title="Number Lookup">
-    The SIP server looks up the phone number in Rannah رنّة's database to find the
+    The SIP server looks up the phone number in Rannah's database to find the
     assigned agent
   </Step>
 
@@ -109,7 +109,7 @@ sequenceDiagram
   </Card>
 
   <Card title="WebSocket Bridge" icon="plug">
-    Connects to Rannah رنّة's AI agent infrastructure
+    Connects to Rannah's AI agent infrastructure
   </Card>
 </CardGroup>
 
@@ -146,17 +146,17 @@ Your SIP provider needs to:
 
 ### Firewall Rules
 
-The Rannah رنّة SIP server has proper firewall rules configured:
+The Rannah SIP server has proper firewall rules configured:
 
 - **Inbound SIP:** Port 5060 (UDP) - Open to SIP providers
 - **Inbound RTP:** Ports 10000-20000 (UDP) - For audio
-- **Outbound:** HTTPS/WSS to Rannah رنّة AI infrastructure
+- **Outbound:** HTTPS/WSS to Rannah AI infrastructure
 
 You don't need to configure any firewall rules on your end - just point your SIP provider to the server.
 
 ## Server Management
 
-### What Rannah رنّة Manages
+### What Rannah Manages
 
 <CardGroup cols={2}>
   <Card title="Server Uptime" icon="check">
@@ -217,7 +217,7 @@ The SIP server is optimized for:
 
 ### Call Logs
 
-All calls through the SIP server are logged in your Rannah رنّة dashboard:
+All calls through the SIP server are logged in your Rannah dashboard:
 
 - View in **Conversations** tab
 - Filter by phone number
@@ -284,7 +284,7 @@ Track these metrics for your SIP trunk:
   </Step>
 
   <Step title="Check Phone Number Configuration">
-    Verify in Rannah رنّة dashboard: - Phone number is added - Number is in E.164
+    Verify in Rannah dashboard: - Phone number is added - Number is in E.164
     format - Agent is assigned - Agent is voice-enabled
   </Step>
 
@@ -295,7 +295,7 @@ Track these metrics for your SIP trunk:
   </Step>
 
   <Step title="Check Conversation Logs">
-    Look in your Rannah رنّة dashboard for error messages or failed call attempts
+    Look in your Rannah dashboard for error messages or failed call attempts
   </Step>
 </Steps>
 
@@ -328,7 +328,7 @@ Every call generates a CDR that includes:
 - Call status (answered, failed, etc.)
 - Codec used
 
-Access CDRs through your Rannah رنّة dashboard or API.
+Access CDRs through your Rannah dashboard or API.
 
 ### Audio Format Details
 
@@ -385,11 +385,9 @@ Now that you understand how the SIP server works, you're ready to:
 Need help with the SIP server?
 
 - 📧 **Email:** support@rannah.io
-- 💬 **Discord:** [Join our community](mailto:support@rannah.io)
-- 📊 **Status:** [Check server status](https://rannah.io)
 
 <Tip>
   **Remember**: You don't need to manage the server yourself. Just configure
-  your SIP provider to route to `134.209.121.168:5060` and Rannah رنّة handles the
+  your SIP provider to route to `134.209.121.168:5060` and Rannah handles the
   rest!
 </Tip>

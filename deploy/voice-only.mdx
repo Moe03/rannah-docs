@@ -1,13 +1,12 @@
 ---
-title: 'Voice Calls'
-description: 'Integrate Rannah رنّة voice calls using the @rannah-labs/web-sdk package.'
-icon: 'microphone'
+title: "Voice Calls"
+description: "Integrate Rannah voice calls using the @rannah-labs/web-sdk package."
+icon: "microphone"
 ---
 
 ## Overview
 
-The **@rannah-labs/web-sdk** package enables voice call functionality via WebRTC. It allows you to initialize a voice call session with an agent (identified by `agentId` and `region` from your [Rannah رنّة Dashboard](https://rannah.io) and provides event listeners to track call status.
-
+The **@rannah-labs/web-sdk** package enables voice call functionality via WebRTC. It allows you to initialize a voice call session with an agent (identified by `agentId` and `region` from your [Rannah Dashboard](https://rannah.io) and provides event listeners to track call status.
 
 ## Installation
 Install the package via pnpm or npm:
@@ -40,7 +39,7 @@ const VoiceCallPage = () => {
     console.log("Starting voice call...");
 
     await voice.init({
-      agentId: "", // Replace with a valid agentId from your Rannah رنّة Dashboard URL (e.g., "enit5lczmqbz1s7d")
+      agentId: "", // Replace with a valid agentId from your Rannah Dashboard URL (e.g., "enit5lczmqbz1s7d")
       region: "",  // Replace with a valid region (e.g., "eu" or "na")
     });
 
@@ -85,8 +84,8 @@ const VoiceCallPage = () => {
 };
 
 export default VoiceCallPage;
-
 ```
+
 ### Voice Call Functions
 
 `.startCall()`
@@ -167,7 +166,7 @@ voice.on("error", (data) => {
   </Card>
 
   <Card title="Support" icon="envelope" href="mailto:support@rannah.io">
-    Contact Rannah رنّة support
+    Contact Rannah support
   </Card>
   
 </CardGroup>
