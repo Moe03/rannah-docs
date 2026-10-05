@@ -1,19 +1,19 @@
 ---
-title: Get Started
-description: Use the Rannah رنّة V3 REST API to manage workspaces, agents, tools, variables, knowledge base documents, and conversations.
-icon: rocket
+title: "Get Started"
+description: "Use the Rannah V3 REST API to manage workspaces, agents, tools, variables, knowledge base documents, and conversations."
+icon: "rocket"
 ---
 
 <Info>
-  V3 is the recommended Rannah رنّة API for new integrations.
+  V3 is the recommended Rannah API for new integrations.
 </Info>
 
-## Use Rannah رنّة with Claude, ChatGPT, or Cursor (MCP)
+## Use Rannah with Claude, ChatGPT, or Cursor (MCP)
 
 The fastest way to work against this API is from the dashboard — you do not need to wire HTTP by hand.
 
-1. Open your [Rannah رنّة dashboard](https://rannah.io).
-2. In the **bottom-left**, open **Rannah رنّة MCP** for your workspace.
+1. Open your [Rannah dashboard](https://rannah.io).
+2. In the **bottom-left**, open **Rannah MCP** for your workspace.
 3. Connect it in **Claude**, **ChatGPT**, or **Cursor**.
 
 Your assistant can then change agents, KB, orgs, settings, and more in that workspace by calling the same V3 endpoints documented in this API reference.
@@ -100,7 +100,7 @@ curl --request GET \
 ## Choosing between API surfaces
 
 - Use **V3 REST** when you want a stable, Bearer-authenticated HTTP API.
-- Use **Rannah رنّة MCP** from the dashboard (bottom-left) when you want Claude / ChatGPT / Cursor to drive the same API for you.
+- Use **Rannah MCP** from the dashboard (bottom-left) when you want Claude / ChatGPT / Cursor to drive the same API for you.
 - Use **V2 / legacy endpoints** only if you are maintaining an older integration that already depends on them.
 - Use **WebSocket interact** when you need real-time streaming behavior during live conversations.
 

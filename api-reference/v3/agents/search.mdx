@@ -12,7 +12,7 @@ Search matches agent **title**, **description**, and **agent ID** within the aut
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `workspaceId` | string | authenticated workspace | Optional. Defaults to the bearer workspace (same as `GET /agents`). Pass only when searching another workspace you belong to. Unknown/stale ids (e.g. MCP `Rannah رنّة_WORKSPACE_ID`) fall back to the bearer workspace instead of 401. |
+| `workspaceId` | string | authenticated workspace | Optional. Defaults to the bearer workspace (same as `GET /agents`). Pass only when searching another workspace you belong to. Unknown/stale ids (e.g. MCP `Rannah _WORKSPACE_ID`) fall back to the bearer workspace instead of 401. |
 | `search` | string | | Free-text filter on title, description, or agent ID |
 | `sortBy` | enum | `newest` | `newest`, `oldest`, `firstCreated`, `lastCreated`, or `alphabetical` |
 | `page` | number | `1` | Page number (1-based) |
