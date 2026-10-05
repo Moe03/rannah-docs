@@ -1,12 +1,12 @@
 ---
-title: 'SIP Trunking Overview'
-description: 'Learn how to connect your own SIP trunk to Rannah رنّة for inbound and outbound voice calls'
-icon: 'phone'
+title: "SIP Trunking Overview"
+description: "Learn how to connect your own SIP trunk to Rannah for inbound and outbound voice calls"
+icon: "phone"
 ---
 
-# SIP Trunking with Rannah رنّة
+# SIP Trunking with Rannah 
 
-SIP (Session Initiation Protocol) trunking allows you to connect your own phone numbers and telephony infrastructure to Rannah رنّة's AI voice agents. This enables you to receive inbound calls directly from your SIP provider and route them to your configured agents.
+SIP (Session Initiation Protocol) trunking allows you to connect your own phone numbers and telephony infrastructure to Rannah's AI voice agents. This enables you to receive inbound calls directly from your SIP provider and route them to your configured agents.
 
 ## What is SIP Trunking?
 
@@ -36,8 +36,9 @@ The SIP trunking integration consists of three main components:
 ### 1. SIP Provider (Your Trunk)
 Your external SIP trunk provider (e.g., Twilio or Peoplefone) that supplies phone numbers and handles call routing.
 
-### 2. Rannah رنّة SIP Server
-The Rannah رنّة SIP server is a fully managed SIP server that acts as a bridge between your SIP provider and Rannah رنّة. This server:
+### 2. Rannah SIP Server
+
+The Rannah SIP server is a fully managed SIP server that acts as a bridge between your SIP provider and Rannah. This server:
 - Receives calls from your SIP trunk
 - Routes calls to the correct AI agent
 - Handles bidirectional audio streaming
@@ -49,16 +50,16 @@ sequenceDiagram
     participant Caller
     participant SIP Provider
     participant Asterisk
-    participant Rannah رنّة Agent
+    participant Rannah Agent
     
     Caller->>SIP Provider: Dials Phone Number
     SIP Provider->>Asterisk: Routes Call via SIP
-    Asterisk->>Rannah رنّة Agent: Establishes AudioSocket Connection
-    Note over Asterisk,Rannah رنّة Agent: Bidirectional Audio Stream
-    Rannah رنّة Agent->>Caller: AI Agent Responds
-    Note over Caller,Rannah رنّة Agent: Conversation Continues
+    Asterisk->>Rannah Agent: Establishes AudioSocket Connection
+    Note over Asterisk,Rannah Agent: Bidirectional Audio Stream
+    Rannah Agent->>Caller: AI Agent Responds
+    Note over Caller,Rannah Agent: Conversation Continues
     Caller->>Asterisk: Hangs Up
-    Asterisk->>Rannah رنّة Agent: Terminates Connection
+    Asterisk->>Rannah Agent: Terminates Connection
 ```
 
 ## Use Cases
@@ -99,11 +100,11 @@ Before setting up SIP trunking, ensure you have:
   </Step>
   
   <Step title="SIP Server Access">
-    The Rannah رنّة SIP server (automatically provided with your account)
+    The Rannah SIP server (automatically provided with your account)
   </Step>
   
   <Step title="Configured AI Agent">
-    A Rannah رنّة voice-enabled AI agent ready to handle calls
+    A Rannah voice-enabled AI agent ready to handle calls
   </Step>
 </Steps>
 
@@ -139,7 +140,7 @@ Ready to get started? Follow our step-by-step guides:
 </CardGroup>
 
 <Note>
-  **Important**: The SIP server is automatically provided with your Rannah رنّة account. You simply need to configure your SIP provider to route calls to the provided server address.
+  **Important**: The SIP server is automatically provided with your Rannah account. You simply need to configure your SIP provider to route calls to the provided server address.
 </Note>
 
 ## Pricing Considerations
@@ -148,9 +149,9 @@ When using SIP trunking, consider the following costs:
 
 - **Plan access (v2-2026)**: Voice / SIP is included on **Business+**, or via the Voice ($29/mo) / SIP trunk ($15/mo) add-ons
 - **SIP Provider Charges**: Your SIP trunk provider will charge for phone numbers and call minutes
-- **Rannah رنّة Voice Minutes**: Standard Rannah رنّة voice pricing applies ($0.020/min platform fee + STT/TTS or realtime STS + LLM) — see [Voice pricing](/voice/pricing)
+- **Rannah رنّة Voice Minutes**: Standard Rannah voice pricing applies ($0.020/min platform fee + STT/TTS or realtime STS + LLM) — see [Voice pricing](/voice/pricing)
 - **SIP Server Access**: Included once voice is unlocked (no additional server hosting fees)
 
 <Tip>
-  Using your own SIP trunk can significantly reduce costs compared to traditional telephony, especially for high-volume operations or international calling. The SIP server is included, so you only pay for your SIP provider and Rannah رنّة voice usage.
+  Using your own SIP trunk can significantly reduce costs compared to traditional telephony, especially for high-volume operations or international calling. The SIP server is included, so you only pay for your SIP provider and Rannah voice usage.
 </Tip>

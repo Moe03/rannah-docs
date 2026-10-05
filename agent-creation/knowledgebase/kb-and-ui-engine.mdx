@@ -4,19 +4,15 @@ description: ""
 icon: desktop
 ---
 
-The [UI Engine](features/ui-engine) is a powerful feature in Rannah رنّة that allows you to create dynamic, interactive elements in your agent's responses. By integrating the UI-Engine with your knowledge base **and Structured Search catalogs**, you can create more sophisticated and user friendly interfaces. This doc shows you how to effectively combine these tools.
+The [UI Engine](features/ui-engine) is a powerful feature in Rannah that allows you to create dynamic, interactive elements in your agent's responses. By integrating the UI-Engine with your knowledge base **and Structured Search catalogs**, you can create more sophisticated and user friendly interfaces. This doc shows you how to effectively combine these tools.
 
 <Info>
   For filterable listing sites (venues, products, cars…), prefer a [Schema crawl + Structured Search](/features/structured-search) over stuffing every listing into the markdown KB. Then instruct the agent to render carousels/cards with `images: [url1, url2, url3]` from the retrieved gallery fields.
 </Info>
 
-#
-
 ## Instructing Your Agent
 
 Here's how you can use the `system prompt` to instruct your agent to use UI Engine components with information from the knowledge base:
-
-#
 
 <Tabs>
   <Tab title="Carousels">
@@ -46,11 +42,10 @@ Here's how you can use the `system prompt` to instruct your agent to use UI Engi
 <Info>
   By referring to the knowledge base in your prompt, you can populate it with links, text, and formatting instructions that the model can use in its responses, freeing up space in your system instructions.
 </Info>
-#
-#
+
 ## Structuring Your Knowledge Base docs
 To efficiently retrieve information for UI Engine components, structuring your knowledge base documents for easy retrieval is `key`. We recommend the following:
-#
+
 <AccordionGroup>
   <Accordion title="Carousels">
 Carousels can be displayed in every way you want. only pictures, without pictures, without title etc. This makes for many creative use-cases:
@@ -160,8 +155,6 @@ If the user asks to book an appointment embed this link to calendly in a iframe:
   </ul>
 </Tip>
 
-#
-
 ### Best Practices
 
 <CardGroup cols={2}>
@@ -182,4 +175,3 @@ If the user asks to book an appointment embed this link to calendly in a iframe:
     Engine components with the knowledge base information.
   </Card>
 </CardGroup>
-
